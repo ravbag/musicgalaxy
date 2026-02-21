@@ -1,1 +1,3 @@
 # musicgalaxy
+
+I'm trying to create a music player that displays composer, singer or genre names as tags and pulls in music from archive .org. There is supposed to be separate autoplay logics, like a random walk, staying within a genre, spiral through time, etc. I also want to have some measure of relatedness between different tags, like if a certain kind of music is close to another, or if two composers are similar. I'm using "temp" musical temperature variable for this but there must be something better. Please review the code and suggest improvements. I'm using electron and running it on my local machine
