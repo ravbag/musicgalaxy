@@ -1,0 +1,693 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self' https: data:; script-src 'self' https://d3js.org 'unsafe-inline'; style-src 'self' 'unsafe-inline'; img-src 'self' data: https:; media-src 'self' https: data:; connect-src 'self' https: data:; object-src 'none'; base-uri 'self';">
+    <title>MusicGalaxy - Stabilized</title>
+    <script src="https://d3js.org/d3.v7.min.js"></script>
+    <style>
+        body { margin: 0; background: #020202; color: #fff; font-family: 'Georgia', serif; overflow: hidden; }
+        #ui { position: absolute; top: 20px; left: 20px; z-index: 100; width: 320px; background: rgba(0,0,0,0.9); padding: 18px; border: 1px solid #333; border-radius: 8px; max-height: calc(100vh - 40px); overflow-y: auto; }
+        #track-title { color: #d4af37; font-weight: bold; margin-bottom: 10px; min-height: 40px; }
+        svg { width: 100vw; height: 100vh; background-image: radial-gradient(#111 1px, transparent 1px); background-size: 50px 50px; }
+        .tag-node { cursor: pointer; stroke: #000; stroke-width: 3px; paint-order: stroke; transition: opacity 0.3s; }
+        @keyframes pulse { 0% { opacity: 1; } 50% { opacity: 0.3; } 100% { opacity: 1; } }
+        .active-node { animation: pulse 1.5s infinite; font-weight: bold !important; }
+        button { background: #222; color: #ccc; border: 1px solid #444; padding: 5px 10px; cursor: pointer; margin-top: 5px; border-radius: 4px; }
+        button:hover { background: #d4af37; color: #000; }
+
+        .chip { background:#151515; color:#ddd; border:1px solid #333; padding:3px 8px; border-radius:999px; font-size:12px; line-height:1.2; }
+        .chip:hover { background:#d4af37; color:#000; }
+        .chip-active { background:#d4af37; color:#000; border-color:#d4af37; }
+    
+        #search { width: 100%; padding: 10px; font-size: 18px; border-radius: 6px; border: 2px solid #d0a040; background: #0a0a0a; color: #fff; box-sizing: border-box; }
+        #search-results { border: 1px solid #333; border-radius: 6px; padding: 8px; background: rgba(8,8,8,0.95); }
+        .result-item { display: block; width: 100%; text-align: left; padding: 6px 8px; margin: 4px 0; border-radius: 6px; border: 1px solid #2a2a2a; background: rgba(255,255,255,0.04); color: #ddd; cursor: pointer; }
+        .result-item:hover { background: rgba(255,255,255,0.08); }
+        .result-meta { font-size: 12px; opacity: 0.75; margin-left: 6px; }
+
+    </style>
+</head>
+<body>
+<div id="ui">
+    <input type="text" id="search" placeholder="Search..." style="width:100%; padding:8px; margin-bottom:10px; background:#111; border:1px solid #444; color:#fff;">
+    <div id="search-results" style="margin-top:8px; display:none;"></div>    <div id="status-line" style="margin-top:6px; font-size:12px; opacity:0.75;"></div>
+    <div id="track-title">Ready...</div>
+    <div id="mode-line" style="margin:6px 0 10px 0; font-size:12px; color:#aaa; line-height:1.3;">
+        Mode: <span id="mode-name">random_walk</span><br>
+        Active tag: <span id="active-tag">(none)</span>
+    </div>
+    <div id="tag-chips" style="margin:8px 0 10px 0; display:flex; flex-wrap:wrap; gap:6px;"></div>
+    <audio id="player" controls style="width:100%; filter:invert(1); height:30px;"></audio>
+    <div style="display:flex; flex-wrap:wrap; gap:5px; margin-top:10px;">
+        <button onclick="setMode('pure_random')">Pure Random</button>
+        <button onclick="setMode('random_walk')">Random Walk</button>
+        <button onclick="setMode('within_tag')">Within Tag</button>
+        <button onclick="setMode('spiral_time')">Spiral Time</button>
+        <button onclick="setMode('teleport')">Teleport</button>
+        <button onclick="toggleAutoplay()" id="autoplay-btn">Autoplay: ON</button>
+        <button onclick="resumeLast()">Resume Last</button>
+        <button onclick="clearActiveTag()">Clear Tag</button>
+        <button onclick="resetView()">Center View</button>
+    </div>
+    </div>
+<svg id="viz"></svg>
+
+<script>
+    const svg = d3.select("#viz"), g = svg.append("g"), width = window.innerWidth, height = window.innerHeight;
+    let nodes = [], currentNode = null;
+    let nodeById = new Map();
+
+    // --- Autoplay controller ---
+    let playMode = "random_walk";   // pure_random | random_walk | within_tag | spiral_time | teleport
+    let autoplayEnabled = true;
+    let activeTag = null;
+    let spiralDir = +1;
+    let stabilizeSteps = 0;
+
+    // --- Weighting state ---
+    const plays = new Map();        // id -> count
+    const lastPlayedAt = new Map(); // id -> epoch ms
+    const HALF_LIFE_MS = 60 * 60 * 1000; // recency penalty half-life ~60 minutes
+    const ROLE_MASTER_W = 1.6;
+    const TAU = 0.12; // exploration temperature for softmax
+
+    // --- Stabilized Physics & Center Gravity ---
+const simulation = d3.forceSimulation()
+    // Keep the map coherent instead of "exploding" into a ring.
+    .force("charge", d3.forceManyBody().strength(-35))
+    .force("center", d3.forceCenter(width / 2, height / 2))
+    // x/y, collision, and link forces are configured after nodes load (need data-dependent targets).
+    .alphaDecay(0.02);
+
+const zoom = d3.zoom().scaleExtent([0.1, 5]).on("zoom", (e) => g.attr("transform", e.transform));
+svg.call(zoom);
+
+function focusOnNode(node, scale=1.35, duration=650) {
+    if (!node || node.x == null || node.y == null) return;
+    const t = d3.zoomIdentity
+        .translate(width / 2 - node.x * scale, height / 2 - node.y * scale)
+        .scale(scale);
+    svg.transition().duration(duration).call(zoom.transform, t);
+}
+
+
+    function setStatus(msg) {
+        const el = document.getElementById('status-line');
+        if (el) el.textContent = msg || '';
+    }
+
+    // ---------- Robust KB loading (fetch for http(s), fs fallback for file:// / Electron) ----------
+    async function loadKnowledgeBase(filename) {
+        try {
+            const res = await fetch(filename, { cache: 'no-store' });
+            if (!res.ok) throw new Error('HTTP ' + res.status);
+            const data = await res.json();
+            setStatus(`Loaded ${data.length} entries`);
+            return data;
+        } catch (e) {
+            try {
+                if (window.require) {
+                    const fs = window.require('fs');
+                    const path = window.require('path');
+                    let base = null;
+                    if (typeof __dirname !== 'undefined') base = __dirname;
+                    else if (location && location.pathname) {
+                        // file://.../index.html
+                        base = decodeURIComponent(location.pathname);
+                        base = base.replace(/[/\\][^/\\]*$/, '');
+                    } else base = process.cwd();
+
+                    const full = path.join(base, filename);
+                    const raw = fs.readFileSync(full, 'utf-8');
+                    const data = JSON.parse(raw);
+                    setStatus(`Loaded ${data.length} entries (fs fallback)`);
+                    return data;
+                }
+            } catch (e2) {}
+            setStatus('Failed to load knowledge_base.json');
+            throw e;
+        }
+    }
+
+    // ---------- Persistence ----------
+    const LS = {
+        lastNodeId: 'mg_lastNodeId',
+        lastTrackSrc: 'mg_lastTrackSrc',
+        lastTrackTitle: 'mg_lastTrackTitle',
+        lastTrackVault: 'mg_lastTrackVault',
+        lastTrackTime: 'mg_lastTrackTime',
+        playMode: 'mg_playMode',
+        activeTag: 'mg_activeTag',
+        autoplayEnabled: 'mg_autoplayEnabled'
+    };
+
+    function saveState() {
+        try {
+            if (currentNode?.id) localStorage.setItem(LS.lastNodeId, currentNode.id);
+            localStorage.setItem(LS.playMode, playMode);
+            localStorage.setItem(LS.activeTag, activeTag ?? '');
+            localStorage.setItem(LS.autoplayEnabled, autoplayEnabled ? '1' : '0');
+        } catch (e) {}
+    }
+
+    function restoreState() {
+        try {
+            const pm = localStorage.getItem(LS.playMode);
+            if (pm) playMode = pm;
+            const at = localStorage.getItem(LS.activeTag);
+            activeTag = at ? at : null;
+            const ap = localStorage.getItem(LS.autoplayEnabled);
+            autoplayEnabled = (ap === null) ? true : (ap === '1');
+            updateUI();
+        } catch (e) {}
+    }
+
+    function resumeLast() {
+        try {
+            const id = localStorage.getItem(LS.lastNodeId);
+            if (!id || !nodeById?.has(id)) { setStatus('No last item'); return; }
+            const node = nodeById.get(id);
+
+            // restore exact track if available
+            const src = localStorage.getItem(LS.lastTrackSrc);
+            const title = localStorage.getItem(LS.lastTrackTitle);
+            const vault = localStorage.getItem(LS.lastTrackVault);
+            const t = parseFloat(localStorage.getItem(LS.lastTrackTime) || '0');
+
+            currentNode = node;
+            d3.selectAll(".tag-node").classed("active-node", false);
+            d3.selectAll(".tag-node").filter(d => d.id === node.id).classed("active-node", true);
+            focusOnNode(node);
+            renderTagChips(node);
+            updateUI();
+
+            if (src) {
+                player.src = src;
+                player.currentTime = isFinite(t) ? t : 0;
+                const trackDisplay = document.getElementById('track-title');
+                if (trackDisplay) trackDisplay.innerHTML = `${vault ? `<span style="color:#66ccff">[${vault}]</span> ` : ''}${title ? title : node.id}`;
+                player.play().catch(()=>{});
+                setStatus('Resumed last track');
+            } else {
+                // fallback: search again
+                playNode(node);
+            }
+        } catch (e) {}
+    }
+
+    // ---------- Search wiring ----------
+    function wireSearch() {
+        const inp = document.getElementById('search');
+        const box = document.getElementById('search-results');
+        if (!inp || !box) return;
+
+        function renderResults(list) {
+            box.innerHTML = '';
+            if (!list.length) { box.style.display = 'none'; return; }
+            box.style.display = 'block';
+            list.slice(0, 10).forEach(n => {
+                const b = document.createElement('button');
+                b.className = 'result-item';
+                const meta = `${n.type} · ${n.era ?? ''}${n.is_master ? ' · master' : ''}`;
+                b.innerHTML = `${n.id} <span class="result-meta">${meta}</span>`;
+                b.onclick = () => { inp.value = n.id; box.style.display='none'; playNode(n); };
+                box.appendChild(b);
+            });
+        }
+
+        inp.addEventListener('input', () => {
+            const q = (inp.value || '').trim().toLowerCase();
+            if (!q) { renderResults([]); d3.selectAll('.tag-node').attr('opacity', 1); return; }
+            const hits = nodes.filter(n => n.id.toLowerCase().includes(q) || (n.tags||[]).some(t => (t||'').toLowerCase().includes(q)));
+            hits.sort((a,b) => (b.is_master?1:0) - (a.is_master?1:0));
+            renderResults(hits);
+            d3.selectAll('.tag-node').attr('opacity', d => (d.id||'').toLowerCase().includes(q) || (d.tags||[]).some(t => (t||'').toLowerCase().includes(q)) ? 1 : 0.08);
+        });
+
+        inp.addEventListener('keydown', (e) => {
+            if (e.key === 'Enter') {
+                const q = (inp.value || '').trim().toLowerCase();
+                const hit = nodes.find(n => n.id.toLowerCase() === q) || nodes.find(n => n.id.toLowerCase().includes(q));
+                if (hit) { box.style.display='none'; playNode(hit); }
+            }
+            if (e.key === 'Escape') box.style.display='none';
+        });
+    }
+
+async function init() {
+    nodes = await loadKnowledgeBase('knowledge_base.json');
+nodeById = new Map(nodes.map(n => [n.id, n]));
+    
+    // Data-dependent layout targets (continuous "cloud" + local neighborhoods)
+    const eraExtent = d3.extent(nodes, d => +d.era || 1800);
+    const xScale = d3.scaleLinear().domain(eraExtent).range([width * 0.18, width * 0.82]);
+
+    // Use temp as a vertical organizing axis (fallback when meta/styles are sparse)
+    const yScale = d3.scaleLinear().domain([1, 10]).range([height * 0.80, height * 0.20]);
+
+    nodes.forEach(n => {
+        const e = (+n.era || 1800);
+        const t = (+n.temp || 5);
+        n._tx = xScale(e) + (Math.random() - 0.5) * 120;
+        n._ty = yScale(t) + (Math.random() - 0.5) * 120;
+        // start near targets to avoid the "ring" artifact
+        n.x = n._tx;
+        n.y = n._ty;
+    });
+
+    // Build robust link graph from precomputed related neighbors (drops dangling refs; uses stable _gid)
+    // Stable graph id (prefer key)
+    nodes.forEach(n => {
+        n._gid = (n.key && String(n.key)) || String(n.id).toLowerCase().replace(/[^a-z0-9]+/g, "_");
+    });
+    const nameToGid = new Map(nodes.map(n => [String(n.id), n._gid]));
+
+    const linkPairs = new Set();
+    let links = [];
+    const dangling = [];
+
+    nodes.forEach(n => {
+        const rel = Array.isArray(n.related) ? n.related.slice(0, 8) : [];
+        rel.forEach(r => {
+            const targetName = (r && r.id != null) ? String(r.id) : null;
+            if (!targetName) return;
+
+            const tgt = nameToGid.get(targetName);
+            if (!tgt) {
+                dangling.push({ from: n.id, to: targetName });
+                return;
+            }
+
+            const a = n._gid, b = tgt;
+            const key = a < b ? (a + "||" + b) : (b + "||" + a);
+            if (!linkPairs.has(key)) {
+                linkPairs.add(key);
+                links.push({ source: a, target: b, w: (typeof r.w === "number" ? r.w : 0.3) });
+            }
+        });
+    });
+
+    if (dangling.length) {
+        console.log("[graph] dangling related refs:", dangling.length, "sample:", dangling.slice(0, 25));
+    }
+
+    // Configure simulation forces now that we have targets + links
+    // IMPORTANT: set simulation nodes BEFORE initializing forceLink, otherwise D3 throws "node not found"
+    simulation.nodes(nodes);
+
+    // Hard-robust: map link endpoints to node objects (bypasses D3 id resolution entirely)
+    const nodeByGid = new Map(nodes.map(d => [d._gid, d]));
+    links = links
+        .map(l => ({ source: nodeByGid.get(l.source), target: nodeByGid.get(l.target), w: l.w }))
+        .filter(l => l.source && l.target);
+
+    console.log("[graph] hildegard node:", nodeByGid.has("hildegard_von_bingen") ? "OK" : "MISSING");
+
+    const linkForce = d3.forceLink(links)
+        .distance(l => 55 + (1 - (l.w || 0.3)) * 65)
+        .strength(l => Math.max(0.05, Math.min(0.22, 0.08 + (l.w || 0.3) * 0.18)));
+
+    simulation
+        .force("x", d3.forceX(d => d._tx).strength(0.22))
+        .force("y", d3.forceY(d => d._ty).strength(0.22))
+        .force("collision", d3.forceCollide().radius(d => 10 + Math.min(18, (d.id || "").length * 0.6)).iterations(2))
+        .force("link", linkForce)
+        .alpha(1)
+        .restart();
+
+    const nodeElements = g.selectAll(".tag-node")
+        .data(nodes)
+        .enter().append("text")
+        .attr("class", d => d.is_master ? "tag-node master" : "tag-node")
+        .text(d => d.id)
+        .attr("text-anchor", "middle")
+        .attr("dominant-baseline", "central") // Centers text vertically on its coordinate
+        .attr("font-size", d => d.is_master ? "20px" : "14px")
+        .attr("font-weight", d => d.is_master ? "700" : "400")
+        .attr("fill", d => {
+            if (d.type === "Singer") return "#ff66cc";   // Pink
+            if (d.type === "Conductor") return "#66ccff"; // Blue
+            return "#d4af37";                             // Gold
+        })
+        .style("opacity", d => d.is_master ? 1 : 0.6)
+        .style("pointer-events", "all")
+        .on("click", (e, d) => playNode(d));
+
+    simulation.nodes(nodes).on("tick", () => {
+        nodeElements
+            .attr("x", d => d.x || width / 2)
+            .attr("y", d => d.y || height / 2);
+    });
+
+    // Restore persisted mode/tag/autoplay and wire up search UI
+    restoreState();
+    wireSearch();
+
+    // Focus last played node (no autoplay) and show last track title if available
+    try {
+        const lastId = localStorage.getItem(LS.lastNodeId);
+        if (lastId && nodeById.has(lastId)) {
+            const n = nodeById.get(lastId);
+            currentNode = n;
+            d3.selectAll(".tag-node").classed("active-node", false);
+            d3.selectAll(".tag-node").filter(d => d.id === n.id).classed("active-node", true);
+            focusOnNode(n, 1.35, 650);
+            renderTagChips(n);
+
+            const title = localStorage.getItem(LS.lastTrackTitle);
+            const vault = localStorage.getItem(LS.lastTrackVault);
+            const trackDisplay = document.getElementById('track-title');
+            if (trackDisplay && title) {
+                trackDisplay.innerHTML = `${vault ? `<span style="color:#66ccff">[${vault}]</span> ` : ''}${title}`;
+            }
+        }
+    } catch (e) {}
+}
+
+    // --- UI helpers ---
+    function setMode(mode) {
+        playMode = mode;
+        const modeName = document.getElementById('mode-name');
+        if (modeName) modeName.textContent = playMode;
+
+        // Teleport is a one-shot jump + stabilize window
+        if (mode === 'teleport') {
+            stabilizeSteps = 6;
+        }
+
+        // Trigger next track immediately if something is already playing
+        if (currentNode) autoNext();
+    }
+
+    function toggleAutoplay() {
+        autoplayEnabled = !autoplayEnabled;
+        const btn = document.getElementById('autoplay-btn');
+        if (btn) btn.textContent = autoplayEnabled ? 'Autoplay: ON' : 'Autoplay: OFF';
+    }
+
+    function setActiveTag(tag) {
+        activeTag = tag;
+        const el = document.getElementById('active-tag');
+        if (el) el.textContent = activeTag ?? '(none)';
+        if (currentNode && playMode === 'within_tag') autoNext();
+    }
+
+    function clearActiveTag() {
+        setActiveTag(null);
+    }
+
+    function renderTagChips(node) {
+        const wrap = document.getElementById('tag-chips');
+        if (!wrap) return;
+        wrap.innerHTML = '';
+        const tags = (node?.tags ?? []).slice(0, 24);
+        for (const t of tags) {
+            const b = document.createElement('button');
+            b.textContent = t;
+            b.className = 'chip' + ((activeTag && t === activeTag) ? ' chip-active' : '');
+            b.onclick = () => setActiveTag(t);
+            wrap.appendChild(b);
+        }
+    }
+
+    function resetView() {
+        if (currentNode) {
+            focusOnNode(currentNode, 1.25, 650);
+        } else {
+            svg.transition().duration(650).call(zoom.transform, d3.zoomIdentity);
+        }
+    }
+
+    async function playNode(node) {
+        currentNode = node;
+        d3.selectAll(".tag-node").classed("active-node", false);
+        d3.selectAll(".tag-node").filter(d => d.id === node.id).classed("active-node", true);
+
+        focusOnNode(node);
+        
+        const trackDisplay = document.getElementById('track-title');
+        const vaults = node.collections || [];
+
+        // Update play counters
+        plays.set(node.id, (plays.get(node.id) || 0) + 1);
+        lastPlayedAt.set(node.id, Date.now());
+
+        // Update UI
+        renderTagChips(node);
+        const modeName = document.getElementById('mode-name');
+        if (modeName) modeName.textContent = playMode;
+        const tagEl = document.getElementById('active-tag');
+        if (tagEl) tagEl.textContent = activeTag ?? '(none)';
+        
+        for (let vault of vaults) {
+            trackDisplay.innerText = `Searching ${vault}...`;
+
+            // Query builder (more robust than creator-only)
+            const name = (node.id || '').replace(/"/g, '');
+            let qParts = [];
+            if (node.type === 'Composer') {
+                qParts.push(`(creator:"${name}" OR subject:"${name}" OR title:"${name}" OR description:"${name}")`);
+            } else if (node.type === 'Singer') {
+                qParts.push(`(creator:"${name}" OR performer:"${name}" OR subject:"${name}" OR title:"${name}")`);
+            } else if (node.type === 'Conductor') {
+                qParts.push(`(creator:"${name}" OR subject:"${name}" OR title:"${name}")`);
+            } else {
+                qParts.push(`(creator:"${name}" OR title:"${name}")`);
+            }
+            qParts.push(`collection:${vault}`);
+            qParts.push(`mediatype:audio`);
+            const query = qParts.join(' AND ');
+
+            // Pull more docs and randomize selection
+            const rows = 50;
+            let url = `https://archive.org/advancedsearch.php?q=${encodeURIComponent(query)}&rows=${rows}&page=1&output=json&sort[]=-downloads`;
+
+            try {
+                const res = await fetch(url);
+                const data = await res.json();
+                if (data?.response?.docs?.length > 0) {
+                    const docs = data.response.docs;
+                    const doc = docs[Math.floor(Math.random() * docs.length)];
+                    const id = doc.identifier;
+                    const meta = await fetch(`https://archive.org/metadata/${id}`).then(r => r.json());
+
+                    const files = Array.isArray(meta?.files) ? meta.files : [];
+                    const playable = pickPlayableFile(files);
+                    if (playable) {
+                        const player = document.getElementById('player');
+                        player.src = `https://archive.org/download/${id}/${playable.name}`;
+                        try {
+                            localStorage.setItem(LS.lastNodeId, node.id);
+                            localStorage.setItem(LS.lastTrackSrc, player.src);
+                            localStorage.setItem(LS.lastTrackTitle, `${node.id} — ${playable.name}`);
+                            localStorage.setItem(LS.lastTrackVault, vault);
+                            localStorage.setItem(LS.lastTrackTime, '0');
+                            localStorage.setItem(LS.playMode, playMode);
+                            localStorage.setItem(LS.activeTag, activeTag ?? '');
+                            localStorage.setItem(LS.autoplayEnabled, autoplayEnabled ? '1' : '0');
+                        } catch(e) {}
+
+                        player.play();
+                        trackDisplay.innerHTML = `<span style="color:#66ccff">[${vault}]</span> ${node.id}`;
+                        currentNode = node;
+                        return;
+                    }
+                }
+            } catch (e) {}
+        }
+        trackDisplay.innerText = "No recordings found. Skipping...";
+        setTimeout(autoNext, 2000);
+    }
+
+    function pickPlayableFile(files) {
+        const audio = files
+            .filter(f => typeof f?.name === 'string')
+            .filter(f => /\.(mp3|flac|ogg|m4a|wav)$/i.test(f.name));
+        const originals = audio.filter(f => (f.source || '') === 'original');
+        const mp3 = audio.filter(f => f.name.toLowerCase().endsWith('.mp3'));
+        return originals[0] || mp3[0] || audio[0] || null;
+    }
+
+    // --- Similarity & weighted sampling ---
+    function jaccard(a, b) {
+        const A = new Set(a || []);
+        const B = new Set(b || []);
+        if (A.size === 0 && B.size === 0) return 0;
+        let inter = 0;
+        for (const x of A) if (B.has(x)) inter++;
+        const uni = new Set([...A, ...B]).size;
+        return uni ? inter / uni : 0;
+    }
+
+    function eraSim(e1, e2, sigma=60) {
+        const a = (Number.isFinite(e1) ? e1 : 1800);
+        const b = (Number.isFinite(e2) ? e2 : 1800);
+        const d = a - b;
+        return Math.exp(-(d*d) / (2 * sigma * sigma));
+    }
+
+    function shareAny(a, b) {
+        if (!Array.isArray(a) || !Array.isArray(b) || a.length === 0 || b.length === 0) return false;
+        const B = new Set(b);
+        for (const x of a) if (B.has(x)) return true;
+        return false;
+    }
+
+    function similarity(u, v) {
+        if (!u || !v) return 0;
+        if (u.id === v.id) return 0;
+        const tagSim = jaccard(u.tags, v.tags);
+        const eSim = eraSim(u.era, v.era);
+        const typeBonus = (u.type === v.type) ? 0.08 : 0.0;
+        const schoolBonus = (shareAny(u.meta?.schools, v.meta?.schools)) ? 0.18 : 0.0;
+        const regionBonus = (shareAny(u.meta?.regions, v.meta?.regions)) ? 0.08 : 0.0;
+        // Weighted mix; keep within [0, 1]
+        const s = 0.55 * tagSim + 0.30 * eSim + typeBonus + schoolBonus + regionBonus;
+        return Math.max(0, Math.min(1, s));
+    }
+
+    function baseWeight(candidate) {
+        const role = candidate.is_master ? ROLE_MASTER_W : 1.0;
+        const p = plays.get(candidate.id) || 0;
+        const novelty = 1 / Math.sqrt(1 + p);
+        const last = lastPlayedAt.get(candidate.id);
+        const dt = (typeof last === 'number') ? (Date.now() - last) : (10 * HALF_LIFE_MS);
+        const recency = Math.max(0.05, 1 - Math.exp(-dt / HALF_LIFE_MS));
+        return role * novelty * recency;
+    }
+
+    function softmaxPick(items, scoreFn, tau=TAU) {
+        const scored = [];
+        for (const it of items) {
+            const s = scoreFn(it);
+            if (!Number.isFinite(s)) continue;
+            scored.push({ it, s });
+        }
+        if (scored.length === 0) return null;
+        // Keep top-K for numerical stability and speed
+        scored.sort((a,b) => b.s - a.s);
+        const top = scored.slice(0, 60);
+        const ws = top.map(o => Math.exp(o.s / tau));
+        const Z = ws.reduce((a,b) => a + b, 0);
+        let r = Math.random() * Z;
+        for (let i = 0; i < top.length; i++) {
+            r -= ws[i];
+            if (r <= 0) return top[i].it;
+        }
+        return top[top.length - 1].it;
+    }
+
+    function relatedCandidates(node) {
+        const rel = Array.isArray(node?.related) ? node.related : [];
+        const ids = rel.map(x => x.id);
+        const out = [];
+        for (const id of ids) {
+            const n = nodeById.get(id);
+            if (n) out.push(n);
+        }
+        return out;
+    }
+
+    function pickNextPureRandom() {
+        const next = nodes[Math.floor(Math.random() * nodes.length)];
+        return next;
+    }
+
+    function pickNextRandomWalk() {
+        const rel = relatedCandidates(currentNode);
+        // Add a small random sample to allow drift
+        const sample = [];
+        for (let i = 0; i < 40; i++) sample.push(nodes[Math.floor(Math.random() * nodes.length)]);
+        const pool = Array.from(new Set([...rel, ...sample]));
+        return softmaxPick(pool, (c) => {
+            const sim = similarity(currentNode, c);
+            return sim + Math.log(baseWeight(c));
+        });
+    }
+
+    function pickNextWithinTag() {
+        const tag = activeTag || (currentNode?.tags?.[0] ?? null);
+        if (!tag) return pickNextRandomWalk();
+        const pool = nodes.filter(n => Array.isArray(n.tags) && n.tags.includes(tag));
+        // If tag pool is too small, fall back to related candidates
+        const candidates = (pool.length >= 10) ? pool : Array.from(new Set([...pool, ...relatedCandidates(currentNode)]));
+        return softmaxPick(candidates, (c) => {
+            const sim = similarity(currentNode, c);
+            return sim + Math.log(baseWeight(c));
+        });
+    }
+
+    function pickNextSpiralTime() {
+        const curEra = Number.isFinite(currentNode?.era) ? currentNode.era : 1800;
+        const target = curEra + spiralDir * 25;
+        // Bounce direction at edges
+        if (target < 1100) spiralDir = +1;
+        if (target > 2025) spiralDir = -1;
+        const t = curEra + spiralDir * 25;
+        return softmaxPick(nodes, (c) => {
+            const sim = similarity(currentNode, c);
+            const ce = Number.isFinite(c?.era) ? c.era : 1800;
+            const eraPenalty = Math.abs(ce - t) / 150; // coarse guidance
+            return (sim - eraPenalty) + Math.log(baseWeight(c));
+        });
+    }
+
+    function pickTeleport() {
+        // Pick something far (low similarity) but not overplayed.
+        const sample = [];
+        for (let i = 0; i < 180; i++) sample.push(nodes[Math.floor(Math.random() * nodes.length)]);
+        return softmaxPick(sample, (c) => {
+            const sim = similarity(currentNode, c);
+            const far = 1 - sim;
+            return far + Math.log(baseWeight(c));
+        }, 0.18);
+    }
+
+    function autoNext() {
+        if (!currentNode) return;
+
+        // After a teleport, stabilize with random walk for a few steps
+        if (stabilizeSteps > 0 && playMode !== 'pure_random') {
+            stabilizeSteps -= 1;
+        }
+
+        let next = null;
+        if (playMode === 'pure_random') next = pickNextPureRandom();
+        else if (playMode === 'within_tag') next = pickNextWithinTag();
+        else if (playMode === 'spiral_time') next = pickNextSpiralTime();
+        else if (playMode === 'teleport') {
+            next = pickTeleport();
+            // Switch to random walk automatically for stabilization
+            playMode = 'random_walk';
+            const modeName = document.getElementById('mode-name');
+            if (modeName) modeName.textContent = playMode;
+        }
+        else next = pickNextRandomWalk();
+
+        if (!next) next = pickNextPureRandom();
+        playNode(next);
+    }
+
+    // Persist playback position (for Resume)
+    (function(){
+        const player = document.getElementById('player');
+        if (!player) return;
+        let lastWrite = 0;
+        player.addEventListener('timeupdate', () => {
+            const now = Date.now();
+            if (now - lastWrite < 1500) return;
+            lastWrite = now;
+            try { localStorage.setItem(LS.lastTrackTime, String(player.currentTime || 0)); } catch(e) {}
+        });
+    })();
+
+    // Autoplay: play next when track ends
+    document.getElementById('player').addEventListener('ended', () => {
+        if (autoplayEnabled) autoNext();
+    });
+
+    init();
+</script>
+</body>
+</html>
