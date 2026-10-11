@@ -55,15 +55,23 @@
 
 <script>
     const svg = d3.select("#viz"), g = svg.append("g"), width = window.innerWidth, height = window.innerHeight;
+    const player = document.getElementById('player');
     let nodes = [], currentNode = null;
     let nodeById = new Map();
+    let aliasToId = new Map();  // alias name -> canonical id (also resolves ids saved before entries were merged)
 
     // --- Autoplay controller ---
     let playMode = "random_walk";   // pure_random | random_walk | within_tag | spiral_time | teleport
     let autoplayEnabled = true;
     let activeTag = null;
     let spiralDir = +1;
-    let stabilizeSteps = 0;
+    let modeBeforeTeleport = 'random_walk';
+
+    // --- Playback request bookkeeping ---
+    let playToken = 0;          // bumped on every playNode(); stale async results are dropped
+    let skipTimer = null;       // pending "no recordings found" auto-skip
+    let consecutiveFailures = 0;
+    const MAX_CONSECUTIVE_FAILURES = 5; // stop auto-skipping (e.g. when offline)
 
     // --- Weighting state ---
     const plays = new Map();        // id -> count
@@ -151,10 +159,38 @@ function focusOnNode(node, scale=1.35, duration=650) {
         } catch (e) {}
     }
 
+    function updateUI() {
+        const modeName = document.getElementById('mode-name');
+        if (modeName) modeName.textContent = playMode;
+        const tagEl = document.getElementById('active-tag');
+        if (tagEl) tagEl.textContent = activeTag ?? '(none)';
+        const btn = document.getElementById('autoplay-btn');
+        if (btn) btn.textContent = autoplayEnabled ? 'Autoplay: ON' : 'Autoplay: OFF';
+    }
+
+    function resolveNode(name) {
+        if (!name) return null;
+        return nodeById.get(name) || nodeById.get(aliasToId.get(name)) || null;
+    }
+
+    // Render "[vault] title" without interpreting either as HTML (titles come from archive.org)
+    function showTrack(title, vault) {
+        const el = document.getElementById('track-title');
+        if (!el) return;
+        el.textContent = '';
+        if (vault) {
+            const v = document.createElement('span');
+            v.style.color = '#66ccff';
+            v.textContent = `[${vault}] `;
+            el.appendChild(v);
+        }
+        el.appendChild(document.createTextNode(title || ''));
+    }
+
     function restoreState() {
         try {
             const pm = localStorage.getItem(LS.playMode);
-            if (pm) playMode = pm;
+            if (pm && pm !== 'teleport') playMode = pm;
             const at = localStorage.getItem(LS.activeTag);
             activeTag = at ? at : null;
             const ap = localStorage.getItem(LS.autoplayEnabled);
@@ -165,9 +201,10 @@ function focusOnNode(node, scale=1.35, duration=650) {
 
     function resumeLast() {
         try {
-            const id = localStorage.getItem(LS.lastNodeId);
-            if (!id || !nodeById?.has(id)) { setStatus('No last item'); return; }
-            const node = nodeById.get(id);
+            const node = resolveNode(localStorage.getItem(LS.lastNodeId));
+            if (!node) { setStatus('No last item'); return; }
+            playToken++; // cancel any search still in flight
+            clearTimeout(skipTimer);
 
             // restore exact track if available
             const src = localStorage.getItem(LS.lastTrackSrc);
@@ -184,19 +221,29 @@ function focusOnNode(node, scale=1.35, duration=650) {
 
             if (src) {
                 player.src = src;
-                player.currentTime = isFinite(t) ? t : 0;
-                const trackDisplay = document.getElementById('track-title');
-                if (trackDisplay) trackDisplay.innerHTML = `${vault ? `<span style="color:#66ccff">[${vault}]</span> ` : ''}${title ? title : node.id}`;
+                // currentTime can only be set once metadata is loaded
+                player.addEventListener('loadedmetadata', () => {
+                    player.currentTime = isFinite(t) ? t : 0;
+                }, { once: true });
+                showTrack(title || node.id, vault);
                 player.play().catch(()=>{});
                 setStatus('Resumed last track');
             } else {
                 // fallback: search again
                 playNode(node);
             }
-        } catch (e) {}
+        } catch (e) { console.error('[resume]', e); }
     }
 
     // ---------- Search wiring ----------
+    function baseOpacity(d) { return d.is_master ? 1 : 0.6; }
+
+    function matchesQuery(n, q) {
+        return (n.id || '').toLowerCase().includes(q)
+            || (n.aliases || []).some(a => (a || '').toLowerCase().includes(q))
+            || (n.tags || []).some(t => (t || '').toLowerCase().includes(q));
+    }
+
     function wireSearch() {
         const inp = document.getElementById('search');
         const box = document.getElementById('search-results');
@@ -209,8 +256,10 @@ function focusOnNode(node, scale=1.35, duration=650) {
             list.slice(0, 10).forEach(n => {
                 const b = document.createElement('button');
                 b.className = 'result-item';
-                const meta = `${n.type} · ${n.era ?? ''}${n.is_master ? ' · master' : ''}`;
-                b.innerHTML = `${n.id} <span class="result-meta">${meta}</span>`;
+                const meta = document.createElement('span');
+                meta.className = 'result-meta';
+                meta.textContent = `${n.type} · ${n.era ?? ''}${n.is_master ? ' · master' : ''}`;
+                b.append(n.id + ' ', meta);
                 b.onclick = () => { inp.value = n.id; box.style.display='none'; playNode(n); };
                 box.appendChild(b);
             });
@@ -218,17 +267,20 @@ function focusOnNode(node, scale=1.35, duration=650) {
 
         inp.addEventListener('input', () => {
             const q = (inp.value || '').trim().toLowerCase();
-            if (!q) { renderResults([]); d3.selectAll('.tag-node').attr('opacity', 1); return; }
-            const hits = nodes.filter(n => n.id.toLowerCase().includes(q) || (n.tags||[]).some(t => (t||'').toLowerCase().includes(q)));
+            // Inline style wins over the SVG opacity attribute, so dim via style too
+            if (!q) { renderResults([]); d3.selectAll('.tag-node').style('opacity', baseOpacity); return; }
+            const hits = nodes.filter(n => matchesQuery(n, q));
             hits.sort((a,b) => (b.is_master?1:0) - (a.is_master?1:0));
             renderResults(hits);
-            d3.selectAll('.tag-node').attr('opacity', d => (d.id||'').toLowerCase().includes(q) || (d.tags||[]).some(t => (t||'').toLowerCase().includes(q)) ? 1 : 0.08);
+            d3.selectAll('.tag-node').style('opacity', d => matchesQuery(d, q) ? 1 : 0.08);
         });
 
         inp.addEventListener('keydown', (e) => {
             if (e.key === 'Enter') {
                 const q = (inp.value || '').trim().toLowerCase();
-                const hit = nodes.find(n => n.id.toLowerCase() === q) || nodes.find(n => n.id.toLowerCase().includes(q));
+                const hit = nodes.find(n => n.id.toLowerCase() === q)
+                    || nodes.find(n => (n.aliases || []).some(a => a.toLowerCase() === q))
+                    || nodes.find(n => n.id.toLowerCase().includes(q));
                 if (hit) { box.style.display='none'; playNode(hit); }
             }
             if (e.key === 'Escape') box.style.display='none';
@@ -237,7 +289,20 @@ function focusOnNode(node, scale=1.35, duration=650) {
 
 async function init() {
     nodes = await loadKnowledgeBase('knowledge_base.json');
-nodeById = new Map(nodes.map(n => [n.id, n]));
+    nodeById = new Map(nodes.map(n => [n.id, n]));
+    aliasToId = new Map();
+    for (const n of nodes) for (const a of (n.aliases || [])) aliasToId.set(a, n.id);
+
+    // Names to query archive.org with: the canonical id plus aliases that can't be confused
+    // with another entry (e.g. skip "Mozart" because "Leopold Mozart" also exists).
+    const surnameOwners = new Map();
+    for (const n of nodes) {
+        const last = String(n.id).split(/\s+/).pop().toLowerCase();
+        surnameOwners.set(last, (surnameOwners.get(last) || 0) + 1);
+    }
+    for (const n of nodes) {
+        n._searchNames = [n.id, ...(n.aliases || []).filter(a => /\s/.test(a) || (surnameOwners.get(a.toLowerCase()) || 0) <= 1)];
+    }
     
     // Data-dependent layout targets (continuous "cloud" + local neighborhoods)
     const eraExtent = d3.extent(nodes, d => +d.era || 1800);
@@ -330,7 +395,7 @@ nodeById = new Map(nodes.map(n => [n.id, n]));
             if (d.type === "Conductor") return "#66ccff"; // Blue
             return "#d4af37";                             // Gold
         })
-        .style("opacity", d => d.is_master ? 1 : 0.6)
+        .style("opacity", baseOpacity)
         .style("pointer-events", "all")
         .on("click", (e, d) => playNode(d));
 
@@ -346,9 +411,8 @@ nodeById = new Map(nodes.map(n => [n.id, n]));
 
     // Focus last played node (no autoplay) and show last track title if available
     try {
-        const lastId = localStorage.getItem(LS.lastNodeId);
-        if (lastId && nodeById.has(lastId)) {
-            const n = nodeById.get(lastId);
+        const n = resolveNode(localStorage.getItem(LS.lastNodeId));
+        if (n) {
             currentNode = n;
             d3.selectAll(".tag-node").classed("active-node", false);
             d3.selectAll(".tag-node").filter(d => d.id === n.id).classed("active-node", true);
@@ -357,24 +421,18 @@ nodeById = new Map(nodes.map(n => [n.id, n]));
 
             const title = localStorage.getItem(LS.lastTrackTitle);
             const vault = localStorage.getItem(LS.lastTrackVault);
-            const trackDisplay = document.getElementById('track-title');
-            if (trackDisplay && title) {
-                trackDisplay.innerHTML = `${vault ? `<span style="color:#66ccff">[${vault}]</span> ` : ''}${title}`;
-            }
+            if (title) showTrack(title, vault);
         }
-    } catch (e) {}
+    } catch (e) { console.error('[restore]', e); }
 }
 
     // --- UI helpers ---
     function setMode(mode) {
+        // Teleport is a one-shot jump; afterwards autoNext() returns to the previous mode
+        if (mode === 'teleport' && playMode !== 'teleport') modeBeforeTeleport = playMode;
         playMode = mode;
-        const modeName = document.getElementById('mode-name');
-        if (modeName) modeName.textContent = playMode;
-
-        // Teleport is a one-shot jump + stabilize window
-        if (mode === 'teleport') {
-            stabilizeSteps = 6;
-        }
+        updateUI();
+        saveState();
 
         // Trigger next track immediately if something is already playing
         if (currentNode) autoNext();
@@ -382,14 +440,15 @@ nodeById = new Map(nodes.map(n => [n.id, n]));
 
     function toggleAutoplay() {
         autoplayEnabled = !autoplayEnabled;
-        const btn = document.getElementById('autoplay-btn');
-        if (btn) btn.textContent = autoplayEnabled ? 'Autoplay: ON' : 'Autoplay: OFF';
+        updateUI();
+        saveState();
     }
 
     function setActiveTag(tag) {
         activeTag = tag;
-        const el = document.getElementById('active-tag');
-        if (el) el.textContent = activeTag ?? '(none)';
+        updateUI();
+        saveState();
+        if (currentNode) renderTagChips(currentNode);
         if (currentNode && playMode === 'within_tag') autoNext();
     }
 
@@ -420,6 +479,8 @@ nodeById = new Map(nodes.map(n => [n.id, n]));
     }
 
     async function playNode(node) {
+        const token = ++playToken;
+        clearTimeout(skipTimer);
         currentNode = node;
         d3.selectAll(".tag-node").classed("active-node", false);
         d3.selectAll(".tag-node").filter(d => d.id === node.id).classed("active-node", true);
@@ -435,26 +496,19 @@ nodeById = new Map(nodes.map(n => [n.id, n]));
 
         // Update UI
         renderTagChips(node);
-        const modeName = document.getElementById('mode-name');
-        if (modeName) modeName.textContent = playMode;
-        const tagEl = document.getElementById('active-tag');
-        if (tagEl) tagEl.textContent = activeTag ?? '(none)';
-        
+        updateUI();
+
         for (let vault of vaults) {
             trackDisplay.innerText = `Searching ${vault}...`;
 
-            // Query builder (more robust than creator-only)
-            const name = (node.id || '').replace(/"/g, '');
+            // Query builder (more robust than creator-only); searches every unambiguous alias
+            const names = (node._searchNames || [node.id]).map(s => String(s).replace(/"/g, ''));
+            const fields = node.type === 'Composer' ? ['creator', 'subject', 'title', 'description']
+                : node.type === 'Singer' ? ['creator', 'performer', 'subject', 'title']
+                : node.type === 'Conductor' ? ['creator', 'subject', 'title']
+                : ['creator', 'title'];
             let qParts = [];
-            if (node.type === 'Composer') {
-                qParts.push(`(creator:"${name}" OR subject:"${name}" OR title:"${name}" OR description:"${name}")`);
-            } else if (node.type === 'Singer') {
-                qParts.push(`(creator:"${name}" OR performer:"${name}" OR subject:"${name}" OR title:"${name}")`);
-            } else if (node.type === 'Conductor') {
-                qParts.push(`(creator:"${name}" OR subject:"${name}" OR title:"${name}")`);
-            } else {
-                qParts.push(`(creator:"${name}" OR title:"${name}")`);
-            }
+            qParts.push('(' + names.flatMap(name => fields.map(f => `${f}:"${name}"`)).join(' OR ') + ')');
             qParts.push(`collection:${vault}`);
             qParts.push(`mediatype:audio`);
             const query = qParts.join(' AND ');
@@ -466,17 +520,19 @@ nodeById = new Map(nodes.map(n => [n.id, n]));
             try {
                 const res = await fetch(url);
                 const data = await res.json();
+                if (token !== playToken) return; // superseded by a newer request
                 if (data?.response?.docs?.length > 0) {
                     const docs = data.response.docs;
                     const doc = docs[Math.floor(Math.random() * docs.length)];
                     const id = doc.identifier;
-                    const meta = await fetch(`https://archive.org/metadata/${id}`).then(r => r.json());
+                    const meta = await fetch(`https://archive.org/metadata/${encodeURIComponent(id)}`).then(r => r.json());
+                    if (token !== playToken) return;
 
                     const files = Array.isArray(meta?.files) ? meta.files : [];
                     const playable = pickPlayableFile(files);
                     if (playable) {
-                        const player = document.getElementById('player');
-                        player.src = `https://archive.org/download/${id}/${playable.name}`;
+                        const path = playable.name.split('/').map(encodeURIComponent).join('/');
+                        player.src = `https://archive.org/download/${encodeURIComponent(id)}/${path}`;
                         try {
                             localStorage.setItem(LS.lastNodeId, node.id);
                             localStorage.setItem(LS.lastTrackSrc, player.src);
@@ -488,16 +544,36 @@ nodeById = new Map(nodes.map(n => [n.id, n]));
                             localStorage.setItem(LS.autoplayEnabled, autoplayEnabled ? '1' : '0');
                         } catch(e) {}
 
-                        player.play();
-                        trackDisplay.innerHTML = `<span style="color:#66ccff">[${vault}]</span> ${node.id}`;
-                        currentNode = node;
+                        player.play().catch(e => console.warn('[play]', e));
+                        showTrack(node.id, vault);
                         return;
                     }
                 }
-            } catch (e) {}
+            } catch (e) {
+                if (token !== playToken) return;
+                console.warn('[search]', vault, e);
+            }
         }
-        trackDisplay.innerText = "No recordings found. Skipping...";
-        setTimeout(autoNext, 2000);
+        if (token !== playToken) return;
+        handlePlaybackFailure('No recordings found.');
+    }
+
+    // Skip to the next node after a failure, unless autoplay is off or we keep failing (e.g. offline)
+    function handlePlaybackFailure(reason) {
+        consecutiveFailures += 1;
+        const trackDisplay = document.getElementById('track-title');
+        if (!autoplayEnabled) {
+            trackDisplay.innerText = reason;
+            return;
+        }
+        if (consecutiveFailures >= MAX_CONSECUTIVE_FAILURES) {
+            trackDisplay.innerText = `${reason} Stopped after ${consecutiveFailures} failures in a row — check your connection.`;
+            consecutiveFailures = 0;
+            return;
+        }
+        trackDisplay.innerText = `${reason} Skipping...`;
+        const token = playToken;
+        skipTimer = setTimeout(() => { if (token === playToken) autoNext(); }, 2000);
     }
 
     function pickPlayableFile(files) {
@@ -647,21 +723,16 @@ nodeById = new Map(nodes.map(n => [n.id, n]));
     function autoNext() {
         if (!currentNode) return;
 
-        // After a teleport, stabilize with random walk for a few steps
-        if (stabilizeSteps > 0 && playMode !== 'pure_random') {
-            stabilizeSteps -= 1;
-        }
-
         let next = null;
         if (playMode === 'pure_random') next = pickNextPureRandom();
         else if (playMode === 'within_tag') next = pickNextWithinTag();
         else if (playMode === 'spiral_time') next = pickNextSpiralTime();
         else if (playMode === 'teleport') {
             next = pickTeleport();
-            // Switch to random walk automatically for stabilization
-            playMode = 'random_walk';
-            const modeName = document.getElementById('mode-name');
-            if (modeName) modeName.textContent = playMode;
+            // One-shot: go back to the mode that was active before the jump
+            playMode = modeBeforeTeleport || 'random_walk';
+            updateUI();
+            saveState();
         }
         else next = pickNextRandomWalk();
 
@@ -671,7 +742,6 @@ nodeById = new Map(nodes.map(n => [n.id, n]));
 
     // Persist playback position (for Resume)
     (function(){
-        const player = document.getElementById('player');
         if (!player) return;
         let lastWrite = 0;
         player.addEventListener('timeupdate', () => {
@@ -683,8 +753,18 @@ nodeById = new Map(nodes.map(n => [n.id, n]));
     })();
 
     // Autoplay: play next when track ends
-    document.getElementById('player').addEventListener('ended', () => {
+    player.addEventListener('ended', () => {
         if (autoplayEnabled) autoNext();
+    });
+
+    // A track that actually starts playing resets the failure streak
+    player.addEventListener('playing', () => { consecutiveFailures = 0; });
+
+    // Broken/unsupported file: move on instead of stalling
+    player.addEventListener('error', () => {
+        if (!player.getAttribute('src')) return;
+        console.warn('[audio] error', player.error);
+        handlePlaybackFailure('Could not play this file.');
     });
 
     init();
