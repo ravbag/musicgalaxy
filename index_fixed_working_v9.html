@@ -105,37 +105,51 @@ function focusOnNode(node, scale=1.35, duration=650) {
         if (el) el.textContent = msg || '';
     }
 
-    // ---------- Robust KB loading (fetch for http(s), fs fallback for file:// / Electron) ----------
+    // ---------- Robust KB loading (fetch for http(s)/Electron file://, fs fallback) ----------
+    // Parse with a readable error: git conflict markers or a truncated download are the usual culprits.
+    function parseKnowledgeBase(raw, source) {
+        if (/^(<<<<<<<|>>>>>>>) /m.test(raw)) {
+            throw new Error(`${source}: contains git merge-conflict markers (<<<<<<<) — resolve or re-checkout the file`);
+        }
+        let data;
+        try { data = JSON.parse(raw); }
+        catch (e) { throw new Error(`${source}: not valid JSON (${e.message}; ${raw.length} bytes, starts with ${JSON.stringify(raw.slice(0, 20))})`); }
+        if (!Array.isArray(data)) throw new Error(`${source}: expected a JSON array of entries`);
+        return data;
+    }
+
     async function loadKnowledgeBase(filename) {
+        const failures = [];
         try {
             const res = await fetch(filename, { cache: 'no-store' });
-            if (!res.ok) throw new Error('HTTP ' + res.status);
-            const data = await res.json();
+            if (!res.ok) throw new Error(`fetch: HTTP ${res.status}`);
+            const data = parseKnowledgeBase(await res.text(), 'fetch');
             setStatus(`Loaded ${data.length} entries`);
             return data;
         } catch (e) {
-            try {
-                if (window.require) {
-                    const fs = window.require('fs');
-                    const path = window.require('path');
-                    let base = null;
-                    if (typeof __dirname !== 'undefined') base = __dirname;
-                    else if (location && location.pathname) {
-                        // file://.../index.html
-                        base = decodeURIComponent(location.pathname);
-                        base = base.replace(/[/\\][^/\\]*$/, '');
-                    } else base = process.cwd();
-
-                    const full = path.join(base, filename);
-                    const raw = fs.readFileSync(full, 'utf-8');
-                    const data = JSON.parse(raw);
-                    setStatus(`Loaded ${data.length} entries (fs fallback)`);
-                    return data;
-                }
-            } catch (e2) {}
-            setStatus('Failed to load knowledge_base.json');
-            throw e;
+            failures.push(e.message);
         }
+        try {
+            if (window.require) {
+                const fs = window.require('fs');
+                const path = window.require('path');
+                const { fileURLToPath } = window.require('url');
+                // fileURLToPath handles Windows drive letters (file:///C:/... -> C:\...)
+                const base = location.protocol === 'file:'
+                    ? path.dirname(fileURLToPath(location.href))
+                    : process.cwd();
+                const full = path.join(base, filename);
+                const data = parseKnowledgeBase(fs.readFileSync(full, 'utf-8'), full);
+                setStatus(`Loaded ${data.length} entries (fs fallback)`);
+                return data;
+            }
+            failures.push('fs fallback: unavailable (Node integration is off)');
+        } catch (e2) {
+            failures.push(`fs fallback: ${e2.message}`);
+        }
+        console.error('[kb] failed to load', filename, failures);
+        setStatus(`Failed to load ${filename} — ${failures.join(' | ')}`);
+        throw new Error(failures.join(' | '));
     }
 
     // ---------- Persistence ----------
