@@ -242,9 +242,14 @@ class Wikidata:
         data = self.http.get_json(f'{WIKIDATA_API}?{q}')
         return [r['id'] for r in data.get('search', []) if r.get('id')]
 
-    def load(self, qids, props='labels|aliases|claims|sitelinks'):
-        """Fetch entities (50 per request) into self.entities; returns {qid: parsed}."""
-        # Cached per entity (not per request), so re-runs only fetch what's new whatever the batching
+    # Everything except the fallback name search goes through the query service (SPARQL) in batches:
+    # Wikimedia rate-limits the regular API heavily for clients that aren't logged in.
+    ENTITY_BATCH = 80
+    LABEL_BATCH = 200
+    NAME_BATCH = 50
+
+    def load(self, qids):
+        """Fetch people's facts into self.entities; returns {qid: parsed}. Cached per entity."""
         todo = []
         for q in dict.fromkeys(qids):
             if not q or q in self.entities:
@@ -252,23 +257,32 @@ class Wikidata:
             cached = self.http.cache_get('wd-entity:' + q)
             if cached is None:
                 todo.append(q)
-            elif cached:  # {} marks a missing entity
+            elif cached:  # {} marks an entity that doesn't exist
                 self.entities[q] = cached
-        for i in range(0, len(todo), 50):
-            chunk = todo[i:i + 50]
-            q = urllib.parse.urlencode({'action': 'wbgetentities', 'ids': '|'.join(chunk), 'props': props,
-                                        'languages': 'en', 'format': 'json'})
-            data = self.http.get_json(f'{WIKIDATA_API}?{q}', cache=False)
-            ents = data.get('entities') or {}
-            for qid in chunk:
-                ent = ents.get(qid) or {'missing': ''}
-                parsed = {} if 'missing' in ent else parse_entity(ent)
+        for i in range(0, len(todo), self.ENTITY_BATCH):
+            chunk = todo[i:i + self.ENTITY_BATCH]
+            items = ' '.join('wd:' + q for q in chunk)
+            props = ' '.join('wdt:' + p for p in PROPS.values())
+            facts = self.sparql(f'''SELECT ?item ?prop ?value WHERE {{
+  VALUES ?item {{ {items} }}
+  VALUES ?prop {{ {props} }}
+  ?item ?prop ?value .
+}}''')
+            meta = self.sparql(f'''SELECT ?item ?label ?mul ?links ?alias WHERE {{
+  VALUES ?item {{ {items} }}
+  OPTIONAL {{ ?item rdfs:label ?label . FILTER(LANG(?label) = "en") }}
+  OPTIONAL {{ ?item rdfs:label ?mul . FILTER(LANG(?mul) = "mul") }}
+  OPTIONAL {{ ?item wikibase:sitelinks ?links }}
+  OPTIONAL {{ ?item skos:altLabel ?alias . FILTER(LANG(?alias) = "en") }}
+}}''')
+            for qid, parsed in entities_from_sparql(chunk, facts, meta).items():
                 self.http.cache_put('wd-entity:' + qid, parsed)
                 if parsed:
                     self.entities[qid] = parsed
         return {q: self.entities[q] for q in qids if q in self.entities}
 
     def labels(self, qids):
+        """English names of anything (countries, movements, ensembles...). Cached per entity."""
         todo = []
         for q in dict.fromkeys(qids):
             if not q or q in self.label_cache:
@@ -278,18 +292,41 @@ class Wikidata:
                 todo.append(q)
             elif cached.get('label'):
                 self.label_cache[q] = cached['label']
-        for i in range(0, len(todo), 50):
-            chunk = todo[i:i + 50]
-            q = urllib.parse.urlencode({'action': 'wbgetentities', 'ids': '|'.join(chunk), 'props': 'labels',
-                                        'languages': 'en', 'format': 'json'})
-            data = self.http.get_json(f'{WIKIDATA_API}?{q}', cache=False)
-            ents = data.get('entities') or {}
+        for i in range(0, len(todo), self.LABEL_BATCH):
+            chunk = todo[i:i + self.LABEL_BATCH]
+            rows = self.sparql(f'''SELECT ?item ?label WHERE {{
+  VALUES ?item {{ {' '.join('wd:' + q for q in chunk)} }}
+  ?item rdfs:label ?label . FILTER(LANG(?label) = "en" || LANG(?label) = "mul")
+}}''')
+            found = {}
+            for r in rows:
+                qid = uri_qid(r.get('item'))
+                lab = r.get('label', {})
+                if qid and (qid not in found or lab.get('xml:lang') == 'en'):
+                    found[qid] = lab.get('value')
             for qid in chunk:
-                lab = ((ents.get(qid) or {}).get('labels') or {}).get('en', {}).get('value')
-                self.http.cache_put('wd-label:' + qid, {'label': lab})
-                if lab:
-                    self.label_cache[qid] = lab
+                self.http.cache_put('wd-label:' + qid, {'label': found.get(qid)})
+                if found.get(qid):
+                    self.label_cache[qid] = found[qid]
         return {q: self.label_cache[q] for q in qids if q in self.label_cache}
+
+    def match_names(self, names):
+        """People whose English (or language-neutral) name or alias is exactly one of names: {name: [qid]}."""
+        out = {n: [] for n in names}
+        for i in range(0, len(names), self.NAME_BATCH):
+            chunk = names[i:i + self.NAME_BATCH]
+            lit = lambda n: json.dumps(n, ensure_ascii=False)
+            values = ' '.join(f'{lit(n)}@en {lit(n)}@mul' for n in chunk)
+            rows = self.sparql(f'''SELECT DISTINCT ?name ?item WHERE {{
+  VALUES ?name {{ {values} }}
+  ?item rdfs:label|skos:altLabel ?name .
+  ?item wdt:P31 wd:Q5 .
+}}''')
+            for r in rows:
+                name, qid = r.get('name', {}).get('value'), uri_qid(r.get('item'))
+                if name in out and qid and qid not in out[name]:
+                    out[name].append(qid)
+        return out
 
     def sparql(self, query):
         q = urllib.parse.urlencode({'query': query, 'format': 'json'})
@@ -297,50 +334,61 @@ class Wikidata:
         return data.get('results', {}).get('bindings', [])
 
 
-def claim_ids(ent, prop):
-    out = []
-    for c in ent.get('claims', {}).get(prop, []):
-        v = c.get('mainsnak', {}).get('datavalue', {}).get('value')
-        if isinstance(v, dict) and v.get('id'):
-            out.append(v['id'])
+def uri_qid(binding):
+    v = (binding or {}).get('value', '')
+    m = re.search(r'/entity/(Q\d+)$', v)
+    return m.group(1) if m else None
+
+
+def sparql_year(value):
+    m = re.match(r'(-?)0*(\d+)-\d\d-\d\d', value or '')
+    if not m:
+        return None
+    y = int(m.group(2))
+    return -y if m.group(1) else y
+
+
+def entities_from_sparql(qids, facts, meta):
+    """One record per person: label, aliases, sitelinks count, born/died years, mbid and the related
+    entity ids per PROPS key. Items Wikidata doesn't know map to {}."""
+    by_prop = {v: k for k, v in PROPS.items()}
+    ents = {q: {'claims': defaultdict(list), 'label': None, 'mul': None, 'links': 0, 'aliases': []} for q in qids}
+    for r in facts:
+        q = uri_qid(r.get('item'))
+        prop = r.get('prop', {}).get('value', '').rsplit('/', 1)[-1]
+        if q in ents and prop in by_prop:
+            ents[q]['claims'][by_prop[prop]].append(r.get('value', {}))
+    for r in meta:
+        q = uri_qid(r.get('item'))
+        if q not in ents:
+            continue
+        e = ents[q]
+        e['label'] = e['label'] or r.get('label', {}).get('value')
+        e['mul'] = e['mul'] or r.get('mul', {}).get('value')
+        if r.get('links'):
+            e['links'] = max(e['links'], int(float(r['links']['value'])))
+        alias = r.get('alias', {}).get('value')
+        if alias and alias not in e['aliases']:
+            e['aliases'].append(alias)
+    out = {}
+    for q, e in ents.items():
+        c = e['claims']
+        if not c and not e['label'] and not e['mul']:
+            out[q] = {}
+            continue
+        ids = lambda key: [x for x in (uri_qid(v) for v in c.get(key, [])) if x]
+        first = lambda key: next((v.get('value') for v in c.get(key, [])), None)
+        p = {
+            'qid': q, 'label': e['label'] or e['mul'] or q, 'aliases': e['aliases'], 'sitelinks': e['links'],
+            'born': next((y for y in (sparql_year(v.get('value')) for v in c.get('born', [])) if y is not None), None),
+            'died': next((y for y in (sparql_year(v.get('value')) for v in c.get('died', [])) if y is not None), None),
+            'mbid': first('mbid'),
+        }
+        for key in ('instance', 'occupation', 'student_of', 'student', 'influenced_by', 'movement', 'genre',
+                    'instrument', 'voice', 'country', 'member_of', 'employer', 'father', 'mother', 'sibling', 'spouse'):
+            p[key] = list(dict.fromkeys(ids(key)))
+        out[q] = p
     return out
-
-
-def claim_year(ent, prop):
-    for c in ent.get('claims', {}).get(prop, []):
-        v = c.get('mainsnak', {}).get('datavalue', {}).get('value')
-        if isinstance(v, dict) and isinstance(v.get('time'), str):
-            m = re.match(r'([+-])0*(\d+)-', v['time'])
-            if m:
-                y = int(m.group(2))
-                return -y if m.group(1) == '-' else y
-    return None
-
-
-def claim_string(ent, prop):
-    for c in ent.get('claims', {}).get(prop, []):
-        v = c.get('mainsnak', {}).get('datavalue', {}).get('value')
-        if isinstance(v, str):
-            return v
-    return None
-
-
-def parse_entity(ent):
-    labels = ent.get('labels', {})
-    label = (labels.get('en') or next(iter(labels.values()), {})).get('value', ent.get('id'))
-    p = {
-        'qid': ent.get('id'),
-        'label': label,
-        'aliases': [a['value'] for a in ent.get('aliases', {}).get('en', [])],
-        'sitelinks': len(ent.get('sitelinks', {}) or {}),
-        'born': claim_year(ent, PROPS['born']),
-        'died': claim_year(ent, PROPS['died']),
-        'mbid': claim_string(ent, PROPS['mbid']),
-    }
-    for key in ('instance', 'occupation', 'student_of', 'student', 'influenced_by', 'movement', 'genre',
-                'instrument', 'voice', 'country', 'member_of', 'employer', 'father', 'mother', 'sibling', 'spouse'):
-        p[key] = claim_ids(ent, PROPS[key])
-    return p
 
 
 def artist_type(ent):
@@ -385,6 +433,11 @@ def match_score(artist, ent):
 
 
 def match_existing(kb, wd, overrides, report, rematch=False):
+    todo = [a for a in kb if a['id'] not in overrides and (rematch or not a.get('qid'))]
+    # 1) exact name matches, many artists per query
+    names = list(dict.fromkeys(n for a in todo for n in [a['id']] + [x for x in a.get('aliases', []) if ' ' in x]))
+    exact = wd.match_names(names) if names else {}
+    wd.load([q for qs in exact.values() for q in qs])
     matched = 0
     for artist in kb:
         name = artist['id']
@@ -401,11 +454,17 @@ def match_existing(kb, wd, overrides, report, rematch=False):
             continue
         best = None
         failed = False
-        for query in [name] + [a for a in artist.get('aliases', []) if ' ' in a]:
+        queries = [name] + [a for a in artist.get('aliases', []) if ' ' in a]
+        cand_ids = list(dict.fromkeys(q for n in queries for q in exact.get(n, [])))
+        scored = sorted(((match_score(artist, e), q) for q, e in wd.load(cand_ids).items()), reverse=True)
+        if scored and scored[0][0] >= 3:
+            best = scored
+        # 2) fall back to Wikidata's search for names without a good exact match (one request each)
+        for query in ([] if best else queries):
             try:
                 cands = wd.load(wd.search(query))
             except Exception as ex:  # noqa: BLE001 - one failed lookup shouldn't stop the build
-                report['warnings'].append(f'Wikidata lookup failed for {name} ({ex}); run again to retry')
+                report['warnings'].append(f'Wikidata search failed for {name} ({ex}); run again to retry')
                 failed = True
                 break
             scored = sorted(((match_score(artist, e), q) for q, e in cands.items()), reverse=True)
@@ -423,7 +482,8 @@ def match_existing(kb, wd, overrides, report, rematch=False):
             e1, e2 = wd.entities[best[0][1]], wd.entities[best[1][1]]
             report['uncertain'].append(f"{name}: chose {best[0][1]} ({e1['label']}, born {e1['born']}) over "
                                        f"{best[1][1]} ({e2['label']}, born {e2['born']})")
-    log(f'  matched {matched} of {len(kb)} artists')
+    log(f'  matched {matched} of {len(kb)} artists '
+        f'({sum(1 for v in exact.values() if v)} names matched exactly in batches)')
     return matched
 
 
