@@ -67,7 +67,7 @@ Then open <http://localhost:8000/index_fixed_working_v9.html>. Press Ctrl+C in t
 - **Left to right is time**: each name sits at its `era` (roughly when the person was active),
   from the 1100s on the left to the present on the right.
 - **Bottom to top is `temp`**, the hand-assigned "musical temperature" (1 = cool/austere, 10 = hot/intense).
-  Positions are jittered, and names related to each other are pulled together.
+  Positions are jittered, and each name is pulled towards its most similar artists (see below).
 - **Colour is the type of artist**: gold = composer, pink = singer, blue = conductor.
 - **Large bold names** are "masters", the 100 core figures; smaller names are secondary.
 - **Drag** to pan and **scroll** to zoom. The name that's playing pulses.
@@ -111,14 +111,16 @@ the next pick. After 5 failures in a row it stops and asks you to check your con
 
 ### Autoplay modes
 
-The mode decides what plays next when a track ends (with Autoplay ON). Clicking a mode button
-while something is playing jumps to the next track straight away.
+The mode decides what plays next when a track ends (with Autoplay ON). Choosing a new mode while a
+track is playing lets that track finish; the status line says "New mode starts after this track". If
+nothing is playing, the new mode starts straight away. Teleport and Radio always act immediately, and so
+does leaving Radio (a live stream never ends).
 
 | Mode | What it does |
 |---|---|
 | **Pure Random** | Any artist, chosen uniformly at random. Ignores similarity and play history. |
-| **Random Walk** (default) | A small step to something nearby. Candidates are the current artist's related artists plus 40 random ones; artists that are more similar (see below) are much more likely. |
-| **Within Tag** | Stays inside the active tag (or, if none is set, the current artist's first tag), e.g. only *Opera*. If fewer than 10 artists have that tag, related artists are added to the pool. Clicking a tag chip in this mode jumps straight to that tag. |
+| **Random Walk** (default) | A small step to something nearby. Candidates are the current artist's 12 most similar artists plus 40 random ones; artists that are more similar (see below) are much more likely. |
+| **Within Tag** | Stays inside the active tag (or, if none is set, the current artist's first tag), e.g. only *Opera*. If fewer than 10 artists have that tag, the most similar artists are added to the pool. Clicking a tag chip in this mode jumps straight to that tag. |
 | **Spiral Time** | Moves through history about 25 years per track, choosing artists close to the target era who are also similar to the current one. It turns around at either end of the timeline and heads back. |
 | **Teleport** | A one-off jump to something deliberately *dissimilar*, for a change of scene. After the jump it returns to the mode you were in before. |
 | **Radio** | Live internet radio instead of individual recordings. See *Radio mode* below. |
@@ -150,13 +152,19 @@ Radio and go back to individual recordings.
 #### How "similar" and "likely" are worked out
 
 Random Walk, Within Tag, Spiral Time and Teleport all score candidate artists and pick one at
-random, with higher scores much more likely:
+random, with higher scores more likely:
 
 - **Similarity** (0–1) between two artists combines shared tags (55%), closeness in era (30%),
   and bonuses for the same type of artist, a shared school (e.g. First Viennese School) and a shared region.
-- **Play history**: artists you've played recently (within roughly the last hour) are strongly avoided,
-  and artists played many times become gradually less likely.
-- **Masters** get a boost over secondary artists.
+  Bookkeeping tags (*Secondary*, *Archive*, *Conductor*) don't count. This one measure is used
+  everywhere: for each mode, for every artist's 12 nearest neighbours (Random Walk's main candidates),
+  and for the links that pull similar names together on the map.
+- **Play history**: an artist you've just played is 20× less likely; that penalty halves every hour.
+  Artists played many times also become gradually less likely.
+- **Masters** are 1.6× as likely as an otherwise equal secondary artist.
+
+Similarity is what's sharpened (a small difference in similarity makes a big difference in
+likelihood); play history and the master boost simply multiply the result.
 
 `temp` currently only affects position on the map, not what plays next.
 
@@ -191,7 +199,7 @@ A list of 430 artists. Each entry looks like:
 | `tags` | Styles, forms, nationalities, e.g. `["Classical", "Austrian", "Opera"]` |
 | `collections` | archive.org collections to search for recordings (78 rpm collections are searched separately, see *Where the music comes from*) |
 | `meta` | `schools`, `regions`, `forms`, `styles` used for similarity |
-| `related` | Precomputed neighbours: `{ "id", "w" (weight 0–1), "why" (reasons) }` |
+| `related` | Precomputed neighbours: `{ "id", "w" (weight 0–1), "why" (reasons) }`. Kept for reference; the app now computes similarity itself (see *How "similar" and "likely" are worked out*) |
 
 ### `tools/merge_aliases.py`
 
