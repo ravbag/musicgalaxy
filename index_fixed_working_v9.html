@@ -45,6 +45,7 @@
         <button onclick="setMode('within_tag')">Within Tag</button>
         <button onclick="setMode('spiral_time')">Spiral Time</button>
         <button onclick="setMode('teleport')">Teleport</button>
+        <button onclick="setMode('radio')" title="Live internet radio for the active tag; press again for another station">Radio</button>
         <button onclick="toggleAutoplay()" id="autoplay-btn">Autoplay: ON</button>
         <button onclick="resumeLast()">Resume Last</button>
         <button onclick="clearActiveTag()">Clear Tag</button>
@@ -245,7 +246,8 @@ function focusOnNode(node, scale=1.35, duration=650) {
                 player.src = src;
                 // currentTime can only be set once metadata is loaded
                 player.addEventListener('loadedmetadata', () => {
-                    player.currentTime = isFinite(t) ? t : 0;
+                    // live radio streams have no finite duration and can't seek
+                    if (Number.isFinite(player.duration)) player.currentTime = isFinite(t) ? t : 0;
                 }, { once: true });
                 showTrack(title || node.id, vault);
                 player.play().catch(()=>{});
@@ -457,8 +459,8 @@ async function init() {
         updateUI();
         saveState();
 
-        // Trigger next track immediately if something is already playing
-        if (currentNode) autoNext();
+        // Trigger next track immediately if something is already playing (radio tunes in straight away)
+        if (currentNode || mode === 'radio') autoNext();
     }
 
     function toggleAutoplay() {
@@ -472,7 +474,8 @@ async function init() {
         updateUI();
         saveState();
         if (currentNode) renderTagChips(currentNode);
-        if (currentNode && playMode === 'within_tag') autoNext();
+        if (playMode === 'radio' && tag) autoNext();
+        else if (currentNode && playMode === 'within_tag') autoNext();
     }
 
     function clearActiveTag() {
@@ -695,11 +698,11 @@ async function init() {
         };
     }
 
-    function startTrack(node, track) {
+    function startTrack(node, track, prefix = `${node.id} — `) {
         player.src = track.src;
-        const title = `${node.id} — ${track.title}`;
+        const title = `${prefix}${track.title}`;
         try {
-            localStorage.setItem(LS.lastNodeId, node.id);
+            if (nodeById.has(node.id)) localStorage.setItem(LS.lastNodeId, node.id);
             localStorage.setItem(LS.lastTrackSrc, player.src);
             localStorage.setItem(LS.lastTrackTitle, title);
             localStorage.setItem(LS.lastTrackVault, track.label);
@@ -729,6 +732,9 @@ async function init() {
         // Update UI
         renderTagChips(node);
         updateUI();
+
+        // Radio mode: clicking an artist tunes to a station in their genres
+        if (playMode === 'radio') return playRadio(node, null, token);
 
         for (const source of sourceOrder(node)) {
             trackDisplay.innerText = `Searching ${SOURCE_LABELS[source]}...`;
@@ -763,6 +769,119 @@ async function init() {
         trackDisplay.innerText = `${reason} Skipping...`;
         const token = playToken;
         skipTimer = setTimeout(() => { if (token === playToken) autoNext(); }, 2000);
+    }
+
+    // ---------- Radio mode (Radio Browser: community directory of internet radio stations) ----------
+    // Map the knowledge base's style tags to Radio Browser tags (tried in order). Nationality and
+    // role tags ("French", "Conductor", ...) are left out: on radio they mean language/pop stations.
+    const RADIO_TAGS = {};
+    for (const [radioTags, ourTags] of [
+        [['early music', 'medieval', 'renaissance'], ['Medieval', 'Early Music', 'Ars Nova', 'Notre Dame School', 'Polyphony', 'Franco-Flemish', 'Renaissance', 'Motet']],
+        [['baroque', 'early music'], ['Baroque', 'Early Baroque', 'Bach', 'Harpsichord', 'Venetian School', 'Counterpoint', 'Historically Informed']],
+        [['classical'], ['Classical', 'First Viennese School', 'Mannheim School', 'Classic']],
+        [['romantic', 'classical'], ['Romantic', 'Late Romantic', 'Nationalist', 'New German School', 'Russian Five', 'Tone Poem', 'Programmatic', 'Lieder', 'Virtuoso']],
+        [['opera'], ['Opera', 'Bel Canto', 'Verismo', 'Operetta', 'Wagnerian', 'Wagner', 'Verdi', 'Soprano', 'Tenor', 'Mezzo', 'Baritone', 'Bass', 'Bass-Baritone', 'Countertenor', 'Coloratura', 'Spinto', 'Lyric', 'Dramatic', 'Contralto', 'Opera Reform']],
+        [['choral', 'sacred', 'gregorian'], ['Sacred', 'Choral', 'Requiem', 'Oratorio', 'Spiritual']],
+        [['classical piano', 'piano'], ['Piano', 'Keyboard', 'Player Piano']],
+        [['organ'], ['Organ']],
+        [['classical guitar'], ['Guitar', 'Lute']],
+        [['chamber music'], ['Violin', 'Cello', 'Flute', 'Chamber', 'Concerto']],
+        [['symphonic', 'orchestral'], ['Orchestral', 'Symphony', 'Ballet']],
+        [['contemporary classical', 'new music', 'avant-garde'], ['Modernist', 'Modern', 'Contemporary', 'Avant-Garde', 'Experimental', 'Serialism', 'Atonal', 'Second Viennese School', 'Darmstadt', 'Spectral', 'Complexity', 'Postmodern', 'Polystylism', 'Neoclassical', 'Impressionism', 'Les Six', 'Electronic']],
+        [['minimalism', 'contemporary classical'], ['Minimalism', 'Postminimalism', 'Repetitive', 'Drone']],
+        [['soundtrack', 'film music'], ['Film']],
+        [['jazz'], ['Jazz', 'Smooth']],
+        [['tango'], ['Tango']],
+        [['folk'], ['Folk', 'Americana']],
+        [['classical crossover'], ['Crossover']],
+        [['musicals', 'broadway'], ['Theatre']],
+    ]) for (const t of ourTags) RADIO_TAGS[t] = radioTags;
+    const RADIO_FALLBACK_TAG = 'classical';
+    const RADIO_FALLBACK_HOSTS = ['de1.api.radio-browser.info', 'nl1.api.radio-browser.info', 'at1.api.radio-browser.info', 'fi1.api.radio-browser.info'];
+    let radioHosts = null;          // resolved server list, best first
+    const recentStations = [];      // uuids, so "next station" doesn't repeat itself
+
+    // Radio tags to try, most specific first: the chosen tag, else the artist's style tags; always ends in "classical"
+    function radioTagsFor(node, tag) {
+        const ours = tag ? [tag] : (node?.tags || []);
+        const out = [];
+        for (const t of ours) for (const r of (RADIO_TAGS[t] || [])) if (!out.includes(r)) out.push(r);
+        return [...out.slice(0, 3), RADIO_FALLBACK_TAG].filter((t, i, a) => a.indexOf(t) === i);
+    }
+
+    // Radio Browser asks clients to pick a server from its live list rather than hard-coding one
+    async function getRadioHosts() {
+        if (radioHosts) return radioHosts;
+        let names = [];
+        try {
+            const servers = await fetchJson('https://all.api.radio-browser.info/json/servers');
+            names = [...new Set((servers || []).map(s => s?.name).filter(Boolean))];
+        } catch (e) { console.warn('[radio] server list unavailable, using defaults', e); }
+        radioHosts = shuffled(names.length ? names : RADIO_FALLBACK_HOSTS);
+        return radioHosts;
+    }
+
+    async function radioApi(path) {
+        let lastErr;
+        for (const host of await getRadioHosts()) {
+            try { return await fetchJson(`https://${host}${path}`); }
+            catch (e) { lastErr = e; radioHosts = [...radioHosts.filter(h => h !== host), host]; } // demote failing host
+        }
+        throw lastErr || new Error('no radio servers');
+    }
+
+    function isPlayableStation(st) {
+        const url = st?.url_resolved || '';
+        if (!url.startsWith('https://')) return false;   // page only allows https media
+        if (Number(st.hls) === 1 || /\.m3u8(\?|$)/i.test(url)) return false; // HLS needs an extra player library
+        if (st.lastcheckok !== undefined && Number(st.lastcheckok) !== 1) return false;
+        return true;
+    }
+
+    const stationCache = new Map(); // radio tag -> playable stations (most-voted first)
+
+    async function stationsFor(radioTag) {
+        if (!stationCache.has(radioTag)) {
+            const params = new URLSearchParams({ tag: radioTag, tagExact: 'true', hidebroken: 'true', order: 'votes', reverse: 'true', limit: '100' });
+            const stations = (await radioApi(`/json/stations/search?${params}`) || []).filter(isPlayableStation);
+            stationCache.set(radioTag, stations.slice(0, 25)); // most-voted, a little variety
+        }
+        return stationCache.get(radioTag);
+    }
+
+    async function playRadio(node, tag, token = ++playToken) {
+        const isCurrent = () => token === playToken;
+        clearTimeout(skipTimer);
+        const trackDisplay = document.getElementById('track-title');
+        // First look for a station not played recently in any of the genres; only then allow repeats
+        const attempts = radioTagsFor(node, tag).flatMap(t => [[t, false]]);
+        attempts.push(...attempts.map(([t]) => [t, true]));
+        for (const [radioTag, allowRecent] of attempts) {
+            trackDisplay.innerText = `Tuning in: ${radioTag} radio...`;
+            try {
+                const stations = await stationsFor(radioTag);
+                if (!isCurrent()) return;
+                const pool = allowRecent ? stations : stations.filter(x => !recentStations.includes(x.stationuuid));
+                if (!pool.length) continue;
+                const st = pool[Math.floor(Math.random() * pool.length)];
+                recentStations.push(st.stationuuid);
+                if (recentStations.length > 15) recentStations.shift();
+                const where = [st.country, st.codec && `${st.codec}${st.bitrate ? ' ' + st.bitrate + ' kbps' : ''}`].filter(Boolean).join(' · ');
+                startTrack(node || { id: 'Radio' }, {
+                    src: st.url_resolved,
+                    title: `${String(st.name || 'Unnamed station').trim()}${where ? ' (' + where + ')' : ''}`,
+                    label: `Radio · ${radioTag}`,
+                }, node ? `${node.id} — ` : '');
+                // Lets Radio Browser count the play for its popularity ranking
+                radioApi(`/json/url/${encodeURIComponent(st.stationuuid)}`).catch(() => {});
+                return;
+            } catch (e) {
+                if (!isCurrent()) return;
+                console.warn('[radio]', radioTag, e);
+            }
+        }
+        if (!isCurrent()) return;
+        handlePlaybackFailure('No radio station found.');
     }
 
     // --- Similarity & weighted sampling ---
@@ -901,6 +1020,7 @@ async function init() {
     }
 
     function autoNext() {
+        if (playMode === 'radio') { playRadio(currentNode, activeTag); return; }
         if (!currentNode) return;
 
         let next = null;
