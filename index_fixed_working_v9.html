@@ -359,6 +359,8 @@ function focusOnNode(node, scale=1.35, duration=650) {
 
     // Vertical position from relatedness: order artists so that related ones sit at similar heights
     // (spectral ordering - the Fiedler vector of the style-neighbour graph), spread evenly 0-1.
+    // Related artists tend to be contemporaries, so the ordering is kept independent of era (the x
+    // axis already shows time): the vertical axis shows what relates artists beyond when they lived.
     function computeRelatednessAxis() {
         const n = nodes.length;
         if (n < 3) { nodes.forEach((d, i) => d._ry = n > 1 ? i / (n - 1) : 0.5); return; }
@@ -376,6 +378,12 @@ function focusOnNode(node, scale=1.35, duration=650) {
         let seed = 12345; // fixed seed: the same data always gives the same map
         const rand = () => (seed = (seed * 1103515245 + 12345) % 2147483648) / 2147483648;
         let v = nodes.map(() => rand() - 0.5);
+        // centred, normalised era vector to project out (time is the x axis)
+        const eras = nodes.map(d => Number.isFinite(+d.era) ? +d.era : 1800);
+        const eraMean = eras.reduce((a, b) => a + b, 0) / n;
+        let eraVec = eras.map(e => e - eraMean);
+        const eraNorm = Math.sqrt(eraVec.reduce((a, b) => a + b * b, 0)) || 1;
+        eraVec = eraVec.map(x => x / eraNorm);
         for (let it = 0; it < 3000; it++) {
             // power iteration on (c*I - Laplacian), keeping v orthogonal to the constant vector
             const next = new Array(n);
@@ -385,8 +393,11 @@ function focusOnNode(node, scale=1.35, duration=650) {
                 next[i] = c * v[i] - lv;
             }
             const mean = next.reduce((a, b) => a + b, 0) / n;
+            for (let i = 0; i < n; i++) next[i] -= mean;
+            let dot = 0;
+            for (let i = 0; i < n; i++) dot += next[i] * eraVec[i];
             let norm = 0;
-            for (let i = 0; i < n; i++) { next[i] -= mean; norm += next[i] * next[i]; }
+            for (let i = 0; i < n; i++) { next[i] -= dot * eraVec[i]; norm += next[i] * next[i]; }
             norm = Math.sqrt(norm) || 1;
             v = next.map(x => x / norm);
         }

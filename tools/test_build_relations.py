@@ -23,7 +23,7 @@ def year(y):
     return {'mainsnak': {'datavalue': {'value': {'time': f'+{y:04d}-01-01T00:00:00Z'}}}}
 
 
-def person(qid, label, occ, born, died=None, links=30, aliases=(), mbid=None, **rels):
+def person(qid, label, occ, born, died=None, links=30, aliases=(), mbid=None, desc='composer', **rels):
     claims = {'P31': [claim('Q5')], 'P106': [claim(o) for o in occ], 'P569': [year(born)]}
     if died:
         claims['P570'] = [year(died)]
@@ -32,6 +32,7 @@ def person(qid, label, occ, born, died=None, links=30, aliases=(), mbid=None, **
     for prop, targets in rels.items():
         claims[br.PROPS[prop]] = [claim(t) for t in targets]
     return {'id': qid, 'labels': {'en': {'value': label}}, 'aliases': {'en': [{'value': a} for a in aliases]},
+            'descriptions': {'en': {'value': desc}},
             'claims': claims, 'sitelinks': {f'site{i}': {} for i in range(links)}}
 
 
@@ -51,10 +52,19 @@ ENTITIES = {
     'Q7': person('Q7', 'Renata Tebaldi', [OPERA_SINGER], 1922, 2004, links=45, voice=['Q700'], country=['Q602']),
     'Q8': person('Q8', 'Bernard of Clairvaux', [COMPOSER], 1090, 1153, links=20),
     'Q9': person('Q9', 'No Dates Person', [COMPOSER], 1900, links=60),
+    'Q10': person('Q10', 'Johann Wolfgang von Goethe', [COMPOSER, 'Q36180'], 1749, 1832, links=200,
+                  desc='German writer, artist, natural scientist and politician (1749–1832)'),
+    'Q11': person('Q11', 'Louis Armstrong', [COMPOSER, SINGER], 1901, 1971, links=150, desc='American jazz trumpeter and singer'),
+    'Q12': person('Q12', 'Young Prodigy', [COMPOSER], 1995, links=41, desc='British composer'),
+    'Q13': person('Q13', 'Johann Pachelbel', [COMPOSER], 1653, 1706, links=70, desc='German Baroque composer', movement=['Q502']),
+    'Q14': person('Q14', 'Album Performer', [COMPOSER], 1950, links=10),
+    'Q15': person('Q15', 'Rocky Pianist', ['Q486748'], 1950, links=50, desc='American pianist', genre=['Q503']),
 }
 del ENTITIES['Q9']['claims']['P569']
+ENTITIES['Q5']['descriptions']['en']['value'] = 'American-born Greek soprano'
+ENTITIES['Q7']['descriptions']['en']['value'] = 'Italian soprano'
 LABELS = {'Q500': 'Notre-Dame school', 'Q501': 'Romantic music', 'Q1344': 'opera', 'Q600': 'Holy Roman Empire',
-          'Q601': 'Germany', 'Q602': 'Italy', 'Q700': 'soprano'}
+          'Q601': 'Germany', 'Q602': 'Italy', 'Q700': 'soprano', 'Q502': 'Baroque music', 'Q503': 'rock music'}
 # Only used for names without an exact match (the fallback search)
 SEARCH = {'Léonin': ['Q1'], 'Pérotin': ['Q99', 'Q2'], 'Hildegard von Bingen': ['Q3'],
           'Richard Wagner': ['Q40', 'Q4'], 'Maria Callas': ['Q5']}
@@ -98,6 +108,8 @@ def fake_sparql(query):
                 continue
             base = {'item': {'value': ENTITY_URI + q}, 'label': {'value': e['labels']['en']['value'], 'xml:lang': 'en'},
                     'links': {'value': str(len(e.get('sitelinks', {})))}}
+            if e.get('descriptions'):
+                base['desc'] = {'value': e['descriptions']['en']['value']}
             aliases = [a['value'] for a in e.get('aliases', {}).get('en', [])]
             rows += [dict(base, alias={'value': a}) for a in aliases] or [base]
     elif 'SELECT ?item ?label WHERE' in query:  # names of countries, movements...
@@ -106,12 +118,17 @@ def fake_sparql(query):
             if lab:
                 rows.append({'item': {'value': ENTITY_URI + q}, 'label': {'value': lab, 'xml:lang': 'en'}})
     elif 'wd:Q36834 ; wikibase:sitelinks' in query:
-        rows = [{'item': {'value': ENTITY_URI + i}, 'links': {'value': str(n)}} for i, n in [('Q6', 55), ('Q9', 60), ('Q3', 90)]]
+        rows = [{'item': {'value': ENTITY_URI + i}, 'links': {'value': str(n)}}
+                for i, n in [('Q10', 200), ('Q11', 150), ('Q13', 70), ('Q6', 55), ('Q9', 60), ('Q3', 90), ('Q12', 41)]]
     elif 'wd:Q2865819 ; wikibase:sitelinks' in query:
         rows = [{'item': {'value': ENTITY_URI + 'Q7'}, 'links': {'value': '45'}}]
+    elif 'wd:Q486748 ; wikibase:sitelinks' in query:
+        rows = [{'item': {'value': ENTITY_URI + 'Q15'}, 'links': {'value': '50'}}]
     elif 'wdt:P86 ?composer' in query:
         rows = [{'composer': {'value': ENTITY_URI + 'Q4'}, 'performer': {'value': ENTITY_URI + 'Q5'}, 'workLabel': {'value': 'Tristan und Isolde'}},
-                {'composer': {'value': ENTITY_URI + 'Q4'}, 'performer': {'value': ENTITY_URI + 'Q12345'}, 'workLabel': {'value': 'Parsifal'}}]
+                {'composer': {'value': ENTITY_URI + 'Q4'}, 'performer': {'value': ENTITY_URI + 'Q12345'}, 'workLabel': {'value': 'Parsifal'}},
+                # a composer credited as "performer" (as on album entries): ignored
+                {'composer': {'value': ENTITY_URI + 'Q4'}, 'performer': {'value': ENTITY_URI + 'Q2'}, 'workLabel': {'value': 'Wagner Album'}}]
     return json.dumps({'results': {'bindings': rows}})
 
 
@@ -164,6 +181,7 @@ class BuildRelationsTest(unittest.TestCase):
             {'id': 'Hildegard von Bingen', 'key': 'hildegard', 'type': 'Composer', 'era': 1150, 'tags': ['Medieval', 'Sacred']},
             {'id': 'Richard Wagner', 'key': 'wagner', 'type': 'Composer', 'era': 1870, 'tags': ['Opera'], 'aliases': ['Wagner']},
             {'id': 'Maria Callas', 'key': 'callas', 'type': 'Singer', 'era': 1955, 'tags': ['Opera']},
+            {'id': 'Johann Pachelbel', 'key': 'pachelbel', 'type': 'Composer', 'era': 1850, 'tags': ['Romantic', 'Secondary']},
         ]
         with open(os.path.join(self.root, 'knowledge_base.json'), 'w', encoding='utf-8') as f:
             json.dump(kb, f)
@@ -194,6 +212,16 @@ class BuildRelationsTest(unittest.TestCase):
         self.assertIn('Renata Tebaldi', by_id)
         self.assertIn('Bernard of Clairvaux', by_id)  # Hildegard's influence
         self.assertNotIn('No Dates Person', by_id)
+        # not classical musicians: a writer, a jazz musician, a rock pianist
+        self.assertNotIn('Johann Wolfgang von Goethe', by_id)
+        self.assertNotIn('Louis Armstrong', by_id)
+        self.assertNotIn('Rocky Pianist', by_id)
+        self.assertEqual(by_id['Young Prodigy']['era'], br.CURRENT_YEAR)  # born 1995: era capped, not 2035
+        # placeholder entry: matched despite its made-up era, then corrected; not duplicated
+        p = by_id['Johann Pachelbel']
+        self.assertEqual((p['qid'], p['era']), ('Q13', 1693))
+        self.assertEqual(p['tags'], ['Baroque', 'Secondary'])
+        self.assertFalse(any(a['id'].startswith('Johann Pachelbel (') for a in kb))
         self.assertEqual(sum(1 for a in kb if a['id'] == 'Hildegard von Bingen'), 1)
         h = by_id['Engelbert Humperdinck']
         self.assertEqual((h['type'], h['era'], h['source']), ('Composer', 1894, 'wikidata'))
@@ -214,6 +242,7 @@ class BuildRelationsTest(unittest.TestCase):
                       self.edge(rel, 'Hildegard von Bingen', 'Bernard of Clairvaux')['why'])
         wc = self.edge(rel, 'Richard Wagner', 'Maria Callas')
         self.assertIn("Maria Callas performed Richard Wagner's Tristan und Isolde", wc['why'])
+        self.assertNotIn('performed', (self.edge(rel, 'Richard Wagner', 'Pérotin') or {'s': {}})['s'])  # composer, not performer
         self.assertEqual(wc['s']['listen'], 0.5)  # 50 of a top score of 100
         self.assertIn('Engelbert Humperdinck studied with Richard Wagner',
                       self.edge(rel, 'Engelbert Humperdinck', 'Richard Wagner')['why'])  # MusicBrainz
@@ -226,13 +255,17 @@ class BuildRelationsTest(unittest.TestCase):
         with open(os.path.join(self.root, 'tools', 'relations_report.md'), encoding='utf-8') as f:
             text = f.read()
         self.assertIn('No Dates Person', text)
+        self.assertIn('Johann Wolfgang von Goethe (Q10): not a classical musician: described as "German writer', text)
+        self.assertIn('Louis Armstrong (Q11): not a classical musician: jazz', text)
+        self.assertIn('Johann Pachelbel: era 1850 -> 1693, tags Romantic -> Baroque', text)
         self.assertIn('Engelbert Humperdinck (Composer, 1854–1921, 55 Wikipedia editions)', text)
 
     def test_second_run_uses_cache_and_is_stable(self):
-        _, rel1, _, _ = self.run_build()
+        kb1, rel1, _, _ = self.run_build()
         kb2, rel2, _, http = self.run_build(offline=True)  # would raise on any uncached request
         self.assertEqual(rel1['edges'], rel2['edges'])
-        self.assertEqual(len(kb2), 8)  # no duplicates added on the second run
+        self.assertEqual([a['id'] for a in kb2], [a['id'] for a in kb1])  # same artists, no duplicates on a re-run
+        self.assertEqual(len(kb2), 10)  # 6 curated + 4 added
         self.assertEqual(http.requests, [])
 
     def test_overrides_and_no_expand(self):
@@ -240,7 +273,7 @@ class BuildRelationsTest(unittest.TestCase):
         with open(os.path.join(self.root, 'tools', 'wikidata_overrides.json'), 'w', encoding='utf-8') as f:
             json.dump({'Maria Callas': None}, f)
         kb, rel, report, _ = self.run_build('--no-expand', '--no-musicbrainz', '--no-listenbrainz', '--no-cooccurrence')
-        self.assertEqual(len(kb), 5)
+        self.assertEqual(len(kb), 6)
         self.assertNotIn('qid', next(a for a in kb if a['id'] == 'Maria Callas'))
         self.assertIn('Maria Callas (override: never match)', report['unmatched'])
         self.assertIsNone(self.edge(rel, 'Richard Wagner', 'Maria Callas'))

@@ -1313,8 +1313,8 @@
     "sitelinks": 45
   },
   {
-    "id": "Elgar",
-    "key": "elgar",
+    "id": "Edward Elgar",
+    "key": "edward_elgar",
     "is_master": true,
     "type": "Composer",
     "era": 1910,
@@ -1422,6 +1422,9 @@
           "era:<=25y"
         ]
       }
+    ],
+    "aliases": [
+      "Elgar"
     ]
   },
   {
@@ -73274,59 +73277,6 @@
       "member": [],
       "country": [
         "Mexican"
-      ]
-    },
-    "sitelinks": 75
-  },
-  {
-    "id": "Edward Elgar",
-    "key": "edward_elgar",
-    "is_master": false,
-    "type": "Composer",
-    "era": 1897,
-    "tags": [
-      "Romantic",
-      "Symphony",
-      "Organ",
-      "British"
-    ],
-    "collections": [
-      "classic-archives",
-      "unlocked-recordings",
-      "community_audio"
-    ],
-    "meta": {
-      "schools": [],
-      "regions": [
-        "British"
-      ],
-      "forms": [],
-      "styles": []
-    },
-    "related": [],
-    "aliases": [
-      "Edward William Elgar"
-    ],
-    "qid": "Q179631",
-    "source": "wikidata",
-    "born": 1857,
-    "died": 1934,
-    "mbid": "4e60a56a-514a-4a19-a3cc-49927c96b3cb",
-    "attrs": {
-      "movement": [],
-      "genre": [
-        "classical music",
-        "symphony"
-      ],
-      "instrument": [
-        "organ"
-      ],
-      "voice": [],
-      "member": [
-        "University of Birmingham"
-      ],
-      "country": [
-        "British"
       ]
     },
     "sitelinks": 75

@@ -86,6 +86,26 @@ PROPS = {
 }
 
 DEFAULT_COLLECTIONS = ['classic-archives', 'unlocked-recordings', 'community_audio']
+CURRENT_YEAR = datetime.date.today().year
+
+# New artists must be described on Wikidata as a musician ("German composer", "Italian soprano")
+# and not as something else first ("German writer, artist, natural scientist..."), and must not be
+# a jazz/pop/rock musician. Applies only to artists the script adds, not to the curated ones.
+MUSIC_DESCRIPTION = re.compile(
+    r'\b(composer|musician|conductor|singer|soprano|mezzo|contralto|alto|tenor|baritone|bass-baritone|bass|basso|'
+    r'countertenor|castrato|pianist|violinist|violist|cellist|organist|harpsichordist|lutenist|guitarist|flautist|'
+    r'flutist|oboist|clarinettist|clarinetist|bassoonist|trumpeter|horn player|harpist|kapellmeister|music theorist|'
+    r'choirmaster|cantor|troubadour|trouv[eè]re|minnesinger|madrigalist|opera|music)', re.I)
+NON_CLASSICAL = re.compile(
+    r'\b(jazz|rock|pop|rapper|hip[- ]hop|singer-songwriter|songwriter|disc jockey|dj|heavy metal|punk|reggae|'
+    r'blues|soul|r&b|rhythm and blues|country music|funk|disco|electronic dance|bandleader|big band|swing|'
+    r'schlager|flamenco|bossa nova|k-pop|j-pop|eurovision)\b', re.I)
+
+
+def is_placeholder(artist):
+    """The original data has ~45 stub entries with a made-up era (1850) and tags ['Romantic', 'Secondary']."""
+    return artist.get('source') != 'wikidata' and artist.get('era') == 1850 and \
+        sorted(artist.get('tags') or []) == ['Romantic', 'Secondary']
 
 # Country (Wikidata label) -> the nationality adjectives the knowledge base already uses
 COUNTRY_ADJECTIVE = {
@@ -261,7 +281,7 @@ class Wikidata:
         for q in dict.fromkeys(qids):
             if not q or q in self.entities:
                 continue
-            cached = self.http.cache_get('wd-entity:' + q)
+            cached = self.http.cache_get('wd-entity:v2:' + q)
             if cached is None:
                 todo.append(q)
             elif cached:  # {} marks an entity that doesn't exist
@@ -277,15 +297,16 @@ class Wikidata:
   VALUES ?prop {{ {props} }}
   ?item ?prop ?value .
 }}''')
-            meta = self.sparql(f'''SELECT ?item ?label ?mul ?links ?alias WHERE {{
+            meta = self.sparql(f'''SELECT ?item ?label ?mul ?links ?alias ?desc WHERE {{
   VALUES ?item {{ {items} }}
   OPTIONAL {{ ?item rdfs:label ?label . FILTER(LANG(?label) = "en") }}
   OPTIONAL {{ ?item rdfs:label ?mul . FILTER(LANG(?mul) = "mul") }}
   OPTIONAL {{ ?item wikibase:sitelinks ?links }}
+  OPTIONAL {{ ?item schema:description ?desc . FILTER(LANG(?desc) = "en") }}
   OPTIONAL {{ ?item skos:altLabel ?alias . FILTER(LANG(?alias) = "en") }}
 }}''')
             for qid, parsed in entities_from_sparql(chunk, facts, meta).items():
-                self.http.cache_put('wd-entity:' + qid, parsed)
+                self.http.cache_put('wd-entity:v2:' + qid, parsed)
                 if parsed:
                     self.entities[qid] = parsed
         return {q: self.entities[q] for q in qids if q in self.entities}
@@ -364,7 +385,7 @@ def entities_from_sparql(qids, facts, meta):
     """One record per person: label, aliases, sitelinks count, born/died years, mbid and the related
     entity ids per PROPS key. Items Wikidata doesn't know map to {}."""
     by_prop = {v: k for k, v in PROPS.items()}
-    ents = {q: {'claims': defaultdict(list), 'label': None, 'mul': None, 'links': 0, 'aliases': []} for q in qids}
+    ents = {q: {'claims': defaultdict(list), 'label': None, 'mul': None, 'desc': None, 'links': 0, 'aliases': []} for q in qids}
     for r in facts:
         q = uri_qid(r.get('item'))
         prop = r.get('prop', {}).get('value', '').rsplit('/', 1)[-1]
@@ -377,6 +398,7 @@ def entities_from_sparql(qids, facts, meta):
         e = ents[q]
         e['label'] = e['label'] or r.get('label', {}).get('value')
         e['mul'] = e['mul'] or r.get('mul', {}).get('value')
+        e['desc'] = e['desc'] or r.get('desc', {}).get('value')
         if r.get('links'):
             e['links'] = max(e['links'], int(float(r['links']['value'])))
         alias = r.get('alias', {}).get('value')
@@ -394,7 +416,7 @@ def entities_from_sparql(qids, facts, meta):
             'qid': q, 'label': e['label'] or e['mul'] or q, 'aliases': e['aliases'], 'sitelinks': e['links'],
             'born': next((y for y in (sparql_year(v.get('value')) for v in c.get('born', [])) if y is not None), None),
             'died': next((y for y in (sparql_year(v.get('value')) for v in c.get('died', [])) if y is not None), None),
-            'mbid': first('mbid'),
+            'mbid': first('mbid'), 'description': e['desc'] or '',
         }
         for key in ('instance', 'occupation', 'student_of', 'student', 'influenced_by', 'movement', 'genre',
                     'instrument', 'voice', 'country', 'member_of', 'employer', 'father', 'mother', 'sibling', 'spouse'):
@@ -416,10 +438,12 @@ def floruit(ent):
     b, d = ent.get('born'), ent.get('died')
     if b is not None:
         era = b + 40
-        return min(era, d - 5) if d is not None and d - 5 > b else era
-    if d is not None:
-        return d - 20
-    return None
+        era = min(era, d - 5) if d is not None and d - 5 > b else era
+    elif d is not None:
+        era = d - 20
+    else:
+        return None
+    return min(era, CURRENT_YEAR)
 
 
 # --- Step 1: match existing artists ---------------------------------------------------------------
@@ -434,7 +458,7 @@ def match_score(artist, ent):
         score += 1
     else:
         score -= 2
-    era = artist.get('era')
+    era = None if is_placeholder(artist) else artist.get('era')
     if ent['born'] is not None and isinstance(era, (int, float)):
         score += 2 if 10 <= era - ent['born'] <= 90 else -3
     names = {norm(artist['id'])} | {norm(a) for a in artist.get('aliases', [])}
@@ -577,10 +601,24 @@ def country_adjectives(ent, labels):
     return out
 
 
+def classical_musician(e, labels):
+    """(True, '') or (False, reason) for a candidate artist."""
+    desc = e.get('description') or ''
+    if not MUSIC_DESCRIPTION.search(desc):
+        return False, f'described as "{desc}"' if desc else 'no description'
+    genres = ' / '.join(labels.get(g, '') for g in e['genre'])
+    for text in (desc, genres):
+        m = NON_CLASSICAL.search(text)
+        if m:
+            return False, f'{m.group(0)} ({text})'
+    return True, ''
+
+
 def add_new_artists(kb, wd, qids, args, report):
     ents = wd.load(qids)
     attr_labels = wd.labels([q for e in ents.values() for k in ('movement', 'genre', 'voice', 'instrument', 'country') for q in e[k]])
     taken_ids = {norm(a['id']) for a in kb} | {norm(x) for a in kb for x in a.get('aliases', [])}
+    unmatched = {norm(a['id']): a for a in kb if not a.get('qid')}
     added = []
     for q in qids:
         if len(added) >= args.max_new:
@@ -593,7 +631,16 @@ def add_new_artists(kb, wd, qids, args, report):
         if not typ or era is None:
             report['skipped'].append(f"{e['label']} ({q}): no {'music occupation' if not typ else 'dates'}")
             continue
+        ok, why_not = classical_musician(e, attr_labels)
+        if not ok:
+            report['skipped'].append(f"{e['label']} ({q}): not a classical musician: {why_not}")
+            continue
         name = e['label']
+        if norm(name) in unmatched:  # an existing artist the matching step missed: link it instead of duplicating
+            existing = unmatched.pop(norm(name))
+            existing['qid'] = q
+            report['attached'].append(f"{existing['id']} -> {q} ({e.get('description') or e['label']})")
+            continue
         if norm(name) in taken_ids:
             name = f"{name} ({e['born'] if e['born'] is not None else q})"
             if norm(name) in taken_ids:
@@ -630,7 +677,7 @@ class Edges:
         return sorted(self.edges.values(), key=lambda e: (e['a'], e['b']))
 
 
-def fill_attributes(kb, wd):
+def fill_attributes(kb, wd, report):
     """Adds qid-derived facts to each artist: born/died/mbid and attrs used for shared-context similarity."""
     ents = wd.load([a['qid'] for a in kb if a.get('qid')])
     labels = wd.labels([q for e in ents.values()
@@ -650,6 +697,15 @@ def fill_attributes(kb, wd):
             'country': sorted(set(country_adjectives(e, labels))),
         }
         a['sitelinks'] = e['sitelinks']
+        if is_placeholder(a):
+            era = floruit(e)
+            tags = derive_tags(e, a.get('type') or artist_type(e) or 'Composer', era, labels) if era is not None else []
+            if era is not None and tags:
+                report['corrected'].append(f"{a['id']}: era 1850 -> {era}, tags Romantic -> {', '.join(tags)}")
+                a['era'] = era
+                a['tags'] = tags + ['Secondary']
+                a.setdefault('meta', {})['styles'] = [t for t in tags if t in PERIOD_TAGS]
+                a['meta']['regions'] = country_adjectives(e, labels)
 
 
 def wikidata_relations(kb, wd, edges, report):
@@ -678,6 +734,9 @@ def wikidata_relations(kb, wd, edges, report):
 
     # Works by one artist with another artist credited as performer
     composers = [a['qid'] for a in kb if a.get('qid') and a.get('type') == 'Composer']
+    # Album entries credit composers as "performers" of compilations, so only singers, conductors
+    # and instrumentalists count as performers here
+    performers = {a['id'] for a in kb if a.get('type') in ('Singer', 'Conductor', 'Instrumentalist')}
     n1 = len(edges.edges)
     for i in range(0, len(composers), 80):
         values = ' '.join('wd:' + q for q in composers[i:i + 80])
@@ -685,6 +744,7 @@ def wikidata_relations(kb, wd, edges, report):
   VALUES ?composer {{ {values} }}
   ?work wdt:P86 ?composer ; wdt:P175 ?performer .
   ?performer wdt:P31 wd:Q5 .
+  FILTER NOT EXISTS {{ ?work wdt:P31 wd:Q482994 }}
   SERVICE wikibase:label {{ bd:serviceParam wikibase:language "en". }}
 }} LIMIT 20000'''
         try:
@@ -696,7 +756,7 @@ def wikidata_relations(kb, wd, edges, report):
             c = by_qid.get(r.get('composer', {}).get('value', '').rsplit('/', 1)[-1])
             p = by_qid.get(r.get('performer', {}).get('value', '').rsplit('/', 1)[-1])
             work = r.get('workLabel', {}).get('value', '')
-            if c and p and c != p:
+            if c and p and c != p and p in performers:
                 why = f"{p} performed {c}'s {work}" if work and not re.fullmatch(r'Q\d+', work) else f'{p} performed works by {c}'
                 edges.add(c, p, 'performed', 1.0, why)
     log(f'  Wikidata performed-works links: {len(edges.edges) - n1} new pairs')
@@ -774,7 +834,11 @@ def listenbrainz_similar(kb, http, edges, report):
         for r in rows:
             other = by_mbid.get(r['artist_mbid'])
             if other and top > 0:
-                edges.add(a['id'], other, 'listen', r['score'] / top, f"listeners of {a['id']} also play {other}")
+                # one sentence per pair, whichever artist's list it was found in first
+                pair = edges.edges.get(tuple(sorted((a['id'], other))))
+                said = pair and any(w.startswith('listeners of ') for w in pair['why'])
+                edges.add(a['id'], other, 'listen', r['score'] / top,
+                          None if said else f"listeners of {a['id']} also play {other}")
     log(f'  ListenBrainz links: {len(edges.edges) - n0} new pairs')
 
 
@@ -827,6 +891,8 @@ def write_report(path, report, stats):
     lines += [f'- {k}: {v}' for k, v in stats['counts'].items()]
     for title, key in (('Warnings', 'warnings'), ('Not matched to Wikidata', 'unmatched'),
                        ('Uncertain matches (check, fix in tools/wikidata_overrides.json)', 'uncertain'),
+                       ('Placeholder entries corrected from Wikidata', 'corrected'),
+                       ('Existing artists linked during expansion', 'attached'),
                        ('Artists added', 'added'), ('Candidates skipped', 'skipped')):
         items = report.get(key) or []
         lines += ['', f'## {title} ({len(items)})', '']
@@ -839,6 +905,8 @@ def build(args, http):
     kb_path = os.path.join(args.root, 'knowledge_base.json')
     with open(kb_path, encoding='utf-8') as f:
         kb = json.load(f)
+    # Artists added by an earlier run are rebuilt from scratch, so changed filters take effect
+    kb = [a for a in kb if a.get('source') != 'wikidata']
     overrides = {}
     if os.path.exists(args.overrides):
         with open(args.overrides, encoding='utf-8') as f:
@@ -861,7 +929,7 @@ def build(args, http):
         step('2/4 Finding more artists: skipped (--no-expand)')
 
     step('3/4 Collecting relations...')
-    fill_attributes(kb, wd)
+    fill_attributes(kb, wd, report)
     edges = Edges()
     wikidata_relations(kb, wd, edges, report)
     if args.musicbrainz:
