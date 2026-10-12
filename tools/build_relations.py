@@ -1,0 +1,829 @@
+#!/usr/bin/env python3
+"""Build MusicGalaxy's relatedness database from open sources.
+
+What it does
+  1. Matches every artist in knowledge_base.json to Wikidata (and, through Wikidata, MusicBrainz).
+  2. Adds more artists: notable classical composers, conductors, opera singers and instrumentalists
+     from Wikidata, plus teachers/students/influences of artists already in the database.
+  3. Collects evidence of how artists are related:
+       - Wikidata: teacher/student, "influenced by", family, works by one artist performed by another,
+         and shared context (movement, genre, instrument, voice type, country, ensembles/employers)
+       - MusicBrainz: artist relationships (teacher, family, collaboration, supporting musician)
+       - ListenBrainz: "similar artists" from listening data
+       - archive.org: how often two artists appear on the same recording
+  4. Writes
+       knowledge_base.json   artists, with qid/mbid/born/died/attrs added (backup: knowledge_base.json.bak)
+       relations.json        direct relations between artists, each with its evidence ("why")
+       tools/relations_report.md   what was matched, skipped or uncertain - worth a read
+
+Every web response is cached in tools/.cache, so a second run is fast and an interrupted run resumes.
+Only the Python standard library is used.
+
+Usage (from the repository root)
+  python3 tools/build_relations.py                 # full build
+  python3 tools/build_relations.py --max-new 200   # add fewer new artists
+  python3 tools/build_relations.py --no-expand     # only relate the artists already in the database
+  python3 tools/build_relations.py --help          # all options
+
+Wrong matches can be fixed in tools/wikidata_overrides.json:
+  { "Arcangelo Corelli": "Q1234567", "Some Artist": null }
+  (use the id from the artist's Wikidata page in place of Q1234567; null = never match)
+"""
+import argparse
+import datetime
+import hashlib
+import json
+import math
+import os
+import re
+import shutil
+import sys
+import time
+import unicodedata
+import urllib.error
+import urllib.parse
+import urllib.request
+from collections import Counter, defaultdict
+
+ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+USER_AGENT = 'MusicGalaxy/0.1 (https://github.com/ravbag/musicgalaxy; relations builder)'
+
+WIKIDATA_API = 'https://www.wikidata.org/w/api.php'
+WIKIDATA_SPARQL = 'https://query.wikidata.org/sparql'
+MUSICBRAINZ_API = 'https://musicbrainz.org/ws/2'
+LISTENBRAINZ_SIMILAR = 'https://labs.api.listenbrainz.org/similar-artists/json'
+# ListenBrainz labs names its similarity datasets after the algorithm settings; if this one has been
+# retired, the step is skipped with a warning (see the report) and the build carries on.
+LISTENBRAINZ_ALGORITHM = 'session_based_days_7500_session_300_contribution_5_threshold_10_limit_100_filter_True_skip_30'
+ARCHIVE_SEARCH = 'https://archive.org/advancedsearch.php'
+
+# --- Wikidata identifiers -------------------------------------------------------------------------
+Q_HUMAN = 'Q5'
+OCCUPATIONS = {  # app type -> Wikidata occupations
+    'Composer': ['Q36834'],                                   # composer
+    'Conductor': ['Q158852'],                                 # conductor
+    'Singer': ['Q2865819', 'Q177220'],                        # opera singer, singer
+    'Instrumentalist': ['Q486748', 'Q1259917', 'Q765778', 'Q13219637'],  # pianist, violinist, organist, cellist
+}
+TYPE_PRIORITY = ['Composer', 'Conductor', 'Singer', 'Instrumentalist']
+MUSIC_OCCUPATIONS = {q for qs in OCCUPATIONS.values() for q in qs} | {'Q639669'}  # + musician
+# Occupations used to find new artists. Generic "singer" is left out: it is mostly pop.
+EXPANSION_OCCUPATIONS = {
+    'Composer': 'Q36834', 'Conductor': 'Q158852', 'Singer': 'Q2865819',
+    'Pianist': 'Q486748', 'Violinist': 'Q1259917', 'Organist': 'Q765778', 'Cellist': 'Q13219637',
+}
+NEEDS_CLASSICAL_EVIDENCE = {'Composer', 'Pianist', 'Violinist', 'Cellist'}  # also common outside classical
+CLASSICAL_GENRES = ['Q9730', 'Q1344']  # classical music, opera
+PRE_POP_YEAR = 1850  # anyone born before this with these occupations counts as classical
+
+PROPS = {
+    'occupation': 'P106', 'instance': 'P31', 'born': 'P569', 'died': 'P570',
+    'student_of': 'P1066', 'student': 'P802', 'influenced_by': 'P737',
+    'movement': 'P135', 'genre': 'P136', 'instrument': 'P1303', 'voice': 'P412',
+    'country': 'P27', 'member_of': 'P463', 'employer': 'P108',
+    'father': 'P22', 'mother': 'P25', 'sibling': 'P3373', 'spouse': 'P26',
+    'mbid': 'P434',
+}
+
+DEFAULT_COLLECTIONS = ['classic-archives', 'unlocked-recordings', 'community_audio']
+
+# Country (Wikidata label) -> the nationality adjectives the knowledge base already uses
+COUNTRY_ADJECTIVE = {
+    'Germany': 'German', 'German Empire': 'German', 'Kingdom of Prussia': 'German', 'Holy Roman Empire': 'German',
+    'East Germany': 'German', 'West Germany': 'German', 'Kingdom of Saxony': 'German', 'Kingdom of Bavaria': 'German',
+    'France': 'French', 'Kingdom of France': 'French', 'Italy': 'Italian', 'Kingdom of Italy': 'Italian',
+    'Republic of Venice': 'Italian', 'Kingdom of Naples': 'Italian', 'Papal States': 'Italian',
+    'Austria': 'Austrian', 'Austria-Hungary': 'Austrian', 'Austrian Empire': 'Austrian', 'Archduchy of Austria': 'Austrian',
+    'Russia': 'Russian', 'Russian Empire': 'Russian', 'Soviet Union': 'Russian', 'Tsardom of Russia': 'Russian',
+    'United Kingdom': 'British', 'United Kingdom of Great Britain and Ireland': 'British', 'Kingdom of Great Britain': 'British',
+    'Kingdom of England': 'English', 'England': 'English', 'Scotland': 'Scottish', 'Ireland': 'Irish',
+    'United States': 'American', 'United States of America': 'American', 'Canada': 'Canadian',
+    'Spain': 'Spanish', 'Portugal': 'Portuguese', 'Poland': 'Polish', 'Polish–Lithuanian Commonwealth': 'Polish',
+    'Hungary': 'Hungarian', 'Kingdom of Hungary': 'Hungarian', 'Czech Republic': 'Czech', 'Czechoslovakia': 'Czech',
+    'Kingdom of Bohemia': 'Czech', 'Finland': 'Finnish', 'Grand Duchy of Finland': 'Finnish', 'Norway': 'Norwegian',
+    'Sweden': 'Swedish', 'Denmark': 'Danish', 'Netherlands': 'Dutch', 'Dutch Republic': 'Dutch', 'Belgium': 'Belgian',
+    'Switzerland': 'Swiss', 'Japan': 'Japanese', 'China': 'Chinese', "People's Republic of China": 'Chinese',
+    'South Korea': 'Korean', 'Argentina': 'Argentinian', 'Brazil': 'Brazilian', 'Mexico': 'Mexican',
+    'Greece': 'Greek', 'Romania': 'Romanian', 'Latvia': 'Latvian', 'Estonia': 'Estonian', 'Lithuania': 'Lithuanian',
+    'Ukraine': 'Ukrainian', 'Georgia': 'Georgian', 'Armenia': 'Armenian', 'Israel': 'Israeli', 'Australia': 'Australian',
+    'New Zealand': 'New Zealand', 'Iceland': 'Icelandic', 'Venezuela': 'Venezuelan', 'Cuba': 'Cuban',
+}
+
+# Wikidata movement/genre/instrument/voice labels -> knowledge-base tags (first match per rule)
+LABEL_TAGS = [
+    (r'medieval|ars nova|ars antiqua|notre[- ]dame', 'Medieval'), (r'renaissance', 'Renaissance'),
+    (r'baroque', 'Baroque'), (r'classical period|classicism|viennese classic', 'Classical'),
+    (r'late romantic', 'Late Romantic'), (r'romantic', 'Romantic'), (r'impressionis', 'Impressionism'),
+    (r'neoclassic', 'Neoclassical'), (r'expressionis', 'Modernist'), (r'modernis', 'Modernist'),
+    (r'serial|twelve-tone|dodecaphon', 'Serialism'), (r'avant-garde', 'Avant-Garde'),
+    (r'minimal', 'Minimalism'), (r'contemporary classical|new music|contemporary music', 'Contemporary'),
+    (r'opera', 'Opera'), (r'operetta', 'Operetta'), (r'lied|art song', 'Lieder'),
+    (r'sacred|church music|liturgical', 'Sacred'), (r'choral|choir', 'Choral'), (r'film score|film music', 'Film'),
+    (r'ballet', 'Ballet'), (r'symphon', 'Symphony'), (r'chamber music', 'Chamber'), (r'jazz', 'Jazz'),
+    (r'nationalis', 'Nationalist'), (r'electronic', 'Electronic'), (r'tango', 'Tango'),
+    (r'^piano$', 'Piano'), (r'harpsichord', 'Harpsichord'), (r'organ', 'Organ'), (r'^violin$', 'Violin'),
+    (r'^cello$', 'Cello'), (r'guitar', 'Guitar'), (r'^flute$', 'Flute'), (r'^lute$', 'Lute'),
+    (r'^soprano', 'Soprano'), (r'mezzo', 'Mezzo'), (r'^tenor', 'Tenor'), (r'^baritone', 'Baritone'),
+    (r'bass-baritone', 'Bass-Baritone'), (r'^bass$|^basso', 'Bass'), (r'countertenor', 'Countertenor'),
+    (r'contralto', 'Contralto'),
+]
+PERIOD_TAGS = {'Medieval', 'Renaissance', 'Baroque', 'Classical', 'Romantic', 'Late Romantic', 'Modernist', 'Contemporary'}
+
+
+def period_for_era(era):
+    if era < 1400: return 'Medieval'
+    if era < 1600: return 'Renaissance'
+    if era < 1750: return 'Baroque'
+    if era < 1820: return 'Classical'
+    if era < 1910: return 'Romantic'
+    if era < 1975: return 'Modernist'
+    return 'Contemporary'
+
+
+def norm(s):
+    s = unicodedata.normalize('NFKD', str(s)).encode('ascii', 'ignore').decode().lower()
+    return re.sub(r'[^a-z0-9]+', ' ', s).strip()
+
+
+def slug(s):
+    return norm(s).replace(' ', '_')
+
+
+def log(msg):
+    print(msg, flush=True)
+
+
+# --- HTTP with cache, rate limits and retries ------------------------------------------------------
+class Http:
+    """GET JSON with an on-disk cache. Subclass/override fetch_raw() in tests."""
+
+    def __init__(self, cache_dir, offline=False):
+        self.cache_dir = cache_dir
+        self.offline = offline
+        self.last_request = {}
+        self.min_interval = {'musicbrainz.org': 1.1, 'query.wikidata.org': 1.0}  # MusicBrainz asks for <= 1/s
+        self.default_interval = 0.25
+        os.makedirs(cache_dir, exist_ok=True)
+
+    def fetch_raw(self, url, headers):
+        req = urllib.request.Request(url, headers=headers)
+        with urllib.request.urlopen(req, timeout=90) as res:
+            return res.read().decode('utf-8')
+
+    def cache_path(self, key):
+        return os.path.join(self.cache_dir, hashlib.sha1(key.encode()).hexdigest() + '.json')
+
+    def cache_get(self, key):
+        path = self.cache_path(key)
+        if os.path.exists(path):
+            with open(path, encoding='utf-8') as f:
+                return json.load(f)
+        return None
+
+    def cache_put(self, key, value):
+        with open(self.cache_path(key), 'w', encoding='utf-8') as f:
+            json.dump(value, f)
+
+    def get_json(self, url, headers=None, cache=True):
+        if cache:
+            cached = self.cache_get(url)
+            if cached is not None:
+                return cached
+        if self.offline:
+            raise RuntimeError('offline and not cached: ' + url)
+        host = urllib.parse.urlparse(url).hostname or ''
+        wait = self.min_interval.get(host, self.default_interval) - (time.time() - self.last_request.get(host, 0))
+        if wait > 0:
+            time.sleep(wait)
+        hdrs = {'User-Agent': USER_AGENT, 'Accept': 'application/json'}
+        hdrs.update(headers or {})
+        delay = 5
+        for attempt in range(5):
+            self.last_request[host] = time.time()
+            try:
+                data = json.loads(self.fetch_raw(url, hdrs))
+                break
+            except urllib.error.HTTPError as e:
+                if e.code in (429, 500, 502, 503, 504) and attempt < 4:
+                    retry_after = e.headers.get('Retry-After') if e.headers else None
+                    time.sleep(int(retry_after) if retry_after and retry_after.isdigit() else delay)
+                    delay *= 2
+                    continue
+                raise
+            except (urllib.error.URLError, TimeoutError) as e:
+                if attempt < 4:
+                    time.sleep(delay)
+                    delay *= 2
+                    continue
+                raise
+        if cache:
+            self.cache_put(url, data)
+        return data
+
+
+# --- Wikidata -----------------------------------------------------------------------------------------
+class Wikidata:
+    def __init__(self, http):
+        self.http = http
+        self.entities = {}   # people (full records)
+        self.label_cache = {}  # anything else we only need the name of (countries, movements, ...)
+
+    def search(self, name):
+        q = urllib.parse.urlencode({'action': 'wbsearchentities', 'search': name, 'language': 'en',
+                                    'type': 'item', 'limit': 7, 'format': 'json'})
+        data = self.http.get_json(f'{WIKIDATA_API}?{q}')
+        return [r['id'] for r in data.get('search', []) if r.get('id')]
+
+    def load(self, qids, props='labels|aliases|claims|sitelinks'):
+        """Fetch entities (50 per request) into self.entities; returns {qid: parsed}."""
+        # Cached per entity (not per request), so re-runs only fetch what's new whatever the batching
+        todo = []
+        for q in dict.fromkeys(qids):
+            if not q or q in self.entities:
+                continue
+            cached = self.http.cache_get('wd-entity:' + q)
+            if cached is None:
+                todo.append(q)
+            elif cached:  # {} marks a missing entity
+                self.entities[q] = cached
+        for i in range(0, len(todo), 50):
+            chunk = todo[i:i + 50]
+            q = urllib.parse.urlencode({'action': 'wbgetentities', 'ids': '|'.join(chunk), 'props': props,
+                                        'languages': 'en', 'format': 'json'})
+            data = self.http.get_json(f'{WIKIDATA_API}?{q}', cache=False)
+            ents = data.get('entities') or {}
+            for qid in chunk:
+                ent = ents.get(qid) or {'missing': ''}
+                parsed = {} if 'missing' in ent else parse_entity(ent)
+                self.http.cache_put('wd-entity:' + qid, parsed)
+                if parsed:
+                    self.entities[qid] = parsed
+        return {q: self.entities[q] for q in qids if q in self.entities}
+
+    def labels(self, qids):
+        todo = []
+        for q in dict.fromkeys(qids):
+            if not q or q in self.label_cache:
+                continue
+            cached = self.http.cache_get('wd-label:' + q)
+            if cached is None:
+                todo.append(q)
+            elif cached.get('label'):
+                self.label_cache[q] = cached['label']
+        for i in range(0, len(todo), 50):
+            chunk = todo[i:i + 50]
+            q = urllib.parse.urlencode({'action': 'wbgetentities', 'ids': '|'.join(chunk), 'props': 'labels',
+                                        'languages': 'en', 'format': 'json'})
+            data = self.http.get_json(f'{WIKIDATA_API}?{q}', cache=False)
+            ents = data.get('entities') or {}
+            for qid in chunk:
+                lab = ((ents.get(qid) or {}).get('labels') or {}).get('en', {}).get('value')
+                self.http.cache_put('wd-label:' + qid, {'label': lab})
+                if lab:
+                    self.label_cache[qid] = lab
+        return {q: self.label_cache[q] for q in qids if q in self.label_cache}
+
+    def sparql(self, query):
+        q = urllib.parse.urlencode({'query': query, 'format': 'json'})
+        data = self.http.get_json(f'{WIKIDATA_SPARQL}?{q}', headers={'Accept': 'application/sparql-results+json'})
+        return data.get('results', {}).get('bindings', [])
+
+
+def claim_ids(ent, prop):
+    out = []
+    for c in ent.get('claims', {}).get(prop, []):
+        v = c.get('mainsnak', {}).get('datavalue', {}).get('value')
+        if isinstance(v, dict) and v.get('id'):
+            out.append(v['id'])
+    return out
+
+
+def claim_year(ent, prop):
+    for c in ent.get('claims', {}).get(prop, []):
+        v = c.get('mainsnak', {}).get('datavalue', {}).get('value')
+        if isinstance(v, dict) and isinstance(v.get('time'), str):
+            m = re.match(r'([+-])0*(\d+)-', v['time'])
+            if m:
+                y = int(m.group(2))
+                return -y if m.group(1) == '-' else y
+    return None
+
+
+def claim_string(ent, prop):
+    for c in ent.get('claims', {}).get(prop, []):
+        v = c.get('mainsnak', {}).get('datavalue', {}).get('value')
+        if isinstance(v, str):
+            return v
+    return None
+
+
+def parse_entity(ent):
+    labels = ent.get('labels', {})
+    label = (labels.get('en') or next(iter(labels.values()), {})).get('value', ent.get('id'))
+    p = {
+        'qid': ent.get('id'),
+        'label': label,
+        'aliases': [a['value'] for a in ent.get('aliases', {}).get('en', [])],
+        'sitelinks': len(ent.get('sitelinks', {}) or {}),
+        'born': claim_year(ent, PROPS['born']),
+        'died': claim_year(ent, PROPS['died']),
+        'mbid': claim_string(ent, PROPS['mbid']),
+    }
+    for key in ('instance', 'occupation', 'student_of', 'student', 'influenced_by', 'movement', 'genre',
+                'instrument', 'voice', 'country', 'member_of', 'employer', 'father', 'mother', 'sibling', 'spouse'):
+        p[key] = claim_ids(ent, PROPS[key])
+    return p
+
+
+def artist_type(ent):
+    occ = set(ent['occupation'])
+    for t in TYPE_PRIORITY:
+        if occ & set(OCCUPATIONS[t]):
+            return t
+    return None
+
+
+def floruit(ent):
+    """The 'era' convention of the knowledge base: roughly when the person was most active."""
+    b, d = ent.get('born'), ent.get('died')
+    if b is not None:
+        era = b + 40
+        return min(era, d - 5) if d is not None and d - 5 > b else era
+    if d is not None:
+        return d - 20
+    return None
+
+
+# --- Step 1: match existing artists ---------------------------------------------------------------
+def match_score(artist, ent):
+    if Q_HUMAN not in ent['instance']:
+        return -99
+    score = 0
+    occ = set(ent['occupation'])
+    if occ & set(OCCUPATIONS.get(artist.get('type'), [])):
+        score += 3
+    elif occ & MUSIC_OCCUPATIONS:
+        score += 1
+    else:
+        score -= 2
+    era = artist.get('era')
+    if ent['born'] is not None and isinstance(era, (int, float)):
+        score += 2 if 10 <= era - ent['born'] <= 90 else -3
+    names = {norm(artist['id'])} | {norm(a) for a in artist.get('aliases', [])}
+    if norm(ent['label']) in names or names & {norm(a) for a in ent['aliases']}:
+        score += 1
+    score += min(2.0, ent['sitelinks'] / 50)
+    return score
+
+
+def match_existing(kb, wd, overrides, report, rematch=False):
+    matched = 0
+    for artist in kb:
+        name = artist['id']
+        if name in overrides:
+            artist['qid'] = overrides[name]
+            if artist['qid'] is None:
+                artist.pop('qid')
+                report['unmatched'].append(f'{name} (override: never match)')
+            else:
+                matched += 1
+            continue
+        if artist.get('qid') and not rematch:
+            matched += 1
+            continue
+        best = None
+        for query in [name] + [a for a in artist.get('aliases', []) if ' ' in a]:
+            cands = wd.load(wd.search(query))
+            scored = sorted(((match_score(artist, e), q) for q, e in cands.items()), reverse=True)
+            if scored and scored[0][0] >= 3:
+                best = scored
+                break
+        if not best:
+            report['unmatched'].append(name)
+            continue
+        artist['qid'] = best[0][1]
+        matched += 1
+        if len(best) > 1 and best[1][0] >= best[0][0] - 1 and best[1][0] >= 3:
+            e1, e2 = wd.entities[best[0][1]], wd.entities[best[1][1]]
+            report['uncertain'].append(f"{name}: chose {best[0][1]} ({e1['label']}, born {e1['born']}) over "
+                                       f"{best[1][1]} ({e2['label']}, born {e2['born']})")
+    log(f'  matched {matched} of {len(kb)} artists')
+    return matched
+
+
+# --- Step 2: find more artists ------------------------------------------------------------------------
+def expansion_candidates(wd, kb, args, report):
+    known = {a['qid'] for a in kb if a.get('qid')}
+    found = {}
+    genre_values = ' '.join('wd:' + g for g in CLASSICAL_GENRES)
+    for label, occ in EXPANSION_OCCUPATIONS.items():
+        classical = (f'FILTER(EXISTS {{ ?item wdt:P136 ?g . VALUES ?g {{ {genre_values} }} }} '
+                     f'|| (BOUND(?born) && YEAR(?born) < {PRE_POP_YEAR}))') if label in NEEDS_CLASSICAL_EVIDENCE else ''
+        query = f'''SELECT ?item ?links WHERE {{
+  ?item wdt:P106 wd:{occ} ; wikibase:sitelinks ?links .
+  FILTER(?links >= {args.min_sitelinks})
+  ?item wdt:P31 wd:Q5 .
+  OPTIONAL {{ ?item wdt:P569 ?born }}
+  {classical}
+}}'''
+        try:
+            rows = wd.sparql(query)
+        except Exception as e:  # noqa: BLE001 - keep building with what we have
+            report['warnings'].append(f'Wikidata query for {label}s failed ({e}); skipped')
+            continue
+        n = 0
+        for r in rows:
+            qid = r.get('item', {}).get('value', '').rsplit('/', 1)[-1]
+            if qid and qid not in known:
+                found[qid] = max(found.get(qid, 0), int(float(r.get('links', {}).get('value', 0))))
+                n += 1
+        log(f'  {label}s with >= {args.min_sitelinks} Wikipedia editions: {n} not yet in the database')
+    # People directly connected to known artists (teachers, students, influences, family)
+    if args.expand_neighbours:
+        neighbour = Counter()
+        for a in kb:
+            ent = wd.entities.get(a.get('qid') or '')
+            if not ent:
+                continue
+            for key in ('student_of', 'student', 'influenced_by', 'father', 'mother', 'sibling', 'spouse'):
+                for q in ent[key]:
+                    if q not in known:
+                        neighbour[q] += 1
+        ents = wd.load(list(neighbour))
+        n = 0
+        for q, e in ents.items():
+            if Q_HUMAN in e['instance'] and artist_type(e) and e['sitelinks'] >= args.min_sitelinks_neighbour:
+                found[q] = max(found.get(q, 0), e['sitelinks'])
+                n += 1
+        log(f'  connected to known artists (teachers, students, influences, family): {n}')
+    return sorted(found, key=lambda q: -found[q])
+
+
+def derive_tags(ent, typ, era, labels):
+    tags = []
+    for key in ('movement', 'genre', 'voice', 'instrument'):
+        for q in ent[key]:
+            lab = (labels.get(q) or '').lower()
+            for pattern, tag in LABEL_TAGS:
+                if re.search(pattern, lab):
+                    if tag not in tags:
+                        tags.append(tag)
+                    break
+    if typ in ('Composer', 'Instrumentalist') and era is not None and not (set(tags) & PERIOD_TAGS):
+        tags.insert(0, period_for_era(era))
+    if typ == 'Singer' and 'Opera' not in tags and 'Q2865819' in ent['occupation']:  # opera singer
+        tags.insert(0, 'Opera')
+    for adj in country_adjectives(ent, labels):
+        if adj not in tags:
+            tags.append(adj)
+    return tags[:6]
+
+
+def country_adjectives(ent, labels):
+    out = []
+    for q in ent['country']:
+        adj = COUNTRY_ADJECTIVE.get(labels.get(q) or '')
+        if adj and adj not in out:
+            out.append(adj)
+    return out
+
+
+def add_new_artists(kb, wd, qids, args, report):
+    ents = wd.load(qids)
+    attr_labels = wd.labels([q for e in ents.values() for k in ('movement', 'genre', 'voice', 'instrument', 'country') for q in e[k]])
+    taken_ids = {norm(a['id']) for a in kb} | {norm(x) for a in kb for x in a.get('aliases', [])}
+    added = []
+    for q in qids:
+        if len(added) >= args.max_new:
+            break
+        e = ents.get(q)
+        if not e or Q_HUMAN not in e['instance']:
+            continue
+        typ = artist_type(e)
+        era = floruit(e)
+        if not typ or era is None:
+            report['skipped'].append(f"{e['label']} ({q}): no {'music occupation' if not typ else 'dates'}")
+            continue
+        name = e['label']
+        if norm(name) in taken_ids:
+            name = f"{name} ({e['born'] if e['born'] is not None else q})"
+            if norm(name) in taken_ids:
+                continue
+        taken_ids.add(norm(name))
+        aliases = [a for a in e['aliases'] if 4 <= len(a) <= 60 and ',' not in a and norm(a) not in taken_ids][:5]
+        kb.append({
+            'id': name, 'key': slug(name) or q.lower(), 'is_master': False, 'type': typ, 'era': era,
+            'tags': derive_tags(e, typ, era, attr_labels), 'collections': list(DEFAULT_COLLECTIONS),
+            'meta': {'schools': [], 'regions': country_adjectives(e, attr_labels), 'forms': [], 'styles': []},
+            'related': [], 'aliases': aliases, 'qid': q, 'source': 'wikidata',
+        })
+        added.append(f"{name} ({typ}, {e['born'] if e['born'] is not None else '?'}–{e['died'] if e['died'] is not None else ''}, "
+                     f"{e['sitelinks']} Wikipedia editions)")
+    report['added'] = added
+    log(f'  added {len(added)} artists')
+
+
+# --- Step 3: attributes and relations ---------------------------------------------------------------
+class Edges:
+    def __init__(self):
+        self.edges = {}
+
+    def add(self, a, b, signal, value, why):
+        if a == b:
+            return
+        key = (a, b) if a < b else (b, a)
+        e = self.edges.setdefault(key, {'a': key[0], 'b': key[1], 's': {}, 'why': []})
+        e['s'][signal] = round(max(e['s'].get(signal, 0), value), 3)
+        if why and why not in e['why'] and len(e['why']) < 6:
+            e['why'].append(why)
+
+    def to_list(self):
+        return sorted(self.edges.values(), key=lambda e: (e['a'], e['b']))
+
+
+def fill_attributes(kb, wd):
+    """Adds qid-derived facts to each artist: born/died/mbid and attrs used for shared-context similarity."""
+    ents = wd.load([a['qid'] for a in kb if a.get('qid')])
+    labels = wd.labels([q for e in ents.values()
+                        for k in ('movement', 'genre', 'voice', 'instrument', 'country', 'member_of', 'employer')
+                        for q in e[k]])
+    for a in kb:
+        e = ents.get(a.get('qid') or '')
+        if not e:
+            continue
+        a['born'], a['died'] = e['born'], e['died']
+        if e['mbid']:
+            a['mbid'] = e['mbid']
+        lab = lambda qs: sorted({labels[q] for q in qs if labels.get(q) and not re.fullmatch(r'Q\d+', labels[q])})
+        a['attrs'] = {
+            'movement': lab(e['movement']), 'genre': lab(e['genre']), 'instrument': lab(e['instrument']),
+            'voice': lab(e['voice']), 'member': lab(e['member_of'] + e['employer']),
+            'country': sorted(set(country_adjectives(e, labels))),
+        }
+        a['sitelinks'] = e['sitelinks']
+
+
+def wikidata_relations(kb, wd, edges, report):
+    by_qid = {a['qid']: a['id'] for a in kb if a.get('qid')}
+    n0 = len(edges.edges)
+    for a in kb:
+        e = wd.entities.get(a.get('qid') or '')
+        if not e:
+            continue
+        me = a['id']
+        for q in e['student_of']:
+            if q in by_qid:
+                edges.add(me, by_qid[q], 'teacher', 1.0, f'{me} studied with {by_qid[q]}')
+        for q in e['student']:
+            if q in by_qid:
+                edges.add(me, by_qid[q], 'teacher', 1.0, f'{by_qid[q]} studied with {me}')
+        for q in e['influenced_by']:
+            if q in by_qid:
+                edges.add(me, by_qid[q], 'influence', 1.0, f'{me} was influenced by {by_qid[q]}')
+        for key, text in (('father', '{o} was the father of {me}'), ('mother', '{o} was the mother of {me}'),
+                          ('sibling', '{me} and {o} were siblings'), ('spouse', '{me} and {o} were married')):
+            for q in e[key]:
+                if q in by_qid:
+                    edges.add(me, by_qid[q], 'family', 1.0, text.format(me=me, o=by_qid[q]))
+    log(f'  Wikidata people links: {len(edges.edges) - n0} pairs')
+
+    # Works by one artist with another artist credited as performer
+    composers = [a['qid'] for a in kb if a.get('qid') and a.get('type') == 'Composer']
+    n1 = len(edges.edges)
+    for i in range(0, len(composers), 80):
+        values = ' '.join('wd:' + q for q in composers[i:i + 80])
+        query = f'''SELECT ?composer ?performer ?workLabel WHERE {{
+  VALUES ?composer {{ {values} }}
+  ?work wdt:P86 ?composer ; wdt:P175 ?performer .
+  ?performer wdt:P31 wd:Q5 .
+  SERVICE wikibase:label {{ bd:serviceParam wikibase:language "en". }}
+}} LIMIT 20000'''
+        try:
+            rows = wd.sparql(query)
+        except Exception as ex:  # noqa: BLE001
+            report['warnings'].append(f'Wikidata works query failed ({ex}); some "performed" links missing')
+            continue
+        for r in rows:
+            c = by_qid.get(r.get('composer', {}).get('value', '').rsplit('/', 1)[-1])
+            p = by_qid.get(r.get('performer', {}).get('value', '').rsplit('/', 1)[-1])
+            work = r.get('workLabel', {}).get('value', '')
+            if c and p and c != p:
+                why = f"{p} performed {c}'s {work}" if work and not re.fullmatch(r'Q\d+', work) else f'{p} performed works by {c}'
+                edges.add(c, p, 'performed', 1.0, why)
+    log(f'  Wikidata performed-works links: {len(edges.edges) - n1} new pairs')
+
+
+MB_SIGNAL = {
+    'teacher': 'teacher', 'parent': 'family', 'sibling': 'family', 'married': 'family',
+    'collaboration': 'collab', 'member of band': 'collab', 'supporting musician': 'performed',
+    'vocal supporting musician': 'performed', 'instrumental supporting musician': 'performed',
+}
+
+
+def musicbrainz_relations(kb, http, edges, report):
+    by_mbid = {a['mbid']: a['id'] for a in kb if a.get('mbid')}
+    n0, done = len(edges.edges), 0
+    for a in kb:
+        if not a.get('mbid'):
+            continue
+        try:
+            data = http.get_json(f"{MUSICBRAINZ_API}/artist/{a['mbid']}?inc=artist-rels&fmt=json")
+        except Exception as ex:  # noqa: BLE001
+            report['warnings'].append(f"MusicBrainz lookup failed for {a['id']} ({ex})")
+            continue
+        done += 1
+        for rel in data.get('relations', []) or []:
+            other = by_mbid.get((rel.get('artist') or {}).get('id'))
+            signal = MB_SIGNAL.get(rel.get('type'))
+            if not other or not signal:
+                continue
+            me = a['id']
+            if rel['type'] == 'teacher':
+                why = f'{me} studied with {other}' if rel.get('direction') == 'backward' else f'{other} studied with {me}'
+            elif signal == 'family':
+                why = {'married': f'{me} and {other} were married', 'sibling': f'{me} and {other} were siblings'}.get(
+                    rel['type'], f'{me} and {other} are related (parent and child)')
+            elif signal == 'performed':
+                why = f'{me} and {other} performed together'
+            else:
+                why = f'{me} and {other} collaborated'
+            edges.add(me, other, signal, 1.0, why)
+        if done % 50 == 0:
+            log(f'    MusicBrainz: {done} artists looked up')
+    log(f'  MusicBrainz links: {len(edges.edges) - n0} new pairs ({done} artists looked up)')
+
+
+def listenbrainz_similar(kb, http, edges, report):
+    by_mbid = {a['mbid']: a['id'] for a in kb if a.get('mbid')}
+    n0 = len(edges.edges)
+    for a in kb:
+        if not a.get('mbid'):
+            continue
+        q = urllib.parse.urlencode({'artist_mbids': a['mbid'], 'algorithm': LISTENBRAINZ_ALGORITHM})
+        try:
+            data = http.get_json(f'{LISTENBRAINZ_SIMILAR}?{q}')
+        except Exception as ex:  # noqa: BLE001
+            report['warnings'].append(f'ListenBrainz similar-artists not available ({ex}); step skipped')
+            return
+        rows = [r for r in iter_dicts(data) if r.get('artist_mbid') and isinstance(r.get('score'), (int, float))]
+        top = max((r['score'] for r in rows), default=0)
+        for r in rows:
+            other = by_mbid.get(r['artist_mbid'])
+            if other and top > 0:
+                edges.add(a['id'], other, 'listen', r['score'] / top, f"listeners of {a['id']} also play {other}")
+    log(f'  ListenBrainz links: {len(edges.edges) - n0} new pairs')
+
+
+def iter_dicts(x):
+    if isinstance(x, dict):
+        yield x
+        for v in x.values():
+            yield from iter_dicts(v)
+    elif isinstance(x, list):
+        for v in x:
+            yield from iter_dicts(v)
+
+
+def archive_cooccurrence(kb, http, edges, report):
+    """Count how often other artists are named on the archive.org items found for each artist."""
+    names = {}
+    for a in kb:
+        for n in [a['id']] + [x for x in a.get('aliases', []) if ' ' in x]:
+            if len(norm(n)) >= 6:
+                names[norm(n)] = a['id']
+    pattern = re.compile(r'\b(' + '|'.join(sorted(map(re.escape, names), key=len, reverse=True)) + r')\b')
+    counts = Counter()
+    for i, a in enumerate(kb):
+        nm = a['id'].replace('"', '')
+        q = urllib.parse.urlencode([('q', f'(creator:"{nm}" OR title:"{nm}") AND mediatype:audio'),
+                                    ('fl[]', 'creator'), ('fl[]', 'title'), ('fl[]', 'subject'),
+                                    ('rows', '100'), ('output', 'json')])
+        try:
+            data = http.get_json(f'{ARCHIVE_SEARCH}?{q}')
+        except Exception as ex:  # noqa: BLE001
+            report['warnings'].append(f"archive.org search failed for {a['id']} ({ex})")
+            continue
+        for doc in data.get('response', {}).get('docs', []):
+            text = norm(' '.join(str(v) for k in ('creator', 'title', 'subject')
+                                 for v in (doc.get(k) if isinstance(doc.get(k), list) else [doc.get(k) or ''])))
+            for other in {names[m] for m in pattern.findall(text)}:
+                if other != a['id']:
+                    counts[tuple(sorted((a['id'], other)))] += 1
+        if (i + 1) % 100 == 0:
+            log(f'    archive.org: {i + 1} artists searched')
+    for (x, y), c in counts.items():
+        if c >= 2:
+            edges.add(x, y, 'cooccur', min(1.0, c / 10), f'{x} and {y} appear together on {c} archive.org recordings')
+    log(f'  archive.org co-occurrence links: {sum(1 for c in counts.values() if c >= 2)} pairs')
+
+
+# --- Main ---------------------------------------------------------------------------------------------
+def write_report(path, report, stats):
+    lines = ['# Relations build report', '', f"Built {stats['built']}", '']
+    lines += [f'- {k}: {v}' for k, v in stats['counts'].items()]
+    for title, key in (('Warnings', 'warnings'), ('Not matched to Wikidata', 'unmatched'),
+                       ('Uncertain matches (check, fix in tools/wikidata_overrides.json)', 'uncertain'),
+                       ('Artists added', 'added'), ('Candidates skipped', 'skipped')):
+        items = report.get(key) or []
+        lines += ['', f'## {title} ({len(items)})', '']
+        lines += [f'- {x}' for x in items] or ['(none)']
+    with open(path, 'w', encoding='utf-8') as f:
+        f.write('\n'.join(lines) + '\n')
+
+
+def build(args, http):
+    kb_path = os.path.join(args.root, 'knowledge_base.json')
+    with open(kb_path, encoding='utf-8') as f:
+        kb = json.load(f)
+    overrides = {}
+    if os.path.exists(args.overrides):
+        with open(args.overrides, encoding='utf-8') as f:
+            overrides = json.load(f)
+    report = defaultdict(list)
+    wd = Wikidata(http)
+
+    log('1/4 Matching artists to Wikidata...')
+    match_existing(kb, wd, overrides, report, rematch=args.rematch)
+    wd.load([a['qid'] for a in kb if a.get('qid')])
+
+    n_before = len(kb)
+    if args.expand:
+        log('2/4 Finding more artists...')
+        add_new_artists(kb, wd, expansion_candidates(wd, kb, args, report), args, report)
+    else:
+        log('2/4 Finding more artists: skipped (--no-expand)')
+
+    log('3/4 Collecting relations...')
+    fill_attributes(kb, wd)
+    edges = Edges()
+    wikidata_relations(kb, wd, edges, report)
+    if args.musicbrainz:
+        musicbrainz_relations(kb, http, edges, report)
+    if args.listenbrainz:
+        listenbrainz_similar(kb, http, edges, report)
+    if args.cooccurrence:
+        archive_cooccurrence(kb, http, edges, report)
+
+    log('4/4 Writing files...')
+    built = datetime.datetime.now(datetime.timezone.utc).strftime('%Y-%m-%d %H:%M UTC')
+    signal_counts = Counter(s for e in edges.edges.values() for s in e['s'])
+    stats = {'built': built, 'counts': {
+        'artists': len(kb), 'artists added': len(kb) - n_before,
+        'matched to Wikidata': sum(1 for a in kb if a.get('qid')),
+        'with MusicBrainz id': sum(1 for a in kb if a.get('mbid')),
+        'related pairs': len(edges.edges), **{f'pairs with {k}': v for k, v in sorted(signal_counts.items())}}}
+    relations = {
+        'version': 1, 'built': built,
+        'sources': ['Wikidata (CC0)', 'MusicBrainz (CC0)', 'ListenBrainz', 'archive.org search'],
+        'signals': {
+            'teacher': 'teacher and student', 'influence': 'one influenced the other', 'family': 'family',
+            'performed': "one performed the other's works, or they performed together", 'collab': 'collaborated',
+            'listen': 'listened to by the same people (ListenBrainz), 0-1', 'cooccur': 'named on the same archive.org recordings, 0-1',
+        },
+        'edges': edges.to_list(),
+    }
+    if not args.dry_run:
+        shutil.copyfile(kb_path, kb_path + '.bak')
+        with open(kb_path, 'w', encoding='utf-8') as f:
+            json.dump(kb, f, ensure_ascii=False, indent=2)
+        with open(os.path.join(args.root, 'relations.json'), 'w', encoding='utf-8') as f:
+            json.dump(relations, f, ensure_ascii=False, indent=1)
+    os.makedirs(os.path.join(args.root, 'tools'), exist_ok=True)
+    write_report(os.path.join(args.root, 'tools', 'relations_report.md'), report, stats)
+    for k, v in stats['counts'].items():
+        log(f'  {k}: {v}')
+    log('Done. Read tools/relations_report.md for unmatched and uncertain artists.')
+    return kb, relations, report
+
+
+def parse_args(argv=None):
+    ap = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
+    ap.add_argument('--root', default=ROOT, help='repository root (default: this script\'s repo)')
+    ap.add_argument('--max-new', type=int, default=500, help='most new artists to add (default 500)')
+    ap.add_argument('--min-sitelinks', type=int, default=40,
+                    help='how many Wikipedia language editions a new artist needs (notability; default 40)')
+    ap.add_argument('--min-sitelinks-neighbour', type=int, default=15,
+                    help='same, for teachers/students/influences of known artists (default 15)')
+    ap.add_argument('--no-expand', dest='expand', action='store_false', help='do not add new artists')
+    ap.add_argument('--no-neighbours', dest='expand_neighbours', action='store_false',
+                    help='do not add teachers/students/influences of known artists')
+    ap.add_argument('--no-musicbrainz', dest='musicbrainz', action='store_false')
+    ap.add_argument('--no-listenbrainz', dest='listenbrainz', action='store_false')
+    ap.add_argument('--no-cooccurrence', dest='cooccurrence', action='store_false', help='skip archive.org co-occurrence')
+    ap.add_argument('--rematch', action='store_true', help='match artists again even if they already have a qid')
+    ap.add_argument('--overrides', default=None, help='default: tools/wikidata_overrides.json')
+    ap.add_argument('--cache', default=None, help='default: tools/.cache')
+    ap.add_argument('--offline', action='store_true', help='use cached responses only')
+    ap.add_argument('--dry-run', action='store_true', help='write only the report, not the data files')
+    args = ap.parse_args(argv)
+    args.overrides = args.overrides or os.path.join(args.root, 'tools', 'wikidata_overrides.json')
+    args.cache = args.cache or os.path.join(args.root, 'tools', '.cache')
+    return args
+
+
+if __name__ == '__main__':
+    a = parse_args()
+    try:
+        build(a, Http(a.cache, offline=a.offline))
+    except KeyboardInterrupt:
+        sys.exit('\nInterrupted. Run again to resume; finished downloads are cached in tools/.cache.')

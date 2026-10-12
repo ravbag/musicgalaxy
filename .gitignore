@@ -1,1 +1,4 @@
 node_modules/
+tools/.cache/
+knowledge_base.json.bak
+__pycache__/
