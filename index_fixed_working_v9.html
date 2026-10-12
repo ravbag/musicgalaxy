@@ -33,6 +33,7 @@
     <input type="text" id="search" placeholder="Search..." style="width:100%; padding:8px; margin-bottom:10px; background:#111; border:1px solid #444; color:#fff;">
     <div id="search-results" style="margin-top:8px; display:none;"></div>    <div id="status-line" style="margin-top:6px; font-size:12px; opacity:0.75;"></div>
     <div id="track-title">Ready...</div>
+    <div id="why-line" style="margin:-4px 0 8px 0; font-size:12px; color:#9fb4c8; line-height:1.35;"></div>
     <div id="mode-line" style="margin:6px 0 10px 0; font-size:12px; color:#aaa; line-height:1.3;">
         Mode: <span id="mode-name">random_walk</span><br>
         Active tag: <span id="active-tag">(none)</span>
@@ -315,31 +316,85 @@ function focusOnNode(node, scale=1.35, duration=650) {
         });
     }
 
-    // Era -> x, temp -> y, within the current window size
+    // Era -> x; relatedness position (_ry, 0-1) -> y; within the current window size
     function computeLayoutTargets() {
         const eraExtent = d3.extent(nodes, d => +d.era || 1800);
         const xScale = d3.scaleLinear().domain(eraExtent).range([width * 0.18, width * 0.82]);
-        const yScale = d3.scaleLinear().domain([1, 10]).range([height * 0.80, height * 0.20]);
+        const yScale = d3.scaleLinear().domain([0, 1]).range([height * 0.85, height * 0.15]);
         for (const n of nodes) {
             n._tx = xScale(+n.era || 1800) + (n._jx || 0);
-            n._ty = yScale(+n.temp || 5) + (n._jy || 0);
+            n._ty = yScale(Number.isFinite(n._ry) ? n._ry : 0.5) + (n._jy || 0);
         }
     }
 
-    // For every artist, its NEIGHBOURS most similar artists (one O(n^2) pass at start-up)
+    // For every artist: its NEIGHBOURS most related artists (playback, map links), and its most
+    // style-related artists ignoring time (vertical layout). One O(n^2) pass at start-up.
     function computeNeighbours() {
-        for (const n of nodes) n._neighbours = [];
+        const keepTop = (list, item, k) => {
+            if (list.length < k) { list.push(item); if (list.length === k) list.sort((a, b) => a.sim - b.sim); return; }
+            if (item.sim <= list[0].sim) return;
+            list[0] = item;
+            for (let i = 0; i + 1 < list.length && list[i].sim > list[i + 1].sim; i++) [list[i], list[i + 1]] = [list[i + 1], list[i]];
+        };
+        for (const n of nodes) { n._neighbours = []; n._styleNeighbours = []; }
         for (let i = 0; i < nodes.length; i++) {
+            const a = nodes[i];
             for (let j = i + 1; j < nodes.length; j++) {
-                const sim = similarity(nodes[i], nodes[j]);
-                nodes[i]._neighbours.push({ node: nodes[j], sim });
-                nodes[j]._neighbours.push({ node: nodes[i], sim });
+                const b = nodes[j];
+                const sim = similarity(a, b);
+                keepTop(a._neighbours, { node: b, sim }, NEIGHBOURS);
+                keepTop(b._neighbours, { node: a, sim }, NEIGHBOURS);
+                const style = styleRelatedness(a, b);
+                if (style > 0) {
+                    keepTop(a._styleNeighbours, { node: b, sim: style }, 10);
+                    keepTop(b._styleNeighbours, { node: a, sim: style }, 10);
+                }
             }
         }
         for (const n of nodes) {
             n._neighbours.sort((a, b) => b.sim - a.sim);
-            n._neighbours = n._neighbours.slice(0, NEIGHBOURS);
+            n._styleNeighbours.sort((a, b) => b.sim - a.sim);
         }
+    }
+
+    // Vertical position from relatedness: order artists so that related ones sit at similar heights
+    // (spectral ordering - the Fiedler vector of the style-neighbour graph), spread evenly 0-1.
+    function computeRelatednessAxis() {
+        const n = nodes.length;
+        if (n < 3) { nodes.forEach((d, i) => d._ry = n > 1 ? i / (n - 1) : 0.5); return; }
+        const index = new Map(nodes.map((d, i) => [d, i]));
+        const nbrs = nodes.map(() => new Map());
+        nodes.forEach((d, i) => {
+            for (const { node, sim } of d._styleNeighbours || []) {
+                const j = index.get(node);
+                const w = Math.max(sim, nbrs[i].get(j) || 0);
+                nbrs[i].set(j, w); nbrs[j].set(i, w);
+            }
+        });
+        const deg = nbrs.map(m => [...m.values()].reduce((a, b) => a + b, 0));
+        const c = 2 * Math.max(...deg) + 1e-9;
+        let seed = 12345; // fixed seed: the same data always gives the same map
+        const rand = () => (seed = (seed * 1103515245 + 12345) % 2147483648) / 2147483648;
+        let v = nodes.map(() => rand() - 0.5);
+        for (let it = 0; it < 3000; it++) {
+            // power iteration on (c*I - Laplacian), keeping v orthogonal to the constant vector
+            const next = new Array(n);
+            for (let i = 0; i < n; i++) {
+                let lv = deg[i] * v[i];
+                for (const [j, w] of nbrs[i]) lv -= w * v[j];
+                next[i] = c * v[i] - lv;
+            }
+            const mean = next.reduce((a, b) => a + b, 0) / n;
+            let norm = 0;
+            for (let i = 0; i < n; i++) { next[i] -= mean; norm += next[i] * next[i]; }
+            norm = Math.sqrt(norm) || 1;
+            v = next.map(x => x / norm);
+        }
+        // Stable orientation: opera towards the top
+        const opera = nodes.reduce((acc, d, i) => acc + ((d.tags || []).includes('Opera') ? v[i] : 0), 0);
+        if (opera < 0) v = v.map(x => -x);
+        const order = v.map((x, i) => [x, i]).sort((a, b) => a[0] - b[0]);
+        order.forEach(([, i], rank) => { nodes[i]._ry = rank / (n - 1); });
     }
 
     // Keep the map filling the window when it's resized
@@ -375,14 +430,19 @@ async function init() {
         n._searchNames = [n.id, ...(n.aliases || []).filter(a => /\s/.test(a) || (surnameOwners.get(a.toLowerCase()) || 0) <= 1)];
     }
     
-    // Musical tags only, precomputed for similarity()
-    for (const n of nodes) n._mtags = new Set((n.tags || []).filter(t => !NON_MUSICAL_TAGS.has(t)));
+    // Relatedness: documented links (if relations.json exists) + context, tags and era
+    const relations = await loadRelations('relations.json');
+    prepareRelatedness();
     computeNeighbours();
+    computeRelatednessAxis();
+    setStatus(relations
+        ? `Loaded ${nodes.length} artists · ${relationEdges.size} documented relations (built ${relations.built || '?'})`
+        : `Loaded ${nodes.length} artists · no relations.json yet: run tools/build_relations.py for richer links`);
 
-    // Layout targets: era left-to-right, temp bottom-to-top, plus a fixed random jitter per node
+    // Layout targets: era left-to-right, relatedness bottom-to-top, plus a fixed random jitter per node
     for (const n of nodes) {
         n._jx = (Math.random() - 0.5) * 120;
-        n._jy = (Math.random() - 0.5) * 120;
+        n._jy = (Math.random() - 0.5) * 40;
     }
     computeLayoutTargets();
     for (const n of nodes) {
@@ -429,6 +489,7 @@ async function init() {
         .attr("font-weight", d => d.is_master ? "700" : "400")
         .attr("fill", d => {
             if (d.type === "Singer") return "#ff66cc";   // Pink
+            if (d.type === "Instrumentalist") return "#7ddc8a"; // Green
             if (d.type === "Conductor") return "#66ccff"; // Blue
             return "#d4af37";                             // Gold
         })
@@ -638,6 +699,7 @@ async function init() {
         const fields = node.type === 'Composer' ? ['creator', 'subject', 'title']
             : node.type === 'Singer' ? ['creator', 'performer', 'subject', 'title']
             : node.type === 'Conductor' ? ['creator', 'subject', 'title']
+            : node.type === 'Instrumentalist' ? ['creator', 'performer', 'subject', 'title']
             : ['creator', 'title'];
         return '(' + names.flatMap(name => fields.map(f => `${f}:"${name}"`)).join(' OR ') + ')';
     }
@@ -719,6 +781,26 @@ async function init() {
         };
     }
 
+    function setWhy(text) {
+        const el = document.getElementById('why-line');
+        if (el) el.textContent = text || '';
+    }
+
+    // The "why" line: how the next artist connects to the previous one, and which mode chose it
+    function describeChoice(node, reason, previous) {
+        const from = reason?.from || previous;
+        const link = from && from !== node ? explain(from, node) : [];
+        const linkText = link.length ? `from ${from.id}: ${link.join(' · ')}` : (from && from !== node ? `no close link to ${from.id}` : '');
+        switch (reason?.mode) {
+            case 'pure_random': return 'Pure random pick';
+            case 'teleport': return `Teleport: a deliberate jump away from ${from?.id ?? 'the last artist'}`;
+            case 'within_tag': return `Within ${reason.tag}` + (linkText ? ` · ${linkText}` : '');
+            case 'spiral_time': return `Spiral Time, towards ~${reason.target}` + (linkText ? ` · ${linkText}` : '');
+            case 'random_walk': return linkText ? `Random walk ${linkText}` : 'Random walk';
+            default: return linkText ? `Link ${linkText}` : '';
+        }
+    }
+
     function startTrack(node, track, prefix = `${node.id} — `) {
         player.src = track.src;
         const title = `${prefix}${track.title}`;
@@ -734,11 +816,14 @@ async function init() {
         showTrack(title, track.label);
     }
 
-    async function playNode(node) {
+    // reason (optional): { mode, from, tag, target } from autoNext(), shown on the "why" line
+    async function playNode(node, reason) {
         const token = ++playToken;
         const isCurrent = () => token === playToken;
         clearTimeout(skipTimer);
+        const previous = currentNode;
         currentNode = node;
+        setWhy(playMode === 'radio' ? '' : describeChoice(node, reason, previous));
         d3.selectAll(".tag-node").classed("active-node", false);
         d3.selectAll(".tag-node").filter(d => d.id === node.id).classed("active-node", true);
 
@@ -905,42 +990,151 @@ async function init() {
         handlePlaybackFailure('No radio station found.');
     }
 
-    // --- Similarity & weighted sampling ---
-    function jaccard(a, b) {
-        const A = new Set(a || []);
-        const B = new Set(b || []);
-        if (A.size === 0 && B.size === 0) return 0;
-        let inter = 0;
-        for (const x of A) if (B.has(x)) inter++;
-        const uni = new Set([...A, ...B]).size;
-        return uni ? inter / uni : 0;
+    // --- Relatedness ("similarity") & weighted sampling ---
+    // How related two artists are (0-1), from three kinds of evidence:
+    //   direct – documented links from relations.json: teacher/student, influence, family, performed,
+    //            collaborated, listened to by the same people, named on the same recordings
+    //   style  – shared context (school, movement, ensemble, voice, instrument, genre, country) and
+    //            shared tags; rare things count more than common ones (IDF weighting)
+    //   era    – closeness in time. It scales style only: a teacher can be 40 years older.
+    // Tune the weights here; relations.json doesn't need rebuilding.
+    const RELATEDNESS = {
+        direct: { teacher: 1.0, family: 0.9, influence: 0.8, performed: 0.7, collab: 0.6, listen: 0.7, cooccur: 0.6 },
+        context: { school: 0.6, movement: 0.5, member: 0.45, voice: 0.25, genre: 0.25, instrument: 0.2, country: 0.15, type: 0.1 },
+        directWeight: 0.9,   // how much a documented link counts
+        contextWeight: 0.6,  // how much shared context counts
+        tagWeight: 0.6,      // how much shared tags count
+        eraSigma: 60,        // years; artists this far apart keep ~60% of their style similarity
+        eraFloor: 0.3,       // style still counts this much between artists centuries apart
+    };
+    // Tags that describe a style or period read as "both Baroque"; the rest as "both known for Opera"
+    const STYLE_TAGS = new Set(['Medieval', 'Renaissance', 'Baroque', 'Early Baroque', 'Classical', 'Romantic', 'Late Romantic',
+        'Modernist', 'Modern', 'Contemporary', 'Avant-Garde', 'Minimalism', 'Postminimalism', 'Impressionism', 'Neoclassical',
+        'Serialism', 'Nationalist', 'Verismo', 'Bel Canto', 'Experimental', 'Spectral', 'Atonal', 'Polystylism', 'Postmodern',
+        'Early Music', 'Historically Informed', 'Jazz', 'Folk', 'Crossover', 'Electronic']);
+    let relationEdges = new Map(); // "a||b" -> { s: {signal: 0-1}, why: [...] }
+
+    function edgeKey(a, b) { return a < b ? a + '||' + b : b + '||' + a; }
+
+    // relations.json is optional: without it, relatedness uses tags, context and era only
+    async function loadRelations(filename) {
+        try {
+            const res = await fetch(filename, { cache: 'no-store' });
+            if (!res.ok) throw new Error(`HTTP ${res.status}`);
+            const data = await res.json();
+            relationEdges = new Map();
+            for (const e of (Array.isArray(data?.edges) ? data.edges : [])) {
+                if (nodeById.has(e.a) && nodeById.has(e.b) && e.s) relationEdges.set(edgeKey(e.a, e.b), e);
+            }
+            return data;
+        } catch (e) {
+            console.warn(`[relations] ${filename} not loaded (${e.message}); using tags, context and era only`);
+            relationEdges = new Map();
+            return null;
+        }
     }
 
-    function eraSim(e1, e2, sigma=60) {
-        const a = (Number.isFinite(e1) ? e1 : 1800);
-        const b = (Number.isFinite(e2) ? e2 : 1800);
-        const d = a - b;
-        return Math.exp(-(d*d) / (2 * sigma * sigma));
+    // Precompute each artist's weighted context and tags (IDF: shared by few artists = more telling)
+    function prepareRelatedness() {
+        const N = nodes.length;
+        const idf = df => (N > 1 && df < N) ? Math.log(N / df) / Math.log(N) : 0;
+        const contextOf = n => {
+            const a = n.attrs || {};
+            const out = [];
+            const add = (type, values) => { for (const v of (values || [])) if (v) out.push([type, String(v)]); };
+            add('school', n.meta?.schools); add('movement', a.movement); add('member', a.member);
+            add('voice', a.voice); add('genre', a.genre); add('instrument', a.instrument);
+            add('country', [...new Set([...(n.meta?.regions || []), ...(a.country || [])])]);
+            add('type', [n.type]);
+            return out;
+        };
+        const ctxDf = new Map(), tagDf = new Map();
+        for (const n of nodes) {
+            n._ctxRaw = contextOf(n);
+            for (const k of new Set(n._ctxRaw.map(([t, v]) => t + ':' + v))) ctxDf.set(k, (ctxDf.get(k) || 0) + 1);
+            n._tagList = [...new Set((n.tags || []).filter(t => !NON_MUSICAL_TAGS.has(t)))];
+            for (const t of n._tagList) tagDf.set(t, (tagDf.get(t) || 0) + 1);
+        }
+        for (const n of nodes) {
+            n._ctx = new Map(); // "type:value" -> { type, value, w }
+            for (const [type, value] of n._ctxRaw) {
+                const k = type + ':' + value;
+                n._ctx.set(k, { type, value, w: (RELATEDNESS.context[type] || 0) * idf(ctxDf.get(k)) });
+            }
+            n._tagW = new Map(n._tagList.map(t => [t, idf(tagDf.get(t))]));
+            n._tagSum = [...n._tagW.values()].reduce((a, b) => a + b, 0);
+            delete n._ctxRaw;
+        }
     }
 
-    function shareAny(a, b) {
-        if (!Array.isArray(a) || !Array.isArray(b) || a.length === 0 || b.length === 0) return false;
-        const B = new Set(b);
-        for (const x of a) if (B.has(x)) return true;
-        return false;
+    function directScore(u, v) {
+        const e = relationEdges.get(edgeKey(u.id, v.id));
+        if (!e) return 0;
+        let keep = 1;
+        for (const [sig, val] of Object.entries(e.s)) keep *= 1 - (RELATEDNESS.direct[sig] || 0) * Math.max(0, Math.min(1, +val || 0));
+        return 1 - keep;
     }
 
+    function styleScore(u, v) {
+        let keep = 1;
+        for (const [k, c] of u._ctx || []) if (v._ctx?.has(k)) keep *= 1 - c.w;
+        const context = 1 - keep;
+        let shared = 0;
+        for (const [t, w] of u._tagW || []) if (v._tagW?.has(t)) shared += w;
+        // shared weight relative to both artists' tag weight (geometric mean): one-off tags dilute less
+        const denom = Math.sqrt((u._tagSum || 0) * (v._tagSum || 0));
+        const tags = denom > 0 ? Math.min(1, shared / denom) : 0;
+        return 1 - (1 - RELATEDNESS.contextWeight * context) * (1 - RELATEDNESS.tagWeight * tags);
+    }
+
+    function eraCloseness(u, v) {
+        const d = (Number.isFinite(u.era) ? u.era : 1800) - (Number.isFinite(v.era) ? v.era : 1800);
+        return Math.exp(-(d * d) / (2 * RELATEDNESS.eraSigma * RELATEDNESS.eraSigma));
+    }
+
+    // Relatedness of two artists, 0-1 (used by every mode, the neighbour lists and the map links)
     function similarity(u, v) {
-        if (!u || !v) return 0;
-        if (u.id === v.id) return 0;
-        const tagSim = jaccard(u._mtags || u.tags, v._mtags || v.tags);
-        const eSim = eraSim(u.era, v.era);
-        const typeBonus = (u.type === v.type) ? 0.08 : 0.0;
-        const schoolBonus = (shareAny(u.meta?.schools, v.meta?.schools)) ? 0.18 : 0.0;
-        const regionBonus = (shareAny(u.meta?.regions, v.meta?.regions)) ? 0.08 : 0.0;
-        // Weighted mix; keep within [0, 1]
-        const s = 0.55 * tagSim + 0.30 * eSim + typeBonus + schoolBonus + regionBonus;
-        return Math.max(0, Math.min(1, s));
+        if (!u || !v || u.id === v.id) return 0;
+        const era = RELATEDNESS.eraFloor + (1 - RELATEDNESS.eraFloor) * eraCloseness(u, v);
+        return 1 - (1 - RELATEDNESS.directWeight * directScore(u, v)) * (1 - styleScore(u, v) * era);
+    }
+
+    // The same without the time factor: positions artists vertically (time is already the x axis)
+    function styleRelatedness(u, v) {
+        if (!u || !v || u.id === v.id) return 0;
+        return 1 - (1 - RELATEDNESS.directWeight * directScore(u, v)) * (1 - styleScore(u, v));
+    }
+
+    // Human-readable reasons why v is related to u, strongest first
+    function explain(u, v, max = 3) {
+        if (!u || !v || u.id === v.id) return [];
+        const reasons = [];
+        const e = relationEdges.get(edgeKey(u.id, v.id));
+        if (e) {
+            const d = directScore(u, v);
+            (e.why || []).forEach((text, i) => reasons.push({ text, w: 1 + d - i * 0.01 }));
+        }
+        const said = new Set();
+        for (const [k, c] of u._ctx || []) {
+            if (!v._ctx?.has(k) || c.type === 'type' || c.w < 0.02) continue;
+            const text = c.type === 'member' ? `both associated with ${c.value}`
+                : c.type === 'voice' ? `both ${c.value}s`
+                : c.type === 'instrument' ? `both play ${c.value}`
+                : c.type === 'genre' ? `both in ${c.value}`
+                : `both ${c.value}`;
+            said.add(c.value.toLowerCase());
+            reasons.push({ text, w: c.w * RELATEDNESS.contextWeight });
+        }
+        for (const [t, w] of u._tagW || []) {
+            const tl = t.toLowerCase();
+            if (!v._tagW?.has(t) || w < 0.05 || [...said].some(x => x === tl || x.startsWith(tl + ' '))) continue;
+            reasons.push({ text: STYLE_TAGS.has(t) ? `both ${t}` : `both known for ${t}`, w: w * RELATEDNESS.tagWeight * 0.5 });
+        }
+        if (Number.isFinite(u.era) && Number.isFinite(v.era) && Math.abs(u.era - v.era) <= 20) {
+            reasons.push({ text: 'contemporaries', w: 0.05 });
+        }
+        reasons.sort((a, b) => b.w - a.w);
+        return [...new Set(reasons.map(r => r.text))].slice(0, max);
     }
 
     function baseWeight(candidate) {
@@ -949,8 +1143,9 @@ async function init() {
         const novelty = 1 / Math.sqrt(1 + p);
         const last = lastPlayedAt.get(candidate.id);
         const dt = (typeof last === 'number') ? (Date.now() - last) : Infinity;
-        // 0.05 right after playing, 0.5 after one half-life, approaching 1 later
-        const recency = Math.max(0.05, 1 - Math.pow(2, -dt / RECENCY_HALF_LIFE_MS));
+        // 0.002 right after playing (500x less likely: a very similar artist would otherwise come
+        // straight back), 0.5 after one half-life, approaching 1 later
+        const recency = Math.max(0.002, 1 - Math.pow(2, -dt / RECENCY_HALF_LIFE_MS));
         return role * novelty * recency;
     }
 
@@ -998,14 +1193,20 @@ async function init() {
         return softmaxPick(pool, (c) => similarity(currentNode, c));
     }
 
+    function withinTagName() {
+        return activeTag || (currentNode?.tags || []).find(t => !NON_MUSICAL_TAGS.has(t)) || null;
+    }
+
     function pickNextWithinTag() {
-        const tag = activeTag || (currentNode?.tags?.[0] ?? null);
+        const tag = withinTagName();
         if (!tag) return pickNextRandomWalk();
         const pool = nodes.filter(n => Array.isArray(n.tags) && n.tags.includes(tag));
         // If tag pool is too small, add the most similar artists
         const candidates = (pool.length >= 10) ? pool : Array.from(new Set([...pool, ...similarCandidates(currentNode)]));
         return softmaxPick(candidates, (c) => similarity(currentNode, c));
     }
+
+    let spiralTarget = null;
 
     function pickNextSpiralTime() {
         const curEra = Number.isFinite(currentNode?.era) ? currentNode.era : 1800;
@@ -1014,6 +1215,7 @@ async function init() {
         if (target < 1100) spiralDir = +1;
         if (target > 2025) spiralDir = -1;
         const t = curEra + spiralDir * 25;
+        spiralTarget = t;
         return softmaxPick(nodes, (c) => {
             const sim = similarity(currentNode, c);
             const ce = Number.isFinite(c?.era) ? c.era : 1800;
@@ -1037,9 +1239,11 @@ async function init() {
         if (!currentNode) return;
 
         let next = null;
+        const from = currentNode;
+        let reason = { mode: playMode === 'teleport' ? 'teleport' : playMode, from };
         if (playMode === 'pure_random') next = pickNextPureRandom();
-        else if (playMode === 'within_tag') next = pickNextWithinTag();
-        else if (playMode === 'spiral_time') next = pickNextSpiralTime();
+        else if (playMode === 'within_tag') { reason.tag = withinTagName(); next = pickNextWithinTag(); if (!reason.tag) reason.mode = 'random_walk'; }
+        else if (playMode === 'spiral_time') { next = pickNextSpiralTime(); reason.target = spiralTarget; }
         else if (playMode === 'teleport') {
             next = pickTeleport();
             // One-shot: go back to the mode that was active before the jump
@@ -1047,10 +1251,10 @@ async function init() {
             updateUI();
             saveState();
         }
-        else next = pickNextRandomWalk();
+        else { reason.mode = 'random_walk'; next = pickNextRandomWalk(); }
 
-        if (!next) next = pickNextPureRandom();
-        playNode(next);
+        if (!next) { next = pickNextPureRandom(); reason = { mode: 'pure_random', from }; }
+        playNode(next, reason);
     }
 
     // Persist playback position (for Resume)

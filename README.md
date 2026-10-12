@@ -66,9 +66,11 @@ Then open <http://localhost:8000/index_fixed_working_v9.html>. Press Ctrl+C in t
 
 - **Left to right is time**: each name sits at its `era` (roughly when the person was active),
   from the 1100s on the left to the present on the right.
-- **Bottom to top is `temp`**, the hand-assigned "musical temperature" (1 = cool/austere, 10 = hot/intense).
-  Positions are jittered, and each name is pulled towards its most similar artists (see below).
-- **Colour is the type of artist**: gold = composer, pink = singer, blue = conductor.
+- **Bottom to top is relatedness**: artists that are related in style (ignoring time, which is
+  already left to right) sit at similar heights. The order is worked out from the relatedness
+  measure below, so it improves when you build `relations.json`. Each name is also pulled towards
+  its most related artists.
+- **Colour is the type of artist**: gold = composer, pink = singer, blue = conductor, green = instrumentalist.
 - **Large bold names** are "masters", the 100 core figures; smaller names are secondary.
 - **Drag** to pan and **scroll** to zoom. The name that's playing pulses.
 
@@ -149,24 +151,45 @@ Some stations can't be played and are skipped: plain `http` streams (the app onl
 that goes silent or errors is replaced by another automatically. Choose any other mode button to leave
 Radio and go back to individual recordings.
 
-#### How "similar" and "likely" are worked out
+#### How "related" and "likely" are worked out
 
-Random Walk, Within Tag, Spiral Time and Teleport all score candidate artists and pick one at
-random, with higher scores more likely:
+Relatedness (0–1) between two artists is the brain of the app: every mode, the map's vertical axis,
+the links between names and the "why" line all use it. It combines three kinds of evidence:
 
-- **Similarity** (0–1) between two artists combines shared tags (55%), closeness in era (30%),
-  and bonuses for the same type of artist, a shared school (e.g. First Viennese School) and a shared region.
-  Bookkeeping tags (*Secondary*, *Archive*, *Conductor*) don't count. This one measure is used
-  everywhere: for each mode, for every artist's 12 nearest neighbours (Random Walk's main candidates),
-  and for the links that pull similar names together on the map.
-- **Play history**: an artist you've just played is 20× less likely; that penalty halves every hour.
+- **Documented links** from `relations.json` (see *Building the relatedness database*): teacher and
+  student, "influenced by", family, one artist performing another's works, collaborations, artists
+  that the same people listen to (ListenBrainz), and artists named together on archive.org recordings.
+- **Shared style**: shared school, movement, ensemble or opera house, voice type, instrument, genre and
+  country, and shared tags. Things that few artists share count for more than things many share
+  (*Notre-Dame school* says more than *German*). Bookkeeping tags (*Secondary*, *Archive*, *Conductor*)
+  don't count.
+- **Time**: shared style counts fully between contemporaries and less between artists centuries apart.
+  Documented links don't depend on time: a teacher can be 40 years older than a student.
+
+The weights are in the `RELATEDNESS` block near the top of the relatedness code in
+`index_fixed_working_v9.html`, so you can tune them (more weight on teachers, less on country...)
+without rebuilding anything. Without `relations.json` the app still works, using shared style and time
+only.
+
+Choosing the next artist:
+
+- Each mode scores candidates by relatedness (Spiral Time also by closeness to its target year,
+  Teleport by *distance*), and higher scores are much more likely.
+- **Play history**: an artist you've just played is 500× less likely; that penalty halves every hour.
   Artists played many times also become gradually less likely.
 - **Masters** are 1.6× as likely as an otherwise equal secondary artist.
 
-Similarity is what's sharpened (a small difference in similarity makes a big difference in
-likelihood); play history and the master boost simply multiply the result.
+#### The "why" line
 
-`temp` currently only affects position on the map, not what plays next.
+Under the track title, a line explains how the new artist connects to the previous one and which mode
+chose it, for example:
+
+- *Random walk from Léonin: Pérotin studied with Léonin · both Notre-Dame school*
+- *Within Opera · from Maria Callas: both Verismo · both known for Opera*
+- *Spiral Time, towards ~1725 · from Henry Purcell: both Baroque · contemporaries*
+- *Teleport: a deliberate jump away from Hildegard von Bingen*
+
+When you click a name yourself, it shows the link from the previous artist (*Link from ...*).
 
 ### Buttons
 
@@ -185,21 +208,78 @@ press **Resume Last** to carry on.
 
 ## Data: `knowledge_base.json`
 
-A list of 430 artists. Each entry looks like:
+A list of artists (430 hand-curated ones, plus those added by `tools/build_relations.py`). Each entry
+looks like:
 
 | Field | Meaning |
 |---|---|
 | `id` | Display name, e.g. `"Wolfgang Amadeus Mozart"` (unique) |
 | `key` | Stable lowercase identifier, e.g. `"wolfgang_amadeus_mozart"` |
 | `aliases` | Other names for the same person, e.g. `["Mozart"]` (optional) |
-| `type` | `Composer`, `Singer` or `Conductor` |
+| `type` | `Composer`, `Singer`, `Conductor` or `Instrumentalist` |
 | `is_master` | `true` for the core figures (drawn larger, preferred by autoplay) |
 | `era` | Year the person was roughly active |
-| `temp` | Hand-assigned "musical temperature", 1–10 |
+| `temp` | Hand-assigned "musical temperature", 1–10. No longer used by the app; kept for reference |
 | `tags` | Styles, forms, nationalities, e.g. `["Classical", "Austrian", "Opera"]` |
 | `collections` | archive.org collections to search for recordings (78 rpm collections are searched separately, see *Where the music comes from*) |
-| `meta` | `schools`, `regions`, `forms`, `styles` used for similarity |
-| `related` | Precomputed neighbours: `{ "id", "w" (weight 0–1), "why" (reasons) }`. Kept for reference; the app now computes similarity itself (see *How "similar" and "likely" are worked out*) |
+| `meta` | `schools`, `regions`, `forms`, `styles`; schools and regions (nationalities) count as shared style |
+| `related` | Old precomputed neighbours. No longer used; replaced by `relations.json` |
+| `qid`, `mbid` | Wikidata and MusicBrainz identifiers (added by the build script) |
+| `born`, `died`, `sitelinks` | From Wikidata; `sitelinks` is the number of Wikipedia language editions |
+| `attrs` | From Wikidata: `movement`, `genre`, `instrument`, `voice`, `member` (ensembles, opera houses, employers), `country` |
+| `source` | `"wikidata"` for artists added by the build script |
+
+## Building the relatedness database
+
+`tools/build_relations.py` gathers how artists are related from open sources, and adds more artists.
+Run it on your computer (it needs internet access) from the repository folder:
+
+```sh
+python3 tools/build_relations.py
+```
+
+The first run takes roughly half an hour, mostly because MusicBrainz allows one request per second.
+Every download is cached in `tools/.cache`, so if it's interrupted, run it again and it carries on;
+later runs are quick. It only needs Python 3 (no packages to install).
+
+What it does:
+
+1. **Matches each artist to Wikidata** using name, type and dates. The person is chosen over, say, a
+   crater or a band with the same name.
+2. **Adds more artists**: classical composers, conductors, opera singers, pianists, violinists,
+   organists and cellists with articles in at least 40 Wikipedia languages (up to 500), plus the
+   teachers, students, influences and family of artists already in the database. They get tags
+   (period, style, voice, instrument, nationality) derived from Wikidata.
+3. **Collects relations**: Wikidata (teacher/student, influence, family, works one artist performed
+   by another, and shared movement, genre, ensembles, voice, instrument, country), MusicBrainz
+   (teacher, family, collaborations), ListenBrainz (listened to by the same people) and archive.org
+   (named together on recordings).
+4. **Writes** `knowledge_base.json` (a backup of the previous one is kept as `knowledge_base.json.bak`),
+   `relations.json`, and `tools/relations_report.md`.
+
+**Read the report afterwards.** It lists artists it couldn't match, matches it wasn't sure about, the
+artists it added and any source that failed. Fix a wrong match in `tools/wikidata_overrides.json`:
+
+```json
+{ "Arcangelo Corelli": "Q1234567", "Some Artist": null }
+```
+
+(`Q1234567` stands for the id shown at the top of the artist's Wikidata page; `null` means never match), then run the script again.
+
+Useful options (`--help` lists them all):
+
+| Option | Effect |
+|---|---|
+| `--max-new 200` | Add at most 200 new artists (default 500) |
+| `--min-sitelinks 60` | Only add artists with articles in at least 60 Wikipedia languages (default 40) |
+| `--no-expand` | Don't add artists; only relate the existing ones |
+| `--no-musicbrainz`, `--no-listenbrainz`, `--no-cooccurrence` | Skip a source |
+| `--dry-run` | Only write the report |
+
+When you're happy with the result, commit `knowledge_base.json`, `relations.json` and (if you made
+one) `tools/wikidata_overrides.json`, so the database is shared through the repository.
+
+The script's tests run without internet: `python3 -m unittest tools/test_build_relations.py`.
 
 ### `tools/merge_aliases.py`
 
@@ -220,6 +300,11 @@ Running it again on an already-merged file changes nothing.
 | `index_fixed_working_v9.html` | The app: map, search, player and autoplay logic |
 | `knowledge_base.json` | Artist data (see above) |
 | `main.js`, `package.json` | Electron wrapper (`npm start`) |
+| `relations.json` | Documented relations between artists, with evidence (built by `tools/build_relations.py`) |
+| `tools/build_relations.py` | Builds the relatedness database from Wikidata, MusicBrainz, ListenBrainz and archive.org |
+| `tools/test_build_relations.py` | Offline tests for the build script |
+| `tools/wikidata_overrides.json` | Optional: your corrections to Wikidata matches |
+| `tools/relations_report.md` | Written by the build script: what was matched, added or skipped |
 | `tools/merge_aliases.py` | Duplicate-merging script for the data |
 
 ## Troubleshooting
