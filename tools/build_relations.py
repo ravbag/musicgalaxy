@@ -157,9 +157,11 @@ def log(msg):
 class Http:
     """GET JSON with an on-disk cache. Subclass/override fetch_raw() in tests."""
 
-    def __init__(self, cache_dir, offline=False):
+    def __init__(self, cache_dir, offline=False, verbose=False):
         self.cache_dir = cache_dir
         self.offline = offline
+        self.verbose = verbose
+        self.network_requests = 0
         self.last_request = {}
         # Seconds between requests per host. MusicBrainz asks for <= 1/s; Wikimedia rate-limits clients that
         # aren't logged in, and shared cloud addresses even more, so Wikidata is kept to one request a second.
@@ -197,6 +199,11 @@ class Http:
         wait = self.min_interval.get(host, self.default_interval) - (time.time() - self.last_request.get(host, 0))
         if wait > 0:
             time.sleep(wait)
+        self.network_requests += 1
+        if self.verbose:
+            log(f'    GET {url[:160]}')
+        elif self.network_requests % 20 == 0:
+            log(f'    ... {self.network_requests} web requests so far (now: {host})')
         hdrs = {'User-Agent': USER_AGENT, 'Accept': 'application/json'}
         hdrs.update(headers or {})
         delay = 5
@@ -261,6 +268,8 @@ class Wikidata:
                 self.entities[q] = cached
         for i in range(0, len(todo), self.ENTITY_BATCH):
             chunk = todo[i:i + self.ENTITY_BATCH]
+            if len(todo) > self.ENTITY_BATCH:
+                log(f'    Wikidata facts: {i}/{len(todo)} people')
             items = ' '.join('wd:' + q for q in chunk)
             props = ' '.join('wdt:' + p for p in PROPS.values())
             facts = self.sparql(f'''SELECT ?item ?prop ?value WHERE {{
@@ -294,6 +303,8 @@ class Wikidata:
                 self.label_cache[q] = cached['label']
         for i in range(0, len(todo), self.LABEL_BATCH):
             chunk = todo[i:i + self.LABEL_BATCH]
+            if len(todo) > self.LABEL_BATCH:
+                log(f'    Wikidata names of places, movements...: {i}/{len(todo)}')
             rows = self.sparql(f'''SELECT ?item ?label WHERE {{
   VALUES ?item {{ {' '.join('wd:' + q for q in chunk)} }}
   ?item rdfs:label ?label . FILTER(LANG(?label) = "en" || LANG(?label) = "mul")
@@ -315,6 +326,7 @@ class Wikidata:
         out = {n: [] for n in names}
         for i in range(0, len(names), self.NAME_BATCH):
             chunk = names[i:i + self.NAME_BATCH]
+            log(f'    exact name matching: {i}/{len(names)} names')
             lit = lambda n: json.dumps(n, ensure_ascii=False)
             values = ' '.join(f'{lit(n)}@en {lit(n)}@mul' for n in chunk)
             rows = self.sparql(f'''SELECT DISTINCT ?name ?item WHERE {{
@@ -461,6 +473,7 @@ def match_existing(kb, wd, overrides, report, rematch=False):
             best = scored
         # 2) fall back to Wikidata's search for names without a good exact match (one request each)
         for query in ([] if best else queries):
+            log(f'    no exact match for {query!r}; searching Wikidata')
             try:
                 cands = wd.load(wd.search(query))
             except Exception as ex:  # noqa: BLE001 - one failed lookup shouldn't stop the build
@@ -833,18 +846,21 @@ def build(args, http):
     report = defaultdict(list)
     wd = Wikidata(http)
 
-    log('1/4 Matching artists to Wikidata...')
+    t0 = time.time()
+    step = lambda text: log(f'{text}   [{int(time.time() - t0) // 60}m{int(time.time() - t0) % 60:02d}s, '
+                            f'{http.network_requests} web requests so far]')
+    step('1/4 Matching artists to Wikidata...')
     match_existing(kb, wd, overrides, report, rematch=args.rematch)
     wd.load([a['qid'] for a in kb if a.get('qid')])
 
     n_before = len(kb)
     if args.expand:
-        log('2/4 Finding more artists...')
+        step('2/4 Finding more artists...')
         add_new_artists(kb, wd, expansion_candidates(wd, kb, args, report), args, report)
     else:
-        log('2/4 Finding more artists: skipped (--no-expand)')
+        step('2/4 Finding more artists: skipped (--no-expand)')
 
-    log('3/4 Collecting relations...')
+    step('3/4 Collecting relations...')
     fill_attributes(kb, wd)
     edges = Edges()
     wikidata_relations(kb, wd, edges, report)
@@ -855,7 +871,7 @@ def build(args, http):
     if args.cooccurrence:
         archive_cooccurrence(kb, http, edges, report)
 
-    log('4/4 Writing files...')
+    step('4/4 Writing files...')
     built = datetime.datetime.now(datetime.timezone.utc).strftime('%Y-%m-%d %H:%M UTC')
     signal_counts = Counter(s for e in edges.edges.values() for s in e['s'])
     stats = {'built': built, 'counts': {
@@ -906,6 +922,7 @@ def parse_args(argv=None):
     ap.add_argument('--cache', default=None, help='default: tools/.cache')
     ap.add_argument('--offline', action='store_true', help='use cached responses only')
     ap.add_argument('--dry-run', action='store_true', help='write only the report, not the data files')
+    ap.add_argument('--verbose', action='store_true', help='print every web request')
     args = ap.parse_args(argv)
     args.overrides = args.overrides or os.path.join(args.root, 'tools', 'wikidata_overrides.json')
     args.cache = args.cache or os.path.join(args.root, 'tools', '.cache')
@@ -915,6 +932,6 @@ def parse_args(argv=None):
 if __name__ == '__main__':
     a = parse_args()
     try:
-        build(a, Http(a.cache, offline=a.offline))
+        build(a, Http(a.cache, offline=a.offline, verbose=a.verbose))
     except KeyboardInterrupt:
         sys.exit('\nInterrupted. Run again to resume; finished downloads are cached in tools/.cache.')
