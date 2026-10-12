@@ -50,6 +50,7 @@
         <button onclick="clearActiveTag()">Clear Tag</button>
         <button onclick="resetView()">Center View</button>
     </div>
+    <div id="source-chips" style="margin-top:10px; display:flex; flex-wrap:wrap; gap:6px; align-items:center; font-size:12px; color:#aaa;"></div>
     </div>
 <svg id="viz"></svg>
 
@@ -161,7 +162,8 @@ function focusOnNode(node, scale=1.35, duration=650) {
         lastTrackTime: 'mg_lastTrackTime',
         playMode: 'mg_playMode',
         activeTag: 'mg_activeTag',
-        autoplayEnabled: 'mg_autoplayEnabled'
+        autoplayEnabled: 'mg_autoplayEnabled',
+        sources: 'mg_sources'
     };
 
     function saveState() {
@@ -170,6 +172,7 @@ function focusOnNode(node, scale=1.35, duration=650) {
             localStorage.setItem(LS.playMode, playMode);
             localStorage.setItem(LS.activeTag, activeTag ?? '');
             localStorage.setItem(LS.autoplayEnabled, autoplayEnabled ? '1' : '0');
+            localStorage.setItem(LS.sources, JSON.stringify(sources));
         } catch (e) {}
     }
 
@@ -209,6 +212,11 @@ function focusOnNode(node, scale=1.35, duration=650) {
             activeTag = at ? at : null;
             const ap = localStorage.getItem(LS.autoplayEnabled);
             autoplayEnabled = (ap === null) ? true : (ap === '1');
+            const src = JSON.parse(localStorage.getItem(LS.sources) || 'null');
+            if (src && typeof src === 'object') {
+                for (const k of Object.keys(sources)) if (typeof src[k] === 'boolean') sources[k] = src[k];
+                if (!Object.values(sources).some(Boolean)) sources.archive = true;
+            }
             updateUI();
         } catch (e) {}
     }
@@ -419,8 +427,9 @@ async function init() {
             .attr("y", d => d.y || height / 2);
     });
 
-    // Restore persisted mode/tag/autoplay and wire up search UI
+    // Restore persisted mode/tag/autoplay/sources and wire up search UI
     restoreState();
+    renderSourceChips();
     wireSearch();
 
     // Focus last played node (no autoplay) and show last track title if available
@@ -492,17 +501,226 @@ async function init() {
         }
     }
 
+    // ---------- Recording sources ----------
+    // archive  – archive.org, excluding 78 rpm transfers; also matches Musopen's uploads
+    // commons  – Wikimedia Commons (free/public-domain audio files)
+    // historic – archive.org 78 rpm transfers (Great 78 Project etc.): mono, surface noise
+    const SOURCE_LABELS = { archive: 'archive.org', commons: 'Wikimedia Commons', historic: '78 rpm (historic)' };
+    let sources = { archive: true, commons: true, historic: true };
+    const HISTORIC_COLLECTIONS = ['georgeblood', '78rpm', '78rpm_opera'];
+    const COMMONS_API = 'https://commons.wikimedia.org/w/api.php';
+    const API_USER_AGENT = 'MusicGalaxy/0.1 (https://github.com/ravbag/musicgalaxy)';
+    const MIN_TRACK_SECONDS = 45;   // skip clips, pronunciations, jingles
+    const TIER_GOOD = 2;            // VBR/high-bitrate lossy or better
+    const ARCHIVE_ITEMS_TO_TRY = 3; // look at a few items for a well-encoded one
+
+    function renderSourceChips() {
+        const wrap = document.getElementById('source-chips');
+        if (!wrap) return;
+        wrap.textContent = 'Sources:';
+        for (const key of Object.keys(SOURCE_LABELS)) {
+            const b = document.createElement('button');
+            b.className = 'chip' + (sources[key] ? ' chip-active' : '');
+            b.textContent = SOURCE_LABELS[key];
+            b.title = sources[key] ? 'Click to stop using this source' : 'Click to use this source';
+            b.onclick = () => {
+                const next = { ...sources, [key]: !sources[key] };
+                if (!Object.values(next).some(Boolean)) { setStatus('Keep at least one source on'); return; }
+                sources = next;
+                saveState();
+                renderSourceChips();
+            };
+            wrap.appendChild(b);
+        }
+    }
+
+    // Try the better-sounding sources first (in random order, for variety) and 78s last.
+    // Performers active before ~1950 mostly survive on 78s, so those go first for them.
+    function sourceOrder(node) {
+        const early78 = node.type !== 'Composer' && (+node.era || 2000) < 1950;
+        const good = Math.random() < 0.5 ? ['archive', 'commons'] : ['commons', 'archive'];
+        const order = early78 ? ['historic', ...good] : [...good, 'historic'];
+        return order.filter(k => sources[k]);
+    }
+
+    async function fetchJson(url, options) {
+        const res = await fetch(url, options);
+        if (!res.ok) throw new Error(`HTTP ${res.status} for ${url}`);
+        return res.json();
+    }
+
+    function shuffled(arr) {
+        const a = arr.slice();
+        for (let i = a.length - 1; i > 0; i--) {
+            const j = Math.floor(Math.random() * (i + 1));
+            [a[i], a[j]] = [a[j], a[i]];
+        }
+        return a;
+    }
+
+    function firstText(v) { return String((Array.isArray(v) ? v[0] : v) ?? '').trim(); }
+
+    // Commons metadata values are HTML; DOMParser doesn't run scripts, so this is safe
+    function htmlToText(html) {
+        if (!html) return '';
+        return (new DOMParser().parseFromString(String(html), 'text/html').body.textContent || '').trim();
+    }
+
+    // "183.4" or "3:03" -> seconds
+    function parseLength(v) {
+        if (v == null || v === '') return NaN;
+        const str = String(v);
+        return str.includes(':') ? str.split(':').reduce((acc, part) => acc * 60 + Number(part), 0) : Number(str);
+    }
+
+    // How good an archive.org file's encoding is (0 = unplayable)
+    function formatTier(f) {
+        const name = (f.name || '').toLowerCase();
+        const fmt = (f.format || '').toLowerCase();
+        if (!/\.(mp3|flac|ogg|oga|opus|m4a|wav)$/.test(name)) return 0;
+        if (fmt.includes('flac') || name.endsWith('.flac')) return 4;
+        if (fmt.includes('apple lossless') || fmt.includes('wave') || name.endsWith('.wav')) return 3;
+        if (/(16|24|32|48|64)kbps/.test(fmt)) return 0.5;
+        if (/128kbps/.test(fmt)) return 1;
+        if (/vbr|320|256|192|vorbis|opus/.test(fmt)) return 2;
+        return 1;
+    }
+
+    // Group an item's files into tracks (an original plus its derivatives), drop short clips,
+    // pick a random track and its best encoding.
+    function pickArchiveTrack(files) {
+        const tracks = new Map();
+        for (const f of files) {
+            if (typeof f?.name !== 'string' || /(_sample|spectrogram)/i.test(f.name)) continue;
+            const tier = formatTier(f);
+            if (!tier) continue;
+            const base = (f.source === 'derivative' && f.original) ? f.original : f.name;
+            const key = base.replace(/\.[^./]+$/, '');
+            const t = tracks.get(key) || { best: null, length: NaN, title: '' };
+            if (!t.best || tier > formatTier(t.best)) t.best = f;
+            const len = parseLength(f.length);
+            if (Number.isFinite(len)) t.length = Math.max(Number.isFinite(t.length) ? t.length : 0, len);
+            t.title = t.title || firstText(f.title);
+            tracks.set(key, t);
+        }
+        const usable = [...tracks.values()].filter(t => !(t.length < MIN_TRACK_SECONDS));
+        if (!usable.length) return null;
+        const t = usable[Math.floor(Math.random() * usable.length)];
+        return { file: t.best, tier: formatTier(t.best), title: t.title };
+    }
+
+    function archiveNameClause(node) {
+        const names = (node._searchNames || [node.id]).map(n => String(n).replace(/"/g, ''));
+        const fields = node.type === 'Composer' ? ['creator', 'subject', 'title', 'description']
+            : node.type === 'Singer' ? ['creator', 'performer', 'subject', 'title']
+            : node.type === 'Conductor' ? ['creator', 'subject', 'title']
+            : ['creator', 'title'];
+        return '(' + names.flatMap(name => fields.map(f => `${f}:"${name}"`)).join(' OR ') + ')';
+    }
+
+    async function findArchiveTrack(node, historic, isCurrent) {
+        const quoted = list => list.map(c => `"${c}"`).join(' OR ');
+        let scope;
+        if (historic) {
+            scope = `collection:(${quoted(HISTORIC_COLLECTIONS)})`;
+        } else {
+            const own = (node.collections || []).filter(c => !HISTORIC_COLLECTIONS.includes(c));
+            // Musopen's modern public-domain recordings are on archive.org; match them wherever they're filed
+            const where = own.length ? `(collection:(${quoted(own)}) OR musopen)` : 'musopen';
+            scope = `${where} AND NOT collection:(${quoted(HISTORIC_COLLECTIONS)})`;
+        }
+        const query = `${archiveNameClause(node)} AND ${scope} AND mediatype:audio`;
+        const url = `https://archive.org/advancedsearch.php?q=${encodeURIComponent(query)}&fl[]=identifier&rows=50&page=1&output=json&sort[]=-downloads`;
+        const data = await fetchJson(url);
+        if (!isCurrent()) return null;
+
+        let best = null;
+        for (const doc of shuffled(data?.response?.docs || []).slice(0, ARCHIVE_ITEMS_TO_TRY)) {
+            const id = doc.identifier;
+            const meta = await fetchJson(`https://archive.org/metadata/${encodeURIComponent(id)}`);
+            if (!isCurrent()) return null;
+            const pick = pickArchiveTrack(Array.isArray(meta?.files) ? meta.files : []);
+            if (!pick) continue;
+            const path = pick.file.name.split('/').map(encodeURIComponent).join('/');
+            const coll = firstText(meta?.metadata?.collection);
+            const candidate = {
+                src: `https://archive.org/download/${encodeURIComponent(id)}/${path}`,
+                title: pick.title || firstText(meta?.metadata?.title) || pick.file.name,
+                label: historic ? `78 rpm · ${coll || 'archive.org'}` : `archive.org${coll ? ' · ' + coll : ''}`,
+                tier: pick.tier,
+            };
+            if (!best || candidate.tier > best.tier) best = candidate;
+            if (candidate.tier >= TIER_GOOD) break;
+        }
+        return best;
+    }
+
+    // Wikimedia Commons: full-text search over audio files that mention the artist
+    function isMusicFile(title, ii) {
+        const mime = ii.mime || '';
+        if (!(ii.mediatype === 'AUDIO' || mime.startsWith('audio/'))) return false;
+        if (/midi/i.test(mime)) return false;
+        // Spoken Wikipedia articles and pronunciation clips ("File:De-Bach.ogg", "File:LL-Q150 ...")
+        if (/spoken|pronunciation/i.test(title) || /^File:(LL-|[A-Z][a-z]{1,2}(-[a-z]{2,3})?-)/.test(title)) return false;
+        const meta = Array.isArray(ii.metadata) ? ii.metadata : [];
+        const lenEntry = meta.find(m => m && (m.name === 'length' || m.name === 'playtime_seconds'));
+        const len = lenEntry ? Number(lenEntry.value) : NaN;
+        if (Number.isFinite(len)) return len >= MIN_TRACK_SECONDS;
+        return (ii.size || 0) >= 500000;
+    }
+
+    async function findCommonsTrack(node, isCurrent) {
+        const params = new URLSearchParams({
+            action: 'query', format: 'json', formatversion: '2', origin: '*',
+            generator: 'search', gsrsearch: `"${String(node.id).replace(/"/g, '')}" filetype:audio`,
+            gsrnamespace: '6', gsrlimit: '50',
+            prop: 'imageinfo', iiprop: 'url|mime|size|mediatype|metadata|extmetadata',
+            iiextmetadatafilter: 'ObjectName|Artist|LicenseShortName',
+        });
+        const data = await fetchJson(`${COMMONS_API}?${params}`, { headers: { 'Api-User-Agent': API_USER_AGENT } });
+        if (!isCurrent()) return null;
+        const pages = Array.isArray(data?.query?.pages) ? data.query.pages : Object.values(data?.query?.pages || {});
+        const candidates = pages.filter(p => p?.imageinfo?.[0]?.url && isMusicFile(p.title || '', p.imageinfo[0]));
+        if (!candidates.length) return null;
+        const page = candidates[Math.floor(Math.random() * candidates.length)];
+        const ii = page.imageinfo[0];
+        const em = ii.extmetadata || {};
+        const title = htmlToText(em.ObjectName?.value) || String(page.title).replace(/^File:/, '').replace(/\.[^.]+$/, '');
+        const artist = htmlToText(em.Artist?.value).slice(0, 80);
+        const license = htmlToText(em.LicenseShortName?.value);
+        return {
+            src: ii.url,
+            title: artist ? `${title} · ${artist}` : title,
+            label: `Wikimedia Commons${license ? ' · ' + license : ''}`,
+        };
+    }
+
+    function startTrack(node, track) {
+        player.src = track.src;
+        const title = `${node.id} — ${track.title}`;
+        try {
+            localStorage.setItem(LS.lastNodeId, node.id);
+            localStorage.setItem(LS.lastTrackSrc, player.src);
+            localStorage.setItem(LS.lastTrackTitle, title);
+            localStorage.setItem(LS.lastTrackVault, track.label);
+            localStorage.setItem(LS.lastTrackTime, '0');
+        } catch (e) {}
+        saveState();
+        player.play().catch(e => console.warn('[play]', e));
+        showTrack(title, track.label);
+    }
+
     async function playNode(node) {
         const token = ++playToken;
+        const isCurrent = () => token === playToken;
         clearTimeout(skipTimer);
         currentNode = node;
         d3.selectAll(".tag-node").classed("active-node", false);
         d3.selectAll(".tag-node").filter(d => d.id === node.id).classed("active-node", true);
 
         focusOnNode(node);
-        
+
         const trackDisplay = document.getElementById('track-title');
-        const vaults = node.collections || [];
 
         // Update play counters
         plays.set(node.id, (plays.get(node.id) || 0) + 1);
@@ -512,63 +730,20 @@ async function init() {
         renderTagChips(node);
         updateUI();
 
-        for (let vault of vaults) {
-            trackDisplay.innerText = `Searching ${vault}...`;
-
-            // Query builder (more robust than creator-only); searches every unambiguous alias
-            const names = (node._searchNames || [node.id]).map(s => String(s).replace(/"/g, ''));
-            const fields = node.type === 'Composer' ? ['creator', 'subject', 'title', 'description']
-                : node.type === 'Singer' ? ['creator', 'performer', 'subject', 'title']
-                : node.type === 'Conductor' ? ['creator', 'subject', 'title']
-                : ['creator', 'title'];
-            let qParts = [];
-            qParts.push('(' + names.flatMap(name => fields.map(f => `${f}:"${name}"`)).join(' OR ') + ')');
-            qParts.push(`collection:${vault}`);
-            qParts.push(`mediatype:audio`);
-            const query = qParts.join(' AND ');
-
-            // Pull more docs and randomize selection
-            const rows = 50;
-            let url = `https://archive.org/advancedsearch.php?q=${encodeURIComponent(query)}&rows=${rows}&page=1&output=json&sort[]=-downloads`;
-
+        for (const source of sourceOrder(node)) {
+            trackDisplay.innerText = `Searching ${SOURCE_LABELS[source]}...`;
             try {
-                const res = await fetch(url);
-                const data = await res.json();
-                if (token !== playToken) return; // superseded by a newer request
-                if (data?.response?.docs?.length > 0) {
-                    const docs = data.response.docs;
-                    const doc = docs[Math.floor(Math.random() * docs.length)];
-                    const id = doc.identifier;
-                    const meta = await fetch(`https://archive.org/metadata/${encodeURIComponent(id)}`).then(r => r.json());
-                    if (token !== playToken) return;
-
-                    const files = Array.isArray(meta?.files) ? meta.files : [];
-                    const playable = pickPlayableFile(files);
-                    if (playable) {
-                        const path = playable.name.split('/').map(encodeURIComponent).join('/');
-                        player.src = `https://archive.org/download/${encodeURIComponent(id)}/${path}`;
-                        try {
-                            localStorage.setItem(LS.lastNodeId, node.id);
-                            localStorage.setItem(LS.lastTrackSrc, player.src);
-                            localStorage.setItem(LS.lastTrackTitle, `${node.id} — ${playable.name}`);
-                            localStorage.setItem(LS.lastTrackVault, vault);
-                            localStorage.setItem(LS.lastTrackTime, '0');
-                            localStorage.setItem(LS.playMode, playMode);
-                            localStorage.setItem(LS.activeTag, activeTag ?? '');
-                            localStorage.setItem(LS.autoplayEnabled, autoplayEnabled ? '1' : '0');
-                        } catch(e) {}
-
-                        player.play().catch(e => console.warn('[play]', e));
-                        showTrack(node.id, vault);
-                        return;
-                    }
-                }
+                const track = source === 'commons'
+                    ? await findCommonsTrack(node, isCurrent)
+                    : await findArchiveTrack(node, source === 'historic', isCurrent);
+                if (!isCurrent()) return; // superseded by a newer request
+                if (track) { startTrack(node, track); return; }
             } catch (e) {
-                if (token !== playToken) return;
-                console.warn('[search]', vault, e);
+                if (!isCurrent()) return;
+                console.warn('[search]', source, e);
             }
         }
-        if (token !== playToken) return;
+        if (!isCurrent()) return;
         handlePlaybackFailure('No recordings found.');
     }
 
@@ -588,15 +763,6 @@ async function init() {
         trackDisplay.innerText = `${reason} Skipping...`;
         const token = playToken;
         skipTimer = setTimeout(() => { if (token === playToken) autoNext(); }, 2000);
-    }
-
-    function pickPlayableFile(files) {
-        const audio = files
-            .filter(f => typeof f?.name === 'string')
-            .filter(f => /\.(mp3|flac|ogg|m4a|wav)$/i.test(f.name));
-        const originals = audio.filter(f => (f.source || '') === 'original');
-        const mp3 = audio.filter(f => f.name.toLowerCase().endsWith('.mp3'));
-        return originals[0] || mp3[0] || audio[0] || null;
     }
 
     // --- Similarity & weighted sampling ---
