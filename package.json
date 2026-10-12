@@ -1,0 +1,13 @@
+{
+  "name": "musicgalaxy",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Tag-cloud music explorer that streams recordings from archive.org",
+  "main": "main.js",
+  "scripts": {
+    "start": "electron ."
+  },
+  "devDependencies": {
+    "electron": "33.2.1"
+  }
+}
