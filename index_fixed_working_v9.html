@@ -56,7 +56,8 @@
 <svg id="viz"></svg>
 
 <script>
-    const svg = d3.select("#viz"), g = svg.append("g"), width = window.innerWidth, height = window.innerHeight;
+    const svg = d3.select("#viz"), g = svg.append("g");
+    let width = window.innerWidth, height = window.innerHeight; // updated on window resize
     const player = document.getElementById('player');
     let nodes = [], currentNode = null;
     let nodeById = new Map();
@@ -78,8 +79,11 @@
     // --- Weighting state ---
     const plays = new Map();        // id -> count
     const lastPlayedAt = new Map(); // id -> epoch ms
-    const HALF_LIFE_MS = 60 * 60 * 1000; // recency penalty half-life ~60 minutes
-    const ROLE_MASTER_W = 1.6;
+    const RECENCY_HALF_LIFE_MS = 60 * 60 * 1000; // the "just played" penalty halves every hour
+    const ROLE_MASTER_W = 1.6;  // masters are 1.6x as likely as an otherwise equal secondary artist
+    const NEIGHBOURS = 12;      // most-similar artists kept per artist (random-walk pool, map links)
+    // Bookkeeping labels in the data, not musical properties: ignored for similarity and tag chips
+    const NON_MUSICAL_TAGS = new Set(['Secondary', 'Archive', 'Conductor']);
     const TAU = 0.12; // exploration temperature for softmax
 
     // --- Stabilized Physics & Center Gravity ---
@@ -311,6 +315,49 @@ function focusOnNode(node, scale=1.35, duration=650) {
         });
     }
 
+    // Era -> x, temp -> y, within the current window size
+    function computeLayoutTargets() {
+        const eraExtent = d3.extent(nodes, d => +d.era || 1800);
+        const xScale = d3.scaleLinear().domain(eraExtent).range([width * 0.18, width * 0.82]);
+        const yScale = d3.scaleLinear().domain([1, 10]).range([height * 0.80, height * 0.20]);
+        for (const n of nodes) {
+            n._tx = xScale(+n.era || 1800) + (n._jx || 0);
+            n._ty = yScale(+n.temp || 5) + (n._jy || 0);
+        }
+    }
+
+    // For every artist, its NEIGHBOURS most similar artists (one O(n^2) pass at start-up)
+    function computeNeighbours() {
+        for (const n of nodes) n._neighbours = [];
+        for (let i = 0; i < nodes.length; i++) {
+            for (let j = i + 1; j < nodes.length; j++) {
+                const sim = similarity(nodes[i], nodes[j]);
+                nodes[i]._neighbours.push({ node: nodes[j], sim });
+                nodes[j]._neighbours.push({ node: nodes[i], sim });
+            }
+        }
+        for (const n of nodes) {
+            n._neighbours.sort((a, b) => b.sim - a.sim);
+            n._neighbours = n._neighbours.slice(0, NEIGHBOURS);
+        }
+    }
+
+    // Keep the map filling the window when it's resized
+    let resizeTimer = null;
+    window.addEventListener('resize', () => {
+        clearTimeout(resizeTimer);
+        resizeTimer = setTimeout(() => {
+            width = window.innerWidth;
+            height = window.innerHeight;
+            if (!nodes.length) return;
+            computeLayoutTargets();
+            simulation.force('center', d3.forceCenter(width / 2, height / 2));
+            simulation.force('x').x(d => d._tx);
+            simulation.force('y').y(d => d._ty);
+            simulation.alpha(0.5).restart();
+        }, 200);
+    });
+
 async function init() {
     nodes = await loadKnowledgeBase('knowledge_base.json');
     nodeById = new Map(nodes.map(n => [n.id, n]));
@@ -328,70 +375,36 @@ async function init() {
         n._searchNames = [n.id, ...(n.aliases || []).filter(a => /\s/.test(a) || (surnameOwners.get(a.toLowerCase()) || 0) <= 1)];
     }
     
-    // Data-dependent layout targets (continuous "cloud" + local neighborhoods)
-    const eraExtent = d3.extent(nodes, d => +d.era || 1800);
-    const xScale = d3.scaleLinear().domain(eraExtent).range([width * 0.18, width * 0.82]);
+    // Musical tags only, precomputed for similarity()
+    for (const n of nodes) n._mtags = new Set((n.tags || []).filter(t => !NON_MUSICAL_TAGS.has(t)));
+    computeNeighbours();
 
-    // Use temp as a vertical organizing axis (fallback when meta/styles are sparse)
-    const yScale = d3.scaleLinear().domain([1, 10]).range([height * 0.80, height * 0.20]);
-
-    nodes.forEach(n => {
-        const e = (+n.era || 1800);
-        const t = (+n.temp || 5);
-        n._tx = xScale(e) + (Math.random() - 0.5) * 120;
-        n._ty = yScale(t) + (Math.random() - 0.5) * 120;
+    // Layout targets: era left-to-right, temp bottom-to-top, plus a fixed random jitter per node
+    for (const n of nodes) {
+        n._jx = (Math.random() - 0.5) * 120;
+        n._jy = (Math.random() - 0.5) * 120;
+    }
+    computeLayoutTargets();
+    for (const n of nodes) {
         // start near targets to avoid the "ring" artifact
         n.x = n._tx;
         n.y = n._ty;
-    });
+    }
 
-    // Build robust link graph from precomputed related neighbors (drops dangling refs; uses stable _gid)
-    // Stable graph id (prefer key)
-    nodes.forEach(n => {
-        n._gid = (n.key && String(n.key)) || String(n.id).toLowerCase().replace(/[^a-z0-9]+/g, "_");
-    });
-    const nameToGid = new Map(nodes.map(n => [String(n.id), n._gid]));
-
+    // Links between each artist and its most similar artists (same measure as the playback modes)
     const linkPairs = new Set();
-    let links = [];
-    const dangling = [];
-
-    nodes.forEach(n => {
-        const rel = Array.isArray(n.related) ? n.related.slice(0, 8) : [];
-        rel.forEach(r => {
-            const targetName = (r && r.id != null) ? String(r.id) : null;
-            if (!targetName) return;
-
-            const tgt = nameToGid.get(targetName);
-            if (!tgt) {
-                dangling.push({ from: n.id, to: targetName });
-                return;
-            }
-
-            const a = n._gid, b = tgt;
-            const key = a < b ? (a + "||" + b) : (b + "||" + a);
-            if (!linkPairs.has(key)) {
-                linkPairs.add(key);
-                links.push({ source: a, target: b, w: (typeof r.w === "number" ? r.w : 0.3) });
-            }
-        });
-    });
-
-    if (dangling.length) {
-        console.log("[graph] dangling related refs:", dangling.length, "sample:", dangling.slice(0, 25));
+    const links = [];
+    for (const n of nodes) {
+        for (const { node: m, sim } of n._neighbours.slice(0, 8)) {
+            const key = n.id < m.id ? n.id + '||' + m.id : m.id + '||' + n.id;
+            if (linkPairs.has(key)) continue;
+            linkPairs.add(key);
+            links.push({ source: n, target: m, w: sim });
+        }
     }
 
     // Configure simulation forces now that we have targets + links
-    // IMPORTANT: set simulation nodes BEFORE initializing forceLink, otherwise D3 throws "node not found"
     simulation.nodes(nodes);
-
-    // Hard-robust: map link endpoints to node objects (bypasses D3 id resolution entirely)
-    const nodeByGid = new Map(nodes.map(d => [d._gid, d]));
-    links = links
-        .map(l => ({ source: nodeByGid.get(l.source), target: nodeByGid.get(l.target), w: l.w }))
-        .filter(l => l.source && l.target);
-
-    console.log("[graph] hildegard node:", nodeByGid.has("hildegard_von_bingen") ? "OK" : "MISSING");
 
     const linkForce = d3.forceLink(links)
         .distance(l => 55 + (1 - (l.w || 0.3)) * 65)
@@ -455,12 +468,19 @@ async function init() {
     function setMode(mode) {
         // Teleport is a one-shot jump; afterwards autoNext() returns to the previous mode
         if (mode === 'teleport' && playMode !== 'teleport') modeBeforeTeleport = playMode;
+        const previous = playMode;
         playMode = mode;
         updateUI();
         saveState();
 
-        // Trigger next track immediately if something is already playing (radio tunes in straight away)
-        if (currentNode || mode === 'radio') autoNext();
+        // A new mode normally takes effect when the current track ends. Teleport (a deliberate jump)
+        // and Radio switch straight away, and so does leaving Radio, since a live stream never ends.
+        const playing = !!currentNode && !player.paused && !player.ended;
+        if (mode === 'teleport' || mode === 'radio' || previous === 'radio' || (currentNode && !playing)) {
+            autoNext();
+        } else if (playing && mode !== previous) {
+            setStatus('New mode starts after this track');
+        }
     }
 
     function toggleAutoplay() {
@@ -486,7 +506,7 @@ async function init() {
         const wrap = document.getElementById('tag-chips');
         if (!wrap) return;
         wrap.innerHTML = '';
-        const tags = (node?.tags ?? []).slice(0, 24);
+        const tags = (node?.tags ?? []).filter(t => !NON_MUSICAL_TAGS.has(t)).slice(0, 24);
         for (const t of tags) {
             const b = document.createElement('button');
             b.textContent = t;
@@ -614,7 +634,8 @@ async function init() {
 
     function archiveNameClause(node) {
         const names = (node._searchNames || [node.id]).map(n => String(n).replace(/"/g, ''));
-        const fields = node.type === 'Composer' ? ['creator', 'subject', 'title', 'description']
+        // description: is left out: it matches any record that merely mentions the name
+        const fields = node.type === 'Composer' ? ['creator', 'subject', 'title']
             : node.type === 'Singer' ? ['creator', 'performer', 'subject', 'title']
             : node.type === 'Conductor' ? ['creator', 'subject', 'title']
             : ['creator', 'title'];
@@ -912,7 +933,7 @@ async function init() {
     function similarity(u, v) {
         if (!u || !v) return 0;
         if (u.id === v.id) return 0;
-        const tagSim = jaccard(u.tags, v.tags);
+        const tagSim = jaccard(u._mtags || u.tags, v._mtags || v.tags);
         const eSim = eraSim(u.era, v.era);
         const typeBonus = (u.type === v.type) ? 0.08 : 0.0;
         const schoolBonus = (shareAny(u.meta?.schools, v.meta?.schools)) ? 0.18 : 0.0;
@@ -927,24 +948,30 @@ async function init() {
         const p = plays.get(candidate.id) || 0;
         const novelty = 1 / Math.sqrt(1 + p);
         const last = lastPlayedAt.get(candidate.id);
-        const dt = (typeof last === 'number') ? (Date.now() - last) : (10 * HALF_LIFE_MS);
-        const recency = Math.max(0.05, 1 - Math.exp(-dt / HALF_LIFE_MS));
+        const dt = (typeof last === 'number') ? (Date.now() - last) : Infinity;
+        // 0.05 right after playing, 0.5 after one half-life, approaching 1 later
+        const recency = Math.max(0.05, 1 - Math.pow(2, -dt / RECENCY_HALF_LIFE_MS));
         return role * novelty * recency;
     }
 
+    // Pick one item with probability proportional to exp(score / tau) * baseWeight(item).
+    // score is the musical part (similarity etc., roughly 0-1) and is sharpened by the temperature;
+    // baseWeight (master role, play count, recency) is a plain multiplier, so a master is 1.6x as
+    // likely rather than the ~50x it was when it was divided by tau as well.
     function softmaxPick(items, scoreFn, tau=TAU) {
         const scored = [];
         for (const it of items) {
             const s = scoreFn(it);
-            if (!Number.isFinite(s)) continue;
-            scored.push({ it, s });
+            const w = baseWeight(it);
+            if (!Number.isFinite(s) || !(w > 0)) continue;
+            scored.push({ it, logw: s / tau + Math.log(w) });
         }
         if (scored.length === 0) return null;
-        // Keep top-K for numerical stability and speed
-        scored.sort((a,b) => b.s - a.s);
+        // Keep top-K for speed; subtract the max for numerical stability
+        scored.sort((a, b) => b.logw - a.logw);
         const top = scored.slice(0, 60);
-        const ws = top.map(o => Math.exp(o.s / tau));
-        const Z = ws.reduce((a,b) => a + b, 0);
+        const ws = top.map(o => Math.exp(o.logw - top[0].logw));
+        const Z = ws.reduce((a, b) => a + b, 0);
         let r = Math.random() * Z;
         for (let i = 0; i < top.length; i++) {
             r -= ws[i];
@@ -953,15 +980,8 @@ async function init() {
         return top[top.length - 1].it;
     }
 
-    function relatedCandidates(node) {
-        const rel = Array.isArray(node?.related) ? node.related : [];
-        const ids = rel.map(x => x.id);
-        const out = [];
-        for (const id of ids) {
-            const n = nodeById.get(id);
-            if (n) out.push(n);
-        }
-        return out;
+    function similarCandidates(node) {
+        return (node?._neighbours || []).map(x => x.node);
     }
 
     function pickNextPureRandom() {
@@ -970,27 +990,21 @@ async function init() {
     }
 
     function pickNextRandomWalk() {
-        const rel = relatedCandidates(currentNode);
+        const rel = similarCandidates(currentNode);
         // Add a small random sample to allow drift
         const sample = [];
         for (let i = 0; i < 40; i++) sample.push(nodes[Math.floor(Math.random() * nodes.length)]);
         const pool = Array.from(new Set([...rel, ...sample]));
-        return softmaxPick(pool, (c) => {
-            const sim = similarity(currentNode, c);
-            return sim + Math.log(baseWeight(c));
-        });
+        return softmaxPick(pool, (c) => similarity(currentNode, c));
     }
 
     function pickNextWithinTag() {
         const tag = activeTag || (currentNode?.tags?.[0] ?? null);
         if (!tag) return pickNextRandomWalk();
         const pool = nodes.filter(n => Array.isArray(n.tags) && n.tags.includes(tag));
-        // If tag pool is too small, fall back to related candidates
-        const candidates = (pool.length >= 10) ? pool : Array.from(new Set([...pool, ...relatedCandidates(currentNode)]));
-        return softmaxPick(candidates, (c) => {
-            const sim = similarity(currentNode, c);
-            return sim + Math.log(baseWeight(c));
-        });
+        // If tag pool is too small, add the most similar artists
+        const candidates = (pool.length >= 10) ? pool : Array.from(new Set([...pool, ...similarCandidates(currentNode)]));
+        return softmaxPick(candidates, (c) => similarity(currentNode, c));
     }
 
     function pickNextSpiralTime() {
@@ -1004,7 +1018,7 @@ async function init() {
             const sim = similarity(currentNode, c);
             const ce = Number.isFinite(c?.era) ? c.era : 1800;
             const eraPenalty = Math.abs(ce - t) / 150; // coarse guidance
-            return (sim - eraPenalty) + Math.log(baseWeight(c));
+            return sim - eraPenalty;
         });
     }
 
@@ -1014,8 +1028,7 @@ async function init() {
         for (let i = 0; i < 180; i++) sample.push(nodes[Math.floor(Math.random() * nodes.length)]);
         return softmaxPick(sample, (c) => {
             const sim = similarity(currentNode, c);
-            const far = 1 - sim;
-            return far + Math.log(baseWeight(c));
+            return 1 - sim; // far away
         }, 0.18);
     }
 
