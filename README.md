@@ -12,7 +12,7 @@ hand-assigned `temp` ("musical temperature") value, and more autoplay strategies
 
 - [Node.js](https://nodejs.org/) (LTS version; includes `npm`)
 - [git](https://git-scm.com/)
-- An internet connection (recordings stream from archive.org and Wikimedia Commons, and D3 loads from d3js.org)
+- An internet connection (recordings stream from archive.org and Wikimedia Commons, radio from stations listed on Radio Browser, and D3 loads from d3js.org)
 
 Check they're installed:
 
@@ -121,6 +121,31 @@ while something is playing jumps to the next track straight away.
 | **Within Tag** | Stays inside the active tag (or, if none is set, the current artist's first tag), e.g. only *Opera*. If fewer than 10 artists have that tag, related artists are added to the pool. Clicking a tag chip in this mode jumps straight to that tag. |
 | **Spiral Time** | Moves through history about 25 years per track, choosing artists close to the target era who are also similar to the current one. It turns around at either end of the timeline and heads back. |
 | **Teleport** | A one-off jump to something deliberately *dissimilar*, for a change of scene. After the jump it returns to the mode you were in before. |
+| **Radio** | Live internet radio instead of individual recordings. See *Radio mode* below. |
+
+### Radio mode
+
+**Radio** plays live internet radio stations from [Radio Browser](https://www.radio-browser.info),
+a free, community-maintained directory of stations around the world. Unlike the other modes it
+doesn't play a particular artist's recordings; it tunes to a station playing that *kind* of music.
+
+- **Press Radio** to tune in. It uses the active tag if one is set, otherwise the current artist's
+  styles, otherwise general classical radio.
+- **Press Radio again** for a different station. It avoids stations you've heard recently, moving on
+  to related genres before repeating one.
+- **Click an artist** to tune to a station in their styles (Hildegard von Bingen → early music or
+  medieval radio, Wagner → opera radio).
+- **Click a tag chip** to tune to that tag's radio (e.g. *Baroque*, *Opera*, *Sacred* → choral radio).
+- The track line shows `Radio · <genre>` in blue, then the station name, country and stream quality.
+
+Only style tags are used to find stations. Nationality and role tags such as *French* or *Conductor*
+are ignored, since on radio those mean French-language or talk stations. If no station is found for a
+style, it falls back to the next style and finally to `classical`.
+
+Some stations can't be played and are skipped: plain `http` streams (the app only allows secure
+`https` audio), HLS (`.m3u8`) streams, and stations that failed Radio Browser's last check. A station
+that goes silent or errors is replaced by another automatically. Choose any other mode button to leave
+Radio and go back to individual recordings.
 
 #### How "similar" and "likely" are worked out
 
@@ -199,5 +224,8 @@ Running it again on an already-merged file changes nothing.
   autoplay moves on. Check that the sources you want are switched on, or add archive.org collections
   to the artist's entry in `knowledge_base.json`.
 - **Too many scratchy old recordings**: switch off the **78 rpm (historic)** source.
+- **Radio says "No radio station found"**: Radio Browser had no working `https` station for that
+  style, or couldn't be reached. Try another tag, or press Radio with no tag selected for general
+  classical radio.
 - **Nothing plays after clicking**: open DevTools (View → Toggle Developer Tools in Electron, or
-  F12 in a browser) and check the Console for `[search]`, `[play]` or `[audio]` messages.
+  F12 in a browser) and check the Console for `[search]`, `[radio]`, `[play]` or `[audio]` messages.
