@@ -161,7 +161,9 @@ class Http:
         self.cache_dir = cache_dir
         self.offline = offline
         self.last_request = {}
-        self.min_interval = {'musicbrainz.org': 1.1, 'query.wikidata.org': 1.0}  # MusicBrainz asks for <= 1/s
+        # Seconds between requests per host. MusicBrainz asks for <= 1/s; Wikimedia rate-limits clients that
+        # aren't logged in, and shared cloud addresses even more, so Wikidata is kept to one request a second.
+        self.min_interval = {'musicbrainz.org': 1.1, 'query.wikidata.org': 2.0, 'www.wikidata.org': 1.0}
         self.default_interval = 0.25
         os.makedirs(cache_dir, exist_ok=True)
 
@@ -198,22 +200,28 @@ class Http:
         hdrs = {'User-Agent': USER_AGENT, 'Accept': 'application/json'}
         hdrs.update(headers or {})
         delay = 5
-        for attempt in range(5):
+        attempts = 10
+        for attempt in range(attempts):
             self.last_request[host] = time.time()
             try:
                 data = json.loads(self.fetch_raw(url, hdrs))
                 break
             except urllib.error.HTTPError as e:
-                if e.code in (429, 500, 502, 503, 504) and attempt < 4:
+                if e.code in (429, 500, 502, 503, 504) and attempt < attempts - 1:
                     retry_after = e.headers.get('Retry-After') if e.headers else None
-                    time.sleep(int(retry_after) if retry_after and retry_after.isdigit() else delay)
-                    delay *= 2
+                    wait = min(300, int(retry_after) if retry_after and retry_after.isdigit() else delay)
+                    log(f'    {host} answered {e.code}{" (rate limit)" if e.code == 429 else ""}; waiting {wait}s')
+                    time.sleep(wait)
+                    delay = min(300, delay * 2)
+                    if e.code == 429:  # slow down for the rest of the run too
+                        self.min_interval[host] = min(5.0, self.min_interval.get(host, self.default_interval) * 1.5 + 0.5)
                     continue
                 raise
-            except (urllib.error.URLError, TimeoutError) as e:
-                if attempt < 4:
+            except (urllib.error.URLError, TimeoutError, ConnectionError) as e:
+                if attempt < attempts - 1:
+                    log(f'    {host}: {e}; retrying in {delay}s')
                     time.sleep(delay)
-                    delay *= 2
+                    delay = min(300, delay * 2)
                     continue
                 raise
         if cache:
@@ -392,12 +400,20 @@ def match_existing(kb, wd, overrides, report, rematch=False):
             matched += 1
             continue
         best = None
+        failed = False
         for query in [name] + [a for a in artist.get('aliases', []) if ' ' in a]:
-            cands = wd.load(wd.search(query))
+            try:
+                cands = wd.load(wd.search(query))
+            except Exception as ex:  # noqa: BLE001 - one failed lookup shouldn't stop the build
+                report['warnings'].append(f'Wikidata lookup failed for {name} ({ex}); run again to retry')
+                failed = True
+                break
             scored = sorted(((match_score(artist, e), q) for q, e in cands.items()), reverse=True)
             if scored and scored[0][0] >= 3:
                 best = scored
                 break
+        if failed:
+            continue
         if not best:
             report['unmatched'].append(name)
             continue
@@ -640,9 +656,10 @@ def musicbrainz_relations(kb, http, edges, report):
             me = a['id']
             if rel['type'] == 'teacher':
                 why = f'{me} studied with {other}' if rel.get('direction') == 'backward' else f'{other} studied with {me}'
+            elif rel['type'] == 'parent':  # forward: this artist is the parent
+                why = f'{me} was the parent of {other}' if rel.get('direction') == 'forward' else f'{other} was the parent of {me}'
             elif signal == 'family':
-                why = {'married': f'{me} and {other} were married', 'sibling': f'{me} and {other} were siblings'}.get(
-                    rel['type'], f'{me} and {other} are related (parent and child)')
+                why = f'{me} and {other} were married' if rel['type'] == 'married' else f'{me} and {other} were siblings'
             elif signal == 'performed':
                 why = f'{me} and {other} performed together'
             else:
@@ -651,6 +668,16 @@ def musicbrainz_relations(kb, http, edges, report):
         if done % 50 == 0:
             log(f'    MusicBrainz: {done} artists looked up')
     log(f'  MusicBrainz links: {len(edges.edges) - n0} new pairs ({done} artists looked up)')
+
+
+SPECIAL_PURPOSE_MBIDS = {'125ec42a-7229-4250-afc5-e057484327fe',  # [unknown]
+                         '89ad4ac3-39f7-470e-963a-56509c546377',  # Various Artists
+                         'f731ccc4-e22a-43af-a747-64213329e088',  # [anonymous]
+                         '33cf029c-63b0-41a0-9855-be2a3665fb3b',  # [data]
+                         '314e1c25-dde7-4e4d-b2f4-0a7b9f7c56dc',  # [dialogue]
+                         'eec63d3c-3b81-4ad4-b1e4-7c147d4d2b61',  # [no artist]
+                         '9be7f096-97ec-4615-8957-8d40b5dcbc41',  # [traditional]
+                         '66ea0139-149f-4a0c-8fbf-5ea9ec4a6e49'}  # [Disney]
 
 
 def listenbrainz_similar(kb, http, edges, report):
@@ -665,7 +692,11 @@ def listenbrainz_similar(kb, http, edges, report):
         except Exception as ex:  # noqa: BLE001
             report['warnings'].append(f'ListenBrainz similar-artists not available ({ex}); step skipped')
             return
-        rows = [r for r in iter_dicts(data) if r.get('artist_mbid') and isinstance(r.get('score'), (int, float))]
+        # Drop MusicBrainz's special-purpose entries ("[unknown]", "Various Artists"): they top the
+        # scores and would shrink everyone else's when scores are scaled to the best match
+        rows = [r for r in iter_dicts(data) if r.get('artist_mbid') and isinstance(r.get('score'), (int, float))
+                and r['artist_mbid'] not in SPECIAL_PURPOSE_MBIDS and r.get('type') != 'Other'
+                and r['artist_mbid'] != a['mbid']]
         top = max((r['score'] for r in rows), default=0)
         for r in rows:
             other = by_mbid.get(r['artist_mbid'])

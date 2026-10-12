@@ -97,11 +97,14 @@ class FakeHttp(br.Http):
         if u.hostname == 'musicbrainz.org':
             if '/artist/mb-humperdinck' in u.path:
                 return json.dumps({'relations': [{'type': 'teacher', 'direction': 'backward', 'artist': {'id': 'mb-wagner'}},
+                                                 {'type': 'parent', 'direction': 'backward', 'artist': {'id': 'mb-callas'}},
                                                  {'type': 'is person', 'artist': {'id': 'mb-callas'}}]})
             return json.dumps({'relations': []})
         if u.hostname == 'labs.api.listenbrainz.org':
             if q['artist_mbids'] == ['mb-wagner']:
-                return json.dumps([{'artist_mbid': 'mb-unknown', 'score': 100}, {'artist_mbid': 'mb-callas', 'score': 50}])
+                return json.dumps([{'artist_mbid': '125ec42a-7229-4250-afc5-e057484327fe', 'name': '[unknown]', 'type': 'Other', 'score': 784},
+                                   {'artist_mbid': 'mb-unknown', 'type': 'Person', 'score': 100},
+                                   {'artist_mbid': 'mb-callas', 'type': 'Person', 'score': 50}])
             return json.dumps([])
         if u.hostname == 'archive.org':
             if 'Léonin' in q['q'][0]:
@@ -174,7 +177,8 @@ class BuildRelationsTest(unittest.TestCase):
         self.assertEqual(wc['s']['listen'], 0.5)  # 50 of a top score of 100
         self.assertIn('Engelbert Humperdinck studied with Richard Wagner',
                       self.edge(rel, 'Engelbert Humperdinck', 'Richard Wagner')['why'])  # MusicBrainz
-        self.assertIsNone(self.edge(rel, 'Engelbert Humperdinck', 'Maria Callas'))  # 'is person' ignored
+        self.assertEqual(self.edge(rel, 'Engelbert Humperdinck', 'Maria Callas')['why'],
+                         ['Maria Callas was the parent of Engelbert Humperdinck'])  # 'is person' ignored, parent direction kept
         # files
         self.assertTrue(os.path.exists(os.path.join(self.root, 'knowledge_base.json.bak')))
         with open(os.path.join(self.root, 'relations.json'), encoding='utf-8') as f:
