@@ -12,7 +12,7 @@ hand-assigned `temp` ("musical temperature") value, and more autoplay strategies
 
 - [Node.js](https://nodejs.org/) (LTS version; includes `npm`)
 - [git](https://git-scm.com/)
-- An internet connection (recordings stream from archive.org, and D3 loads from d3js.org)
+- An internet connection (recordings stream from archive.org and Wikimedia Commons, and D3 loads from d3js.org)
 
 Check they're installed:
 
@@ -82,11 +82,32 @@ Then open <http://localhost:8000/index_fixed_working_v9.html>. Press Ctrl+C in t
   the *active tag*, which the Within Tag mode uses.
 - The player bar has the usual play/pause, seek and volume controls.
 
-How a recording is found: MusicGalaxy searches each of the artist's archive.org collections in
-turn for audio items mentioning the artist (by creator, title, subject, etc.). It takes up to 50 of
-the most-downloaded matches, picks one at random and plays its first audio file. If nothing
-playable turns up it shows "No recordings found" and, when autoplay is on, skips to the next pick.
-After 5 failures in a row it stops and asks you to check your connection.
+### Where the music comes from
+
+There are three sources. The **Sources** chips under the buttons switch each one on or off
+(at least one stays on), and your choice is remembered.
+
+| Source | What it is | Sound |
+|---|---|---|
+| **archive.org** | The artist's archive.org collections (from `collections` in the data), plus any archive.org item mentioning Musopen. 78 rpm transfers are excluded here. | Varies; often good |
+| **Wikimedia Commons** | Free and public-domain audio files on [Wikimedia Commons](https://commons.wikimedia.org) that mention the artist, many from Musopen and other free recording projects | Mixed, often good |
+| **78 rpm (historic)** | archive.org's 78 rpm transfers (the Great 78 Project and similar), roughly 1900–1950 | Mono, with surface noise and short sides |
+
+**Order.** For each artist, archive.org and Wikimedia Commons are tried first, in random order for
+variety, and 78s last. The exception is singers and conductors active before 1950, whose recordings
+mostly exist only on 78s; for them the 78s are tried first.
+
+**Choosing a recording.**
+- *archive.org*: takes up to 50 of the most-downloaded matching items and looks at up to 3 of them at
+  random. It plays a random full-length track, in the best encoding available (FLAC first, then
+  high-bitrate MP3/Ogg, then low-bitrate MP3), and prefers an item with a good encoding.
+- *Wikimedia Commons*: picks a random matching audio file, skipping MIDI files, spoken-word articles,
+  pronunciation clips and anything under 45 seconds.
+- The track line shows the source in blue, then the artist and the track title. For Commons it also
+  shows the performer or uploader and the licence, since many files require attribution.
+
+If no source has anything playable, it shows "No recordings found" and, when autoplay is on, skips to
+the next pick. After 5 failures in a row it stops and asks you to check your connection.
 
 ### Autoplay modes
 
@@ -143,7 +164,7 @@ A list of 430 artists. Each entry looks like:
 | `era` | Year the person was roughly active |
 | `temp` | Hand-assigned "musical temperature", 1–10 |
 | `tags` | Styles, forms, nationalities, e.g. `["Classical", "Austrian", "Opera"]` |
-| `collections` | archive.org collections to search for recordings, in order |
+| `collections` | archive.org collections to search for recordings (78 rpm collections are searched separately, see *Where the music comes from*) |
 | `meta` | `schools`, `regions`, `forms`, `styles` used for similarity |
 | `related` | Precomputed neighbours: `{ "id", "w" (weight 0–1), "why" (reasons) }` |
 
@@ -174,7 +195,9 @@ Running it again on an already-merged file changes nothing.
   or the local server above. If it still fails, the status line now says why (for example, invalid
   JSON or leftover git merge-conflict markers in the file).
 - **Blank map, no status message**: D3 couldn't load from d3js.org. Check your internet connection.
-- **"No recordings found" for an artist**: archive.org has no matching audio in that artist's
-  collections; autoplay moves on. Adding collections to the entry in `knowledge_base.json` can help.
+- **"No recordings found" for an artist**: none of the enabled sources had playable audio for them;
+  autoplay moves on. Check that the sources you want are switched on, or add archive.org collections
+  to the artist's entry in `knowledge_base.json`.
+- **Too many scratchy old recordings**: switch off the **78 rpm (historic)** source.
 - **Nothing plays after clicking**: open DevTools (View → Toggle Developer Tools in Electron, or
   F12 in a browser) and check the Console for `[search]`, `[play]` or `[audio]` messages.
