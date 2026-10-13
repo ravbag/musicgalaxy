@@ -1297,7 +1297,13 @@ async function init() {
                 // Saved under an old name (merged entry)? File it under the current id
                 for (const [id, t] of Object.entries(saved.artists)) {
                     const n = resolveNode(id);
-                    if (n) taste.artists[n.id] = { ...(taste.artists[n.id] || {}), ...t };
+                    if (!n || !t || typeof t !== 'object') continue;
+                    const cur = taste.artists[n.id] || { like: false, listens: 0, skips: 0 };
+                    taste.artists[n.id] = {
+                        like: !!(cur.like || t.like),
+                        listens: (cur.listens || 0) + (Number(t.listens) || 0),
+                        skips: (cur.skips || 0) + (Number(t.skips) || 0),
+                    };
                 }
             }
         } catch (e) { console.warn('[taste] load', e); }
