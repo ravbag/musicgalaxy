@@ -55,6 +55,7 @@
     <div id="source-chips" style="margin-top:10px; display:flex; flex-wrap:wrap; gap:6px; align-items:center; font-size:12px; color:#aaa;"></div>
     </div>
 <svg id="viz"></svg>
+<div id="lod-hint" style="position:absolute; right:16px; bottom:12px; z-index:50; font-size:12px; color:#888; pointer-events:none;"></div>
 
 <script>
     const svg = d3.select("#viz"), g = svg.append("g");
@@ -95,7 +96,12 @@ const simulation = d3.forceSimulation()
     // x/y, collision, and link forces are configured after nodes load (need data-dependent targets).
     .alphaDecay(0.02);
 
-const zoom = d3.zoom().scaleExtent([0.1, 5]).on("zoom", (e) => g.attr("transform", e.transform));
+let zoomK = 1; // current zoom level; decides how many names are shown
+const zoom = d3.zoom().scaleExtent([0.1, 5]).on("zoom", (e) => {
+    g.attr("transform", e.transform);
+    zoomK = e.transform.k;
+    updateVisibility();
+});
 svg.call(zoom);
 
 function focusOnNode(node, scale=1.35, duration=650) {
@@ -241,6 +247,7 @@ function focusOnNode(node, scale=1.35, duration=650) {
             const t = parseFloat(localStorage.getItem(LS.lastTrackTime) || '0');
 
             currentNode = node;
+            updateVisibility();
             d3.selectAll(".tag-node").classed("active-node", false);
             d3.selectAll(".tag-node").filter(d => d.id === node.id).classed("active-node", true);
             focusOnNode(node);
@@ -266,6 +273,50 @@ function focusOnNode(node, scale=1.35, duration=650) {
 
     // ---------- Search wiring ----------
     function baseOpacity(d) { return d.is_master ? 1 : 0.6; }
+
+    // ---------- Zoom-based visibility ----------
+    // Masters are always shown. The other names appear in order of importance as you zoom in: the
+    // first at LOD_FIRST_ZOOM, all of them by LOD_ALL_ZOOM. Importance = number of Wikipedia language
+    // editions, with a head start for your curated artists over ones the build script added.
+    // Always shown whatever the zoom: the artist playing, its closest artists, and search matches.
+    const LOD_FIRST_ZOOM = 0.8;
+    const LOD_ALL_ZOOM = 3;
+    const CURATED_BONUS = 1.5;
+    let searchQuery = '';
+
+    function computeImportance() {
+        const importance = n => (n.sitelinks || 0) * (n.source === 'wikidata' ? 1 : CURATED_BONUS);
+        const others = nodes.filter(n => !n.is_master).sort((a, b) => importance(b) - importance(a));
+        for (const n of nodes) if (n.is_master) n._minZoom = 0;
+        others.forEach((n, i) => {
+            n._minZoom = LOD_FIRST_ZOOM + (LOD_ALL_ZOOM - LOD_FIRST_ZOOM) * (others.length > 1 ? i / (others.length - 1) : 0);
+        });
+    }
+
+    let visibilityQueued = false;
+    function updateVisibility() {
+        if (visibilityQueued) return; // at most once per frame while zooming
+        visibilityQueued = true;
+        requestAnimationFrame(() => {
+            visibilityQueued = false;
+            const context = new Set(currentNode ? [currentNode, ...(currentNode._neighbours || []).map(x => x.node)] : []);
+            const opacity = d => {
+                const zoomed = zoomK >= (d._minZoom ?? 0) || context.has(d);
+                if (searchQuery) return matchesQuery(d, searchQuery) ? 1 : (zoomed ? 0.08 : 0);
+                return zoomed ? baseOpacity(d) : 0;
+            };
+            let shown = 0;
+            d3.selectAll('.tag-node').each(function (d) {
+                const o = opacity(d);
+                if (o > 0) shown++;
+                this.style.opacity = o;
+                this.style.pointerEvents = o > 0 ? 'all' : 'none'; // hidden names can't be clicked
+            });
+            const hint = document.getElementById('lod-hint');
+            if (hint) hint.textContent = shown < nodes.length
+                ? `${shown} of ${nodes.length} names · zoom in for more` : `all ${nodes.length} names`;
+        });
+    }
 
     function matchesQuery(n, q) {
         return (n.id || '').toLowerCase().includes(q)
@@ -296,12 +347,12 @@ function focusOnNode(node, scale=1.35, duration=650) {
 
         inp.addEventListener('input', () => {
             const q = (inp.value || '').trim().toLowerCase();
-            // Inline style wins over the SVG opacity attribute, so dim via style too
-            if (!q) { renderResults([]); d3.selectAll('.tag-node').style('opacity', baseOpacity); return; }
+            searchQuery = q;
+            updateVisibility(); // matches are shown at any zoom, the rest dimmed
+            if (!q) { renderResults([]); return; }
             const hits = nodes.filter(n => matchesQuery(n, q));
             hits.sort((a,b) => (b.is_master?1:0) - (a.is_master?1:0));
             renderResults(hits);
-            d3.selectAll('.tag-node').style('opacity', d => matchesQuery(d, q) ? 1 : 0.08);
         });
 
         inp.addEventListener('keydown', (e) => {
@@ -456,6 +507,7 @@ async function init() {
     prepareRelatedness();
     computeNeighbours();
     computeRelatednessAxis();
+    computeImportance();
     setStatus(relations
         ? `Loaded ${nodes.length} artists · ${relationEdges.size} documented relations (built ${relations.built || '?'})`
         : `Loaded ${nodes.length} artists · no relations.json yet: run tools/build_relations.py for richer links`);
@@ -514,9 +566,8 @@ async function init() {
             if (d.type === "Conductor") return "#66ccff"; // Blue
             return "#d4af37";                             // Gold
         })
-        .style("opacity", baseOpacity)
-        .style("pointer-events", "all")
         .on("click", (e, d) => playNode(d));
+    updateVisibility();
 
     simulation.nodes(nodes).on("tick", () => {
         nodeElements
@@ -538,6 +589,7 @@ async function init() {
             d3.selectAll(".tag-node").filter(d => d.id === n.id).classed("active-node", true);
             focusOnNode(n, 1.35, 650);
             renderTagChips(n);
+            updateVisibility();
 
             const title = localStorage.getItem(LS.lastTrackTitle);
             const vault = localStorage.getItem(LS.lastTrackVault);
@@ -844,6 +896,7 @@ async function init() {
         clearTimeout(skipTimer);
         const previous = currentNode;
         currentNode = node;
+        updateVisibility();
         setWhy(playMode === 'radio' ? '' : describeChoice(node, reason, previous));
         d3.selectAll(".tag-node").classed("active-node", false);
         d3.selectAll(".tag-node").filter(d => d.id === node.id).classed("active-node", true);
