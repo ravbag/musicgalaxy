@@ -363,5 +363,18 @@ class BuildRelationsTest(unittest.TestCase):
         self.assertIsNotNone(self.edge(rel, 'Léonin', 'Pérotin'))
 
 
+    def test_classical_filter(self):
+        labels = {'G1': 'symphonic metal', 'G2': 'Indian classical music', 'G3': 'postminimalism'}
+
+        def check(desc, genres=(), occupations=('Q36834',)):
+            e = {'description': desc, 'genre': list(genres), 'movement': [], 'occupation': list(occupations)}
+            return br.classical_musician(e, labels, needs_evidence=True)[0]
+
+        self.assertTrue(check('British composer', ['G3']))
+        self.assertFalse(check('Dutch singer', ['G1']))                       # symphonic metal
+        self.assertFalse(check('Indian playback singer (1924–1980)', ['G2']))
+        self.assertFalse(check('American composer and conductor'))            # no evidence at all
+        self.assertTrue(check('American composer and conductor', occupations=['Q36834', 'Q1415090']))
+
 if __name__ == '__main__':
     unittest.main()

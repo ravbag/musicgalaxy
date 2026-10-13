@@ -262,10 +262,12 @@ What it does:
    organists and cellists with articles in at least 40 Wikipedia languages (up to 500), plus the
    teachers, students, influences and family of artists already in the database. Only people whose
    Wikidata description starts with a musical role ("German composer", "Italian soprano",
-   "orchestral and operatic conductor") are added, and not jazz, pop or rock musicians, so writers
+   "orchestral and operatic conductor") are added, and not jazz, pop, rock, metal or film playback
+   singers, so writers
    or rulers who also composed (Goethe, Henry VIII) stay out. Composers and instrumentalists born
    after 1850 also need a genre or movement whose name sounds classical (classical, opera,
-   minimalism, postminimalism, neoclassical, serial, film score, ...), unless they are a teacher,
+   minimalism, postminimalism, neoclassical, serial, film score, ...) or the occupation "film score
+   composer" or "opera singer", unless they are a teacher,
    student or influence of an artist already in the database. New artists get tags (period, style,
    voice, instrument, nationality) from Wikidata.
    Each run rebuilds the added artists from scratch; your curated entries are never removed.

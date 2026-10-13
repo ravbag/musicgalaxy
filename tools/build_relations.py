@@ -73,6 +73,9 @@ EXPANSION_OCCUPATIONS = {
     'Pianist': 'Q486748', 'Violinist': 'Q1259917', 'Organist': 'Q765778', 'Cellist': 'Q13219637',
 }
 NEEDS_CLASSICAL_EVIDENCE = {'Composer', 'Pianist', 'Violinist', 'Cellist'}  # also common outside classical
+# Occupations that count as classical evidence by themselves: many film composers (Maurice Jarre,
+# Thomas Newman) have no genre on Wikidata and are described only as "composer and conductor"
+CLASSICAL_EVIDENCE_OCCUPATIONS = {'Q1415090', 'Q2865819'}  # film score composer, opera singer
 # Classical evidence for composers/instrumentalists born after PRE_POP_YEAR: a genre or movement whose
 # name sounds classical. Wikidata's genre tree doesn't help here: postminimalism has no parent genre
 # and ambient music is filed under popular music, so Max Richter would never count as classical.
@@ -104,7 +107,7 @@ MUSIC_DESCRIPTION = re.compile(
     r'flutist|oboist|clarinettist|clarinetist|bassoonist|trumpeter|horn player|harpist|kapellmeister|music theorist|'
     r'choirmaster|cantor|troubadour|trouv[eè]re|minnesinger|madrigalist|opera|music)', re.I)
 NON_CLASSICAL = re.compile(
-    r'\b(jazz|rock|pop|rapper|hip[- ]hop|singer-songwriter|songwriter|disc jockey|dj|heavy metal|punk|reggae|'
+    r'\b(jazz|rock|pop|rapper|hip[- ]hop|singer-songwriter|songwriter|disc jockey|dj|[\w-]*\s?metal|punk|playback singer|filmi|bollywood|reggae|'
     r'blues|soul|r&b|rhythm and blues|country music|funk|disco|electronic dance|bandleader|big band|swing|'
     r'schlager|flamenco|bossa nova|k-pop|j-pop|eurovision)\b', re.I)
 
@@ -663,7 +666,8 @@ def classical_musician(e, labels, needs_evidence=False):
             return False, f'{m.group(0)} ({text})'
     if needs_evidence:
         movements = ' / '.join(labels.get(m, '') for m in e['movement'])
-        if not any(CLASSICAL_LABEL.search(t) for t in (genres, movements, desc)):
+        if (not set(e['occupation']) & CLASSICAL_EVIDENCE_OCCUPATIONS
+                and not any(CLASSICAL_LABEL.search(t) for t in (genres, movements, desc))):
             return False, f'no classical genre or movement (genres: {genres or "none"})'
     return True, ''
 
