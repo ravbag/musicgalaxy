@@ -1,6 +1,6 @@
 {
  "version": 1,
- "built": "2026-10-13 16:33 UTC",
+ "built": "2026-10-13 17:30 UTC",
  "sources": [
   "Wikidata (CC0)",
   "MusicBrainz (CC0)",
@@ -1630,38 +1630,6 @@
    ]
   },
   {
-   "a": "Albert Schweitzer",
-   "b": "Charles-Marie Widor",
-   "s": {
-    "teacher": 1.0,
-    "cooccur": 0.2
-   },
-   "why": [
-    "Albert Schweitzer studied with Charles-Marie Widor",
-    "Albert Schweitzer and Charles-Marie Widor appear together on 2 archive.org recordings"
-   ]
-  },
-  {
-   "a": "Albert Schweitzer",
-   "b": "Felix Mendelssohn",
-   "s": {
-    "cooccur": 0.4
-   },
-   "why": [
-    "Albert Schweitzer and Felix Mendelssohn appear together on 4 archive.org recordings"
-   ]
-  },
-  {
-   "a": "Albert Schweitzer",
-   "b": "Johann Sebastian Bach",
-   "s": {
-    "cooccur": 1.0
-   },
-   "why": [
-    "Albert Schweitzer and Johann Sebastian Bach appear together on 10 archive.org recordings"
-   ]
-  },
-  {
    "a": "Alberto Ginastera",
    "b": "Astor Piazzolla",
    "s": {
@@ -1829,16 +1797,6 @@
    },
    "why": [
     "Aleksandr Gauk studied with Nikolai Tcherepnin"
-   ]
-  },
-  {
-   "a": "Alessandro Rolla",
-   "b": "Niccolò Paganini",
-   "s": {
-    "teacher": 1.0
-   },
-   "why": [
-    "Niccolò Paganini studied with Alessandro Rolla"
    ]
   },
   {
@@ -2537,16 +2495,6 @@
   },
   {
    "a": "Alexander Glazunov",
-   "b": "Dimitri Tiomkin",
-   "s": {
-    "teacher": 1.0
-   },
-   "why": [
-    "Dimitri Tiomkin studied with Alexander Glazunov"
-   ]
-  },
-  {
-   "a": "Alexander Glazunov",
    "b": "Ernest Ansermet",
    "s": {
     "cooccur": 0.4
@@ -2978,16 +2926,6 @@
    ]
   },
   {
-   "a": "Alexander Scriabin",
-   "b": "Vladimir Horowitz",
-   "s": {
-    "listen": 1.0
-   },
-   "why": [
-    "listeners of Alexander Scriabin also play Vladimir Horowitz"
-   ]
-  },
-  {
    "a": "Alexander Siloti",
    "b": "Camille Saint-Saëns",
    "s": {
@@ -3095,6 +3033,57 @@
    },
    "why": [
     "Alexander Siloti studied with Sergei Taneyev"
+   ]
+  },
+  {
+   "a": "Alexander Tcherepnin",
+   "b": "Arthur Honegger",
+   "s": {
+    "cooccur": 0.2
+   },
+   "why": [
+    "Alexander Tcherepnin and Arthur Honegger appear together on 2 archive.org recordings"
+   ]
+  },
+  {
+   "a": "Alexander Tcherepnin",
+   "b": "Carl Maria von Weber",
+   "s": {
+    "cooccur": 0.3
+   },
+   "why": [
+    "Alexander Tcherepnin and Carl Maria von Weber appear together on 3 archive.org recordings"
+   ]
+  },
+  {
+   "a": "Alexander Tcherepnin",
+   "b": "Nicolai Gedda",
+   "s": {
+    "cooccur": 0.2
+   },
+   "why": [
+    "Alexander Tcherepnin and Nicolai Gedda appear together on 2 archive.org recordings"
+   ]
+  },
+  {
+   "a": "Alexander Tcherepnin",
+   "b": "Nikolai Tcherepnin",
+   "s": {
+    "family": 1.0
+   },
+   "why": [
+    "Nikolai Tcherepnin was the father of Alexander Tcherepnin",
+    "Nikolai Tcherepnin was the parent of Alexander Tcherepnin"
+   ]
+  },
+  {
+   "a": "Alexander Tcherepnin",
+   "b": "Rafael Kubelík",
+   "s": {
+    "cooccur": 0.2
+   },
+   "why": [
+    "Alexander Tcherepnin and Rafael Kubelík appear together on 2 archive.org recordings"
    ]
   },
   {
@@ -3633,16 +3622,6 @@
   },
   {
    "a": "Alfred Newman",
-   "b": "Dimitri Tiomkin",
-   "s": {
-    "listen": 0.519
-   },
-   "why": [
-    "listeners of Alfred Newman also play Dimitri Tiomkin"
-   ]
-  },
-  {
-   "a": "Alfred Newman",
    "b": "Elmer Bernstein",
    "s": {
     "listen": 0.759
@@ -4005,16 +3984,6 @@
    ]
   },
   {
-   "a": "Alicia de Larrocha",
-   "b": "Vladimir Horowitz",
-   "s": {
-    "cooccur": 0.2
-   },
-   "why": [
-    "Alicia de Larrocha and Vladimir Horowitz appear together on 2 archive.org recordings"
-   ]
-  },
-  {
    "a": "Alma Mahler",
    "b": "Gustav Mahler",
    "s": {
@@ -4163,16 +4132,6 @@
    },
    "why": [
     "Théodore Dubois studied with Ambroise Thomas"
-   ]
-  },
-  {
-   "a": "Amilcare Ponchielli",
-   "b": "Arrigo Boito",
-   "s": {
-    "cooccur": 0.4
-   },
-   "why": [
-    "Amilcare Ponchielli and Arrigo Boito appear together on 4 archive.org recordings"
    ]
   },
   {
@@ -5498,16 +5457,6 @@
   },
   {
    "a": "Antal Doráti",
-   "b": "Leó Weiner",
-   "s": {
-    "cooccur": 0.3
-   },
-   "why": [
-    "Antal Doráti and Leó Weiner appear together on 3 archive.org recordings"
-   ]
-  },
-  {
-   "a": "Antal Doráti",
    "b": "Ludwig van Beethoven",
    "s": {
     "cooccur": 0.2
@@ -5668,16 +5617,6 @@
   },
   {
    "a": "Antal Doráti",
-   "b": "Vladimir Horowitz",
-   "s": {
-    "cooccur": 0.2
-   },
-   "why": [
-    "Antal Doráti and Vladimir Horowitz appear together on 2 archive.org recordings"
-   ]
-  },
-  {
-   "a": "Antal Doráti",
    "b": "Wolfgang Amadeus Mozart",
    "s": {
     "cooccur": 0.3
@@ -5700,9 +5639,11 @@
    "a": "Antal Doráti",
    "b": "Zoltán Kodály",
    "s": {
+    "teacher": 1.0,
     "cooccur": 0.3
    },
    "why": [
+    "Antal Doráti studied with Zoltán Kodály",
     "Antal Doráti and Zoltán Kodály appear together on 3 archive.org recordings"
    ]
   },
@@ -6247,16 +6188,6 @@
    },
    "why": [
     "Pyotr Ilyich Tchaikovsky studied with Anton Rubinstein"
-   ]
-  },
-  {
-   "a": "Anton Seidl",
-   "b": "Hans Richter",
-   "s": {
-    "teacher": 1.0
-   },
-   "why": [
-    "Anton Seidl studied with Hans Richter"
    ]
   },
   {
@@ -8175,16 +8106,6 @@
   },
   {
    "a": "Antonín Dvořák",
-   "b": "Mstislav Rostropovich",
-   "s": {
-    "cooccur": 0.6
-   },
-   "why": [
-    "Antonín Dvořák and Mstislav Rostropovich appear together on 6 archive.org recordings"
-   ]
-  },
-  {
-   "a": "Antonín Dvořák",
    "b": "Nikolai Rimsky-Korsakov",
    "s": {
     "listen": 0.5,
@@ -8317,16 +8238,6 @@
    },
    "why": [
     "listeners of Antonín Dvořák also play Tomaso Albinoni"
-   ]
-  },
-  {
-   "a": "Antonín Dvořák",
-   "b": "Vladimir Horowitz",
-   "s": {
-    "listen": 0.083
-   },
-   "why": [
-    "listeners of Vladimir Horowitz also play Antonín Dvořák"
    ]
   },
   {
@@ -8710,16 +8621,6 @@
    },
    "why": [
     "Aram Khachaturian and Stanisław Skrowaczewski appear together on 2 archive.org recordings"
-   ]
-  },
-  {
-   "a": "Aram Khachaturian",
-   "b": "Vladimir Horowitz",
-   "s": {
-    "listen": 0.189
-   },
-   "why": [
-    "listeners of Aram Khachaturian also play Vladimir Horowitz"
    ]
   },
   {
@@ -9158,16 +9059,6 @@
   },
   {
    "a": "Arnold Schoenberg",
-   "b": "Egon Wellesz",
-   "s": {
-    "teacher": 1.0
-   },
-   "why": [
-    "Egon Wellesz studied with Arnold Schoenberg"
-   ]
-  },
-  {
-   "a": "Arnold Schoenberg",
    "b": "Erik Satie",
    "s": {
     "cooccur": 0.4
@@ -9206,16 +9097,6 @@
    },
    "why": [
     "Arnold Schoenberg and György Ligeti appear together on 2 archive.org recordings"
-   ]
-  },
-  {
-   "a": "Arnold Schoenberg",
-   "b": "Hanns Eisler",
-   "s": {
-    "teacher": 1.0
-   },
-   "why": [
-    "Hanns Eisler studied with Arnold Schoenberg"
    ]
   },
   {
@@ -9501,156 +9382,6 @@
    ]
   },
   {
-   "a": "Arrigo Boito",
-   "b": "Beniamino Gigli",
-   "s": {
-    "cooccur": 0.2
-   },
-   "why": [
-    "Arrigo Boito and Beniamino Gigli appear together on 2 archive.org recordings"
-   ]
-  },
-  {
-   "a": "Arrigo Boito",
-   "b": "Boris Christoff",
-   "s": {
-    "cooccur": 0.2
-   },
-   "why": [
-    "Arrigo Boito and Boris Christoff appear together on 2 archive.org recordings"
-   ]
-  },
-  {
-   "a": "Arrigo Boito",
-   "b": "Cesare Siepi",
-   "s": {
-    "cooccur": 0.8
-   },
-   "why": [
-    "Arrigo Boito and Cesare Siepi appear together on 8 archive.org recordings"
-   ]
-  },
-  {
-   "a": "Arrigo Boito",
-   "b": "Enrico Caruso",
-   "s": {
-    "cooccur": 0.5
-   },
-   "why": [
-    "Arrigo Boito and Enrico Caruso appear together on 5 archive.org recordings"
-   ]
-  },
-  {
-   "a": "Arrigo Boito",
-   "b": "Giacomo Meyerbeer",
-   "s": {
-    "cooccur": 0.2
-   },
-   "why": [
-    "Arrigo Boito and Giacomo Meyerbeer appear together on 2 archive.org recordings"
-   ]
-  },
-  {
-   "a": "Arrigo Boito",
-   "b": "Giacomo Puccini",
-   "s": {
-    "cooccur": 0.2
-   },
-   "why": [
-    "Arrigo Boito and Giacomo Puccini appear together on 2 archive.org recordings"
-   ]
-  },
-  {
-   "a": "Arrigo Boito",
-   "b": "Giuseppe Di Stefano",
-   "s": {
-    "cooccur": 0.2
-   },
-   "why": [
-    "Arrigo Boito and Giuseppe Di Stefano appear together on 2 archive.org recordings"
-   ]
-  },
-  {
-   "a": "Arrigo Boito",
-   "b": "Giuseppe Verdi",
-   "s": {
-    "cooccur": 0.2
-   },
-   "why": [
-    "Arrigo Boito and Giuseppe Verdi appear together on 2 archive.org recordings"
-   ]
-  },
-  {
-   "a": "Arrigo Boito",
-   "b": "Ildebrando Pizzetti",
-   "s": {
-    "cooccur": 0.2
-   },
-   "why": [
-    "Arrigo Boito and Ildebrando Pizzetti appear together on 2 archive.org recordings"
-   ]
-  },
-  {
-   "a": "Arrigo Boito",
-   "b": "Mario Del Monaco",
-   "s": {
-    "cooccur": 0.4
-   },
-   "why": [
-    "Arrigo Boito and Mario Del Monaco appear together on 4 archive.org recordings"
-   ]
-  },
-  {
-   "a": "Arrigo Boito",
-   "b": "Montserrat Caballé",
-   "s": {
-    "cooccur": 0.2
-   },
-   "why": [
-    "Arrigo Boito and Montserrat Caballé appear together on 2 archive.org recordings"
-   ]
-  },
-  {
-   "a": "Arrigo Boito",
-   "b": "Nicolai Ghiaurov",
-   "s": {
-    "cooccur": 0.3
-   },
-   "why": [
-    "Arrigo Boito and Nicolai Ghiaurov appear together on 3 archive.org recordings"
-   ]
-  },
-  {
-   "a": "Arrigo Boito",
-   "b": "Plácido Domingo",
-   "s": {
-    "cooccur": 0.2
-   },
-   "why": [
-    "Arrigo Boito and Plácido Domingo appear together on 2 archive.org recordings"
-   ]
-  },
-  {
-   "a": "Arrigo Boito",
-   "b": "Renata Tebaldi",
-   "s": {
-    "cooccur": 0.6
-   },
-   "why": [
-    "Arrigo Boito and Renata Tebaldi appear together on 6 archive.org recordings"
-   ]
-  },
-  {
-   "a": "Arrigo Boito",
-   "b": "Riccardo Muti",
-   "s": {
-    "cooccur": 0.2
-   },
-   "why": [
-    "Arrigo Boito and Riccardo Muti appear together on 2 archive.org recordings"
-   ]
-  },
-  {
    "a": "Arthur Bliss",
    "b": "Benjamin Britten",
    "s": {
@@ -9908,16 +9639,6 @@
    },
    "why": [
     "Arthur Grumiaux and Sviatoslav Richter appear together on 2 archive.org recordings"
-   ]
-  },
-  {
-   "a": "Arthur Grumiaux",
-   "b": "Vladimir Horowitz",
-   "s": {
-    "cooccur": 0.2
-   },
-   "why": [
-    "Arthur Grumiaux and Vladimir Horowitz appear together on 2 archive.org recordings"
    ]
   },
   {
@@ -10626,16 +10347,6 @@
   },
   {
    "a": "Arthur Rubinstein",
-   "b": "Vladimir Horowitz",
-   "s": {
-    "listen": 1.0
-   },
-   "why": [
-    "listeners of Arthur Rubinstein also play Vladimir Horowitz"
-   ]
-  },
-  {
-   "a": "Arthur Rubinstein",
    "b": "Walter Susskind",
    "s": {
     "cooccur": 0.4
@@ -10834,16 +10545,6 @@
    },
    "why": [
     "Arturo Toscanini and Richard Wagner appear together on 3 archive.org recordings"
-   ]
-  },
-  {
-   "a": "Arturo Toscanini",
-   "b": "Vladimir Horowitz",
-   "s": {
-    "cooccur": 1.0
-   },
-   "why": [
-    "Arturo Toscanini and Vladimir Horowitz appear together on 46 archive.org recordings"
    ]
   },
   {
@@ -11054,16 +10755,6 @@
    },
    "why": [
     "listeners of Arvo Pärt also play Terry Riley"
-   ]
-  },
-  {
-   "a": "Arvo Pärt",
-   "b": "Vladimir Horowitz",
-   "s": {
-    "listen": 0.097
-   },
-   "why": [
-    "listeners of Arvo Pärt also play Vladimir Horowitz"
    ]
   },
   {
@@ -11935,16 +11626,6 @@
   },
   {
    "a": "Benjamin Britten",
-   "b": "Mstislav Rostropovich",
-   "s": {
-    "cooccur": 0.5
-   },
-   "why": [
-    "Benjamin Britten and Mstislav Rostropovich appear together on 5 archive.org recordings"
-   ]
-  },
-  {
-   "a": "Benjamin Britten",
    "b": "Norman Dello Joio",
    "s": {
     "cooccur": 0.2
@@ -12405,16 +12086,6 @@
   },
   {
    "a": "Bernard Haitink",
-   "b": "Vladimir Horowitz",
-   "s": {
-    "cooccur": 0.2
-   },
-   "why": [
-    "Bernard Haitink and Vladimir Horowitz appear together on 2 archive.org recordings"
-   ]
-  },
-  {
-   "a": "Bernard Haitink",
    "b": "Wolfgang Amadeus Mozart",
    "s": {
     "listen": 0.5
@@ -12451,16 +12122,6 @@
    },
    "why": [
     "Bernard Herrmann and Claude Debussy appear together on 2 archive.org recordings"
-   ]
-  },
-  {
-   "a": "Bernard Herrmann",
-   "b": "Dimitri Tiomkin",
-   "s": {
-    "listen": 0.864
-   },
-   "why": [
-    "listeners of Dimitri Tiomkin also play Bernard Herrmann"
    ]
   },
   {
@@ -12573,16 +12234,6 @@
    },
    "why": [
     "listeners of Bernard Herrmann also play John Barry"
-   ]
-  },
-  {
-   "a": "Bernard Herrmann",
-   "b": "John Carpenter",
-   "s": {
-    "listen": 0.601
-   },
-   "why": [
-    "listeners of Bernard Herrmann also play John Carpenter"
    ]
   },
   {
@@ -13797,16 +13448,6 @@
   },
   {
    "a": "Béla Bartók",
-   "b": "István Thomán",
-   "s": {
-    "teacher": 1.0
-   },
-   "why": [
-    "Béla Bartók studied with István Thomán"
-   ]
-  },
-  {
-   "a": "Béla Bartók",
    "b": "Johannes Brahms",
    "s": {
     "cooccur": 0.2
@@ -13853,16 +13494,6 @@
    },
    "why": [
     "Béla Bartók and Leoš Janáček appear together on 6 archive.org recordings"
-   ]
-  },
-  {
-   "a": "Béla Bartók",
-   "b": "Leó Weiner",
-   "s": {
-    "cooccur": 0.2
-   },
-   "why": [
-    "Béla Bartók and Leó Weiner appear together on 2 archive.org recordings"
    ]
   },
   {
@@ -14501,16 +14132,6 @@
   },
   {
    "a": "Camille Saint-Saëns",
-   "b": "Mstislav Rostropovich",
-   "s": {
-    "cooccur": 0.2
-   },
-   "why": [
-    "Camille Saint-Saëns and Mstislav Rostropovich appear together on 2 archive.org recordings"
-   ]
-  },
-  {
-   "a": "Camille Saint-Saëns",
    "b": "Neeme Järvi",
    "s": {
     "cooccur": 0.2
@@ -14537,16 +14158,6 @@
    },
    "why": [
     "Camille Saint-Saëns and Nikolai Rimsky-Korsakov appear together on 2 archive.org recordings"
-   ]
-  },
-  {
-   "a": "Camille Saint-Saëns",
-   "b": "Noël Coward",
-   "s": {
-    "cooccur": 0.3
-   },
-   "why": [
-    "Camille Saint-Saëns and Noël Coward appear together on 3 archive.org recordings"
    ]
   },
   {
@@ -14713,16 +14324,6 @@
    },
    "why": [
     "Camille Saint-Saëns and Vincent d'Indy appear together on 3 archive.org recordings"
-   ]
-  },
-  {
-   "a": "Camille Saint-Saëns",
-   "b": "Vladimir Horowitz",
-   "s": {
-    "listen": 0.258
-   },
-   "why": [
-    "listeners of Camille Saint-Saëns also play Vladimir Horowitz"
    ]
   },
   {
@@ -15881,16 +15482,6 @@
    },
    "why": [
     "Max Bruch studied with Carl Reinecke"
-   ]
-  },
-  {
-   "a": "Carl Reinecke",
-   "b": "Mikalojus Konstantinas Čiurlionis",
-   "s": {
-    "teacher": 1.0
-   },
-   "why": [
-    "Mikalojus Konstantinas Čiurlionis studied with Carl Reinecke"
    ]
   },
   {
@@ -17747,6 +17338,16 @@
    ]
   },
   {
+   "a": "Charles-Marie Widor",
+   "b": "Zoltán Kodály",
+   "s": {
+    "teacher": 1.0
+   },
+   "why": [
+    "Zoltán Kodály studied with Charles-Marie Widor"
+   ]
+  },
+  {
    "a": "Charles-Valentin Alkan",
    "b": "François Benoist",
    "s": {
@@ -18721,19 +18322,6 @@
   },
   {
    "a": "Clara Schumann",
-   "b": "Friedrich Wieck",
-   "s": {
-    "teacher": 1.0,
-    "family": 1.0
-   },
-   "why": [
-    "Clara Schumann studied with Friedrich Wieck",
-    "Friedrich Wieck was the father of Clara Schumann",
-    "Friedrich Wieck was the parent of Clara Schumann"
-   ]
-  },
-  {
-   "a": "Clara Schumann",
    "b": "Robert Schumann",
    "s": {
     "family": 1.0,
@@ -19508,18 +19096,6 @@
    },
    "why": [
     "listeners of Vladimir Ashkenazy also play Claude Debussy"
-   ]
-  },
-  {
-   "a": "Claude Debussy",
-   "b": "Vladimir Horowitz",
-   "s": {
-    "listen": 0.235,
-    "cooccur": 0.5
-   },
-   "why": [
-    "listeners of Claude Debussy also play Vladimir Horowitz",
-    "Claude Debussy and Vladimir Horowitz appear together on 5 archive.org recordings"
    ]
   },
   {
@@ -21846,16 +21422,6 @@
   },
   {
    "a": "Daniel Barenboim",
-   "b": "Vladimir Horowitz",
-   "s": {
-    "listen": 0.159
-   },
-   "why": [
-    "listeners of Daniel Barenboim also play Vladimir Horowitz"
-   ]
-  },
-  {
-   "a": "Daniel Barenboim",
    "b": "Wolfgang Amadeus Mozart",
    "s": {
     "listen": 0.346,
@@ -22295,16 +21861,6 @@
    },
    "why": [
     "David Oistrakh and Ludwig van Beethoven appear together on 4 archive.org recordings"
-   ]
-  },
-  {
-   "a": "David Oistrakh",
-   "b": "Mstislav Rostropovich",
-   "s": {
-    "cooccur": 0.4
-   },
-   "why": [
-    "David Oistrakh and Mstislav Rostropovich appear together on 4 archive.org recordings"
    ]
   },
   {
@@ -23093,186 +22649,6 @@
    ]
   },
   {
-   "a": "Dimitri Tiomkin",
-   "b": "Egon Petri",
-   "s": {
-    "teacher": 1.0
-   },
-   "why": [
-    "Dimitri Tiomkin studied with Egon Petri"
-   ]
-  },
-  {
-   "a": "Dimitri Tiomkin",
-   "b": "Elmer Bernstein",
-   "s": {
-    "listen": 0.758
-   },
-   "why": [
-    "listeners of Elmer Bernstein also play Dimitri Tiomkin"
-   ]
-  },
-  {
-   "a": "Dimitri Tiomkin",
-   "b": "Ennio Morricone",
-   "s": {
-    "listen": 1.0
-   },
-   "why": [
-    "listeners of Dimitri Tiomkin also play Ennio Morricone"
-   ]
-  },
-  {
-   "a": "Dimitri Tiomkin",
-   "b": "Erich Wolfgang Korngold",
-   "s": {
-    "listen": 0.516
-   },
-   "why": [
-    "listeners of Erich Wolfgang Korngold also play Dimitri Tiomkin"
-   ]
-  },
-  {
-   "a": "Dimitri Tiomkin",
-   "b": "Felix Mikhailovich Blumenfeld",
-   "s": {
-    "teacher": 1.0
-   },
-   "why": [
-    "Dimitri Tiomkin studied with Felix Mikhailovich Blumenfeld"
-   ]
-  },
-  {
-   "a": "Dimitri Tiomkin",
-   "b": "Ferruccio Busoni",
-   "s": {
-    "teacher": 1.0
-   },
-   "why": [
-    "Dimitri Tiomkin studied with Ferruccio Busoni"
-   ]
-  },
-  {
-   "a": "Dimitri Tiomkin",
-   "b": "Howard Shore",
-   "s": {
-    "listen": 0.288
-   },
-   "why": [
-    "listeners of Dimitri Tiomkin also play Howard Shore"
-   ]
-  },
-  {
-   "a": "Dimitri Tiomkin",
-   "b": "James Horner",
-   "s": {
-    "listen": 0.545
-   },
-   "why": [
-    "listeners of Dimitri Tiomkin also play James Horner"
-   ]
-  },
-  {
-   "a": "Dimitri Tiomkin",
-   "b": "Jerry Goldsmith",
-   "s": {
-    "listen": 0.682
-   },
-   "why": [
-    "listeners of Dimitri Tiomkin also play Jerry Goldsmith"
-   ]
-  },
-  {
-   "a": "Dimitri Tiomkin",
-   "b": "Johann Strauss II",
-   "s": {
-    "cooccur": 0.4
-   },
-   "why": [
-    "Dimitri Tiomkin and Johann Strauss II appear together on 4 archive.org recordings"
-   ]
-  },
-  {
-   "a": "Dimitri Tiomkin",
-   "b": "John Barry",
-   "s": {
-    "listen": 0.682
-   },
-   "why": [
-    "listeners of Dimitri Tiomkin also play John Barry"
-   ]
-  },
-  {
-   "a": "Dimitri Tiomkin",
-   "b": "John Williams",
-   "s": {
-    "listen": 0.561
-   },
-   "why": [
-    "listeners of Dimitri Tiomkin also play John Williams"
-   ]
-  },
-  {
-   "a": "Dimitri Tiomkin",
-   "b": "Max Steiner",
-   "s": {
-    "listen": 0.75
-   },
-   "why": [
-    "listeners of Max Steiner also play Dimitri Tiomkin"
-   ]
-  },
-  {
-   "a": "Dimitri Tiomkin",
-   "b": "Michael Kamen",
-   "s": {
-    "listen": 0.318
-   },
-   "why": [
-    "listeners of Dimitri Tiomkin also play Michael Kamen"
-   ]
-  },
-  {
-   "a": "Dimitri Tiomkin",
-   "b": "Miklós Rózsa",
-   "s": {
-    "listen": 0.5
-   },
-   "why": [
-    "listeners of Miklós Rózsa also play Dimitri Tiomkin"
-   ]
-  },
-  {
-   "a": "Dimitri Tiomkin",
-   "b": "Nino Rota",
-   "s": {
-    "listen": 0.212
-   },
-   "why": [
-    "listeners of Dimitri Tiomkin also play Nino Rota"
-   ]
-  },
-  {
-   "a": "Dimitri Tiomkin",
-   "b": "Ramin Djawadi",
-   "s": {
-    "listen": 0.167
-   },
-   "why": [
-    "listeners of Dimitri Tiomkin also play Ramin Djawadi"
-   ]
-  },
-  {
-   "a": "Dimitri Tiomkin",
-   "b": "Thomas Newman",
-   "s": {
-    "listen": 0.424
-   },
-   "why": [
-    "listeners of Dimitri Tiomkin also play Thomas Newman"
-   ]
-  },
-  {
    "a": "Dinu Lipatti",
    "b": "Edvard Grieg",
    "s": {
@@ -23330,16 +22706,6 @@
    },
    "why": [
     "Dinu Lipatti and Robert Schumann appear together on 6 archive.org recordings"
-   ]
-  },
-  {
-   "a": "Dinu Lipatti",
-   "b": "Vladimir Horowitz",
-   "s": {
-    "listen": 0.747
-   },
-   "why": [
-    "listeners of Vladimir Horowitz also play Dinu Lipatti"
    ]
   },
   {
@@ -23593,18 +22959,6 @@
    },
    "why": [
     "Dmitri Shostakovich and Modest Mussorgsky appear together on 2 archive.org recordings"
-   ]
-  },
-  {
-   "a": "Dmitri Shostakovich",
-   "b": "Mstislav Rostropovich",
-   "s": {
-    "teacher": 1.0,
-    "cooccur": 0.8
-   },
-   "why": [
-    "Mstislav Rostropovich studied with Dmitri Shostakovich",
-    "Dmitri Shostakovich and Mstislav Rostropovich appear together on 8 archive.org recordings"
    ]
   },
   {
@@ -23993,18 +23347,6 @@
    },
    "why": [
     "Domenico Scarlatti and Tomaso Albinoni appear together on 2 archive.org recordings"
-   ]
-  },
-  {
-   "a": "Domenico Scarlatti",
-   "b": "Vladimir Horowitz",
-   "s": {
-    "listen": 0.211,
-    "cooccur": 0.9
-   },
-   "why": [
-    "listeners of Domenico Scarlatti also play Vladimir Horowitz",
-    "Domenico Scarlatti and Vladimir Horowitz appear together on 9 archive.org recordings"
    ]
   },
   {
@@ -26836,16 +26178,6 @@
   },
   {
    "a": "Ennio Morricone",
-   "b": "John Carpenter",
-   "s": {
-    "listen": 1.0
-   },
-   "why": [
-    "listeners of John Carpenter also play Ennio Morricone"
-   ]
-  },
-  {
-   "a": "Ennio Morricone",
    "b": "John Tavener",
    "s": {
     "listen": 0.296
@@ -27124,16 +26456,6 @@
    },
    "why": [
     "listeners of Toru Takemitsu also play Ennio Morricone"
-   ]
-  },
-  {
-   "a": "Ennio Morricone",
-   "b": "Vladimir Horowitz",
-   "s": {
-    "listen": 0.061
-   },
-   "why": [
-    "listeners of Vladimir Horowitz also play Ennio Morricone"
    ]
   },
   {
@@ -28270,16 +27592,6 @@
   },
   {
    "a": "Erik Satie",
-   "b": "Vladimir Horowitz",
-   "s": {
-    "listen": 0.223
-   },
-   "why": [
-    "listeners of Vladimir Horowitz also play Erik Satie"
-   ]
-  },
-  {
-   "a": "Erik Satie",
    "b": "Wojciech Kilar",
    "s": {
     "listen": 0.166
@@ -28966,16 +28278,6 @@
   },
   {
    "a": "Ernő Dohnányi",
-   "b": "István Thomán",
-   "s": {
-    "teacher": 1.0
-   },
-   "why": [
-    "Ernő Dohnányi studied with István Thomán"
-   ]
-  },
-  {
-   "a": "Ernő Dohnányi",
    "b": "Pyotr Ilyich Tchaikovsky",
    "s": {
     "cooccur": 0.2
@@ -28992,16 +28294,6 @@
    },
    "why": [
     "Ernő Dohnányi and Richard Strauss appear together on 2 archive.org recordings"
-   ]
-  },
-  {
-   "a": "Ervin Nyiregyházi",
-   "b": "István Thomán",
-   "s": {
-    "teacher": 1.0
-   },
-   "why": [
-    "Ervin Nyiregyházi studied with István Thomán"
    ]
   },
   {
@@ -29462,16 +28754,6 @@
    },
    "why": [
     "Evelyn Lear and Wolfgang Amadeus Mozart appear together on 2 archive.org recordings"
-   ]
-  },
-  {
-   "a": "Evgeny Kissin",
-   "b": "Vladimir Horowitz",
-   "s": {
-    "listen": 1.0
-   },
-   "why": [
-    "listeners of Vladimir Horowitz also play Evgeny Kissin"
    ]
   },
   {
@@ -30204,16 +29486,6 @@
    },
    "why": [
     "Felix Mikhailovich Blumenfeld studied with Nikolai Rimsky-Korsakov"
-   ]
-  },
-  {
-   "a": "Felix Mikhailovich Blumenfeld",
-   "b": "Vladimir Horowitz",
-   "s": {
-    "teacher": 1.0
-   },
-   "why": [
-    "Vladimir Horowitz studied with Felix Mikhailovich Blumenfeld"
    ]
   },
   {
@@ -30980,18 +30252,6 @@
   },
   {
    "a": "Francis Poulenc",
-   "b": "Vladimir Horowitz",
-   "s": {
-    "listen": 0.424,
-    "cooccur": 0.2
-   },
-   "why": [
-    "listeners of Francis Poulenc also play Vladimir Horowitz",
-    "Francis Poulenc and Vladimir Horowitz appear together on 2 archive.org recordings"
-   ]
-  },
-  {
-   "a": "Francis Poulenc",
    "b": "İdil Biret",
    "s": {
     "listen": 0.291
@@ -31278,16 +30538,6 @@
    },
    "why": [
     "Frank Bridge and John Ireland appear together on 6 archive.org recordings"
-   ]
-  },
-  {
-   "a": "Frank Bridge",
-   "b": "Mstislav Rostropovich",
-   "s": {
-    "cooccur": 0.2
-   },
-   "why": [
-    "Frank Bridge and Mstislav Rostropovich appear together on 2 archive.org recordings"
    ]
   },
   {
@@ -31701,16 +30951,6 @@
   },
   {
    "a": "Franz Liszt",
-   "b": "István Thomán",
-   "s": {
-    "teacher": 1.0
-   },
-   "why": [
-    "István Thomán studied with Franz Liszt"
-   ]
-  },
-  {
-   "a": "Franz Liszt",
    "b": "Jacques Ibert",
    "s": {
     "cooccur": 0.2
@@ -32013,6 +31253,16 @@
   },
   {
    "a": "Franz Liszt",
+   "b": "Tamás Vásáry",
+   "s": {
+    "cooccur": 0.3
+   },
+   "why": [
+    "Franz Liszt and Tamás Vásáry appear together on 3 archive.org recordings"
+   ]
+  },
+  {
+   "a": "Franz Liszt",
    "b": "Thomas Beecham",
    "s": {
     "cooccur": 0.4
@@ -32029,18 +31279,6 @@
    },
    "why": [
     "Franz Liszt and Vladimir Ashkenazy appear together on 5 archive.org recordings"
-   ]
-  },
-  {
-   "a": "Franz Liszt",
-   "b": "Vladimir Horowitz",
-   "s": {
-    "listen": 0.129,
-    "cooccur": 0.5
-   },
-   "why": [
-    "listeners of Franz Liszt also play Vladimir Horowitz",
-    "Franz Liszt and Vladimir Horowitz appear together on 5 archive.org recordings"
    ]
   },
   {
@@ -32101,16 +31339,6 @@
    },
    "why": [
     "Franz Schreker studied with Robert Fuchs"
-   ]
-  },
-  {
-   "a": "Franz Schreker",
-   "b": "Władysław Szpilman",
-   "s": {
-    "teacher": 1.0
-   },
-   "why": [
-    "Władysław Szpilman studied with Franz Schreker"
    ]
   },
   {
@@ -32515,16 +31743,6 @@
   },
   {
    "a": "Franz Schubert",
-   "b": "Mstislav Rostropovich",
-   "s": {
-    "cooccur": 0.3
-   },
-   "why": [
-    "Franz Schubert and Mstislav Rostropovich appear together on 3 archive.org recordings"
-   ]
-  },
-  {
-   "a": "Franz Schubert",
    "b": "Otto Klemperer",
    "s": {
     "listen": 0.027,
@@ -32635,18 +31853,6 @@
    },
    "why": [
     "listeners of Tomaso Albinoni also play Franz Schubert"
-   ]
-  },
-  {
-   "a": "Franz Schubert",
-   "b": "Vladimir Horowitz",
-   "s": {
-    "listen": 0.109,
-    "cooccur": 0.2
-   },
-   "why": [
-    "listeners of Franz Schubert also play Vladimir Horowitz",
-    "Franz Schubert and Vladimir Horowitz appear together on 2 archive.org recordings"
    ]
   },
   {
@@ -33080,26 +32286,6 @@
    },
    "why": [
     "Friedrich Schorr and Richard Wagner appear together on 11 archive.org recordings"
-   ]
-  },
-  {
-   "a": "Friedrich Wieck",
-   "b": "Hans von Bülow",
-   "s": {
-    "teacher": 1.0
-   },
-   "why": [
-    "Hans von Bülow studied with Friedrich Wieck"
-   ]
-  },
-  {
-   "a": "Friedrich Wieck",
-   "b": "Robert Schumann",
-   "s": {
-    "teacher": 1.0
-   },
-   "why": [
-    "Robert Schumann studied with Friedrich Wieck"
    ]
   },
   {
@@ -33584,16 +32770,6 @@
    },
    "why": [
     "Fritz Reiner and Shirley Verrett appear together on 2 archive.org recordings"
-   ]
-  },
-  {
-   "a": "Fritz Reiner",
-   "b": "Vladimir Horowitz",
-   "s": {
-    "cooccur": 1.0
-   },
-   "why": [
-    "Fritz Reiner and Vladimir Horowitz appear together on 10 archive.org recordings"
    ]
   },
   {
@@ -34082,24 +33258,22 @@
   },
   {
    "a": "Frédéric Chopin",
+   "b": "Tamás Vásáry",
+   "s": {
+    "cooccur": 0.6
+   },
+   "why": [
+    "Frédéric Chopin and Tamás Vásáry appear together on 6 archive.org recordings"
+   ]
+  },
+  {
+   "a": "Frédéric Chopin",
    "b": "Vladimir Ashkenazy",
    "s": {
     "cooccur": 0.5
    },
    "why": [
     "Frédéric Chopin and Vladimir Ashkenazy appear together on 5 archive.org recordings"
-   ]
-  },
-  {
-   "a": "Frédéric Chopin",
-   "b": "Vladimir Horowitz",
-   "s": {
-    "listen": 0.432,
-    "cooccur": 0.9
-   },
-   "why": [
-    "listeners of Frédéric Chopin also play Vladimir Horowitz",
-    "Frédéric Chopin and Vladimir Horowitz appear together on 9 archive.org recordings"
    ]
   },
   {
@@ -34601,16 +33775,6 @@
   },
   {
    "a": "Gabriel Fauré",
-   "b": "Vladimir Horowitz",
-   "s": {
-    "listen": 0.065
-   },
-   "why": [
-    "listeners of Gabriel Fauré also play Vladimir Horowitz"
-   ]
-  },
-  {
-   "a": "Gabriel Fauré",
    "b": "Wolfgang Amadeus Mozart",
    "s": {
     "listen": 1.0
@@ -34848,19 +34012,6 @@
    },
    "why": [
     "Galina Vishnevskaya and Modest Mussorgsky appear together on 8 archive.org recordings"
-   ]
-  },
-  {
-   "a": "Galina Vishnevskaya",
-   "b": "Mstislav Rostropovich",
-   "s": {
-    "family": 1.0,
-    "cooccur": 0.4
-   },
-   "why": [
-    "Mstislav Rostropovich and Galina Vishnevskaya were married",
-    "Galina Vishnevskaya and Mstislav Rostropovich were married",
-    "Galina Vishnevskaya and Mstislav Rostropovich appear together on 4 archive.org recordings"
    ]
   },
   {
@@ -35432,16 +34583,6 @@
   },
   {
    "a": "Georg Solti",
-   "b": "Leó Weiner",
-   "s": {
-    "teacher": 1.0
-   },
-   "why": [
-    "Georg Solti studied with Leó Weiner"
-   ]
-  },
-  {
-   "a": "Georg Solti",
    "b": "Luciano Pavarotti",
    "s": {
     "cooccur": 0.4
@@ -35596,9 +34737,11 @@
    "a": "Georg Solti",
    "b": "Zoltán Kodály",
    "s": {
+    "teacher": 1.0,
     "cooccur": 0.4
    },
    "why": [
+    "Georg Solti studied with Zoltán Kodály",
     "Georg Solti and Zoltán Kodály appear together on 4 archive.org recordings"
    ]
   },
@@ -36204,16 +35347,6 @@
   },
   {
    "a": "George Gershwin",
-   "b": "Noël Coward",
-   "s": {
-    "cooccur": 0.2
-   },
-   "why": [
-    "George Gershwin and Noël Coward appear together on 2 archive.org recordings"
-   ]
-  },
-  {
-   "a": "George Gershwin",
    "b": "Pyotr Ilyich Tchaikovsky",
    "s": {
     "listen": 0.147
@@ -36360,16 +35493,6 @@
    },
    "why": [
     "George Szell and Modest Mussorgsky appear together on 5 archive.org recordings"
-   ]
-  },
-  {
-   "a": "George Szell",
-   "b": "Mstislav Rostropovich",
-   "s": {
-    "cooccur": 0.3
-   },
-   "why": [
-    "George Szell and Mstislav Rostropovich appear together on 3 archive.org recordings"
    ]
   },
   {
@@ -39308,16 +38431,6 @@
   },
   {
    "a": "Glenn Gould",
-   "b": "Vladimir Horowitz",
-   "s": {
-    "listen": 0.341
-   },
-   "why": [
-    "listeners of Vladimir Horowitz also play Glenn Gould"
-   ]
-  },
-  {
-   "a": "Glenn Gould",
    "b": "Walter Susskind",
    "s": {
     "cooccur": 0.2
@@ -40695,6 +39808,16 @@
    ]
   },
   {
+   "a": "György Sándor",
+   "b": "Zoltán Kodály",
+   "s": {
+    "teacher": 1.0
+   },
+   "why": [
+    "György Sándor studied with Zoltán Kodály"
+   ]
+  },
+  {
    "a": "Gérard Grisey",
    "b": "Henri Dutilleux",
    "s": {
@@ -40742,16 +39865,6 @@
    },
    "why": [
     "Gérard Grisey studied with Olivier Messiaen"
-   ]
-  },
-  {
-   "a": "Hanns Eisler",
-   "b": "Joseph Kosma",
-   "s": {
-    "teacher": 1.0
-   },
-   "why": [
-    "Joseph Kosma studied with Hanns Eisler"
    ]
   },
   {
@@ -40882,16 +39995,6 @@
    },
    "why": [
     "Hans Hotter and Wolfgang Sawallisch appear together on 6 archive.org recordings"
-   ]
-  },
-  {
-   "a": "Hans Knappertsbusch",
-   "b": "Hans Richter",
-   "s": {
-    "teacher": 1.0
-   },
-   "why": [
-    "Hans Knappertsbusch studied with Hans Richter"
    ]
   },
   {
@@ -41072,16 +40175,6 @@
    },
    "why": [
     "Ture Rangström studied with Hans Pfitzner"
-   ]
-  },
-  {
-   "a": "Hans Richter",
-   "b": "István Kertész",
-   "s": {
-    "cooccur": 0.4
-   },
-   "why": [
-    "Hans Richter and István Kertész appear together on 4 archive.org recordings"
    ]
   },
   {
@@ -41266,12 +40359,12 @@
   },
   {
    "a": "Hans von Koessler",
-   "b": "Leó Weiner",
+   "b": "Zoltán Kodály",
    "s": {
     "teacher": 1.0
    },
    "why": [
-    "Leó Weiner studied with Hans von Koessler"
+    "Zoltán Kodály studied with Hans von Koessler"
    ]
   },
   {
@@ -42437,16 +41530,6 @@
    ]
   },
   {
-   "a": "Henryk Szeryng",
-   "b": "Vladimir Horowitz",
-   "s": {
-    "cooccur": 0.2
-   },
-   "why": [
-    "Henryk Szeryng and Vladimir Horowitz appear together on 2 archive.org recordings"
-   ]
-  },
-  {
    "a": "Herbert Blomstedt",
    "b": "Igor Markevitch",
    "s": {
@@ -42692,16 +41775,6 @@
    "why": [
     "listeners of Herbert von Karajan also play Modest Mussorgsky",
     "Herbert von Karajan and Modest Mussorgsky appear together on 3 archive.org recordings"
-   ]
-  },
-  {
-   "a": "Herbert von Karajan",
-   "b": "Mstislav Rostropovich",
-   "s": {
-    "cooccur": 0.9
-   },
-   "why": [
-    "Herbert von Karajan and Mstislav Rostropovich appear together on 9 archive.org recordings"
    ]
   },
   {
@@ -43488,16 +42561,6 @@
   },
   {
    "a": "Howard Shore",
-   "b": "John Carpenter",
-   "s": {
-    "listen": 0.336
-   },
-   "why": [
-    "listeners of John Carpenter also play Howard Shore"
-   ]
-  },
-  {
-   "a": "Howard Shore",
    "b": "John Dowland",
    "s": {
     "listen": 0.138
@@ -43766,16 +42829,6 @@
    },
    "why": [
     "listeners of Toru Takemitsu also play Howard Shore"
-   ]
-  },
-  {
-   "a": "Howard Shore",
-   "b": "Vladimir Horowitz",
-   "s": {
-    "listen": 0.072
-   },
-   "why": [
-    "listeners of Vladimir Horowitz also play Howard Shore"
    ]
   },
   {
@@ -44966,16 +44019,6 @@
   },
   {
    "a": "Isaac Stern",
-   "b": "Vladimir Horowitz",
-   "s": {
-    "cooccur": 0.2
-   },
-   "why": [
-    "Isaac Stern and Vladimir Horowitz appear together on 2 archive.org recordings"
-   ]
-  },
-  {
-   "a": "Isaac Stern",
    "b": "Wolfgang Amadeus Mozart",
    "s": {
     "cooccur": 0.9
@@ -45084,16 +44127,6 @@
    },
    "why": [
     "listeners of Itzhak Perlman also play Michael Kamen"
-   ]
-  },
-  {
-   "a": "Itzhak Perlman",
-   "b": "Mstislav Rostropovich",
-   "s": {
-    "cooccur": 0.2
-   },
-   "why": [
-    "Itzhak Perlman and Mstislav Rostropovich appear together on 2 archive.org recordings"
    ]
   },
   {
@@ -45265,16 +44298,6 @@
    },
    "why": [
     "Jacqueline du Pré and Luigi Boccherini appear together on 2 archive.org recordings"
-   ]
-  },
-  {
-   "a": "Jacqueline du Pré",
-   "b": "Mstislav Rostropovich",
-   "s": {
-    "teacher": 1.0
-   },
-   "why": [
-    "Jacqueline du Pré studied with Mstislav Rostropovich"
    ]
   },
   {
@@ -45505,16 +44528,6 @@
    },
    "why": [
     "listeners of James Horner also play John Barry"
-   ]
-  },
-  {
-   "a": "James Horner",
-   "b": "John Carpenter",
-   "s": {
-    "listen": 0.354
-   },
-   "why": [
-    "listeners of John Carpenter also play James Horner"
    ]
   },
   {
@@ -46510,16 +45523,6 @@
    ]
   },
   {
-   "a": "Jean-Jacques Rousseau",
-   "b": "Reynaldo Hahn",
-   "s": {
-    "cooccur": 0.2
-   },
-   "why": [
-    "Jean-Jacques Rousseau and Reynaldo Hahn appear together on 2 archive.org recordings"
-   ]
-  },
-  {
    "a": "Jean-Marie Leclair",
    "b": "Jean-Philippe Rameau",
    "s": {
@@ -46667,16 +45670,6 @@
    },
    "why": [
     "listeners of John Barry also play Jerry Goldsmith"
-   ]
-  },
-  {
-   "a": "Jerry Goldsmith",
-   "b": "John Carpenter",
-   "s": {
-    "listen": 0.843
-   },
-   "why": [
-    "listeners of Jerry Goldsmith also play John Carpenter"
    ]
   },
   {
@@ -48724,16 +47717,6 @@
   },
   {
    "a": "Johann Strauss II",
-   "b": "Vladimir Horowitz",
-   "s": {
-    "listen": 0.068
-   },
-   "why": [
-    "listeners of Vladimir Horowitz also play Johann Strauss II"
-   ]
-  },
-  {
-   "a": "Johann Strauss II",
    "b": "Wolfgang Amadeus Mozart",
    "s": {
     "listen": 1.0
@@ -48850,16 +47833,6 @@
    "why": [
     "listeners of Modest Mussorgsky also play Johannes Brahms",
     "Johannes Brahms and Modest Mussorgsky appear together on 2 archive.org recordings"
-   ]
-  },
-  {
-   "a": "Johannes Brahms",
-   "b": "Mstislav Rostropovich",
-   "s": {
-    "cooccur": 0.3
-   },
-   "why": [
-    "Johannes Brahms and Mstislav Rostropovich appear together on 3 archive.org recordings"
    ]
   },
   {
@@ -49174,16 +48147,6 @@
   },
   {
    "a": "John Barry",
-   "b": "John Carpenter",
-   "s": {
-    "listen": 0.36
-   },
-   "why": [
-    "listeners of John Carpenter also play John Barry"
-   ]
-  },
-  {
-   "a": "John Barry",
    "b": "John Williams",
    "s": {
     "listen": 0.856
@@ -49382,66 +48345,6 @@
    },
    "why": [
     "John Cage and Walter Piston appear together on 2 archive.org recordings"
-   ]
-  },
-  {
-   "a": "John Carpenter",
-   "b": "John Williams",
-   "s": {
-    "listen": 0.942
-   },
-   "why": [
-    "listeners of John Carpenter also play John Williams"
-   ]
-  },
-  {
-   "a": "John Carpenter",
-   "b": "Maurice Jarre",
-   "s": {
-    "listen": 0.306
-   },
-   "why": [
-    "listeners of Maurice Jarre also play John Carpenter"
-   ]
-  },
-  {
-   "a": "John Carpenter",
-   "b": "Miklós Rózsa",
-   "s": {
-    "listen": 0.347
-   },
-   "why": [
-    "listeners of Miklós Rózsa also play John Carpenter"
-   ]
-  },
-  {
-   "a": "John Carpenter",
-   "b": "Philip Glass",
-   "s": {
-    "listen": 0.402
-   },
-   "why": [
-    "listeners of John Carpenter also play Philip Glass"
-   ]
-  },
-  {
-   "a": "John Carpenter",
-   "b": "Ramin Djawadi",
-   "s": {
-    "listen": 0.478
-   },
-   "why": [
-    "listeners of John Carpenter also play Ramin Djawadi"
-   ]
-  },
-  {
-   "a": "John Carpenter",
-   "b": "Thomas Newman",
-   "s": {
-    "listen": 0.354
-   },
-   "why": [
-    "listeners of John Carpenter also play Thomas Newman"
    ]
   },
   {
@@ -49896,16 +48799,6 @@
    },
    "why": [
     "John Williams and Toshiro Mayuzumi appear together on 2 archive.org recordings"
-   ]
-  },
-  {
-   "a": "John Williams",
-   "b": "Vladimir Horowitz",
-   "s": {
-    "cooccur": 0.2
-   },
-   "why": [
-    "John Williams and Vladimir Horowitz appear together on 2 archive.org recordings"
    ]
   },
   {
@@ -50944,8 +49837,8 @@
    "why": [
     "Kurt Weill and Lotte Lenya were married",
     "Lotte Lenya and Kurt Weill were married",
-    "Lotte Lenya performed Kurt Weill's Alabama Song",
     "Lotte Lenya performed Kurt Weill's Pirate Jenny",
+    "Lotte Lenya performed Kurt Weill's Alabama Song",
     "Kurt Weill and Lotte Lenya appear together on 21 archive.org recordings"
    ]
   },
@@ -51161,16 +50054,6 @@
   },
   {
    "a": "Leonard Bernstein",
-   "b": "Mstislav Rostropovich",
-   "s": {
-    "cooccur": 0.3
-   },
-   "why": [
-    "Leonard Bernstein and Mstislav Rostropovich appear together on 3 archive.org recordings"
-   ]
-  },
-  {
-   "a": "Leonard Bernstein",
    "b": "Nadia Boulanger",
    "s": {
     "teacher": 1.0
@@ -51307,16 +50190,6 @@
    },
    "why": [
     "listeners of Leonard Bernstein also play Sir Simon Rattle"
-   ]
-  },
-  {
-   "a": "Leonard Bernstein",
-   "b": "Vladimir Horowitz",
-   "s": {
-    "listen": 0.214
-   },
-   "why": [
-    "listeners of Leonard Bernstein also play Vladimir Horowitz"
    ]
   },
   {
@@ -51728,26 +50601,6 @@
    ]
   },
   {
-   "a": "Leó Weiner",
-   "b": "Pál Kadosa",
-   "s": {
-    "teacher": 1.0
-   },
-   "why": [
-    "Pál Kadosa studied with Leó Weiner"
-   ]
-  },
-  {
-   "a": "Leó Weiner",
-   "b": "Zoltán Kodály",
-   "s": {
-    "cooccur": 0.2
-   },
-   "why": [
-    "Leó Weiner and Zoltán Kodály appear together on 2 archive.org recordings"
-   ]
-  },
-  {
    "a": "Lili Boulanger",
    "b": "Louis Vierne",
    "s": {
@@ -51800,6 +50653,16 @@
    "why": [
     "listeners of Lili Kraus also play Wolfgang Amadeus Mozart",
     "Lili Kraus and Wolfgang Amadeus Mozart appear together on 5 archive.org recordings"
+   ]
+  },
+  {
+   "a": "Lili Kraus",
+   "b": "Zoltán Kodály",
+   "s": {
+    "teacher": 1.0
+   },
+   "why": [
+    "Lili Kraus studied with Zoltán Kodály"
    ]
   },
   {
@@ -52410,16 +51273,6 @@
   },
   {
    "a": "Ludwig van Beethoven",
-   "b": "Mstislav Rostropovich",
-   "s": {
-    "cooccur": 0.9
-   },
-   "why": [
-    "Ludwig van Beethoven and Mstislav Rostropovich appear together on 9 archive.org recordings"
-   ]
-  },
-  {
-   "a": "Ludwig van Beethoven",
    "b": "Muzio Clementi",
    "s": {
     "teacher": 1.0
@@ -52616,16 +51469,6 @@
   },
   {
    "a": "Ludwig van Beethoven",
-   "b": "Vladimir Horowitz",
-   "s": {
-    "cooccur": 0.9
-   },
-   "why": [
-    "Ludwig van Beethoven and Vladimir Horowitz appear together on 9 archive.org recordings"
-   ]
-  },
-  {
-   "a": "Ludwig van Beethoven",
    "b": "Walter Berry",
    "s": {
     "cooccur": 0.5
@@ -52716,16 +51559,6 @@
    },
    "why": [
     "Luigi Boccherini and Michael Gielen appear together on 4 archive.org recordings"
-   ]
-  },
-  {
-   "a": "Luigi Boccherini",
-   "b": "Mstislav Rostropovich",
-   "s": {
-    "cooccur": 0.2
-   },
-   "why": [
-    "Luigi Boccherini and Mstislav Rostropovich appear together on 2 archive.org recordings"
    ]
   },
   {
@@ -53544,16 +52377,6 @@
   },
   {
    "a": "Mario Lanza",
-   "b": "Noël Coward",
-   "s": {
-    "listen": 0.33
-   },
-   "why": [
-    "listeners of Noël Coward also play Mario Lanza"
-   ]
-  },
-  {
-   "a": "Mario Lanza",
    "b": "Plácido Domingo",
    "s": {
     "listen": 0.205
@@ -53600,16 +52423,6 @@
    },
    "why": [
     "Martha Argerich and Sergei Prokofiev appear together on 2 archive.org recordings"
-   ]
-  },
-  {
-   "a": "Martha Argerich",
-   "b": "Vladimir Horowitz",
-   "s": {
-    "listen": 1.0
-   },
-   "why": [
-    "listeners of Vladimir Horowitz also play Martha Argerich"
    ]
   },
   {
@@ -53752,16 +52565,6 @@
    },
    "why": [
     "Maurice Ravel and Norman Dello Joio appear together on 3 archive.org recordings"
-   ]
-  },
-  {
-   "a": "Maurice Ravel",
-   "b": "Noël Coward",
-   "s": {
-    "cooccur": 0.2
-   },
-   "why": [
-    "Maurice Ravel and Noël Coward appear together on 2 archive.org recordings"
    ]
   },
   {
@@ -53956,16 +52759,6 @@
    },
    "why": [
     "Maurice Ravel and Vincent d'Indy appear together on 2 archive.org recordings"
-   ]
-  },
-  {
-   "a": "Maurice Ravel",
-   "b": "Vladimir Horowitz",
-   "s": {
-    "listen": 0.178
-   },
-   "why": [
-    "listeners of Maurice Ravel also play Vladimir Horowitz"
    ]
   },
   {
@@ -54304,16 +53097,6 @@
   },
   {
    "a": "Michael Tilson Thomas",
-   "b": "Vladimir Horowitz",
-   "s": {
-    "listen": 0.087
-   },
-   "why": [
-    "listeners of Michael Tilson Thomas also play Vladimir Horowitz"
-   ]
-  },
-  {
-   "a": "Michael Tilson Thomas",
    "b": "Walter Piston",
    "s": {
     "cooccur": 0.2
@@ -54350,26 +53133,6 @@
    },
    "why": [
     "Mieczysław Weinberg and Samuel Barber appear together on 2 archive.org recordings"
-   ]
-  },
-  {
-   "a": "Mikalojus Konstantinas Čiurlionis",
-   "b": "Salomon Jadassohn",
-   "s": {
-    "teacher": 1.0
-   },
-   "why": [
-    "Mikalojus Konstantinas Čiurlionis studied with Salomon Jadassohn"
-   ]
-  },
-  {
-   "a": "Mikalojus Konstantinas Čiurlionis",
-   "b": "Zygmunt Noskowski",
-   "s": {
-    "teacher": 1.0
-   },
-   "why": [
-    "Mikalojus Konstantinas Čiurlionis studied with Zygmunt Noskowski"
    ]
   },
   {
@@ -54424,16 +53187,6 @@
    "why": [
     "Reinhold Glière studied with Mikhail Ippolitov-Ivanov",
     "Mikhail Ippolitov-Ivanov and Reinhold Glière appear together on 8 archive.org recordings"
-   ]
-  },
-  {
-   "a": "Mikhail Ippolitov-Ivanov",
-   "b": "Sergei Vasilenko",
-   "s": {
-    "teacher": 1.0
-   },
-   "why": [
-    "Sergei Vasilenko studied with Mikhail Ippolitov-Ivanov"
    ]
   },
   {
@@ -54643,16 +53396,6 @@
   },
   {
    "a": "Modest Mussorgsky",
-   "b": "Mstislav Rostropovich",
-   "s": {
-    "cooccur": 0.4
-   },
-   "why": [
-    "Modest Mussorgsky and Mstislav Rostropovich appear together on 4 archive.org recordings"
-   ]
-  },
-  {
-   "a": "Modest Mussorgsky",
    "b": "Nicolai Ghiaurov",
    "s": {
     "cooccur": 0.2
@@ -54799,16 +53542,6 @@
   },
   {
    "a": "Modest Mussorgsky",
-   "b": "Vladimir Horowitz",
-   "s": {
-    "cooccur": 0.4
-   },
-   "why": [
-    "Modest Mussorgsky and Vladimir Horowitz appear together on 4 archive.org recordings"
-   ]
-  },
-  {
-   "a": "Modest Mussorgsky",
    "b": "Wolfgang Amadeus Mozart",
    "s": {
     "listen": 0.952
@@ -54825,17 +53558,6 @@
    },
    "why": [
     "Modest Mussorgsky and Zubin Mehta appear together on 2 archive.org recordings"
-   ]
-  },
-  {
-   "a": "Modest Tchaikovsky",
-   "b": "Pyotr Ilyich Tchaikovsky",
-   "s": {
-    "family": 1.0
-   },
-   "why": [
-    "Pyotr Ilyich Tchaikovsky and Modest Tchaikovsky were siblings",
-    "Modest Tchaikovsky and Pyotr Ilyich Tchaikovsky were siblings"
    ]
   },
   {
@@ -54936,58 +53658,6 @@
    },
    "why": [
     "Morton Feldman studied with Stefan Wolpe"
-   ]
-  },
-  {
-   "a": "Mstislav Rostropovich",
-   "b": "Pyotr Ilyich Tchaikovsky",
-   "s": {
-    "cooccur": 1.0
-   },
-   "why": [
-    "Mstislav Rostropovich and Pyotr Ilyich Tchaikovsky appear together on 16 archive.org recordings"
-   ]
-  },
-  {
-   "a": "Mstislav Rostropovich",
-   "b": "Robert Schumann",
-   "s": {
-    "cooccur": 0.6
-   },
-   "why": [
-    "Mstislav Rostropovich and Robert Schumann appear together on 6 archive.org recordings"
-   ]
-  },
-  {
-   "a": "Mstislav Rostropovich",
-   "b": "Sergei Prokofiev",
-   "s": {
-    "teacher": 1.0,
-    "cooccur": 0.7
-   },
-   "why": [
-    "Mstislav Rostropovich studied with Sergei Prokofiev",
-    "Mstislav Rostropovich and Sergei Prokofiev appear together on 7 archive.org recordings"
-   ]
-  },
-  {
-   "a": "Mstislav Rostropovich",
-   "b": "Sviatoslav Richter",
-   "s": {
-    "cooccur": 1.0
-   },
-   "why": [
-    "Mstislav Rostropovich and Sviatoslav Richter appear together on 22 archive.org recordings"
-   ]
-  },
-  {
-   "a": "Mstislav Rostropovich",
-   "b": "Vissarion Shebalin",
-   "s": {
-    "teacher": 1.0
-   },
-   "why": [
-    "Mstislav Rostropovich studied with Vissarion Shebalin"
    ]
   },
   {
@@ -55605,16 +54275,6 @@
    },
    "why": [
     "listeners of Nikolai Rimsky-Korsakov also play Wolfgang Amadeus Mozart"
-   ]
-  },
-  {
-   "a": "Nikolai Roslavets",
-   "b": "Sergei Vasilenko",
-   "s": {
-    "teacher": 1.0
-   },
-   "why": [
-    "Nikolai Roslavets studied with Sergei Vasilenko"
    ]
   },
   {
@@ -56813,18 +55473,6 @@
   },
   {
    "a": "Pyotr Ilyich Tchaikovsky",
-   "b": "Vladimir Horowitz",
-   "s": {
-    "listen": 0.117,
-    "cooccur": 0.2
-   },
-   "why": [
-    "listeners of Vladimir Horowitz also play Pyotr Ilyich Tchaikovsky",
-    "Pyotr Ilyich Tchaikovsky and Vladimir Horowitz appear together on 2 archive.org recordings"
-   ]
-  },
-  {
-   "a": "Pyotr Ilyich Tchaikovsky",
    "b": "Walter Susskind",
    "s": {
     "cooccur": 0.2
@@ -56861,6 +55509,16 @@
    },
    "why": [
     "Pyotr Ilyich Tchaikovsky and Zubin Mehta appear together on 2 archive.org recordings"
+   ]
+  },
+  {
+   "a": "Pál Kadosa",
+   "b": "Zoltán Kodály",
+   "s": {
+    "teacher": 1.0
+   },
+   "why": [
+    "Pál Kadosa studied with Zoltán Kodály"
    ]
   },
   {
@@ -57608,18 +56266,6 @@
   },
   {
    "a": "Robert Schumann",
-   "b": "Vladimir Horowitz",
-   "s": {
-    "listen": 0.134,
-    "cooccur": 0.7
-   },
-   "why": [
-    "listeners of Robert Schumann also play Vladimir Horowitz",
-    "Robert Schumann and Vladimir Horowitz appear together on 7 archive.org recordings"
-   ]
-  },
-  {
-   "a": "Robert Schumann",
    "b": "Wolfgang Amadeus Mozart",
    "s": {
     "listen": 0.72,
@@ -57973,16 +56619,6 @@
   },
   {
    "a": "Sergei Prokofiev",
-   "b": "Vladimir Horowitz",
-   "s": {
-    "listen": 0.182
-   },
-   "why": [
-    "listeners of Sergei Prokofiev also play Vladimir Horowitz"
-   ]
-  },
-  {
-   "a": "Sergei Prokofiev",
    "b": "Walter Susskind",
    "s": {
     "cooccur": 0.5
@@ -58021,16 +56657,6 @@
    },
    "why": [
     "Sergei Rachmaninoff studied with Sergei Taneyev"
-   ]
-  },
-  {
-   "a": "Sergei Rachmaninoff",
-   "b": "Vladimir Horowitz",
-   "s": {
-    "listen": 0.188
-   },
-   "why": [
-    "listeners of Sergei Rachmaninoff also play Vladimir Horowitz"
    ]
   },
   {
@@ -58129,24 +56755,32 @@
   },
   {
    "a": "Sviatoslav Richter",
-   "b": "Vladimir Horowitz",
-   "s": {
-    "listen": 1.0,
-    "cooccur": 0.2
-   },
-   "why": [
-    "listeners of Vladimir Horowitz also play Sviatoslav Richter",
-    "Sviatoslav Richter and Vladimir Horowitz appear together on 2 archive.org recordings"
-   ]
-  },
-  {
-   "a": "Sviatoslav Richter",
    "b": "Wolfgang Amadeus Mozart",
    "s": {
     "cooccur": 0.2
    },
    "why": [
     "Sviatoslav Richter and Wolfgang Amadeus Mozart appear together on 2 archive.org recordings"
+   ]
+  },
+  {
+   "a": "Sándor Veress",
+   "b": "Zoltán Kodály",
+   "s": {
+    "teacher": 1.0
+   },
+   "why": [
+    "Sándor Veress studied with Zoltán Kodály"
+   ]
+  },
+  {
+   "a": "Tamás Vásáry",
+   "b": "Zoltán Kodály",
+   "s": {
+    "teacher": 1.0
+   },
+   "why": [
+    "Tamás Vásáry studied with Zoltán Kodály"
    ]
   },
   {
@@ -58357,16 +56991,6 @@
   },
   {
    "a": "Vladimir Ashkenazy",
-   "b": "Vladimir Horowitz",
-   "s": {
-    "listen": 0.72
-   },
-   "why": [
-    "listeners of Vladimir Horowitz also play Vladimir Ashkenazy"
-   ]
-  },
-  {
-   "a": "Vladimir Ashkenazy",
    "b": "Wolfgang Amadeus Mozart",
    "s": {
     "listen": 0.92,
@@ -58385,26 +57009,6 @@
    },
    "why": [
     "Vladimir Ashkenazy and Zubin Mehta appear together on 2 archive.org recordings"
-   ]
-  },
-  {
-   "a": "Vladimir Horowitz",
-   "b": "Wolfgang Amadeus Mozart",
-   "s": {
-    "listen": 0.205
-   },
-   "why": [
-    "listeners of Vladimir Horowitz also play Wolfgang Amadeus Mozart"
-   ]
-  },
-  {
-   "a": "Vladimir Horowitz",
-   "b": "İdil Biret",
-   "s": {
-    "listen": 0.527
-   },
-   "why": [
-    "listeners of Vladimir Horowitz also play İdil Biret"
    ]
   },
   {

@@ -1,124 +1,66 @@
 # Relations build report
 
-Built 2026-10-13 16:33 UTC
+Built 2026-10-13 17:30 UTC
 
-- artists: 922
-- artists added: 492
-- matched to Wikidata: 920
-- with MusicBrainz id: 913
-- related pairs: 5751
-- pairs with cooccur: 3331
-- pairs with family: 103
+- artists: 896
+- artists added: 466
+- matched to Wikidata: 896
+- with MusicBrainz id: 890
+- related pairs: 5614
+- pairs with cooccur: 3269
+- pairs with family: 101
 - pairs with influence: 59
-- pairs with listen: 1722
+- pairs with listen: 1660
 - pairs with performed: 20
-- pairs with teacher: 945
+- pairs with teacher: 922
 
 ## Warnings (0)
 
 (none)
 
-## Not matched to Wikidata (2)
+## Not matched to Wikidata (0)
 
-- Dmitri Tcherepnin
-- Zoltán Kodály
+(none)
 
-## Uncertain matches (check, fix in tools/wikidata_overrides.json) (2)
+## Uncertain matches (check, fix in tools/wikidata_overrides.json) (0)
 
-- Josef Suk: chose Q312700 (Josef Suk, born 1874) over Q707845 (Josef Suk, born 1929)
-- Karol Szymanowski: chose Q295400 (Karol Szymanowski, born 1882) over Q85102524 (Karol Szymanowski, born 1960)
+(none)
 
-## Placeholder entries corrected from Wikidata (45)
+## Placeholder entries corrected from Wikidata (0)
 
-- Adam de la Halle: era 1850 -> 1277, tags Romantic -> Medieval, French
-- Leonel Power: era 1850 -> 1410, tags Romantic -> Renaissance, English
-- John Dunstable: era 1850 -> 1430, tags Romantic -> Renaissance, Sacred, English
-- Johannes Ockeghem: era 1850 -> 1450, tags Romantic -> Renaissance, French
-- Jacob Obrecht: era 1850 -> 1497, tags Romantic -> Renaissance, Sacred
-- Heinrich Isaac: era 1850 -> 1490, tags Romantic -> Renaissance, Sacred, Organ
-- Adrian Willaert: era 1850 -> 1520, tags Romantic -> Renaissance
-- Cipriano de Rore: era 1850 -> 1555, tags Romantic -> Renaissance, Italian
-- Luca Marenzio: era 1850 -> 1593, tags Romantic -> Renaissance, Italian
-- Heinrich Schütz: era 1850 -> 1625, tags Romantic -> Baroque, Opera, Organ, German
-- Johann Pachelbel: era 1850 -> 1693, tags Romantic -> Baroque, Organ, German
-- Jan Dismas Zelenka: era 1850 -> 1719, tags Romantic -> Baroque, Opera, Czech
-- Johann Fux: era 1850 -> 1700, tags Romantic -> Baroque, Opera, Organ, German
-- Alessandro Scarlatti: era 1850 -> 1700, tags Romantic -> Baroque, Opera, Sacred, Harpsichord
-- Domenico Cimarosa: era 1850 -> 1789, tags Romantic -> Classical, Opera, Italian
-- Antonio Salieri: era 1850 -> 1790, tags Romantic -> Classical, Organ, Italian, Austrian
-- Carl Philipp Emanuel Bach: era 1850 -> 1754, tags Romantic -> Symphony, Baroque, Organ, Piano, German
-- Johann Christian Bach: era 1850 -> 1775, tags Romantic -> Classical, Opera, Symphony, Organ, British
-- Johann Nepomuk Hummel: era 1850 -> 1818, tags Romantic -> Classical, Opera, Piano, Guitar
-- John Field: era 1850 -> 1822, tags Romantic -> Romantic, Piano, Irish, Russian
-- Carl Czerny: era 1850 -> 1831, tags Romantic -> Romantic, Piano, Austrian
-- Louis Spohr: era 1850 -> 1824, tags Romantic -> Romantic, Opera, Symphony, Violin
-- Giacomo Meyerbeer: era 1850 -> 1831, tags Romantic -> Romantic, Opera, German
-- Fromental Halévy: era 1850 -> 1839, tags Romantic -> Romantic, Opera, Sacred, French
-- Adolphe Adam: era 1850 -> 1843, tags Romantic -> Romantic, Opera, Piano, French
-- Léo Delibes: era 1850 -> 1876, tags Romantic -> Romantic, Opera, Organ, French
-- Emmanuel Chabrier: era 1850 -> 1881, tags Romantic -> Romantic, Piano, French
-- Ernest Chausson: era 1850 -> 1894, tags Romantic -> Romantic, Opera, Symphony, Piano, French
-- Henri Duparc: era 1850 -> 1888, tags Romantic -> Romantic, French
-- César Franck: era 1850 -> 1862, tags Romantic -> Romantic, Opera, Symphony, Organ, Belgian, French
-- Bedřich Smetana: era 1850 -> 1864, tags Romantic -> Romantic, Opera, Symphony, Piano, Violin, Austrian
-- Zdeněk Fibich: era 1850 -> 1890, tags Romantic -> Romantic, Opera, Symphony, Organ
-- Josef Suk: era 1850 -> 1914, tags Romantic -> Modernist, Opera, Symphony, Violin, Czech
-- Mily Balakirev: era 1850 -> 1877, tags Romantic -> Romantic, Symphony, Piano, Russian
-- César Cui: era 1850 -> 1875, tags Romantic -> Romantic, Opera, Piano, Russian
-- Alexander Glazunov: era 1850 -> 1905, tags Romantic -> Romantic, Symphony, Russian
-- Nikolai Medtner: era 1850 -> 1920, tags Romantic -> Modernist, Piano, British, Russian
-- Enrique Granados: era 1850 -> 1907, tags Romantic -> Romantic, Piano, Spanish
-- Isaac Albéniz: era 1850 -> 1900, tags Romantic -> Romantic, Opera, Piano, Spanish
-- Joaquín Turina: era 1850 -> 1922, tags Romantic -> Modernist, Opera, Piano, Spanish
-- Karol Szymanowski: era 1850 -> 1922, tags Romantic -> Modernist, Opera, Symphony, Piano, Russian
-- Heitor Villa-Lobos: era 1850 -> 1927, tags Romantic -> Modernist, Opera, Symphony, Guitar, Brazilian
-- Alberto Ginastera: era 1850 -> 1956, tags Romantic -> Modernist, Opera, Piano, Argentinian
-- Silvestre Revueltas: era 1850 -> 1935, tags Romantic -> Modernist, Violin, Mexican
-- Toru Takemitsu: era 1850 -> 1970, tags Romantic -> Modernist, Impressionism, Piano, Japanese
+(none)
 
 ## Existing artists linked during expansion (0)
 
 (none)
 
-## Artists added (492)
+## Artists added (466)
 
-- Jean-Jacques Rousseau (Composer, 1712–1778, 233 Wikipedia editions)
-- Albert Schweitzer (Composer, 1875–1965, 122 Wikipedia editions)
 - Anatoliy Solovyanenko (Singer, 1932–1999, 120 Wikipedia editions)
-- William Herschel (Composer, 1738–1822, 114 Wikipedia editions)
 - Jacques Offenbach (Composer, 1819–1880, 105 Wikipedia editions)
-- Isabelle de Charrière (Composer, 1740–1805, 97 Wikipedia editions)
 - Ennio Morricone (Composer, 1928–2020, 94 Wikipedia editions)
 - Louis Braille (Instrumentalist, 1809–1852, 89 Wikipedia editions)
 - John Williams (Composer, 1932–, 78 Wikipedia editions)
 - Arthur Rubinstein (Composer, 1887–1982, 71 Wikipedia editions)
-- Mstislav Rostropovich (Composer, 1927–2007, 66 Wikipedia editions)
 - James Horner (Composer, 1953–2015, 66 Wikipedia editions)
-- Abay Kunanbaiuly (Composer, 1845–1904, 64 Wikipedia editions)
 - Pau Casals (Composer, 1876–1973, 64 Wikipedia editions)
 - Mikis Theodorakis (Composer, 1925–2021, 63 Wikipedia editions)
 - Walther von der Vogelweide (Composer, 1170–1230, 62 Wikipedia editions)
 - Maurice Jarre (Composer, 1924–2009, 62 Wikipedia editions)
 - Jenny Lind (Singer, 1820–1887, 62 Wikipedia editions)
-- Alexander Griboyedov (Composer, 1795–1829, 61 Wikipedia editions)
 - Ignacy Jan Paderewski (Composer, 1860–1941, 60 Wikipedia editions)
 - Yo-Yo Ma (Composer, 1955–, 60 Wikipedia editions)
 - John Barry (Composer, 1933–2011, 60 Wikipedia editions)
-- Vladimir Horowitz (Instrumentalist, 1903–1989, 60 Wikipedia editions)
 - Zubin Mehta (Conductor, 1936–, 59 Wikipedia editions)
 - Anton Rubinstein (Composer, 1829–1894, 58 Wikipedia editions)
 - Jerry Goldsmith (Composer, 1929–2004, 58 Wikipedia editions)
-- John Carpenter (Composer, 1948–, 58 Wikipedia editions)
 - Marian Anderson (Singer, 1897–1993, 58 Wikipedia editions)
 - Martha Argerich (Instrumentalist, 1941–, 57 Wikipedia editions)
-- Noël Coward (Conductor, 1899–1973, 56 Wikipedia editions)
-- Komitas (Composer, 1869–1935, 56 Wikipedia editions)
 - Giuseppe Tartini (Composer, 1692–1770, 55 Wikipedia editions)
 - Airat Ichmouratov (Composer, 1973–, 55 Wikipedia editions)
 - François-André Danican Philidor (Composer, 1726–1795, 55 Wikipedia editions)
 - Glenn Gould (Composer, 1932–1982, 55 Wikipedia editions)
 - Sviatoslav Richter (Composer, 1915–1997, 54 Wikipedia editions)
-- Władysław Szpilman (Composer, 1911–2000, 53 Wikipedia editions)
 - Daniel François Esprit Auber (Composer, 1782–1871, 53 Wikipedia editions)
 - Paul Dukas (Composer, 1865–1935, 53 Wikipedia editions)
 - Howard Shore (Composer, 1946–, 53 Wikipedia editions)
@@ -133,7 +75,6 @@ Built 2026-10-13 16:33 UTC
 - Arnaut Daniel (Composer, 1150–1210, 50 Wikipedia editions)
 - Jascha Heifetz (Instrumentalist, 1901–1987, 50 Wikipedia editions)
 - Wilhelm Friedemann Bach (Composer, 1710–1784, 49 Wikipedia editions)
-- Mikalojus Konstantinas Čiurlionis (Composer, 1875–1911, 49 Wikipedia editions)
 - Renata Scotto (Singer, 1934–2023, 49 Wikipedia editions)
 - Peng Liyuan (Singer, 1962–, 49 Wikipedia editions)
 - Pablo de Sarasate (Composer, 1844–1908, 48 Wikipedia editions)
@@ -142,10 +83,8 @@ Built 2026-10-13 16:33 UTC
 - Giovanni Paisiello (Composer, 1740–1816, 48 Wikipedia editions)
 - Jacopo Peri (Composer, 1561–1633, 48 Wikipedia editions)
 - Hugo Wolf (Composer, 1860–1903, 48 Wikipedia editions)
-- Johann Nestroy (Composer, 1801–1862, 48 Wikipedia editions)
 - Galina Vishnevskaya (Singer, 1926–2012, 48 Wikipedia editions)
 - Max Bruch (Composer, 1838–1920, 47 Wikipedia editions)
-- Arrigo Boito (Composer, 1842–1918, 47 Wikipedia editions)
 - André Rieu (Conductor, 1949–, 47 Wikipedia editions)
 - Mario Lanza (Singer, 1921–1959, 47 Wikipedia editions)
 - Anne-Sophie Mutter (Instrumentalist, 1963–, 47 Wikipedia editions)
@@ -183,9 +122,7 @@ Built 2026-10-13 16:33 UTC
 - Florence Foster Jenkins (Singer, 1868–1944, 42 Wikipedia editions)
 - Khatia Buniatishvili (Instrumentalist, 1987–, 42 Wikipedia editions)
 - Nayden Todorov (Composer, 1974–, 41 Wikipedia editions)
-- Carl Jonas Love Almqvist (Composer, 1793–1866, 41 Wikipedia editions)
 - André Grétry (Composer, 1741–1813, 41 Wikipedia editions)
-- Victor Borge (Composer, 1909–2000, 41 Wikipedia editions)
 - Henri Wieniawski (Composer, 1835–1880, 41 Wikipedia editions)
 - Umberto Giordano (Composer, 1867–1948, 41 Wikipedia editions)
 - Elmer Bernstein (Composer, 1922–2004, 41 Wikipedia editions)
@@ -207,7 +144,6 @@ Built 2026-10-13 16:33 UTC
 - Gilles Binchois (Composer, 1400–1460, 38 Wikipedia editions)
 - Vincent d'Indy (Composer, 1851–1931, 38 Wikipedia editions)
 - Anton Arensky (Composer, 1861–1906, 38 Wikipedia editions)
-- Hanns Eisler (Composer, 1898–1962, 38 Wikipedia editions)
 - Pietro Locatelli (Composer, 1695–1764, 37 Wikipedia editions)
 - Eugen d'Albert (Composer, 1864–1932, 37 Wikipedia editions)
 - Cosima Wagner (Composer, 1837–1930, 37 Wikipedia editions)
@@ -218,7 +154,6 @@ Built 2026-10-13 16:33 UTC
 - Marcel Dupré (Composer, 1886–1971, 35 Wikipedia editions)
 - Joseph Strauss (Composer, 1827–1870, 35 Wikipedia editions)
 - François Adrien Boieldieu (Composer, 1775–1834, 34 Wikipedia editions)
-- Dimitri Tiomkin (Composer, 1894–1979, 34 Wikipedia editions)
 - Carl Reinecke (Composer, 1824–1910, 34 Wikipedia editions)
 - Johann Ambrosius Bach (Composer, 1645–1695, 34 Wikipedia editions)
 - Einojuhani Rautavaara (Composer, 1928–2016, 34 Wikipedia editions)
@@ -256,7 +191,6 @@ Built 2026-10-13 16:33 UTC
 - Maria Szymanowska (Composer, 1789–1831, 30 Wikipedia editions)
 - Theodor Leschetizky (Composer, 1830–1915, 30 Wikipedia editions)
 - Siegfried Wagner (Composer, 1869–1930, 30 Wikipedia editions)
-- Hans Richter (Composer, 1843–1916, 30 Wikipedia editions)
 - Johann Jakob Froberger (Composer, 1616–1667, 30 Wikipedia editions)
 - Friedrich Kalkbrenner (Composer, 1785–1849, 30 Wikipedia editions)
 - Józef Elsner (Composer, 1769–1854, 30 Wikipedia editions)
@@ -337,16 +271,13 @@ Built 2026-10-13 16:33 UTC
 - Johann Simon Mayr (Composer, 1763–1845, 23 Wikipedia editions)
 - Giovanni Sgambati (Composer, 1841–1914, 23 Wikipedia editions)
 - Robert Fuchs (Composer, 1847–1927, 23 Wikipedia editions)
-- Egon Wellesz (Composer, 1885–1974, 23 Wikipedia editions)
 - Lukas Foss (Composer, 1922–2009, 23 Wikipedia editions)
 - Brian Ferneyhough (Composer, 1943–, 23 Wikipedia editions)
 - Francisco Guerrero (Composer, 1528–1599, 23 Wikipedia editions)
-- Friedrich Wieck (Composer, 1785–1873, 23 Wikipedia editions)
 - Maria Ewing (Singer, 1950–2022, 23 Wikipedia editions)
 - Agathe Backer Grøndahl (Composer, 1847–1907, 23 Wikipedia editions)
 - Otakar Ševčík (Composer, 1852–1934, 23 Wikipedia editions)
 - Théodore Dubois (Composer, 1837–1924, 23 Wikipedia editions)
-- Leó Weiner (Composer, 1885–1960, 22 Wikipedia editions)
 - Hans Swarowsky (Conductor, 1899–1975, 22 Wikipedia editions)
 - Franz Xaver Richter (Composer, 1709–1789, 22 Wikipedia editions)
 - Stephen Heller (Composer, 1813–1888, 22 Wikipedia editions)
@@ -402,7 +333,6 @@ Built 2026-10-13 16:33 UTC
 - Robert Russell Bennett (Composer, 1894–1981, 20 Wikipedia editions)
 - Vítězslava Kaprálová (Composer, 1915–1940, 20 Wikipedia editions)
 - Benjamin Godard (Composer, 1849–1895, 20 Wikipedia editions)
-- Sergei Vasilenko (Composer, 1872–1956, 20 Wikipedia editions)
 - Richard Bonynge (Conductor, 1930–, 19 Wikipedia editions)
 - Marcello Abbado (Composer, 1926–2020, 19 Wikipedia editions)
 - Marc'Antonio Ingegneri (Composer, 1535–1592, 19 Wikipedia editions)
@@ -427,12 +357,12 @@ Built 2026-10-13 16:33 UTC
 - Holger Czukay (Composer, 1938–2017, 19 Wikipedia editions)
 - Giovanni Animuccia (Composer, 1520–1571, 19 Wikipedia editions)
 - Matthew Locke (Composer, 1621–1677, 19 Wikipedia editions)
-- Modest Tchaikovsky (Composer, 1850–1916, 19 Wikipedia editions)
 - Max von Schillings (Composer, 1868–1933, 19 Wikipedia editions)
 - Michael Gielen (Composer, 1927–2019, 19 Wikipedia editions)
 - Arvīds Jansons (Conductor, 1914–1984, 19 Wikipedia editions)
 - Sophie Menter (Composer, 1846–1918, 19 Wikipedia editions)
 - Toshio Hosokawa (Composer, 1955–, 19 Wikipedia editions)
+- Tamás Vásáry (Conductor, 1933–2026, 19 Wikipedia editions)
 - Jacques-Nicolas Lemmens (Composer, 1823–1881, 19 Wikipedia editions)
 - Ferenc Farkas (Composer, 1905–2000, 19 Wikipedia editions)
 - Vagn Holmboe (Composer, 1909–1996, 19 Wikipedia editions)
@@ -449,7 +379,6 @@ Built 2026-10-13 16:33 UTC
 - Johann Kaspar Kerll (Composer, 1627–1693, 18 Wikipedia editions)
 - Giovanni Battista Bassani (Composer, 1650–1716, 18 Wikipedia editions)
 - Anton Stamitz (Composer, 1750–1800, 18 Wikipedia editions)
-- Alessandro Rolla (Composer, 1757–1841, 18 Wikipedia editions)
 - Salomon Jadassohn (Composer, 1831–1902, 18 Wikipedia editions)
 - Arthur De Greef (Composer, 1862–1940, 18 Wikipedia editions)
 - Martin Wegelius (Composer, 1846–1906, 18 Wikipedia editions)
@@ -554,7 +483,6 @@ Built 2026-10-13 16:33 UTC
 - Paul Gilson (Composer, 1865–1942, 15 Wikipedia editions)
 - Hans Bronsart von Schellendorff (Composer, 1830–1913, 15 Wikipedia editions)
 - Arthur Friedheim (Composer, 1859–1932, 15 Wikipedia editions)
-- István Thomán (Composer, 1862–1940, 15 Wikipedia editions)
 - Stefan Wolpe (Composer, 1902–1972, 15 Wikipedia editions)
 - Ellen Taaffe Zwilich (Composer, 1939–, 15 Wikipedia editions)
 - Daniel Purcell (Composer, 1664–1717, 15 Wikipedia editions)
@@ -575,12 +503,13 @@ Built 2026-10-13 16:33 UTC
 - Ervin Nyiregyházi (Composer, 1903–1987, 15 Wikipedia editions)
 - Ilmari Hannikainen (Composer, 1892–1955, 15 Wikipedia editions)
 
-## Candidates skipped (176)
+## Candidates skipped (204)
 
 - Leonardo da Vinci (Q762): not a classical musician: described as "Italian Renaissance polymath (1452−1519)"
 - Johann Wolfgang von Goethe (Q5879): not a classical musician: described as "German writer, artist, natural scientist and politician (1749–1832)"
 - Martin Luther (Q9554): not a classical musician: described as "German priest and theologian (1483–1546)"
 - Friedrich Nietzsche (Q9358): not a classical musician: described as "German philosopher (1844-1900)"
+- Jean-Jacques Rousseau (Q6527): not a classical musician: described as "Genevan philosopher, writer, and composer (1712-1778)"
 - Louis Armstrong (Q1779): not a classical musician: jazz (American jazz musician, trumpeter and singer (1901–1971))
 - Heinrich Heine (Q44403): not a classical musician: described as "German poet, writer and literary critic (1797–1856)"
 - Paul McCartney (Q2599): not a classical musician: rock (rock and roll / classical music / rock music / psychedelic rock / art rock / pop rock / beat music)
@@ -589,8 +518,10 @@ Built 2026-10-13 16:33 UTC
 - Jean-Auguste-Dominique Ingres (Q23380): not a classical musician: described as "French painter (1780–1867)"
 - Zhu Xi (Q9397): not a classical musician: described as "Chinese historian, neo-Confucian philosopher, poet, and politician during the Song dynasty (1130–1200)"
 - Frederick II of Prussia (Q33550): not a classical musician: described as "King of Prussia from 1740 to 1786 (1712-1786)"
+- Albert Schweitzer (Q49325): not a classical musician: described as "French-German physician, theologian, musician, and philosopher (1875-1965)"
 - Henry VIII of England (Q38370): not a classical musician: described as "King of England from 1509 to 1547 (1491–1547)"
 - Lila Downs (Q23880): not a classical musician: singer-songwriter (Mexican-American singer-songwriter)
+- William Herschel (Q14277): not a classical musician: described as "German-born British astronomer and composer (1738–1822)"
 - Frank Zappa (Q127330): not a classical musician: jazz (jazz / classical music / alternative rock / rock music / proto-punk / progressive rock / jazz fusion / psychedelic rock / musique concrète / comedy rock / art music / experimental music / experimental rock / avant-garde music / avant-prog / avant-pop)
 - Giacomo Casanova (Q83321): not a classical musician: described as "Venetian adventurer and writer (1725–1798)"
 - Anne Boleyn (Q80823): not a classical musician: described as "second wife of Henry VIII of England (died 1536)"
@@ -600,6 +531,7 @@ Built 2026-10-13 16:33 UTC
 - Ella Fitzgerald (Q1768): not a classical musician: jazz (American jazz singer (1917–1996))
 - Miles Davis (Q93341): not a classical musician: jazz (American jazz trumpeter, bandleader, and composer (1926–1991))
 - Andrea Bocelli (Q42402): not a classical musician: singer-songwriter (Italian tenor and singer-songwriter (born 1958))
+- Isabelle de Charrière (Q123386): not a classical musician: described as "Dutch French-language writer and composer (1740-1805)"
 - Ravi Shankar (Q103774): not a classical musician: described as "Indian sitar player (1920–2012)"
 - E. T. A. Hoffmann (Q150471): not a classical musician: described as "German writer (1776-1822)"
 - Leon Battista Alberti (Q182046): not a classical musician: described as "Italian architect and writer (1404-1472)"
@@ -615,7 +547,7 @@ Built 2026-10-13 16:33 UTC
 - Abdülaziz (Q151500): not a classical musician: described as "32th Sultan of the Ottoman Empire (1861–1876)"
 - Ruslana Lyzhychko (Q129119): not a classical musician: pop (pop music / world music / folk-pop)
 - Leopold I, Holy Roman Emperor (Q150494): not a classical musician: described as "Holy Roman Emperor (1658-1705), King of Hungary and Croatia and King of Bohemia (lived 1640-1705)"
-- Quincy Jones (Q193645): not a classical musician: jazz (jazz / rhythm and blues / soul / funk / swing / bossa nova)
+- Quincy Jones (Q193645): not a classical musician: described as "American record producer and composer (1933–2024)"
 - Alexander Rybak (Q131259): not a classical musician: pop (classical music / pop music / baroque pop / country music / folk rock / adult contemporary music / pop rock / crossover / symphonic rock / indie pop)
 - Samuel Butler (Q312829): not a classical musician: described as "English novelist and critic (1835–1902)"
 - Rouget de Lisle (Q207660): not a classical musician: described as "French army officer (1760-1836)"
@@ -623,8 +555,9 @@ Built 2026-10-13 16:33 UTC
 - Karl May (Q22714): not a classical musician: described as "German writer (1842–1912)"
 - Caroline Herschel (Q76948): not a classical musician: described as "German-British astronomer (1750-1848)"
 - Prince Albert of Saxe-Coburg and Gotha (Q152245): not a classical musician: described as "Consort of Queen Victoria from 1840 to 1861 (1819–1861)"
-- Paco de Lucía (Q153300): not a classical musician: flamenco (Spanish flamenco, classical, jazz guitarist & musician (1947-2014))
+- Paco de Lucía (Q153300): not a classical musician: described as "Spanish flamenco, classical, jazz guitarist & musician (1947-2014)"
 - A. R. Rahman (Q108560): not a classical musician: pop (classical music / electronic music / pop music / world music / soft rock / dance music / pop rock / electronic dance music / Carnatic music / Indian classical music / experimental music / folk-pop)
+- Mstislav Rostropovich (Q152043): not a classical musician: described as "Soviet and Russian cellist and conductor (1927-2007)"
 - Dizzy Gillespie (Q49575): not a classical musician: jazz (American jazz trumpeter (1917–1993))
 - Ferdinand III, Holy Roman Emperor (Q150575): not a classical musician: described as "Emperor of the Holy Roman Empire (1608-1657)"
 - Joseph I, Holy Roman Emperor (Q152480): not a classical musician: described as "Emperor from 1705 till his death in 1711"
@@ -632,8 +565,9 @@ Built 2026-10-13 16:33 UTC
 - Benny Goodman (Q46755): not a classical musician: jazz (American jazz clarinetist and bandleader (1909–1986))
 - Tori Amos (Q193744): not a classical musician: singer-songwriter (American singer-songwriter (born 1963))
 - Zeami Motokiyo (Q169352): not a classical musician: described as "Japanese aesthetician and playwright"
+- Abay Kunanbaiuly (Q304890): not a classical musician: described as "Kazakh poet, philosopher and composer (1845-1904)"
 - David Ogden Stiers (Q202449): not a classical musician: described as "American actor (1942–2018)"
-- Glenn Miller (Q103651): not a classical musician: jazz (jazz / blues / swing / big band music)
+- Glenn Miller (Q103651): not a classical musician: described as "American band leader, arranger, and composer (1904–1944)"
 - Serj Tankian (Q486063): not a classical musician: rock (Armenian-American rock musician, singer, songwriter and record producer)
 - Oscar I of Sweden (Q52926): not a classical musician: described as "King of Sweden and Norway between 1844–1859 (1799–1859)"
 - Benny Andersson (Q214582): not a classical musician: rock (rock music / pop music / popular music)
@@ -641,20 +575,25 @@ Built 2026-10-13 16:33 UTC
 - John IV of Portugal (Q1060796): not a classical musician: described as "King of Portugal from 1640 to 1656 (lived 1604-1656)"
 - Frederick William III of Prussia (Q37134): not a classical musician: described as "King of Prussia from 1797 to 1840"
 - Leo VI the Wise (Q41618): not a classical musician: described as "Byzantine Emperor"
+- Alexander Griboyedov (Q15001): not a classical musician: described as "Russian diplomat, playwriter, poet, and composer (1795–1829)"
 - Athanasius Kircher (Q76738): not a classical musician: described as "German Jesuit scholar (1601 or 1602-1680)"
 - Herbie Hancock (Q105875): not a classical musician: jazz (American jazz pianist and composer (born 1940))
 - Pierre-Jean de Béranger (Q324998): not a classical musician: described as "French poet and chansonnier (1780-1857)"
 - Wolfram von Eschenbach (Q18821): not a classical musician: described as "German knight and poet (1170–1220)"
 - Bettina von Arnim (Q57236): not a classical musician: described as "German writer and novelist (1785-1859)"
+- Vladimir Horowitz (Q192506): not a classical musician: described as "Russian/Ukrainian and American pianist (1903-1989)"
 - Jon Lord (Q192114): not a classical musician: rock (concerto / rock music / progressive rock / hard rock / symphonic music)
 - Tarja Turunen (Q484540): not a classical musician: heavy metal (classical music / power metal / glam metal / symphonic metal / traditional heavy metal / operatic pop)
+- John Carpenter (Q95008): not a classical musician: described as "American filmmaker, composer and actor (born 1948)"
 - Yehudi Menuhin (Q156814): not a classical musician: jazz (jazz / classical music / art music)
 - Henry Mancini (Q185928): not a classical musician: pop (comedy / melodrama / easy listening / lounge music / orchestral pop / stage and screen)
-- Chick Corea (Q192465): not a classical musician: jazz (American jazz and fusion pianist, keyboardist, and composer (1941-2021))
+- Chick Corea (Q192465): not a classical musician: described as "American jazz and fusion pianist, keyboardist, and composer (1941-2021)"
 - Mike Oldfield (Q3008): not a classical musician: pop (classical music / pop music / progressive rock / ambient music / world music / new age music / traditional folk music / pop rock / Celtic fusion)
 - Hryhorii Skovoroda (Q336803): not a classical musician: described as "Ukrainian philosopher (1722–1794)"
 - Vanessa-Mae (Q215076): not a classical musician: pop (classical music / pop music / techno)
+- Noël Coward (Q298388): not a classical musician: described as "English playwright, composer, director, actor, and singer (1899–1973)"
 - Michel Legrand (Q313281): not a classical musician: jazz (jazz / film score / instrumental music / easy listening / variety)
+- Komitas (Q351670): not a classical musician: described as "Ottoman Armenian priest, musicologist, composer and vardapet (1869–1935)"
 - Matt Bellamy (Q190576): not a classical musician: singer-songwriter (English singer-songwriter, member of Muse)
 - Count Basie (Q107008): not a classical musician: jazz (American jazz musician and composer (1904–1984))
 - Burt Bacharach (Q212762): not a classical musician: pop (pop music / vocal music / easy listening / lounge music / orchestral pop)
@@ -662,35 +601,39 @@ Built 2026-10-13 16:33 UTC
 - Fela Kuti (Q313868): not a classical musician: jazz (jazz / Afrobeat / highlife)
 - Sarah Brightman (Q151814): not a classical musician: pop (musical play / baroque pop / world music / operatic pop)
 - Madame du Barry (Q230677): not a classical musician: described as "French noblewoman by marriage (1743–1793), last mistress of Louis XV (from 1768 to 1774)"
+- Władysław Szpilman (Q157176): not a classical musician: described as "(1911-2000) Polish pianist, composer, Holocaust survivor"
 - George Martin (Q191819): not a classical musician: described as "English record producer (1926–2016)"
 - Alphonsus Maria de Liguori (Q273334): not a classical musician: described as "Italian Catholic bishop and saint (1696-1787)"
 - Ezra Miller (Q508049): not a classical musician: described as "American actor (born 1992)"
 - Denis I of Portugal (Q212890): not a classical musician: described as "King of Portugal"
 - Peter III of Aragon (Q312311): not a classical musician: described as "King of Aragon and Valencia (1276–85); King of Sicily (1282–85)"
-- Bill Haley (Q202319): not a classical musician: rock (American rock and roll music pioneer (1925–1981))
+- Bill Haley (Q202319): not a classical musician: described as "American rock and roll music pioneer (1925–1981)"
 - Alan Silvestri (Q313537): not a classical musician: jazz (jazz / blues)
 - Bill Evans (Q208205): not a classical musician: jazz (American jazz pianist (1929–1980))
 - Ike Turner (Q208871): not a classical musician: blues (blues / rhythm and blues / funk)
 - Josh Groban (Q218083): not a classical musician: pop (pop music)
 - Alain-René Lesage (Q267962): not a classical musician: described as "French writer (1668–1747)"
 - Muslim Magomayev (Q558799): not a classical musician: pop (opera / pop music / operatic pop / classical crossover)
-- Bobby McFerrin (Q310894): not a classical musician: jazz (American jazz vocalist and composer (born 1950))
+- Bobby McFerrin (Q310894): not a classical musician: described as "American jazz vocalist and composer (born 1950)"
 - Blanche of Castile (Q353): not a classical musician: described as "Queen consort of France (1188–1252)"
 - Alexandra David-Néel (Q230456): not a classical musician: described as "French explorer, spiritualist, Buddhist, Taoist, anarchist and writer"
 - August Heinrich Hoffmann von Fallersleben (Q76938): not a classical musician: described as "German scholar and poet (1798–1874)"
 - Dimitrie Cantemir (Q159933): not a classical musician: described as "Prince of Moldavia"
+- Mikalojus Konstantinas Čiurlionis (Q297137): not a classical musician: described as "Lithuanian painter, composer and writer (1875-1911)"
 - James Newton Howard (Q213869): not a classical musician: jazz (free jazz / film score)
 - Charles Mingus (Q107432): not a classical musician: jazz (American jazz double bassist, composer and bandleader (1922–1979))
 - Randy Newman (Q318475): not a classical musician: singer-songwriter (American singer-songwriter and pianist)
 - Wenceslaus II of Bohemia (Q155581): not a classical musician: described as "King of Bohemia and Poland"
 - John Gay (Q321660): not a classical musician: described as "English poet and playwright (1685–1732)"
-- Sonny Rollins (Q299208): not a classical musician: jazz (American jazz saxophonist and composer (1930–2026))
-- Violetta Villas (Q217750): not a classical musician: songwriter (Polish cabaret star, singer, actress, composer, songwriter (1938-2011))
+- Johann Nestroy (Q44862): not a classical musician: described as "Austrian playwright, actor and singer (1801–1862)"
+- Sonny Rollins (Q299208): not a classical musician: described as "American jazz saxophonist and composer (1930–2026)"
+- Violetta Villas (Q217750): not a classical musician: described as "Polish cabaret star, singer, actress, composer, songwriter (1938-2011)"
 - RZA (Q52447): not a classical musician: described as "American rapper, record producer and actor (born 1969)"
-- Kristin Chenoweth (Q231811): not a classical musician: jazz (opera / musical play / jazz / pop music / folk music / gospel music)
+- Arrigo Boito (Q219491): not a classical musician: described as "Italian poet and opera composer and librettist of Verdi's opera ''Otello'' (1842-1918)"
+- Kristin Chenoweth (Q231811): not a classical musician: described as "American actress, singer, author (born 1968)"
 - Wynton Marsalis (Q273076): not a classical musician: jazz (American jazz musician and educator)
 - Hans Sachs (Q19543): not a classical musician: described as "German shoemaker, meistersinger, poet and playwright (1494-1576)"
-- Dorothy Dandridge (Q229251): not a classical musician: jazz (jazz / traditional pop)
+- Dorothy Dandridge (Q229251): not a classical musician: described as "American actress and singer (1922–1965)"
 - Ludovico Einaudi (Q83182): not a classical musician: pop (minimalist music / neoclassical new-age music / 20th-century classical music / operatic pop)
 - Alfonso II of Aragon (Q299156): not a classical musician: described as "Aragonese monarch (1157-1196)"
 - James II of Aragon (Q312735): not a classical musician: described as "King of Aragon and Valencia, Count of Barcelona and King of Sicily (1267-1327)"
@@ -722,34 +665,47 @@ Built 2026-10-13 16:33 UTC
 - Hermann of Reichenau (Q68490): not a classical musician: described as "German 11th-century Benedictine monk"
 - Chet Atkins (Q72096): not a classical musician: jazz (jazz / classical music / country music / traditional folk music)
 - David Foster (Q77112): not a classical musician: songwriter (Canadian musician, record producer, songwriter)
+- Carl Jonas Love Almqvist (Q316381): not a classical musician: described as "Swedish romantic poet, early feminist, realist, composer, social critic and traveller (1793-1866)"
 - Franco Battiato (Q25147): not a classical musician: singer-songwriter (Italian singer-songwriter and musician (1945–2021))
+- Victor Borge (Q251417): not a classical musician: described as "Danish comedian and pianist (1909–2000)"
 - Sufjan Stevens (Q319502): not a classical musician: rock (classical music / electronic music / alternative rock / baroque pop / indie rock / indie pop / indie folk / lo-fi music / folk-pop / chamber pop)
-- Léo Ferré (Q320146): not a classical musician: pop (classical music / chanson / French pop / spoken word)
+- Léo Ferré (Q320146): not a classical musician: described as "French-born Monégasque poet and singer"
 - Venantius Fortunatus (Q44934): not a classical musician: described as "Italian saint-bishop, poet and hymnwriter (c. 530-c. 600/609)"
 - Bernard de Ventadour (Q4501): not a classical musician: described as "12th-century troubador"
 - Georg V of Hanover (Q57428): not a classical musician: described as "King of Hanover (1819–1878)"
 - Hartmann von Aue (Q75852): not a classical musician: described as "leading poet of the Middle High German period"
-- Carl Michael Bellman (Q312498): not a classical musician: songwriter (Swedish poet, songwriter and composer (1740–1795))
+- Carl Michael Bellman (Q312498): not a classical musician: described as "Swedish poet, songwriter and composer (1740–1795)"
 - Lalo Schifrin (Q247293): not a classical musician: jazz (jazz / classical music / rock music / bebop / bossa nova)
 - Vitas (Q362258): not a classical musician: rock (opera / rock music / world music / pop rock / synth-pop)
 - Buddy Rich (Q318339): not a classical musician: described as "American jazz drummer and bandleader (1917–1987)"
 - George Clinton (Q336272): not a classical musician: funk (American funk musician, singer, songwriter and music producer)
 - George Gaynes (Q279225): not a classical musician: described as "American actor (1917–2016)"
 - John Sigismund Zápolya (Q313396): not a classical musician: described as "King of Hungary and Prince of Transylvania"
-- Joe Zawinul (Q44767): not a classical musician: jazz (Austrian jazz keyboardist and composer (1932–2007))
+- Joe Zawinul (Q44767): not a classical musician: described as "Austrian jazz keyboardist and composer (1932–2007)"
+- Hanns Eisler (Q78704): not a classical musician: described as "Austrian and German composer (1898–1962)"
 - Ira Gershwin (Q61059): not a classical musician: described as "American lyricist (1896–1983)"
+- Dimitri Tiomkin (Q317033): not a classical musician: described as "Ukrainian and American composer"
 - Barbara Hendricks (Q807482): not a classical musician: jazz (opera / jazz / swing)
 - Archduke Rudolf of Austria (Q93373): not a classical musician: described as "Austrian cardinal"
-- Donald Byrd (Q362764): not a classical musician: jazz (American recording artist; jazz and rhythm & blues trumpeter and vocalist (1932–2013))
+- Donald Byrd (Q362764): not a classical musician: described as "American recording artist; jazz and rhythm & blues trumpeter and vocalist (1932–2013)"
+- Hans Richter (Q366147): not a classical musician: described as "Austrian-Hungarian orchestral and operatic conductor (1843-1916)"
 - Pierre Henry (Q544469): not a classical musician: rock (electronic rock / musique concrète)
 - Anna Mahler (Q215588): not a classical musician: described as "Austrian sculptor (1904-1988)"
 - Vladimir Cosma (Q507940): not a classical musician: jazz (opera / jazz / symphonic music)
 - Friedrich Gulda (Q345922): not a classical musician: jazz (jazz)
 - Johann van Beethoven (Q2153541): not a classical musician: described as "father of Ludwig van Beethoven"
+- Ferenc Fricsay (Q315589): not a classical musician: described as "(1914–1963) conductor"
+- Egon Wellesz (Q213680): not a classical musician: described as "Austrian, later British composer, teacher and musicologist (1885-1974)"
+- Friedrich Wieck (Q440809): not a classical musician: described as "German piano teacher, music critic and music educator (1785-1873)"
+- Leó Weiner (Q535323): not a classical musician: described as "(1885–1960) composer, music pedagogue"
+- Sergei Vasilenko (Q1553197): not a classical musician: described as "Russian and Soviet composer (1872–1956)"
+- Modest Tchaikovsky (Q2306644): not a classical musician: described as "Russian dramatist, opera librettist and translator (1850–1916)"
+- Alessandro Rolla (Q2143613): not a classical musician: described as "Italian viola and violin virtuoso, composer, conductor and teacher"
 - María Grever (Q1645018): not a classical musician: songwriter (Mexican-American musician, songwriter, conductor)
 - Andrew Hill (Q505138): not a classical musician: jazz (American jazz pianist and composer (1931-2007))
 - Harriet Smithson (Q1034113): not a classical musician: described as "Anglo-Irish actress (1800-1854)"
 - Gottfried Heinrich Bach (Q710996): not a classical musician: described as "Son of Johann Sebastian Bach"
 - Jaroslav Ježek (Q1345146): not a classical musician: jazz (Czech conductor, Esperantist, composer and jazz musician (1906–1942))
+- István Thomán (Q375024): not a classical musician: described as "(1862–1940 classical pianist, piano teacher"
 - Marie Bigot (Q460587): not a classical musician: described as "French piano teacher"
 - Egberto Gismonti (Q746182): not a classical musician: jazz (jazz / Latin jazz)
