@@ -15,6 +15,11 @@
         .active-node { animation: pulse 1.5s infinite; font-weight: bold !important; }
         button { background: #222; color: #ccc; border: 1px solid #444; padding: 5px 10px; cursor: pointer; margin-top: 5px; border-radius: 4px; }
         button:hover { background: #d4af37; color: #000; }
+        button:disabled { opacity: 0.4; cursor: default; }
+        button:disabled:hover { background: #222; color: #ccc; }
+        #like-btn.liked { color: #ff5c7a; border-color: #ff5c7a; }
+        .link-btn { background: none; border: none; padding: 0; margin: 0 0 0 6px; color: #9fb4c8; text-decoration: underline; font-size: 12px; }
+        .link-btn:hover { background: none; color: #fff; }
 
         .chip { background:#151515; color:#ddd; border:1px solid #333; padding:3px 8px; border-radius:999px; font-size:12px; line-height:1.2; }
         .chip:hover { background:#d4af37; color:#000; }
@@ -48,11 +53,14 @@
         <button onclick="setMode('teleport')">Teleport</button>
         <button onclick="setMode('radio')" title="Live internet radio for the active tag; press again for another station">Radio</button>
         <button onclick="skipTrack()" title="Next track now (in Radio mode: next station). Media key: Next">Skip ⏭</button>
+        <button onclick="toggleLike()" id="like-btn" title="Like this artist: they and related artists come up more often">♡ Like</button>
         <button onclick="toggleAutoplay()" id="autoplay-btn">Autoplay: ON</button>
         <button onclick="resumeLast()">Resume Last</button>
         <button onclick="clearActiveTag()">Clear Tag</button>
         <button onclick="resetView()">Center View</button>
+        <button onclick="toggleTaste()" id="taste-btn" title="Let your likes, skips and listens steer the picks">Taste: ON</button>
     </div>
+    <div id="taste-line" style="margin-top:6px; font-size:12px; color:#aaa;"></div>
     <div id="source-chips" style="margin-top:10px; display:flex; flex-wrap:wrap; gap:6px; align-items:center; font-size:12px; color:#aaa;"></div>
     </div>
 <svg id="viz"></svg>
@@ -196,6 +204,7 @@ function focusOnNode(node, scale=1.35, duration=650) {
         if (tagEl) tagEl.textContent = activeTag ?? '(none)';
         const btn = document.getElementById('autoplay-btn');
         if (btn) btn.textContent = autoplayEnabled ? 'Autoplay: ON' : 'Autoplay: OFF';
+        updateTasteUI();
     }
 
     function resolveNode(name) {
@@ -257,6 +266,7 @@ function focusOnNode(node, scale=1.35, duration=650) {
 
             if (src) {
                 player.src = src;
+                trackState = null;
                 // currentTime can only be set once metadata is loaded
                 player.addEventListener('loadedmetadata', () => {
                     // live radio streams have no finite duration and can't seek
@@ -279,7 +289,8 @@ function focusOnNode(node, scale=1.35, duration=650) {
     // Masters are always shown. The other names appear in order of importance as you zoom in: the
     // first at LOD_FIRST_ZOOM, all of them by LOD_ALL_ZOOM. Importance = number of Wikipedia language
     // editions, with a head start for your curated artists over ones the build script added.
-    // Always shown whatever the zoom: the artist playing, its closest artists, and search matches.
+    // Always shown whatever the zoom: the artist playing, its closest artists, artists you liked and
+    // search matches.
     const LOD_FIRST_ZOOM = 0.8;
     const LOD_ALL_ZOOM = 3;
     const CURATED_BONUS = 1.5;
@@ -301,6 +312,7 @@ function focusOnNode(node, scale=1.35, duration=650) {
         requestAnimationFrame(() => {
             visibilityQueued = false;
             const context = new Set(currentNode ? [currentNode, ...(currentNode._neighbours || []).map(x => x.node)] : []);
+            for (const n of likedNodes()) context.add(n);
             const opacity = d => {
                 const zoomed = zoomK >= (d._minZoom ?? 0) || context.has(d);
                 if (searchQuery) return matchesQuery(d, searchQuery) ? 1 : (zoomed ? 0.08 : 0);
@@ -568,6 +580,7 @@ async function init() {
             return "#d4af37";                             // Gold
         })
         .on("click", (e, d) => playNode(d));
+    loadTaste();
     updateVisibility();
 
     simulation.nodes(nodes).on("tick", () => {
@@ -622,6 +635,12 @@ async function init() {
     function skipTrack() {
         if (playMode !== 'radio' && !currentNode) { setStatus('Pick an artist first'); return; }
         setStatus('');
+        // Skipping a track you've just started hearing says you didn't want it (a track that never
+        // started - still searching, or failed - says nothing)
+        if (trackState?.started && !trackState.counted && player.currentTime < TASTE.quickSkipSec) {
+            trackState.counted = true;
+            recordTaste(trackState.node, 'skips');
+        }
         // Stop the current track (or station) now: otherwise it plays on while the next one is looked
         // up, and if it ends meanwhile, autoplay would skip a second time
         player.pause();
@@ -913,6 +932,8 @@ async function init() {
 
     function startTrack(node, track, prefix = `${node.id} — `) {
         player.src = track.src;
+        // Radio streams belong to a genre, not to the artist: they teach the taste nothing
+        trackState = playMode === 'radio' ? null : { node, started: false, counted: false };
         const title = `${prefix}${track.title}`;
         try {
             if (nodeById.has(node.id)) localStorage.setItem(LS.lastNodeId, node.id);
@@ -933,8 +954,11 @@ async function init() {
         clearTimeout(skipTimer);
         const previous = currentNode;
         currentNode = node;
+        trackState = null;
         updateVisibility();
-        setWhy(playMode === 'radio' ? '' : describeChoice(node, reason, previous));
+        updateTasteUI();
+        const tasteNote = reason && reason.mode !== 'pure_random' ? tasteReason(node) : '';
+        setWhy(playMode === 'radio' ? '' : [describeChoice(node, reason, previous), tasteNote].filter(Boolean).join(' · '));
         d3.selectAll(".tag-node").classed("active-node", false);
         d3.selectAll(".tag-node").filter(d => d.id === node.id).classed("active-node", true);
 
@@ -1250,6 +1274,147 @@ async function init() {
         return [...new Set(reasons.map(r => r.text))].slice(0, max);
     }
 
+    // ---------- Taste ----------
+    // Learns only from what you do on purpose: the ♥ button, skipping a track in its first 30 seconds,
+    // and listening (2 minutes, or to the end of a shorter track). Automatic skips (no recordings found,
+    // a file that won't play) never count, and neither does Radio. Each artist's score also spreads,
+    // at half strength, to their closest artists, so liking Pérotin makes Léonin likelier too.
+    // The score multiplies the pick weight (like = 2.2x, three quick skips = 0.5x): nothing is ruled out.
+    const TASTE = {
+        like: 1.0, listen: 0.1, maxListens: 4, skip: -0.3, maxSkips: 3,
+        quickSkipSec: 30, listenSec: 120, spread: 0.5, strength: 0.8,
+    };
+    const TASTE_KEY = 'mg_taste';
+    let taste = { on: true, artists: {} };  // artists: id -> { like, listens, skips }
+    let tasteSpread = new Map();             // id -> taste borrowed from related artists
+    let trackState = null;                   // the track playing now: { node, started, counted }
+
+    function loadTaste() {
+        try {
+            const saved = JSON.parse(localStorage.getItem(TASTE_KEY) || 'null');
+            if (saved && saved.artists && typeof saved.artists === 'object') {
+                taste.on = saved.on !== false;
+                // Saved under an old name (merged entry)? File it under the current id
+                for (const [id, t] of Object.entries(saved.artists)) {
+                    const n = resolveNode(id);
+                    if (n) taste.artists[n.id] = { ...(taste.artists[n.id] || {}), ...t };
+                }
+            }
+        } catch (e) { console.warn('[taste] load', e); }
+        tasteChanged(false);
+    }
+
+    function tasteChanged(save = true) {
+        if (save) { try { localStorage.setItem(TASTE_KEY, JSON.stringify(taste)); } catch (e) {} }
+        tasteSpread = new Map();
+        for (const id of Object.keys(taste.artists)) {
+            const own = ownTaste(id);
+            if (!own) continue;
+            for (const { node: m, sim } of nodeById.get(id)?._neighbours || []) {
+                tasteSpread.set(m.id, (tasteSpread.get(m.id) || 0) + sim * own);
+            }
+        }
+        d3.selectAll('.tag-node').text(d => taste.artists[d.id]?.like ? `${d.id} ♥` : d.id);
+        updateTasteUI();
+        updateVisibility();
+    }
+
+    function ownTaste(id) {
+        const t = taste.artists[id];
+        if (!t) return 0;
+        return (t.like ? TASTE.like : 0)
+            + TASTE.listen * Math.min(t.listens || 0, TASTE.maxListens)
+            + TASTE.skip * Math.min(t.skips || 0, TASTE.maxSkips);
+    }
+
+    function affinity(n) {
+        const a = ownTaste(n.id) + TASTE.spread * (tasteSpread.get(n.id) || 0);
+        return Math.max(-1.5, Math.min(2, a));
+    }
+
+    function tasteWeight(n) {
+        return taste.on ? Math.exp(TASTE.strength * affinity(n)) : 1;
+    }
+
+    function likedNodes() {
+        return Object.keys(taste.artists).filter(id => taste.artists[id].like).map(id => nodeById.get(id)).filter(Boolean);
+    }
+
+    function recordTaste(node, field) {
+        if (!node || !nodeById.has(node.id)) return;
+        const t = taste.artists[node.id] || (taste.artists[node.id] = { like: false, listens: 0, skips: 0 });
+        t[field] = (t[field] || 0) + 1;
+        tasteChanged();
+    }
+
+    // A track counts as listened to once: after 2 minutes, or at its end
+    function countListen() {
+        if (!trackState?.started || trackState.counted) return;
+        trackState.counted = true;
+        recordTaste(trackState.node, 'listens');
+    }
+
+    function toggleLike() {
+        if (!currentNode || playMode === 'radio' || !nodeById.has(currentNode.id)) return;
+        const t = taste.artists[currentNode.id] || (taste.artists[currentNode.id] = { like: false, listens: 0, skips: 0 });
+        t.like = !t.like;
+        if (t.like) t.skips = 0; // a like overrules earlier quick skips
+        if (trackState?.node === currentNode) trackState.counted = true; // and a skip right after it says nothing
+        tasteChanged();
+    }
+
+    function toggleTaste() {
+        taste.on = !taste.on;
+        tasteChanged();
+    }
+
+    function resetTaste() {
+        if (!confirm('Forget all your likes, skips and listens?')) return;
+        taste.artists = {};
+        tasteChanged();
+    }
+
+    // For the "why" line: is this pick (partly) down to your likes?
+    function tasteReason(node) {
+        if (!taste.on) return '';
+        if (taste.artists[node.id]?.like) return '♥ you liked them';
+        let best = null;
+        for (const u of likedNodes()) {
+            const hit = (u._neighbours || []).find(x => x.node === node);
+            if (hit && (!best || hit.sim > best.sim)) best = { u, sim: hit.sim };
+        }
+        return best ? `♥ close to ${best.u.id}, whom you liked` : '';
+    }
+
+    function updateTasteUI() {
+        const btn = document.getElementById('like-btn');
+        if (btn) {
+            const liked = !!(currentNode && taste.artists[currentNode.id]?.like);
+            btn.textContent = liked ? '♥ Liked' : '♡ Like';
+            btn.classList.toggle('liked', liked);
+            btn.disabled = !currentNode || playMode === 'radio' || !nodeById.has(currentNode.id);
+        }
+        const tb = document.getElementById('taste-btn');
+        if (tb) tb.textContent = taste.on ? 'Taste: ON' : 'Taste: OFF';
+        const line = document.getElementById('taste-line');
+        if (line) {
+            const all = Object.values(taste.artists);
+            const liked = all.filter(t => t.like).length;
+            const skipped = all.filter(t => (t.skips || 0) > 0).length;
+            const listened = all.filter(t => (t.listens || 0) > 0).length;
+            line.textContent = all.length
+                ? `Taste: ${liked} liked · ${listened} listened to · ${skipped} skipped early`
+                : 'Taste: like artists (♡) or skip early to steer the picks';
+            if (all.length) {
+                const reset = document.createElement('button');
+                reset.className = 'link-btn';
+                reset.textContent = 'reset';
+                reset.onclick = resetTaste;
+                line.appendChild(reset);
+            }
+        }
+    }
+
     const RECENT_EXCLUDED = 8;   // the last 8 artists played are never picked again straight away
     const recentPicks = [];
 
@@ -1263,7 +1428,7 @@ async function init() {
         // 0.002 right after playing (500x less likely: a very similar artist would otherwise come
         // straight back), 0.5 after one half-life, approaching 1 later
         const recency = Math.max(0.002, 1 - Math.pow(2, -dt / RECENCY_HALF_LIFE_MS));
-        return role * novelty * recency;
+        return role * novelty * recency * tasteWeight(candidate);
     }
 
     // Pick one item with probability proportional to exp(score / tau) * baseWeight(item).
@@ -1386,15 +1551,22 @@ async function init() {
             lastWrite = now;
             try { localStorage.setItem(LS.lastTrackTime, String(player.currentTime || 0)); } catch(e) {}
         });
+        player.addEventListener('timeupdate', () => {
+            if (player.currentTime >= TASTE.listenSec) countListen();
+        });
     })();
 
     // Autoplay: play next when track ends
     player.addEventListener('ended', () => {
+        countListen();
         if (autoplayEnabled) autoNext();
     });
 
     // A track that actually starts playing resets the failure streak
-    player.addEventListener('playing', () => { consecutiveFailures = 0; });
+    player.addEventListener('playing', () => {
+        consecutiveFailures = 0;
+        if (trackState) trackState.started = true;
+    });
 
     // Broken/unsupported file: move on instead of stalling
     player.addEventListener('error', () => {
