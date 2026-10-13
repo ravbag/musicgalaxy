@@ -47,6 +47,7 @@
         <button onclick="setMode('spiral_time')">Spiral Time</button>
         <button onclick="setMode('teleport')">Teleport</button>
         <button onclick="setMode('radio')" title="Live internet radio for the active tag; press again for another station">Radio</button>
+        <button onclick="skipTrack()" title="Next track now (in Radio mode: next station). Media key: Next">Skip ⏭</button>
         <button onclick="toggleAutoplay()" id="autoplay-btn">Autoplay: ON</button>
         <button onclick="resumeLast()">Resume Last</button>
         <button onclick="clearActiveTag()">Clear Tag</button>
@@ -613,9 +614,24 @@ async function init() {
         if (mode === 'teleport' || mode === 'radio' || previous === 'radio' || (currentNode && !playing)) {
             autoNext();
         } else if (playing && mode !== previous) {
-            setStatus('New mode starts after this track');
+            setStatus('New mode starts after this track (Skip to start it now)');
         }
     }
+
+    // Move on now: the next pick in the current mode, or the next station in Radio mode
+    function skipTrack() {
+        if (playMode !== 'radio' && !currentNode) { setStatus('Pick an artist first'); return; }
+        setStatus('');
+        // Stop the current track (or station) now: otherwise it plays on while the next one is looked
+        // up, and if it ends meanwhile, autoplay would skip a second time
+        player.pause();
+        autoNext();
+    }
+
+    // The keyboard's "next track" media key does the same
+    try {
+        navigator.mediaSession?.setActionHandler('nexttrack', skipTrack);
+    } catch (e) { /* not supported */ }
 
     function toggleAutoplay() {
         autoplayEnabled = !autoplayEnabled;
@@ -817,7 +833,9 @@ async function init() {
     // Wikimedia Commons: full-text search over audio files that mention the artist
     // Spoken content: talks, concert introductions, interviews, lectures, podcasts. Only words that
     // clearly mean speech (not "introduction", which is common in music titles: Introduction and Allegro)
-    const SPEECH_WORDS = /\b(spoken|pronunciation|interviews?|lectures?|podcasts?|speech(es)?|talk show|discussion|conversation|audio ?guide|radio (programme|program|show)|inleiding|toelichting|lezing|gesprek|voordracht|einf(ü|ue)hrung|vortrag|gespr(ä|ae)ch|diskussion|conf(é|e)rence|entretien|causerie)\b/i;
+    // "Concert introduction" and German/Dutch compounds (Konzerteinführung, concertinleiding) are matched
+    // as such, so the plain word "introduction" can stay allowed.
+    const SPEECH_WORDS = /\b(spoken|pronunciation|interviews?|lectures?|podcasts?|speech(es)?|talk show|discussion|conversation|audio ?guide|radio (programme|program|show)|concert introductions?|pre-?concert talks?|\w*inleiding(en)?|toelichting|lezing|gesprek|voordracht|\w*einf(ü|ue)hrung(en)?|vortrag|gespr(ä|ae)ch|diskussion|conf(é|e)rence|entretien|causerie)\b/i;
     // Categories that mark a file as music ("Audio files of music by ...", "Symphonies by ...", ...)
     const MUSIC_CATEGORY = /music|musique|musik|muziek|m(ú|u)sica|symphon|concert|sonata|quartet|opera|aria|lieder|song|piano|organ|orchestra|choir|choral|cantata|mass(es)? by|requiem|composition|works by/i;
 
