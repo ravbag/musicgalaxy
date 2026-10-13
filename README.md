@@ -77,8 +77,8 @@ Then open <http://localhost:8000/index_fixed_working_v9.html>. Press Ctrl+C in t
   notable other artists too; from about 3× zoom all of them. The counter in the bottom-right corner
   shows how many are visible ("173 of 896 names · zoom in for more"). Notability is how many
   Wikipedia languages cover an artist, with a head start for the hand-curated artists over the ones
-  the build script added. The artist that's playing, its closest related artists and any search
-  matches are always shown, whatever the zoom.
+  the build script added. The artist that's playing, its closest related artists, artists you
+  liked (marked ♥) and any search matches are always shown, whatever the zoom.
 
 ### Playing music
 
@@ -189,6 +189,30 @@ Choosing the next artist:
 - **Play history**: an artist you've just played is 500× less likely; that penalty halves every hour.
   Artists played many times also become gradually less likely.
 - **Masters** are 1.6× as likely as an otherwise equal secondary artist.
+- **Your taste** (see below) makes artists you like, and artists close to them, more likely.
+
+#### Taste
+
+The app learns what you like, but only from things you do on purpose:
+
+| You | Counts as |
+|---|---|
+| Press **♡ Like** | A strong like for the artist playing (press again to undo). |
+| Press **Skip** in the first 30 seconds of a track | A small "not now" for that artist (counted up to 3 times). |
+| Listen for 2 minutes, or to the end of a shorter track | A small plus for that artist (counted up to 4 times). |
+
+Automatic skips never count: when no recording is found or a file won't play, the app moves on but
+learns nothing, and neither does a Skip while it's still searching. Radio mode doesn't count either,
+since a station plays a genre, not the artist. A like also clears earlier quick skips.
+
+Each artist's taste also carries over, at half strength, to their closest related artists: liking
+Vivaldi makes Corelli more likely too. Taste multiplies an artist's chances and never rules anyone
+out: a liked artist is about 2.2× as likely, a neighbour of a liked artist about 1.5×, and an artist
+you skipped early three times about half as likely. Pure Random ignores taste.
+
+When a pick is down to your likes, the "why" line says so (*♥ close to Vivaldi, whom you liked*).
+The line under the buttons counts your likes, listens and early skips; **reset** there forgets them
+all, and **Taste: ON/OFF** switches the effect off without forgetting anything.
 
 #### The "why" line
 
@@ -207,15 +231,17 @@ When you click a name yourself, it shows the link from the previous artist (*Lin
 | Button | Action |
 |---|---|
 | **Skip ⏭** | Moves on now: the next pick in the current mode (or the next station in Radio mode). The keyboard's "next track" media key does the same. |
+| **♡ Like** | Likes the artist playing (♥ next to their name on the map); press again to undo. See [Taste](#taste). |
 | **Autoplay: ON/OFF** | Whether a new track starts automatically when one ends. |
 | **Resume Last** | Picks up the last track you were listening to, at the position you left it. |
 | **Clear Tag** | Removes the active tag (Within Tag then falls back to the current artist's first tag). |
 | **Center View** | Zooms back to the current artist, or resets the view if nothing is playing. |
+| **Taste: ON/OFF** | Whether your likes, skips and listens steer the picks. |
 
 ### What's remembered between sessions
 
 Your mode, active tag, autoplay setting, the last artist and the last track (with playback position)
-are saved locally. On start-up the map centres on the last artist without playing anything;
+are saved locally, and so is your taste (likes, early skips, listens). On start-up the map centres on the last artist without playing anything;
 press **Resume Last** to carry on.
 
 ## Data: `knowledge_base.json`
