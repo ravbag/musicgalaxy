@@ -261,9 +261,13 @@ What it does:
 2. **Adds more artists**: classical composers, conductors, opera singers, pianists, violinists,
    organists and cellists with articles in at least 40 Wikipedia languages (up to 500), plus the
    teachers, students, influences and family of artists already in the database. Only people whose
-   Wikidata description calls them a musician ("German composer", "Italian soprano") are added, and
-   not jazz, pop or rock musicians, so writers or rulers who also composed (Goethe, Henry VIII)
-   stay out. New artists get tags (period, style, voice, instrument, nationality) from Wikidata.
+   Wikidata description starts with a musical role ("German composer", "Italian soprano",
+   "orchestral and operatic conductor") are added, and not jazz, pop or rock musicians, so writers
+   or rulers who also composed (Goethe, Henry VIII) stay out. Composers and instrumentalists born
+   after 1850 also need a genre or movement whose name sounds classical (classical, opera,
+   minimalism, postminimalism, neoclassical, serial, film score, ...), unless they are a teacher,
+   student or influence of an artist already in the database. New artists get tags (period, style,
+   voice, instrument, nationality) from Wikidata.
    Each run rebuilds the added artists from scratch; your curated entries are never removed.
    Curated stub entries with a made-up era (1850, tagged *Romantic, Secondary*) are matched by name
    and corrected with their real era and style.
@@ -275,13 +279,25 @@ What it does:
    `relations.json`, and `tools/relations_report.md`.
 
 **Read the report afterwards.** It lists artists it couldn't match, matches it wasn't sure about, the
-artists it added and any source that failed. Fix a wrong match in `tools/wikidata_overrides.json`:
+artists it added, the candidates it skipped (with the reason) and any source that failed.
+
+`tools/wikidata_overrides.json` holds your corrections and additions:
 
 ```json
-{ "Arcangelo Corelli": "Q1234567", "Some Artist": null }
+{
+  "Arcangelo Corelli": "Q1234567",
+  "Some Artist": null,
+  "include": ["Max Richter", "Q714325"]
+}
 ```
 
-(`Q1234567` stands for the id shown at the top of the artist's Wikidata page; `null` means never match), then run the script again.
+- `"Name": "Q…"` fixes a wrong match (`Q1234567` stands for the id shown at the top of the artist's
+  Wikidata page); `null` means never match.
+- `"include"` lists artists to add whatever the rules say, e.g. a favourite who is under the
+  40-language notability cut-off or has no classical genre on Wikidata. Use a name (the best-known
+  musician of exactly that name) or a Wikidata id. The report warns if a name isn't found.
+
+Then run the script again.
 
 Useful options (`--help` lists them all):
 

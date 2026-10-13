@@ -55,7 +55,14 @@ ENTITIES = {
     'Q10': person('Q10', 'Johann Wolfgang von Goethe', [COMPOSER, 'Q36180'], 1749, 1832, links=200,
                   desc='German writer, artist, natural scientist and politician (1749–1832)'),
     'Q11': person('Q11', 'Louis Armstrong', [COMPOSER, SINGER], 1901, 1971, links=150, desc='American jazz trumpeter and singer'),
-    'Q12': person('Q12', 'Young Prodigy', [COMPOSER], 1995, links=41, desc='British composer'),
+    'Q12': person('Q12', 'Young Prodigy', [COMPOSER], 1995, links=41, desc='British composer', genre=['Q506']),
+    # classical evidence by genre/movement *names*; Max Richter only via the include list (31 editions)
+    'Q20': person('Q20', 'Max Richter', [COMPOSER], 1966, links=31, desc='British composer (born 1966)', genre=['Q507', 'Q504']),
+    'Q21': person('Q21', 'Pop Writer', [COMPOSER], 1960, links=90, desc='English composer', genre=['Q505']),
+    'Q22': person('Q22', 'Genreless Composer', [COMPOSER], 1950, links=80, desc='Brazilian composer'),
+    'Q23': person('Q23', 'Postminimal Composer', [COMPOSER], 1960, links=50, desc='Danish composer', genre=['Q504']),
+    'Q24': person('Q24', 'Hans Richter', ['Q158852'], 1843, 1916, links=48,
+                  desc='Austrian-Hungarian orchestral and operatic conductor (1843-1916)'),
     'Q13': person('Q13', 'Johann Pachelbel', [COMPOSER], 1653, 1706, links=70, desc='German Baroque composer', movement=['Q502']),
     'Q14': person('Q14', 'Album Performer', [COMPOSER], 1950, links=10),
     'Q16': person('Q16', 'Jean-Jacques Rousseau', [COMPOSER], 1712, 1778, links=180,
@@ -67,7 +74,8 @@ del ENTITIES['Q9']['claims']['P569']
 ENTITIES['Q5']['descriptions']['en']['value'] = 'American-born Greek soprano'
 ENTITIES['Q7']['descriptions']['en']['value'] = 'Italian soprano'
 LABELS = {'Q500': 'Notre-Dame school', 'Q501': 'Romantic music', 'Q1344': 'opera', 'Q600': 'Holy Roman Empire',
-          'Q601': 'Germany', 'Q602': 'Italy', 'Q700': 'soprano', 'Q502': 'Baroque music', 'Q503': 'rock music'}
+          'Q601': 'Germany', 'Q602': 'Italy', 'Q700': 'soprano', 'Q502': 'Baroque music', 'Q503': 'rock music',
+          'Q504': 'postminimalism', 'Q505': 'pop music', 'Q506': 'contemporary classical music', 'Q507': 'ambient music'}
 # Only used for names without an exact match (the fallback search)
 SEARCH = {'Léonin': ['Q1'], 'Pérotin': ['Q99', 'Q2'], 'Hildegard von Bingen': ['Q3'],
           'Richard Wagner': ['Q40', 'Q4'], 'Maria Callas': ['Q5']}
@@ -122,8 +130,10 @@ def fake_sparql(query):
                 rows.append({'item': {'value': ENTITY_URI + q}, 'label': {'value': lab, 'xml:lang': 'en'}})
     elif 'wd:Q36834 ; wikibase:sitelinks' in query:
         rows = [{'item': {'value': ENTITY_URI + i}, 'links': {'value': str(n)}}
-                for i, n in [('Q10', 200), ('Q16', 180), ('Q11', 150), ('Q13', 70), ('Q6', 55), ('Q9', 60), ('Q3', 90),
-                             ('Q17', 45), ('Q12', 41)]]
+                for i, n in [('Q10', 200), ('Q16', 180), ('Q11', 150), ('Q21', 90), ('Q22', 80), ('Q13', 70), ('Q6', 55),
+                             ('Q9', 60), ('Q3', 90), ('Q23', 50), ('Q17', 45), ('Q12', 41)]]
+    elif 'wd:Q158852 ; wikibase:sitelinks' in query:
+        rows = [{'item': {'value': ENTITY_URI + 'Q24'}, 'links': {'value': '48'}}]
     elif 'wd:Q2865819 ; wikibase:sitelinks' in query:
         rows = [{'item': {'value': ENTITY_URI + 'Q7'}, 'links': {'value': '45'}}]
     elif 'wd:Q486748 ; wikibase:sitelinks' in query:
@@ -222,6 +232,14 @@ class BuildRelationsTest(unittest.TestCase):
         self.assertNotIn('Rocky Pianist', by_id)
         self.assertNotIn('Jean-Jacques Rousseau', by_id)  # composer only as a later role
         self.assertIn('Dual Role Musician', by_id)  # composer first: kept
+        # genre names: postminimalism counts as classical; pop or no genre at all doesn't (born after 1850)
+        self.assertIn('Postminimal Composer', by_id)
+        self.assertNotIn('Pop Writer', by_id)
+        self.assertNotIn('Genreless Composer', by_id)
+        # "orchestral and operatic conductor" is a musical role
+        self.assertIn('Hans Richter', by_id)
+        # under 40 Wikipedia editions and not in any query: not added without the include list
+        self.assertNotIn('Max Richter', by_id)
         self.assertEqual(by_id['Young Prodigy']['era'], br.CURRENT_YEAR)  # born 1995: era capped, not 2035
         # placeholder entry: matched despite its made-up era, then corrected; not duplicated
         p = by_id['Johann Pachelbel']
@@ -264,6 +282,7 @@ class BuildRelationsTest(unittest.TestCase):
         self.assertIn('Johann Wolfgang von Goethe (Q10): not a classical musician: described as "German writer', text)
         self.assertIn('Louis Armstrong (Q11): not a classical musician: jazz', text)
         self.assertIn('Johann Pachelbel: era 1850 -> 1693, tags Romantic -> Baroque', text)
+        self.assertIn('Genreless Composer (Q22): not a classical musician: no classical genre or movement (genres: none)', text)
         self.assertIn('Engelbert Humperdinck (Composer, 1854–1921, 55 Wikipedia editions)', text)
 
     def test_second_run_uses_cache_and_is_stable(self):
@@ -271,8 +290,19 @@ class BuildRelationsTest(unittest.TestCase):
         kb2, rel2, _, http = self.run_build(offline=True)  # would raise on any uncached request
         self.assertEqual(rel1['edges'], rel2['edges'])
         self.assertEqual([a['id'] for a in kb2], [a['id'] for a in kb1])  # same artists, no duplicates on a re-run
-        self.assertEqual(len(kb2), 11)  # 6 curated + 5 added
+        self.assertEqual(len(kb2), 13)  # 6 curated + 7 added
         self.assertEqual(http.requests, [])
+
+    def test_include_list(self):
+        os.makedirs(os.path.join(self.root, 'tools'), exist_ok=True)
+        with open(os.path.join(self.root, 'tools', 'wikidata_overrides.json'), 'w', encoding='utf-8') as f:
+            json.dump({'include': ['Max Richter', 'Nobody Of This Name']}, f)
+        kb, rel, report, _ = self.run_build('--max-new', '1')
+        by_id = {a['id']: a for a in kb}
+        r = by_id.get('Max Richter')
+        self.assertIsNotNone(r)  # added although under the notability cut-off and over --max-new
+        self.assertEqual((r['qid'], r['type'], r['source']), ('Q20', 'Composer', 'wikidata'))
+        self.assertTrue(any('Nobody Of This Name' in w for w in report['warnings']))
 
     def test_overrides_and_no_expand(self):
         os.makedirs(os.path.join(self.root, 'tools'), exist_ok=True)
