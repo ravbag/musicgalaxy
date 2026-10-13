@@ -545,7 +545,11 @@ def resolve_includes(wd, names, kb, report):
     known = {a['qid'] for a in kb if a.get('qid')}
     ids = [n for n in names if re.fullmatch(r'Q\d+', str(n))]
     by_name = [n for n in names if not re.fullmatch(r'Q\d+', str(n))]
-    matches = wd.match_names(by_name) if by_name else {}
+    try:
+        matches = wd.match_names(by_name) if by_name else {}
+    except Exception as e:  # noqa: BLE001 - keep building without the named includes
+        report['warnings'].append(f'include list: name lookup failed ({e}); {", ".join(by_name)} skipped')
+        by_name, matches = [], {}
     for name in by_name:
         people = [e for e in wd.load(matches.get(name, [])).values()
                   if Q_HUMAN in e['instance'] and set(e['occupation']) & MUSIC_OCCUPATIONS]
@@ -563,7 +567,7 @@ def resolve_includes(wd, names, kb, report):
 def expansion_candidates(wd, kb, args, report):
     known = {a['qid'] for a in kb if a.get('qid')}
     found = {}
-    connected = set()  # teachers, students, influences, family of known artists
+    connected = set()  # teachers, students, influences of known artists (exempt from the evidence check)
     for label, occ in EXPANSION_OCCUPATIONS.items():
         # Classical evidence (genre/movement names) is checked later, in classical_musician()
         query = f'''SELECT ?item ?links WHERE {{
@@ -586,6 +590,7 @@ def expansion_candidates(wd, kb, args, report):
     # People directly connected to known artists (teachers, students, influences, family)
     if args.expand_neighbours:
         neighbour = Counter()
+        lineage = set()  # family alone is no sign of a classical musician
         for a in kb:
             ent = wd.entities.get(a.get('qid') or '')
             if not ent:
@@ -594,12 +599,15 @@ def expansion_candidates(wd, kb, args, report):
                 for q in ent[key]:
                     if q not in known:
                         neighbour[q] += 1
+                        if key in ('student_of', 'student', 'influenced_by'):
+                            lineage.add(q)
         ents = wd.load(list(neighbour))
         n = 0
         for q, e in ents.items():
             if Q_HUMAN in e['instance'] and artist_type(e) and e['sitelinks'] >= args.min_sitelinks_neighbour:
                 found[q] = max(found.get(q, 0), e['sitelinks'])
-                connected.add(q)
+                if q in lineage:
+                    connected.add(q)
                 n += 1
         log(f'  connected to known artists (teachers, students, influences, family): {n}')
     return sorted(found, key=lambda q: -found[q]), connected
@@ -635,6 +643,13 @@ def country_adjectives(ent, labels):
 
 
 ADJECTIVE_END = re.compile(r'(al|ic|ical|ian|an|ese|ish|ive|ary|ern)$', re.I)
+ROLE_NOUNS = {  # nouns with an adjective ending
+    'politician', 'historian', 'musician', 'physician', 'librarian', 'comedian', 'magician',
+    'mathematician', 'theologian', 'grammarian', 'academician', 'statistician', 'guardian', 'antiquarian',
+    'humanitarian', 'parliamentarian', 'critic', 'cleric', 'secretary', 'missionary', 'revolutionary',
+    'notary', 'executive', 'general', 'admiral', 'cardinal', 'official', 'statesman', 'nobleman',
+    'clergyman', 'businessman', 'chairman', 'artisan', 'veteran',
+}
 
 
 def first_role(desc):
@@ -646,7 +661,10 @@ def first_role(desc):
     parts = re.split(r'\band\b', segment)
     role = parts[0].strip()
     i = 0
-    while i + 1 < len(parts) and role and ADJECTIVE_END.search(role.split()[-1]):
+    # Only "<adjective> and <adjective> <noun>": in "American politician and composer" the part after
+    # 'and' is a single word, so 'politician' is the noun and the role ends there
+    while (i + 1 < len(parts) and role and ADJECTIVE_END.search(role.split()[-1])
+           and role.split()[-1].lower() not in ROLE_NOUNS and len(parts[i + 1].split()) >= 2):
         i += 1
         role = f'{role} and {parts[i].strip()}'
     return role

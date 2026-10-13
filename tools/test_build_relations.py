@@ -43,7 +43,7 @@ ENTITIES = {
     'Q99': {'id': 'Q99', 'labels': {'en': {'value': 'Pérotin (crater)'}}, 'claims': {'P31': [claim('Q55')]}, 'sitelinks': {}},
     'Q3': person('Q3', 'Hildegard of Bingen', [COMPOSER], 1098, 1179, links=90, influenced_by=['Q8'], country=['Q600']),
     'Q4': person('Q4', 'Richard Wagner', [COMPOSER, 'Q158852'], 1813, 1883, links=150, mbid='mb-wagner',
-                 genre=['Q1344'], country=['Q601']),
+                 genre=['Q1344'], country=['Q601'], sibling=['Q25']),
     'Q40': {'id': 'Q40', 'labels': {'en': {'value': 'Wagner (band)'}}, 'claims': {'P31': [claim('Q215380')]}, 'sitelinks': {}},
     'Q5': person('Q5', 'Maria Callas', [OPERA_SINGER, SINGER], 1923, 1977, links=100, mbid='mb-callas', voice=['Q700']),
     # new artists found by the expansion queries
@@ -63,6 +63,8 @@ ENTITIES = {
     'Q23': person('Q23', 'Postminimal Composer', [COMPOSER], 1960, links=50, desc='Danish composer', genre=['Q504']),
     'Q24': person('Q24', 'Hans Richter', ['Q158852'], 1843, 1916, links=48,
                   desc='Austrian-Hungarian orchestral and operatic conductor (1843-1916)'),
+    # family-only neighbour born after 1850 without a classical genre: needs evidence like anyone else
+    'Q25': person('Q25', 'Wagner Relative', [COMPOSER], 1900, links=20, desc='German composer'),
     'Q13': person('Q13', 'Johann Pachelbel', [COMPOSER], 1653, 1706, links=70, desc='German Baroque composer', movement=['Q502']),
     'Q14': person('Q14', 'Album Performer', [COMPOSER], 1950, links=10),
     'Q16': person('Q16', 'Jean-Jacques Rousseau', [COMPOSER], 1712, 1778, links=180,
@@ -236,6 +238,8 @@ class BuildRelationsTest(unittest.TestCase):
         self.assertIn('Postminimal Composer', by_id)
         self.assertNotIn('Pop Writer', by_id)
         self.assertNotIn('Genreless Composer', by_id)
+        # family alone doesn't exempt from the evidence check (teachers, students and influences do)
+        self.assertNotIn('Wagner Relative', by_id)
         # "orchestral and operatic conductor" is a musical role
         self.assertIn('Hans Richter', by_id)
         # under 40 Wikipedia editions and not in any query: not added without the include list
@@ -375,6 +379,34 @@ class BuildRelationsTest(unittest.TestCase):
         self.assertFalse(check('Indian playback singer (1924–1980)', ['G2']))
         self.assertFalse(check('American composer and conductor'))            # no evidence at all
         self.assertTrue(check('American composer and conductor', occupations=['Q36834', 'Q1415090']))
+        # a noun with an adjective ending is still the first role
+        self.assertEqual(br.first_role('American politician and composer'), 'American politician')
+        self.assertEqual(br.first_role('German historian and composer'), 'German historian')
+        self.assertEqual(br.first_role('Austrian-Hungarian orchestral and operatic conductor (1843-1916)'),
+                         'Austrian-Hungarian orchestral and operatic conductor')
+        self.assertEqual(br.first_role('Italian and French composer'), 'Italian and French composer')
+
+    def test_include_lookup_outage_does_not_stop_the_build(self):
+        os.makedirs(os.path.join(self.root, 'tools'), exist_ok=True)
+        with open(os.path.join(self.root, 'tools', 'wikidata_overrides.json'), 'w', encoding='utf-8') as f:
+            json.dump({'include': ['Max Richter']}, f)
+
+        class NoIncludeLookup(FakeHttp):
+            def fetch_raw(self, url, headers):
+                if 'query.wikidata.org' in url and 'VALUES+%3Fname' in url and 'Max+Richter' in url:
+                    raise br.urllib.error.HTTPError(url, 503, 'Service Unavailable', {'Retry-After': '1'}, None)
+                return super().fetch_raw(url, headers)
+        args = br.parse_args(['--root', self.root])
+        real_sleep = br.time.sleep
+        br.time.sleep = lambda s: None
+        try:
+            kb, rel, report = br.build(args, NoIncludeLookup(args.cache))
+        finally:
+            br.time.sleep = real_sleep
+        by_id = {a['id']: a for a in kb}
+        self.assertNotIn('Max Richter', by_id)
+        self.assertIn('Engelbert Humperdinck', by_id)  # the rest of the build went ahead
+        self.assertTrue(any('include list: name lookup failed' in w for w in report['warnings']))
 
 if __name__ == '__main__':
     unittest.main()
