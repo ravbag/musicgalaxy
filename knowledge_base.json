@@ -71792,6 +71792,55 @@
     "sitelinks": 31
   },
   {
+    "id": "Max Richter",
+    "key": "max_richter",
+    "is_master": false,
+    "type": "Composer",
+    "era": 2006,
+    "tags": [
+      "Contemporary",
+      "Minimalism",
+      "Piano",
+      "British"
+    ],
+    "collections": [
+      "classic-archives",
+      "unlocked-recordings",
+      "community_audio"
+    ],
+    "meta": {
+      "schools": [],
+      "regions": [
+        "British"
+      ],
+      "forms": [],
+      "styles": []
+    },
+    "related": [],
+    "aliases": [],
+    "qid": "Q714325",
+    "source": "wikidata",
+    "born": 1966,
+    "died": null,
+    "mbid": "509f20b2-5df3-4aec-9bbc-002131fb3f99",
+    "attrs": {
+      "movement": [],
+      "genre": [
+        "ambient music",
+        "postminimalism"
+      ],
+      "instrument": [
+        "piano"
+      ],
+      "voice": [],
+      "member": [],
+      "country": [
+        "British"
+      ]
+    },
+    "sitelinks": 31
+  },
+  {
     "id": "Anatoliy Solovyanenko",
     "key": "anatoliy_solovyanenko",
     "is_master": false,
@@ -71971,6 +72020,66 @@
     "sitelinks": 94
   },
   {
+    "id": "Hans Zimmer",
+    "key": "hans_zimmer",
+    "is_master": false,
+    "type": "Composer",
+    "era": 1997,
+    "tags": [
+      "Contemporary",
+      "Film",
+      "Piano",
+      "Guitar",
+      "American",
+      "German"
+    ],
+    "collections": [
+      "classic-archives",
+      "unlocked-recordings",
+      "community_audio"
+    ],
+    "meta": {
+      "schools": [],
+      "regions": [
+        "American",
+        "German"
+      ],
+      "forms": [],
+      "styles": []
+    },
+    "related": [],
+    "aliases": [],
+    "qid": "Q76364",
+    "source": "wikidata",
+    "born": 1957,
+    "died": null,
+    "mbid": "e6de1f3b-6484-491c-88dd-6d619f142abc",
+    "attrs": {
+      "movement": [],
+      "genre": [
+        "film score",
+        "video game music"
+      ],
+      "instrument": [
+        "banjo",
+        "bass guitar",
+        "guitar",
+        "keyboard instrument",
+        "piano",
+        "synthesizer"
+      ],
+      "voice": [],
+      "member": [
+        "Helden"
+      ],
+      "country": [
+        "American",
+        "German"
+      ]
+    },
+    "sitelinks": 89
+  },
+  {
     "id": "Louis Braille",
     "key": "louis_braille",
     "is_master": false,
@@ -72016,6 +72125,62 @@
       ]
     },
     "sitelinks": 89
+  },
+  {
+    "id": "Lisa Gerrard",
+    "key": "lisa_gerrard",
+    "is_master": false,
+    "type": "Composer",
+    "era": 2001,
+    "tags": [
+      "Contemporary",
+      "Contralto",
+      "Guitar",
+      "Australian"
+    ],
+    "collections": [
+      "classic-archives",
+      "unlocked-recordings",
+      "community_audio"
+    ],
+    "meta": {
+      "schools": [],
+      "regions": [
+        "Australian"
+      ],
+      "forms": [],
+      "styles": []
+    },
+    "related": [],
+    "aliases": [],
+    "qid": "Q40580",
+    "source": "wikidata",
+    "born": 1961,
+    "died": null,
+    "mbid": "cd645207-1664-46af-9953-264e9ae54089",
+    "attrs": {
+      "movement": [],
+      "genre": [
+        "dark wave",
+        "ethereal wave",
+        "world music"
+      ],
+      "instrument": [
+        "accordion",
+        "guitar",
+        "voice"
+      ],
+      "voice": [
+        "contralto"
+      ],
+      "member": [
+        "Dead Can Dance"
+      ],
+      "country": [
+        "Australian"
+      ]
+    },
+    "sitelinks": 84
   },
   {
     "id": "John Williams",
@@ -72071,6 +72236,66 @@
       ]
     },
     "sitelinks": 78
+  },
+  {
+    "id": "Irving Berlin",
+    "key": "irving_berlin",
+    "is_master": false,
+    "type": "Composer",
+    "era": 1928,
+    "tags": [
+      "Modernist",
+      "Piano",
+      "American",
+      "Russian"
+    ],
+    "collections": [
+      "classic-archives",
+      "unlocked-recordings",
+      "community_audio"
+    ],
+    "meta": {
+      "schools": [],
+      "regions": [
+        "American",
+        "Russian"
+      ],
+      "forms": [],
+      "styles": []
+    },
+    "related": [],
+    "aliases": [
+      "I. Berlin",
+      "Israel Balin",
+      "Israel Baline",
+      "Israel Isidore Baline"
+    ],
+    "qid": "Q128746",
+    "source": "wikidata",
+    "born": 1888,
+    "died": 1989,
+    "mbid": "5e645519-a175-4fe0-9a9b-eb9dc9f506b5",
+    "attrs": {
+      "movement": [],
+      "genre": [
+        "musical play",
+        "vaudeville"
+      ],
+      "instrument": [
+        "piano"
+      ],
+      "voice": [],
+      "member": [
+        "American Society of Composers, Authors and Publishers",
+        "SACEM",
+        "Ted Snyder Company"
+      ],
+      "country": [
+        "American",
+        "Russian"
+      ]
+    },
+    "sitelinks": 73
   },
   {
     "id": "Arthur Rubinstein",
@@ -72434,65 +72659,6 @@
     "sitelinks": 62
   },
   {
-    "id": "Ignacy Jan Paderewski",
-    "key": "ignacy_jan_paderewski",
-    "is_master": false,
-    "type": "Composer",
-    "era": 1900,
-    "tags": [
-      "Romantic",
-      "Opera",
-      "Piano",
-      "American",
-      "Polish",
-      "British"
-    ],
-    "collections": [
-      "classic-archives",
-      "unlocked-recordings",
-      "community_audio"
-    ],
-    "meta": {
-      "schools": [],
-      "regions": [
-        "American",
-        "Polish",
-        "British"
-      ],
-      "forms": [],
-      "styles": []
-    },
-    "related": [],
-    "aliases": [
-      "Ignace Jan Paderewski",
-      "Ignacy Paderewski"
-    ],
-    "qid": "Q191957",
-    "source": "wikidata",
-    "born": 1860,
-    "died": 1941,
-    "mbid": "4a2b8def-5a86-45fd-9c21-31c3356a3774",
-    "attrs": {
-      "movement": [],
-      "genre": [
-        "opera"
-      ],
-      "instrument": [
-        "piano"
-      ],
-      "voice": [],
-      "member": [
-        "Académie des beaux-arts"
-      ],
-      "country": [
-        "American",
-        "British",
-        "Polish"
-      ]
-    },
-    "sitelinks": 60
-  },
-  {
     "id": "Yo-Yo Ma",
     "key": "yo_yo_ma",
     "is_master": false,
@@ -72603,6 +72769,216 @@
     "sitelinks": 60
   },
   {
+    "id": "Ignacy Jan Paderewski",
+    "key": "ignacy_jan_paderewski",
+    "is_master": false,
+    "type": "Composer",
+    "era": 1900,
+    "tags": [
+      "Romantic",
+      "Opera",
+      "Piano",
+      "American",
+      "Polish",
+      "British"
+    ],
+    "collections": [
+      "classic-archives",
+      "unlocked-recordings",
+      "community_audio"
+    ],
+    "meta": {
+      "schools": [],
+      "regions": [
+        "American",
+        "Polish",
+        "British"
+      ],
+      "forms": [],
+      "styles": []
+    },
+    "related": [],
+    "aliases": [
+      "Ignace Jan Paderewski",
+      "Ignacy Paderewski"
+    ],
+    "qid": "Q191957",
+    "source": "wikidata",
+    "born": 1860,
+    "died": 1941,
+    "mbid": "4a2b8def-5a86-45fd-9c21-31c3356a3774",
+    "attrs": {
+      "movement": [],
+      "genre": [
+        "opera"
+      ],
+      "instrument": [
+        "piano"
+      ],
+      "voice": [],
+      "member": [
+        "Académie des beaux-arts"
+      ],
+      "country": [
+        "American",
+        "British",
+        "Polish"
+      ]
+    },
+    "sitelinks": 60
+  },
+  {
+    "id": "Danny Elfman",
+    "key": "danny_elfman",
+    "is_master": false,
+    "type": "Composer",
+    "era": 1993,
+    "tags": [
+      "Contemporary",
+      "American"
+    ],
+    "collections": [
+      "classic-archives",
+      "unlocked-recordings",
+      "community_audio"
+    ],
+    "meta": {
+      "schools": [],
+      "regions": [
+        "American"
+      ],
+      "forms": [],
+      "styles": []
+    },
+    "related": [],
+    "aliases": [],
+    "qid": "Q193338",
+    "source": "wikidata",
+    "born": 1953,
+    "died": null,
+    "mbid": "5b24fbab-c58f-4c37-a59d-ab232e2d98c4",
+    "attrs": {
+      "movement": [],
+      "genre": [
+        "new wave",
+        "ska"
+      ],
+      "instrument": [
+        "voice"
+      ],
+      "voice": [],
+      "member": [
+        "Oingo Boingo"
+      ],
+      "country": [
+        "American"
+      ]
+    },
+    "sitelinks": 60
+  },
+  {
+    "id": "Michel Sogny",
+    "key": "michel_sogny",
+    "is_master": false,
+    "type": "Composer",
+    "era": 1987,
+    "tags": [
+      "Contemporary",
+      "Piano",
+      "French"
+    ],
+    "collections": [
+      "classic-archives",
+      "unlocked-recordings",
+      "community_audio"
+    ],
+    "meta": {
+      "schools": [],
+      "regions": [
+        "French"
+      ],
+      "forms": [],
+      "styles": []
+    },
+    "related": [],
+    "aliases": [
+      "Mihály Szőnyi"
+    ],
+    "qid": "Q3310873",
+    "source": "wikidata",
+    "born": 1947,
+    "died": null,
+    "mbid": "581e2958-be81-4956-a098-14970a32dec6",
+    "attrs": {
+      "movement": [
+        "classical music"
+      ],
+      "genre": [],
+      "instrument": [
+        "piano"
+      ],
+      "voice": [],
+      "member": [],
+      "country": [
+        "French"
+      ]
+    },
+    "sitelinks": 60
+  },
+  {
+    "id": "Vladimir Horowitz",
+    "key": "vladimir_horowitz",
+    "is_master": false,
+    "type": "Instrumentalist",
+    "era": 1943,
+    "tags": [
+      "Modernist",
+      "Piano",
+      "American",
+      "Russian"
+    ],
+    "collections": [
+      "classic-archives",
+      "unlocked-recordings",
+      "community_audio"
+    ],
+    "meta": {
+      "schools": [],
+      "regions": [
+        "American",
+        "Russian"
+      ],
+      "forms": [],
+      "styles": []
+    },
+    "related": [],
+    "aliases": [
+      "Vladimir Samoilovich Horowitz",
+      "Vladimir Samoylovich Horowitz"
+    ],
+    "qid": "Q192506",
+    "source": "wikidata",
+    "born": 1903,
+    "died": 1989,
+    "mbid": "81269a28-c616-4e87-8942-a6f8e59b68e4",
+    "attrs": {
+      "movement": [],
+      "genre": [
+        "classical music"
+      ],
+      "instrument": [
+        "piano"
+      ],
+      "voice": [],
+      "member": [],
+      "country": [
+        "American",
+        "Russian"
+      ]
+    },
+    "sitelinks": 60
+  },
+  {
     "id": "Zubin Mehta",
     "key": "zubin_mehta",
     "is_master": false,
@@ -72655,6 +73031,51 @@
       ]
     },
     "sitelinks": 59
+  },
+  {
+    "id": "Jerry Goldsmith",
+    "key": "jerry_goldsmith",
+    "is_master": false,
+    "type": "Composer",
+    "era": 1969,
+    "tags": [
+      "Contemporary",
+      "American"
+    ],
+    "collections": [
+      "classic-archives",
+      "unlocked-recordings",
+      "community_audio"
+    ],
+    "meta": {
+      "schools": [],
+      "regions": [
+        "American"
+      ],
+      "forms": [],
+      "styles": []
+    },
+    "related": [],
+    "aliases": [],
+    "qid": "Q235077",
+    "source": "wikidata",
+    "born": 1929,
+    "died": 2004,
+    "mbid": "db403e3d-4753-45d6-8fcb-94db03e882e1",
+    "attrs": {
+      "movement": [],
+      "genre": [
+        "classical music",
+        "contemporary classical music"
+      ],
+      "instrument": [],
+      "voice": [],
+      "member": [],
+      "country": [
+        "American"
+      ]
+    },
+    "sitelinks": 58
   },
   {
     "id": "Anton Rubinstein",
@@ -72710,51 +73131,6 @@
       ],
       "country": [
         "Russian"
-      ]
-    },
-    "sitelinks": 58
-  },
-  {
-    "id": "Jerry Goldsmith",
-    "key": "jerry_goldsmith",
-    "is_master": false,
-    "type": "Composer",
-    "era": 1969,
-    "tags": [
-      "Contemporary",
-      "American"
-    ],
-    "collections": [
-      "classic-archives",
-      "unlocked-recordings",
-      "community_audio"
-    ],
-    "meta": {
-      "schools": [],
-      "regions": [
-        "American"
-      ],
-      "forms": [],
-      "styles": []
-    },
-    "related": [],
-    "aliases": [],
-    "qid": "Q235077",
-    "source": "wikidata",
-    "born": 1929,
-    "died": 2004,
-    "mbid": "db403e3d-4753-45d6-8fcb-94db03e882e1",
-    "attrs": {
-      "movement": [],
-      "genre": [
-        "classical music",
-        "contemporary classical music"
-      ],
-      "instrument": [],
-      "voice": [],
-      "member": [],
-      "country": [
-        "American"
       ]
     },
     "sitelinks": 58
@@ -72862,6 +73238,55 @@
     "sitelinks": 57
   },
   {
+    "id": "Glenn Gould",
+    "key": "glenn_gould",
+    "is_master": false,
+    "type": "Composer",
+    "era": 1972,
+    "tags": [
+      "Modernist",
+      "Piano",
+      "Canadian"
+    ],
+    "collections": [
+      "classic-archives",
+      "unlocked-recordings",
+      "community_audio"
+    ],
+    "meta": {
+      "schools": [],
+      "regions": [
+        "Canadian"
+      ],
+      "forms": [],
+      "styles": []
+    },
+    "related": [],
+    "aliases": [
+      "Glenn Herbert Gould"
+    ],
+    "qid": "Q216924",
+    "source": "wikidata",
+    "born": 1932,
+    "died": 1982,
+    "mbid": "7002bf88-1269-4965-a772-4ba1e7a91eaa",
+    "attrs": {
+      "movement": [],
+      "genre": [
+        "classical music"
+      ],
+      "instrument": [
+        "piano"
+      ],
+      "voice": [],
+      "member": [],
+      "country": [
+        "Canadian"
+      ]
+    },
+    "sitelinks": 55
+  },
+  {
     "id": "Giuseppe Tartini",
     "key": "giuseppe_tartini",
     "is_master": false,
@@ -72906,56 +73331,6 @@
       "member": [],
       "country": [
         "Italian"
-      ]
-    },
-    "sitelinks": 55
-  },
-  {
-    "id": "Airat Ichmouratov",
-    "key": "airat_ichmouratov",
-    "is_master": false,
-    "type": "Composer",
-    "era": 2013,
-    "tags": [
-      "Contemporary",
-      "Canadian",
-      "Russian"
-    ],
-    "collections": [
-      "classic-archives",
-      "unlocked-recordings",
-      "community_audio"
-    ],
-    "meta": {
-      "schools": [],
-      "regions": [
-        "Canadian",
-        "Russian"
-      ],
-      "forms": [],
-      "styles": []
-    },
-    "related": [],
-    "aliases": [
-      "Airat Rafailovich Ichmouratov"
-    ],
-    "qid": "Q21063940",
-    "source": "wikidata",
-    "born": 1973,
-    "died": null,
-    "mbid": "ef6395f2-54b8-460e-9c5e-4fca2d1ceb94",
-    "attrs": {
-      "movement": [],
-      "genre": [
-        "classical music",
-        "klezmer"
-      ],
-      "instrument": [],
-      "voice": [],
-      "member": [],
-      "country": [
-        "Canadian",
-        "Russian"
       ]
     },
     "sitelinks": 55
@@ -73017,15 +73392,15 @@
     "sitelinks": 55
   },
   {
-    "id": "Glenn Gould",
-    "key": "glenn_gould",
+    "id": "Airat Ichmouratov",
+    "key": "airat_ichmouratov",
     "is_master": false,
     "type": "Composer",
-    "era": 1972,
+    "era": 2013,
     "tags": [
-      "Modernist",
-      "Piano",
-      "Canadian"
+      "Contemporary",
+      "Canadian",
+      "Russian"
     ],
     "collections": [
       "classic-archives",
@@ -73035,32 +73410,33 @@
     "meta": {
       "schools": [],
       "regions": [
-        "Canadian"
+        "Canadian",
+        "Russian"
       ],
       "forms": [],
       "styles": []
     },
     "related": [],
     "aliases": [
-      "Glenn Herbert Gould"
+      "Airat Rafailovich Ichmouratov"
     ],
-    "qid": "Q216924",
+    "qid": "Q21063940",
     "source": "wikidata",
-    "born": 1932,
-    "died": 1982,
-    "mbid": "7002bf88-1269-4965-a772-4ba1e7a91eaa",
+    "born": 1973,
+    "died": null,
+    "mbid": "ef6395f2-54b8-460e-9c5e-4fca2d1ceb94",
     "attrs": {
       "movement": [],
       "genre": [
-        "classical music"
+        "classical music",
+        "klezmer"
       ],
-      "instrument": [
-        "piano"
-      ],
+      "instrument": [],
       "voice": [],
       "member": [],
       "country": [
-        "Canadian"
+        "Canadian",
+        "Russian"
       ]
     },
     "sitelinks": 55
@@ -73116,15 +73492,16 @@
     "sitelinks": 54
   },
   {
-    "id": "Daniel François Esprit Auber",
-    "key": "daniel_francois_esprit_auber",
+    "id": "Ramin Djawadi",
+    "key": "ramin_djawadi",
     "is_master": false,
     "type": "Composer",
-    "era": 1822,
+    "era": 2014,
     "tags": [
-      "Romantic",
-      "Opera",
-      "French"
+      "Contemporary",
+      "Film",
+      "Piano",
+      "German"
     ],
     "collections": [
       "classic-archives",
@@ -73134,39 +73511,30 @@
     "meta": {
       "schools": [],
       "regions": [
-        "French"
+        "German"
       ],
       "forms": [],
       "styles": []
     },
     "related": [],
-    "aliases": [
-      "Auber",
-      "François Auber"
-    ],
-    "qid": "Q157672",
+    "aliases": [],
+    "qid": "Q57577",
     "source": "wikidata",
-    "born": 1782,
-    "died": 1871,
-    "mbid": "7c08bc24-bcd9-47d5-819e-bbbf6e87fa9f",
+    "born": 1974,
+    "died": null,
+    "mbid": "f089f636-6b85-4e0e-a192-0d30ed2b44d1",
     "attrs": {
       "movement": [],
       "genre": [
-        "classical music",
-        "grand opera",
-        "opera",
-        "opéra comique"
+        "film score"
       ],
-      "instrument": [],
+      "instrument": [
+        "piano"
+      ],
       "voice": [],
-      "member": [
-        "Académie des beaux-arts",
-        "Académie des sciences, belles-lettres et arts de Rouen",
-        "Conservatoire de Paris",
-        "Royal Academy of Science, Letters and Fine Arts of Belgium"
-      ],
+      "member": [],
       "country": [
-        "French"
+        "German"
       ]
     },
     "sitelinks": 53
@@ -73230,6 +73598,62 @@
     "sitelinks": 53
   },
   {
+    "id": "Daniel François Esprit Auber",
+    "key": "daniel_francois_esprit_auber",
+    "is_master": false,
+    "type": "Composer",
+    "era": 1822,
+    "tags": [
+      "Romantic",
+      "Opera",
+      "French"
+    ],
+    "collections": [
+      "classic-archives",
+      "unlocked-recordings",
+      "community_audio"
+    ],
+    "meta": {
+      "schools": [],
+      "regions": [
+        "French"
+      ],
+      "forms": [],
+      "styles": []
+    },
+    "related": [],
+    "aliases": [
+      "Auber",
+      "François Auber"
+    ],
+    "qid": "Q157672",
+    "source": "wikidata",
+    "born": 1782,
+    "died": 1871,
+    "mbid": "7c08bc24-bcd9-47d5-819e-bbbf6e87fa9f",
+    "attrs": {
+      "movement": [],
+      "genre": [
+        "classical music",
+        "grand opera",
+        "opera",
+        "opéra comique"
+      ],
+      "instrument": [],
+      "voice": [],
+      "member": [
+        "Académie des beaux-arts",
+        "Académie des sciences, belles-lettres et arts de Rouen",
+        "Conservatoire de Paris",
+        "Royal Academy of Science, Letters and Fine Arts of Belgium"
+      ],
+      "country": [
+        "French"
+      ]
+    },
+    "sitelinks": 53
+  },
+  {
     "id": "Howard Shore",
     "key": "howard_shore",
     "is_master": false,
@@ -73274,104 +73698,6 @@
       ]
     },
     "sitelinks": 53
-  },
-  {
-    "id": "Ramin Djawadi",
-    "key": "ramin_djawadi",
-    "is_master": false,
-    "type": "Composer",
-    "era": 2014,
-    "tags": [
-      "Contemporary",
-      "Film",
-      "Piano",
-      "German"
-    ],
-    "collections": [
-      "classic-archives",
-      "unlocked-recordings",
-      "community_audio"
-    ],
-    "meta": {
-      "schools": [],
-      "regions": [
-        "German"
-      ],
-      "forms": [],
-      "styles": []
-    },
-    "related": [],
-    "aliases": [],
-    "qid": "Q57577",
-    "source": "wikidata",
-    "born": 1974,
-    "died": null,
-    "mbid": "f089f636-6b85-4e0e-a192-0d30ed2b44d1",
-    "attrs": {
-      "movement": [],
-      "genre": [
-        "film score"
-      ],
-      "instrument": [
-        "piano"
-      ],
-      "voice": [],
-      "member": [],
-      "country": [
-        "German"
-      ]
-    },
-    "sitelinks": 53
-  },
-  {
-    "id": "Lorenzo Da Ponte",
-    "key": "lorenzo_da_ponte",
-    "is_master": false,
-    "type": "Composer",
-    "era": 1789,
-    "tags": [
-      "Classical",
-      "Italian"
-    ],
-    "collections": [
-      "classic-archives",
-      "unlocked-recordings",
-      "community_audio"
-    ],
-    "meta": {
-      "schools": [],
-      "regions": [
-        "Italian"
-      ],
-      "forms": [],
-      "styles": []
-    },
-    "related": [],
-    "aliases": [
-      "Da Ponte",
-      "Emanuele Conegliano"
-    ],
-    "qid": "Q268166",
-    "source": "wikidata",
-    "born": 1749,
-    "died": 1838,
-    "mbid": "6fa8dd85-b6a8-47c0-8304-9973017dd520",
-    "attrs": {
-      "movement": [],
-      "genre": [
-        "libretto"
-      ],
-      "instrument": [],
-      "voice": [],
-      "member": [
-        "Arcadian Academy",
-        "Columbia University"
-      ],
-      "country": [
-        "Italian"
-      ]
-    },
-    "sitelinks": 52
   },
   {
     "id": "Stanisław Moniuszko",
@@ -73476,6 +73802,56 @@
       ],
       "country": [
         "Russian"
+      ]
+    },
+    "sitelinks": 52
+  },
+  {
+    "id": "Lorenzo Da Ponte",
+    "key": "lorenzo_da_ponte",
+    "is_master": false,
+    "type": "Composer",
+    "era": 1789,
+    "tags": [
+      "Classical",
+      "Italian"
+    ],
+    "collections": [
+      "classic-archives",
+      "unlocked-recordings",
+      "community_audio"
+    ],
+    "meta": {
+      "schools": [],
+      "regions": [
+        "Italian"
+      ],
+      "forms": [],
+      "styles": []
+    },
+    "related": [],
+    "aliases": [
+      "Da Ponte",
+      "Emanuele Conegliano"
+    ],
+    "qid": "Q268166",
+    "source": "wikidata",
+    "born": 1749,
+    "died": 1838,
+    "mbid": "6fa8dd85-b6a8-47c0-8304-9973017dd520",
+    "attrs": {
+      "movement": [],
+      "genre": [
+        "libretto"
+      ],
+      "instrument": [],
+      "voice": [],
+      "member": [
+        "Arcadian Academy",
+        "Columbia University"
+      ],
+      "country": [
+        "Italian"
       ]
     },
     "sitelinks": 52
@@ -73592,6 +73968,55 @@
     "sitelinks": 51
   },
   {
+    "id": "Alexandre Desplat",
+    "key": "alexandre_desplat",
+    "is_master": false,
+    "type": "Composer",
+    "era": 2001,
+    "tags": [
+      "Contemporary",
+      "Piano",
+      "Flute",
+      "French"
+    ],
+    "collections": [
+      "classic-archives",
+      "unlocked-recordings",
+      "community_audio"
+    ],
+    "meta": {
+      "schools": [],
+      "regions": [
+        "French"
+      ],
+      "forms": [],
+      "styles": []
+    },
+    "related": [],
+    "aliases": [],
+    "qid": "Q313362",
+    "source": "wikidata",
+    "born": 1961,
+    "died": null,
+    "mbid": "391846f7-f09f-470c-b188-c16b3a2022e4",
+    "attrs": {
+      "movement": [],
+      "genre": [],
+      "instrument": [
+        "flute",
+        "piano"
+      ],
+      "voice": [],
+      "member": [
+        "Royal College of Music"
+      ],
+      "country": [
+        "French"
+      ]
+    },
+    "sitelinks": 51
+  },
+  {
     "id": "Itzhak Perlman",
     "key": "itzhak_perlman",
     "is_master": false,
@@ -73646,6 +74071,53 @@
     "sitelinks": 51
   },
   {
+    "id": "Arnaut Daniel",
+    "key": "arnaut_daniel",
+    "is_master": false,
+    "type": "Composer",
+    "era": 1190,
+    "tags": [
+      "Medieval",
+      "French"
+    ],
+    "collections": [
+      "classic-archives",
+      "unlocked-recordings",
+      "community_audio"
+    ],
+    "meta": {
+      "schools": [],
+      "regions": [
+        "French"
+      ],
+      "forms": [],
+      "styles": []
+    },
+    "related": [],
+    "aliases": [
+      "Arnaut Daniel de Riberac"
+    ],
+    "qid": "Q4344",
+    "source": "wikidata",
+    "born": 1150,
+    "died": 1210,
+    "mbid": "24977da1-3d52-4940-acba-d3cb5a0794e1",
+    "attrs": {
+      "movement": [
+        "medieval music",
+        "troubadoric poetry"
+      ],
+      "genre": [],
+      "instrument": [],
+      "voice": [],
+      "member": [],
+      "country": [
+        "French"
+      ]
+    },
+    "sitelinks": 50
+  },
+  {
     "id": "Alma Mahler",
     "key": "alma_mahler",
     "is_master": false,
@@ -73691,53 +74163,6 @@
       "member": [],
       "country": [
         "Czech"
-      ]
-    },
-    "sitelinks": 50
-  },
-  {
-    "id": "Arnaut Daniel",
-    "key": "arnaut_daniel",
-    "is_master": false,
-    "type": "Composer",
-    "era": 1190,
-    "tags": [
-      "Medieval",
-      "French"
-    ],
-    "collections": [
-      "classic-archives",
-      "unlocked-recordings",
-      "community_audio"
-    ],
-    "meta": {
-      "schools": [],
-      "regions": [
-        "French"
-      ],
-      "forms": [],
-      "styles": []
-    },
-    "related": [],
-    "aliases": [
-      "Arnaut Daniel de Riberac"
-    ],
-    "qid": "Q4344",
-    "source": "wikidata",
-    "born": 1150,
-    "died": 1210,
-    "mbid": "24977da1-3d52-4940-acba-d3cb5a0794e1",
-    "attrs": {
-      "movement": [
-        "medieval music",
-        "troubadoric poetry"
-      ],
-      "genre": [],
-      "instrument": [],
-      "voice": [],
-      "member": [],
-      "country": [
-        "French"
       ]
     },
     "sitelinks": 50
@@ -73948,14 +74373,64 @@
     "sitelinks": 49
   },
   {
-    "id": "Pablo de Sarasate",
-    "key": "pablo_de_sarasate",
+    "id": "Hugo Wolf",
+    "key": "hugo_wolf",
     "is_master": false,
     "type": "Composer",
-    "era": 1884,
+    "era": 1898,
     "tags": [
       "Romantic",
-      "Violin",
+      "Opera",
+      "Piano",
+      "Austrian"
+    ],
+    "collections": [
+      "classic-archives",
+      "unlocked-recordings",
+      "community_audio"
+    ],
+    "meta": {
+      "schools": [],
+      "regions": [
+        "Austrian"
+      ],
+      "forms": [],
+      "styles": []
+    },
+    "related": [],
+    "aliases": [
+      "Hugo Philipp Jacob Wolf"
+    ],
+    "qid": "Q215747",
+    "source": "wikidata",
+    "born": 1860,
+    "died": 1903,
+    "mbid": "21f39bff-fdec-4424-8ad7-86207565d571",
+    "attrs": {
+      "movement": [],
+      "genre": [
+        "opera"
+      ],
+      "instrument": [
+        "piano"
+      ],
+      "voice": [],
+      "member": [],
+      "country": [
+        "Austrian"
+      ]
+    },
+    "sitelinks": 48
+  },
+  {
+    "id": "Francisco Tárrega",
+    "key": "francisco_tarrega",
+    "is_master": false,
+    "type": "Composer",
+    "era": 1892,
+    "tags": [
+      "Romantic",
+      "Guitar",
       "Spanish"
     ],
     "collections": [
@@ -73973,28 +74448,68 @@
     },
     "related": [],
     "aliases": [
-      "Martin Meliton Sarasate",
-      "Pablo Martin Meliton de Sarasate y Navascues",
-      "Pablo Martín Melitón Sarasate y Navascuéz"
+      "Francisco de Asís Tárrega y Eixea"
     ],
-    "qid": "Q204503",
+    "qid": "Q313372",
     "source": "wikidata",
-    "born": 1844,
-    "died": 1908,
-    "mbid": "05f12d97-ecae-4fd6-bb03-53a4bd1322a8",
+    "born": 1852,
+    "died": 1909,
+    "mbid": "59bdd84b-28dd-4aef-bb5b-2e2c98997b10",
     "attrs": {
       "movement": [],
       "genre": [
-        "Romanticism"
+        "Romantic music"
       ],
       "instrument": [
-        "violin"
+        "classical guitar",
+        "guitar"
       ],
       "voice": [],
-      "member": [],
+      "member": [
+        "Catalan guitar school"
+      ],
       "country": [
         "Spanish"
       ]
+    },
+    "sitelinks": 48
+  },
+  {
+    "id": "Sayat-Nova",
+    "key": "sayat_nova",
+    "is_master": false,
+    "type": "Composer",
+    "era": 1752,
+    "tags": [
+      "Classical"
+    ],
+    "collections": [
+      "classic-archives",
+      "unlocked-recordings",
+      "community_audio"
+    ],
+    "meta": {
+      "schools": [],
+      "regions": [],
+      "forms": [],
+      "styles": []
+    },
+    "related": [],
+    "aliases": [],
+    "qid": "Q366289",
+    "source": "wikidata",
+    "born": 1712,
+    "died": 1795,
+    "mbid": "2f9bace8-8d4e-47ae-9925-b1250b0caaa4",
+    "attrs": {
+      "movement": [],
+      "genre": [],
+      "instrument": [
+        "voice"
+      ],
+      "voice": [],
+      "member": [],
+      "country": []
     },
     "sitelinks": 48
   },
@@ -74049,45 +74564,6 @@
     "sitelinks": 48
   },
   {
-    "id": "Sayat-Nova",
-    "key": "sayat_nova",
-    "is_master": false,
-    "type": "Composer",
-    "era": 1752,
-    "tags": [
-      "Classical"
-    ],
-    "collections": [
-      "classic-archives",
-      "unlocked-recordings",
-      "community_audio"
-    ],
-    "meta": {
-      "schools": [],
-      "regions": [],
-      "forms": [],
-      "styles": []
-    },
-    "related": [],
-    "aliases": [],
-    "qid": "Q366289",
-    "source": "wikidata",
-    "born": 1712,
-    "died": 1795,
-    "mbid": "2f9bace8-8d4e-47ae-9925-b1250b0caaa4",
-    "attrs": {
-      "movement": [],
-      "genre": [],
-      "instrument": [
-        "voice"
-      ],
-      "voice": [],
-      "member": [],
-      "country": []
-    },
-    "sitelinks": 48
-  },
-  {
     "id": "Giovanni Paisiello",
     "key": "giovanni_paisiello",
     "is_master": false,
@@ -74130,6 +74606,57 @@
       ],
       "country": [
         "Italian"
+      ]
+    },
+    "sitelinks": 48
+  },
+  {
+    "id": "Pablo de Sarasate",
+    "key": "pablo_de_sarasate",
+    "is_master": false,
+    "type": "Composer",
+    "era": 1884,
+    "tags": [
+      "Romantic",
+      "Violin",
+      "Spanish"
+    ],
+    "collections": [
+      "classic-archives",
+      "unlocked-recordings",
+      "community_audio"
+    ],
+    "meta": {
+      "schools": [],
+      "regions": [
+        "Spanish"
+      ],
+      "forms": [],
+      "styles": []
+    },
+    "related": [],
+    "aliases": [
+      "Martin Meliton Sarasate",
+      "Pablo Martin Meliton de Sarasate y Navascues",
+      "Pablo Martín Melitón Sarasate y Navascuéz"
+    ],
+    "qid": "Q204503",
+    "source": "wikidata",
+    "born": 1844,
+    "died": 1908,
+    "mbid": "05f12d97-ecae-4fd6-bb03-53a4bd1322a8",
+    "attrs": {
+      "movement": [],
+      "genre": [
+        "Romanticism"
+      ],
+      "instrument": [
+        "violin"
+      ],
+      "voice": [],
+      "member": [],
+      "country": [
+        "Spanish"
       ]
     },
     "sitelinks": 48
@@ -74180,56 +74707,6 @@
       ],
       "member": [],
       "country": []
-    },
-    "sitelinks": 48
-  },
-  {
-    "id": "Hugo Wolf",
-    "key": "hugo_wolf",
-    "is_master": false,
-    "type": "Composer",
-    "era": 1898,
-    "tags": [
-      "Romantic",
-      "Opera",
-      "Piano",
-      "Austrian"
-    ],
-    "collections": [
-      "classic-archives",
-      "unlocked-recordings",
-      "community_audio"
-    ],
-    "meta": {
-      "schools": [],
-      "regions": [
-        "Austrian"
-      ],
-      "forms": [],
-      "styles": []
-    },
-    "related": [],
-    "aliases": [
-      "Hugo Philipp Jacob Wolf"
-    ],
-    "qid": "Q215747",
-    "source": "wikidata",
-    "born": 1860,
-    "died": 1903,
-    "mbid": "21f39bff-fdec-4424-8ad7-86207565d571",
-    "attrs": {
-      "movement": [],
-      "genre": [
-        "opera"
-      ],
-      "instrument": [
-        "piano"
-      ],
-      "voice": [],
-      "member": [],
-      "country": [
-        "Austrian"
-      ]
     },
     "sitelinks": 48
   },
@@ -74489,61 +74966,6 @@
     "sitelinks": 47
   },
   {
-    "id": "John Philip Sousa",
-    "key": "john_philip_sousa",
-    "is_master": false,
-    "type": "Composer",
-    "era": 1894,
-    "tags": [
-      "Romantic",
-      "Opera",
-      "American"
-    ],
-    "collections": [
-      "classic-archives",
-      "unlocked-recordings",
-      "community_audio"
-    ],
-    "meta": {
-      "schools": [],
-      "regions": [
-        "American"
-      ],
-      "forms": [],
-      "styles": []
-    },
-    "related": [],
-    "aliases": [
-      "John Philip Sousa I",
-      "John Phillip Sousa",
-      "Philip Sousa"
-    ],
-    "qid": "Q295935",
-    "source": "wikidata",
-    "born": 1854,
-    "died": 1932,
-    "mbid": "c4ca9930-556d-470a-b5b9-a25d12aad9e9",
-    "attrs": {
-      "movement": [],
-      "genre": [
-        "military band",
-        "opera"
-      ],
-      "instrument": [
-        "trombone",
-        "tuba"
-      ],
-      "voice": [],
-      "member": [
-        "United States Marine Band"
-      ],
-      "country": [
-        "American"
-      ]
-    },
-    "sitelinks": 46
-  },
-  {
     "id": "Annette von Droste-Hülshoff",
     "key": "annette_von_droste_hulshoff",
     "is_master": false,
@@ -74632,16 +75054,15 @@
     "sitelinks": 46
   },
   {
-    "id": "Malena Ernman",
-    "key": "malena_ernman",
+    "id": "John Philip Sousa",
+    "key": "john_philip_sousa",
     "is_master": false,
-    "type": "Singer",
-    "era": 2010,
+    "type": "Composer",
+    "era": 1894,
     "tags": [
+      "Romantic",
       "Opera",
-      "Soprano",
-      "Mezzo",
-      "Swedish"
+      "American"
     ],
     "collections": [
       "classic-archives",
@@ -74651,40 +75072,38 @@
     "meta": {
       "schools": [],
       "regions": [
-        "Swedish"
+        "American"
       ],
       "forms": [],
       "styles": []
     },
     "related": [],
     "aliases": [
-      "Sara Ernman",
-      "Sara Magdalena Ernman"
+      "John Philip Sousa I",
+      "John Phillip Sousa",
+      "Philip Sousa"
     ],
-    "qid": "Q187210",
+    "qid": "Q295935",
     "source": "wikidata",
-    "born": 1970,
-    "died": null,
-    "mbid": "bcfa2a05-90f6-469a-b25d-b485838f1401",
+    "born": 1854,
+    "died": 1932,
+    "mbid": "c4ca9930-556d-470a-b5b9-a25d12aad9e9",
     "attrs": {
       "movement": [],
       "genre": [
-        "art lyrique",
-        "cabaret",
+        "military band",
         "opera"
       ],
       "instrument": [
-        "voice"
+        "trombone",
+        "tuba"
       ],
-      "voice": [
-        "mezzo-soprano",
-        "soprano"
-      ],
+      "voice": [],
       "member": [
-        "Royal Swedish Academy of Music"
+        "United States Marine Band"
       ],
       "country": [
-        "Swedish"
+        "American"
       ]
     },
     "sitelinks": 46
@@ -74745,14 +75164,16 @@
     "sitelinks": 46
   },
   {
-    "id": "Maria Anna Mozart",
-    "key": "maria_anna_mozart",
+    "id": "Malena Ernman",
+    "key": "malena_ernman",
     "is_master": false,
-    "type": "Composer",
-    "era": 1791,
+    "type": "Singer",
+    "era": 2010,
     "tags": [
-      "Classical",
-      "Violin"
+      "Opera",
+      "Soprano",
+      "Mezzo",
+      "Swedish"
     ],
     "collections": [
       "classic-archives",
@@ -74761,33 +75182,44 @@
     ],
     "meta": {
       "schools": [],
-      "regions": [],
+      "regions": [
+        "Swedish"
+      ],
       "forms": [],
       "styles": []
     },
     "related": [],
     "aliases": [
-      "Nannerl Mozart"
+      "Sara Ernman",
+      "Sara Magdalena Ernman"
     ],
-    "qid": "Q157928",
+    "qid": "Q187210",
     "source": "wikidata",
-    "born": 1751,
-    "died": 1829,
-    "mbid": "7dff8315-1c93-4214-9721-2748a351018a",
+    "born": 1970,
+    "died": null,
+    "mbid": "bcfa2a05-90f6-469a-b25d-b485838f1401",
     "attrs": {
       "movement": [],
       "genre": [
-        "classical music"
+        "art lyrique",
+        "cabaret",
+        "opera"
       ],
       "instrument": [
-        "clavichord",
-        "violin"
+        "voice"
       ],
-      "voice": [],
-      "member": [],
-      "country": []
+      "voice": [
+        "mezzo-soprano",
+        "soprano"
+      ],
+      "member": [
+        "Royal Swedish Academy of Music"
+      ],
+      "country": [
+        "Swedish"
+      ]
     },
-    "sitelinks": 45
+    "sitelinks": 46
   },
   {
     "id": "Arthur Sullivan",
@@ -74905,16 +75337,14 @@
     "sitelinks": 45
   },
   {
-    "id": "Alfred Brendel",
-    "key": "alfred_brendel",
+    "id": "Maria Anna Mozart",
+    "key": "maria_anna_mozart",
     "is_master": false,
     "type": "Composer",
-    "era": 1971,
+    "era": 1791,
     "tags": [
-      "Modernist",
-      "Piano",
-      "Austrian",
-      "Czech"
+      "Classical",
+      "Violin"
     ],
     "collections": [
       "classic-archives",
@@ -74923,41 +75353,33 @@
     ],
     "meta": {
       "schools": [],
-      "regions": [
-        "Austrian",
-        "Czech"
-      ],
+      "regions": [],
       "forms": [],
       "styles": []
     },
     "related": [],
-    "aliases": [],
-    "qid": "Q84148",
+    "aliases": [
+      "Nannerl Mozart"
+    ],
+    "qid": "Q157928",
     "source": "wikidata",
-    "born": 1931,
-    "died": 2025,
-    "mbid": "4a37c64f-4151-4c4b-ab69-a58450f9967e",
+    "born": 1751,
+    "died": 1829,
+    "mbid": "7dff8315-1c93-4214-9721-2748a351018a",
     "attrs": {
       "movement": [],
       "genre": [
         "classical music"
       ],
       "instrument": [
-        "piano"
+        "clavichord",
+        "violin"
       ],
       "voice": [],
-      "member": [
-        "American Academy of Arts and Sciences",
-        "Bavarian Academy of Fine Arts",
-        "European Academy of Sciences and Arts",
-        "German Academy for Language and Literature"
-      ],
-      "country": [
-        "Austrian",
-        "Czech"
-      ]
+      "member": [],
+      "country": []
     },
-    "sitelinks": 44
+    "sitelinks": 45
   },
   {
     "id": "Mykola Lysenko",
@@ -75019,6 +75441,160 @@
       ],
       "country": [
         "Russian"
+      ]
+    },
+    "sitelinks": 44
+  },
+  {
+    "id": "Alfred Brendel",
+    "key": "alfred_brendel",
+    "is_master": false,
+    "type": "Composer",
+    "era": 1971,
+    "tags": [
+      "Modernist",
+      "Piano",
+      "Austrian",
+      "Czech"
+    ],
+    "collections": [
+      "classic-archives",
+      "unlocked-recordings",
+      "community_audio"
+    ],
+    "meta": {
+      "schools": [],
+      "regions": [
+        "Austrian",
+        "Czech"
+      ],
+      "forms": [],
+      "styles": []
+    },
+    "related": [],
+    "aliases": [],
+    "qid": "Q84148",
+    "source": "wikidata",
+    "born": 1931,
+    "died": 2025,
+    "mbid": "4a37c64f-4151-4c4b-ab69-a58450f9967e",
+    "attrs": {
+      "movement": [],
+      "genre": [
+        "classical music"
+      ],
+      "instrument": [
+        "piano"
+      ],
+      "voice": [],
+      "member": [
+        "American Academy of Arts and Sciences",
+        "Bavarian Academy of Fine Arts",
+        "European Academy of Sciences and Arts",
+        "German Academy for Language and Literature"
+      ],
+      "country": [
+        "Austrian",
+        "Czech"
+      ]
+    },
+    "sitelinks": 44
+  },
+  {
+    "id": "Kitarō",
+    "key": "kitaro",
+    "is_master": false,
+    "type": "Composer",
+    "era": 1993,
+    "tags": [
+      "Contemporary",
+      "Electronic",
+      "Japanese"
+    ],
+    "collections": [
+      "classic-archives",
+      "unlocked-recordings",
+      "community_audio"
+    ],
+    "meta": {
+      "schools": [],
+      "regions": [
+        "Japanese"
+      ],
+      "forms": [],
+      "styles": []
+    },
+    "related": [],
+    "aliases": [
+      "Kitarou",
+      "Masanori Takahashi",
+      "Takahashi Masanori"
+    ],
+    "qid": "Q273652",
+    "source": "wikidata",
+    "born": 1953,
+    "died": null,
+    "mbid": "f3d8c154-208d-4efa-b52d-7e9f16adcdae",
+    "attrs": {
+      "movement": [],
+      "genre": [
+        "ambient music",
+        "electronica",
+        "new age music"
+      ],
+      "instrument": [
+        "electronic keyboard",
+        "synthesizer"
+      ],
+      "voice": [],
+      "member": [],
+      "country": [
+        "Japanese"
+      ]
+    },
+    "sitelinks": 44
+  },
+  {
+    "id": "Alfred Newman",
+    "key": "alfred_newman",
+    "is_master": false,
+    "type": "Composer",
+    "era": 1940,
+    "tags": [
+      "Modernist",
+      "Film",
+      "American"
+    ],
+    "collections": [
+      "classic-archives",
+      "unlocked-recordings",
+      "community_audio"
+    ],
+    "meta": {
+      "schools": [],
+      "regions": [
+        "American"
+      ],
+      "forms": [],
+      "styles": []
+    },
+    "related": [],
+    "aliases": [],
+    "qid": "Q367032",
+    "source": "wikidata",
+    "born": 1900,
+    "died": 1970,
+    "mbid": "dbe22c4f-6a21-4b7c-ad09-e4048d1065bc",
+    "attrs": {
+      "movement": [],
+      "genre": [
+        "film score"
+      ],
+      "instrument": [],
+      "voice": [],
+      "member": [],
+      "country": [
+        "American"
       ]
     },
     "sitelinks": 44
@@ -75132,51 +75708,6 @@
       ],
       "country": [
         "Russian"
-      ]
-    },
-    "sitelinks": 44
-  },
-  {
-    "id": "Alfred Newman",
-    "key": "alfred_newman",
-    "is_master": false,
-    "type": "Composer",
-    "era": 1940,
-    "tags": [
-      "Modernist",
-      "Film",
-      "American"
-    ],
-    "collections": [
-      "classic-archives",
-      "unlocked-recordings",
-      "community_audio"
-    ],
-    "meta": {
-      "schools": [],
-      "regions": [
-        "American"
-      ],
-      "forms": [],
-      "styles": []
-    },
-    "related": [],
-    "aliases": [],
-    "qid": "Q367032",
-    "source": "wikidata",
-    "born": 1900,
-    "died": 1970,
-    "mbid": "dbe22c4f-6a21-4b7c-ad09-e4048d1065bc",
-    "attrs": {
-      "movement": [],
-      "genre": [
-        "film score"
-      ],
-      "instrument": [],
-      "voice": [],
-      "member": [],
-      "country": [
-        "American"
       ]
     },
     "sitelinks": 44
@@ -75321,102 +75852,6 @@
     "sitelinks": 44
   },
   {
-    "id": "Władysław Tarnowski",
-    "key": "wadysaw_tarnowski",
-    "is_master": false,
-    "type": "Composer",
-    "era": 1873,
-    "tags": [
-      "Romantic",
-      "Piano"
-    ],
-    "collections": [
-      "classic-archives",
-      "unlocked-recordings",
-      "community_audio"
-    ],
-    "meta": {
-      "schools": [],
-      "regions": [],
-      "forms": [],
-      "styles": []
-    },
-    "related": [],
-    "aliases": [],
-    "qid": "Q93817",
-    "source": "wikidata",
-    "born": 1836,
-    "died": 1878,
-    "mbid": "487883b1-8132-43be-9d3e-579ee0b07acf",
-    "attrs": {
-      "movement": [],
-      "genre": [
-        "Romantic music"
-      ],
-      "instrument": [
-        "piano"
-      ],
-      "voice": [],
-      "member": [
-        "Collège de France"
-      ],
-      "country": []
-    },
-    "sitelinks": 43
-  },
-  {
-    "id": "Fritz Kreisler",
-    "key": "fritz_kreisler",
-    "is_master": false,
-    "type": "Composer",
-    "era": 1915,
-    "tags": [
-      "Modernist",
-      "Opera",
-      "Violin",
-      "American",
-      "Austrian"
-    ],
-    "collections": [
-      "classic-archives",
-      "unlocked-recordings",
-      "community_audio"
-    ],
-    "meta": {
-      "schools": [],
-      "regions": [
-        "American",
-        "Austrian"
-      ],
-      "forms": [],
-      "styles": []
-    },
-    "related": [],
-    "aliases": [],
-    "qid": "Q78517",
-    "source": "wikidata",
-    "born": 1875,
-    "died": 1962,
-    "mbid": "590fcad4-2ba4-43bc-a22f-a4bb9b496fe8",
-    "attrs": {
-      "movement": [],
-      "genre": [
-        "classical music",
-        "opera"
-      ],
-      "instrument": [
-        "violin"
-      ],
-      "voice": [],
-      "member": [],
-      "country": [
-        "American",
-        "Austrian"
-      ]
-    },
-    "sitelinks": 43
-  },
-  {
     "id": "Lorin Maazel",
     "key": "lorin_maazel",
     "is_master": false,
@@ -75469,6 +75904,269 @@
       "country": [
         "American",
         "French"
+      ]
+    },
+    "sitelinks": 43
+  },
+  {
+    "id": "Charles-Valentin Alkan",
+    "key": "charles_valentin_alkan",
+    "is_master": false,
+    "type": "Composer",
+    "era": 1853,
+    "tags": [
+      "Romantic",
+      "Organ",
+      "Piano",
+      "French"
+    ],
+    "collections": [
+      "classic-archives",
+      "unlocked-recordings",
+      "community_audio"
+    ],
+    "meta": {
+      "schools": [],
+      "regions": [
+        "French"
+      ],
+      "forms": [],
+      "styles": []
+    },
+    "related": [],
+    "aliases": [],
+    "qid": "Q217068",
+    "source": "wikidata",
+    "born": 1813,
+    "died": 1888,
+    "mbid": "62000bf9-9919-4dfb-9929-15f013fca57b",
+    "attrs": {
+      "movement": [
+        "Romantic music"
+      ],
+      "genre": [
+        "classical music"
+      ],
+      "instrument": [
+        "organ",
+        "piano"
+      ],
+      "voice": [],
+      "member": [],
+      "country": [
+        "French"
+      ]
+    },
+    "sitelinks": 43
+  },
+  {
+    "id": "Farinelli",
+    "key": "farinelli",
+    "is_master": false,
+    "type": "Composer",
+    "era": 1745,
+    "tags": [
+      "Baroque",
+      "Opera",
+      "Italian"
+    ],
+    "collections": [
+      "classic-archives",
+      "unlocked-recordings",
+      "community_audio"
+    ],
+    "meta": {
+      "schools": [],
+      "regions": [
+        "Italian"
+      ],
+      "forms": [],
+      "styles": []
+    },
+    "related": [],
+    "aliases": [
+      "Carlo Broschi Farinelli",
+      "Carlo Broschi",
+      "Farinello Broschi"
+    ],
+    "qid": "Q223744",
+    "source": "wikidata",
+    "born": 1705,
+    "died": 1782,
+    "mbid": "79e12258-adb2-407d-af70-9c581e8cbe42",
+    "attrs": {
+      "movement": [],
+      "genre": [
+        "opera"
+      ],
+      "instrument": [
+        "viola d'amore",
+        "voice"
+      ],
+      "voice": [
+        "castrato"
+      ],
+      "member": [],
+      "country": [
+        "Italian"
+      ]
+    },
+    "sitelinks": 43
+  },
+  {
+    "id": "Jerome Kern",
+    "key": "jerome_kern",
+    "is_master": false,
+    "type": "Composer",
+    "era": 1925,
+    "tags": [
+      "Modernist",
+      "American"
+    ],
+    "collections": [
+      "classic-archives",
+      "unlocked-recordings",
+      "community_audio"
+    ],
+    "meta": {
+      "schools": [],
+      "regions": [
+        "American"
+      ],
+      "forms": [],
+      "styles": []
+    },
+    "related": [],
+    "aliases": [
+      "Jerome David Kern"
+    ],
+    "qid": "Q313270",
+    "source": "wikidata",
+    "born": 1885,
+    "died": 1945,
+    "mbid": "8fb64b2e-db8b-4579-ad08-f324ef1bf494",
+    "attrs": {
+      "movement": [],
+      "genre": [
+        "musical play",
+        "song"
+      ],
+      "instrument": [],
+      "voice": [],
+      "member": [
+        "American Academy of Arts and Letters",
+        "Jerome David Kern and Dorothy Fields",
+        "T.B. Harms & Co."
+      ],
+      "country": [
+        "American"
+      ]
+    },
+    "sitelinks": 43
+  },
+  {
+    "id": "Ottorino Respighi",
+    "key": "ottorino_respighi",
+    "is_master": false,
+    "type": "Composer",
+    "era": 1919,
+    "tags": [
+      "Modernist",
+      "Symphony",
+      "Impressionism",
+      "Violin",
+      "Italian"
+    ],
+    "collections": [
+      "classic-archives",
+      "unlocked-recordings",
+      "community_audio"
+    ],
+    "meta": {
+      "schools": [],
+      "regions": [
+        "Italian"
+      ],
+      "forms": [],
+      "styles": []
+    },
+    "related": [],
+    "aliases": [],
+    "qid": "Q243837",
+    "source": "wikidata",
+    "born": 1879,
+    "died": 1936,
+    "mbid": "788c380d-247b-42f0-b7a9-64881e1f0fd9",
+    "attrs": {
+      "movement": [],
+      "genre": [
+        "impressionism in music",
+        "symphonic poem"
+      ],
+      "instrument": [
+        "viola",
+        "violin"
+      ],
+      "voice": [],
+      "member": [
+        "Accademia Nazionale di Santa Cecilia",
+        "Accademia Tiberina",
+        "Royal Academy of Italy"
+      ],
+      "country": [
+        "Italian"
+      ]
+    },
+    "sitelinks": 43
+  },
+  {
+    "id": "Fritz Kreisler",
+    "key": "fritz_kreisler",
+    "is_master": false,
+    "type": "Composer",
+    "era": 1915,
+    "tags": [
+      "Modernist",
+      "Opera",
+      "Violin",
+      "American",
+      "Austrian"
+    ],
+    "collections": [
+      "classic-archives",
+      "unlocked-recordings",
+      "community_audio"
+    ],
+    "meta": {
+      "schools": [],
+      "regions": [
+        "American",
+        "Austrian"
+      ],
+      "forms": [],
+      "styles": []
+    },
+    "related": [],
+    "aliases": [],
+    "qid": "Q78517",
+    "source": "wikidata",
+    "born": 1875,
+    "died": 1962,
+    "mbid": "590fcad4-2ba4-43bc-a22f-a4bb9b496fe8",
+    "attrs": {
+      "movement": [],
+      "genre": [
+        "classical music",
+        "opera"
+      ],
+      "instrument": [
+        "violin"
+      ],
+      "voice": [],
+      "member": [],
+      "country": [
+        "American",
+        "Austrian"
       ]
     },
     "sitelinks": 43
@@ -75583,15 +76281,14 @@
     "sitelinks": 43
   },
   {
-    "id": "Marco Misciagna",
-    "key": "marco_misciagna",
+    "id": "Władysław Tarnowski",
+    "key": "wadysaw_tarnowski",
     "is_master": false,
     "type": "Composer",
-    "era": 2024,
+    "era": 1873,
     "tags": [
-      "Contemporary",
-      "Violin",
-      "Italian"
+      "Romantic",
+      "Piano"
     ],
     "collections": [
       "classic-archives",
@@ -75600,36 +76297,30 @@
     ],
     "meta": {
       "schools": [],
-      "regions": [
-        "Italian"
-      ],
+      "regions": [],
       "forms": [],
       "styles": []
     },
     "related": [],
     "aliases": [],
-    "qid": "Q117184901",
+    "qid": "Q93817",
     "source": "wikidata",
-    "born": 1984,
-    "died": null,
-    "mbid": "73fd9f93-b4ed-4706-a1ee-742aea8ef1b9",
+    "born": 1836,
+    "died": 1878,
+    "mbid": "487883b1-8132-43be-9d3e-579ee0b07acf",
     "attrs": {
       "movement": [],
       "genre": [
-        "classical music"
+        "Romantic music"
       ],
       "instrument": [
-        "viola",
-        "violin"
+        "piano"
       ],
       "voice": [],
       "member": [
-        "Bilkent University",
-        "Conservatorio di musica \"Nino Rota\" di Monopoli"
+        "Collège de France"
       ],
-      "country": [
-        "Italian"
-      ]
+      "country": []
     },
     "sitelinks": 43
   },
@@ -75688,120 +76379,13 @@
     "sitelinks": 43
   },
   {
-    "id": "Charles-Valentin Alkan",
-    "key": "charles_valentin_alkan",
+    "id": "Marco Misciagna",
+    "key": "marco_misciagna",
     "is_master": false,
     "type": "Composer",
-    "era": 1853,
+    "era": 2024,
     "tags": [
-      "Romantic",
-      "Organ",
-      "Piano",
-      "French"
-    ],
-    "collections": [
-      "classic-archives",
-      "unlocked-recordings",
-      "community_audio"
-    ],
-    "meta": {
-      "schools": [],
-      "regions": [
-        "French"
-      ],
-      "forms": [],
-      "styles": []
-    },
-    "related": [],
-    "aliases": [],
-    "qid": "Q217068",
-    "source": "wikidata",
-    "born": 1813,
-    "died": 1888,
-    "mbid": "62000bf9-9919-4dfb-9929-15f013fca57b",
-    "attrs": {
-      "movement": [
-        "Romantic music"
-      ],
-      "genre": [
-        "classical music"
-      ],
-      "instrument": [
-        "organ",
-        "piano"
-      ],
-      "voice": [],
-      "member": [],
-      "country": [
-        "French"
-      ]
-    },
-    "sitelinks": 43
-  },
-  {
-    "id": "Farinelli",
-    "key": "farinelli",
-    "is_master": false,
-    "type": "Composer",
-    "era": 1745,
-    "tags": [
-      "Baroque",
-      "Opera",
-      "Italian"
-    ],
-    "collections": [
-      "classic-archives",
-      "unlocked-recordings",
-      "community_audio"
-    ],
-    "meta": {
-      "schools": [],
-      "regions": [
-        "Italian"
-      ],
-      "forms": [],
-      "styles": []
-    },
-    "related": [],
-    "aliases": [
-      "Carlo Broschi Farinelli",
-      "Carlo Broschi",
-      "Farinello Broschi"
-    ],
-    "qid": "Q223744",
-    "source": "wikidata",
-    "born": 1705,
-    "died": 1782,
-    "mbid": "79e12258-adb2-407d-af70-9c581e8cbe42",
-    "attrs": {
-      "movement": [],
-      "genre": [
-        "opera"
-      ],
-      "instrument": [
-        "viola d'amore",
-        "voice"
-      ],
-      "voice": [
-        "castrato"
-      ],
-      "member": [],
-      "country": [
-        "Italian"
-      ]
-    },
-    "sitelinks": 43
-  },
-  {
-    "id": "Ottorino Respighi",
-    "key": "ottorino_respighi",
-    "is_master": false,
-    "type": "Composer",
-    "era": 1919,
-    "tags": [
-      "Modernist",
-      "Symphony",
-      "Impressionism",
+      "Contemporary",
       "Violin",
       "Italian"
     ],
@@ -75820,16 +76404,15 @@
     },
     "related": [],
     "aliases": [],
-    "qid": "Q243837",
+    "qid": "Q117184901",
     "source": "wikidata",
-    "born": 1879,
-    "died": 1936,
-    "mbid": "788c380d-247b-42f0-b7a9-64881e1f0fd9",
+    "born": 1984,
+    "died": null,
+    "mbid": "73fd9f93-b4ed-4706-a1ee-742aea8ef1b9",
     "attrs": {
       "movement": [],
       "genre": [
-        "impressionism in music",
-        "symphonic poem"
+        "classical music"
       ],
       "instrument": [
         "viola",
@@ -75837,9 +76420,8 @@
       ],
       "voice": [],
       "member": [
-        "Accademia Nazionale di Santa Cecilia",
-        "Accademia Tiberina",
-        "Royal Academy of Italy"
+        "Bilkent University",
+        "Conservatorio di musica \"Nino Rota\" di Monopoli"
       ],
       "country": [
         "Italian"
@@ -75899,6 +76481,102 @@
       ]
     },
     "sitelinks": 43
+  },
+  {
+    "id": "Michael Giacchino",
+    "key": "michael_giacchino",
+    "is_master": false,
+    "type": "Composer",
+    "era": 2007,
+    "tags": [
+      "Contemporary",
+      "Film",
+      "American"
+    ],
+    "collections": [
+      "classic-archives",
+      "unlocked-recordings",
+      "community_audio"
+    ],
+    "meta": {
+      "schools": [],
+      "regions": [
+        "American"
+      ],
+      "forms": [],
+      "styles": []
+    },
+    "related": [],
+    "aliases": [
+      "Michael George Giacchino"
+    ],
+    "qid": "Q155124",
+    "source": "wikidata",
+    "born": 1967,
+    "died": null,
+    "mbid": "150e14bd-915d-4574-b574-f77dd7ea72ad",
+    "attrs": {
+      "movement": [],
+      "genre": [
+        "film score"
+      ],
+      "instrument": [],
+      "voice": [],
+      "member": [],
+      "country": [
+        "American"
+      ]
+    },
+    "sitelinks": 42
+  },
+  {
+    "id": "Michael Kamen",
+    "key": "michael_kamen",
+    "is_master": false,
+    "type": "Composer",
+    "era": 1988,
+    "tags": [
+      "Contemporary",
+      "Film",
+      "Piano",
+      "American"
+    ],
+    "collections": [
+      "classic-archives",
+      "unlocked-recordings",
+      "community_audio"
+    ],
+    "meta": {
+      "schools": [],
+      "regions": [
+        "American"
+      ],
+      "forms": [],
+      "styles": []
+    },
+    "related": [],
+    "aliases": [],
+    "qid": "Q156300",
+    "source": "wikidata",
+    "born": 1948,
+    "died": 2003,
+    "mbid": "adcc6c98-0bf1-4d54-84aa-2249cf5e46bf",
+    "attrs": {
+      "movement": [],
+      "genre": [
+        "film score"
+      ],
+      "instrument": [
+        "oboe",
+        "piano"
+      ],
+      "voice": [],
+      "member": [],
+      "country": [
+        "American"
+      ]
+    },
+    "sitelinks": 42
   },
   {
     "id": "Vladimir Ashkenazy",
@@ -75998,55 +76676,6 @@
       "member": [],
       "country": [
         "Italian"
-      ]
-    },
-    "sitelinks": 42
-  },
-  {
-    "id": "Michael Kamen",
-    "key": "michael_kamen",
-    "is_master": false,
-    "type": "Composer",
-    "era": 1988,
-    "tags": [
-      "Contemporary",
-      "Film",
-      "Piano",
-      "American"
-    ],
-    "collections": [
-      "classic-archives",
-      "unlocked-recordings",
-      "community_audio"
-    ],
-    "meta": {
-      "schools": [],
-      "regions": [
-        "American"
-      ],
-      "forms": [],
-      "styles": []
-    },
-    "related": [],
-    "aliases": [],
-    "qid": "Q156300",
-    "source": "wikidata",
-    "born": 1948,
-    "died": 2003,
-    "mbid": "adcc6c98-0bf1-4d54-84aa-2249cf5e46bf",
-    "attrs": {
-      "movement": [],
-      "genre": [
-        "film score"
-      ],
-      "instrument": [
-        "oboe",
-        "piano"
-      ],
-      "voice": [],
-      "member": [],
-      "country": [
-        "American"
       ]
     },
     "sitelinks": 42
@@ -76207,16 +76836,14 @@
     "sitelinks": 42
   },
   {
-    "id": "Nayden Todorov",
-    "key": "nayden_todorov",
+    "id": "Elmer Bernstein",
+    "key": "elmer_bernstein",
     "is_master": false,
     "type": "Composer",
-    "era": 2014,
+    "era": 1962,
     "tags": [
-      "Contemporary",
-      "Opera",
-      "Symphony",
-      "Piano"
+      "Modernist",
+      "American"
     ],
     "collections": [
       "classic-archives",
@@ -76225,29 +76852,173 @@
     ],
     "meta": {
       "schools": [],
-      "regions": [],
+      "regions": [
+        "American"
+      ],
       "forms": [],
       "styles": []
     },
     "related": [],
     "aliases": [],
-    "qid": "Q1963895",
+    "qid": "Q111436",
     "source": "wikidata",
-    "born": 1974,
-    "died": null,
-    "mbid": "2ebaede7-6ed0-4ffe-b575-9ec38827e042",
+    "born": 1922,
+    "died": 2004,
+    "mbid": "e2c7d7a5-b520-4232-b7cf-aaceead17b6c",
+    "attrs": {
+      "movement": [],
+      "genre": [],
+      "instrument": [
+        "keyboard instrument"
+      ],
+      "voice": [],
+      "member": [
+        "University of Southern California"
+      ],
+      "country": [
+        "American"
+      ]
+    },
+    "sitelinks": 41
+  },
+  {
+    "id": "Victor Borge",
+    "key": "victor_borge",
+    "is_master": false,
+    "type": "Composer",
+    "era": 1949,
+    "tags": [
+      "Modernist",
+      "Piano",
+      "American"
+    ],
+    "collections": [
+      "classic-archives",
+      "unlocked-recordings",
+      "community_audio"
+    ],
+    "meta": {
+      "schools": [],
+      "regions": [
+        "American"
+      ],
+      "forms": [],
+      "styles": []
+    },
+    "related": [],
+    "aliases": [],
+    "qid": "Q251417",
+    "source": "wikidata",
+    "born": 1909,
+    "died": 2000,
+    "mbid": "f81530c4-8418-4c20-8448-41dac13a6a32",
     "attrs": {
       "movement": [],
       "genre": [
-        "opera",
-        "symphonic music"
+        "classical music"
       ],
       "instrument": [
         "piano"
       ],
       "voice": [],
       "member": [],
-      "country": []
+      "country": [
+        "American"
+      ]
+    },
+    "sitelinks": 41
+  },
+  {
+    "id": "Thomas Newman",
+    "key": "thomas_newman",
+    "is_master": false,
+    "type": "Composer",
+    "era": 1995,
+    "tags": [
+      "Contemporary",
+      "American"
+    ],
+    "collections": [
+      "classic-archives",
+      "unlocked-recordings",
+      "community_audio"
+    ],
+    "meta": {
+      "schools": [],
+      "regions": [
+        "American"
+      ],
+      "forms": [],
+      "styles": []
+    },
+    "related": [],
+    "aliases": [
+      "Tom Newman"
+    ],
+    "qid": "Q319996",
+    "source": "wikidata",
+    "born": 1955,
+    "died": null,
+    "mbid": "348f3a5f-5112-4d72-b33b-11c60b4f9af2",
+    "attrs": {
+      "movement": [],
+      "genre": [],
+      "instrument": [],
+      "voice": [],
+      "member": [],
+      "country": [
+        "American"
+      ]
+    },
+    "sitelinks": 41
+  },
+  {
+    "id": "Henri Wieniawski",
+    "key": "henri_wieniawski",
+    "is_master": false,
+    "type": "Composer",
+    "era": 1875,
+    "tags": [
+      "Romantic",
+      "Violin",
+      "Russian"
+    ],
+    "collections": [
+      "classic-archives",
+      "unlocked-recordings",
+      "community_audio"
+    ],
+    "meta": {
+      "schools": [],
+      "regions": [
+        "Russian"
+      ],
+      "forms": [],
+      "styles": []
+    },
+    "related": [],
+    "aliases": [],
+    "qid": "Q272184",
+    "source": "wikidata",
+    "born": 1835,
+    "died": 1880,
+    "mbid": "a65d57ec-36a7-49ad-b99d-79f01cd45478",
+    "attrs": {
+      "movement": [],
+      "genre": [
+        "classical music"
+      ],
+      "instrument": [
+        "violin"
+      ],
+      "voice": [],
+      "member": [
+        "Royal Conservatory of Brussels",
+        "Saint Petersburg Conservatory"
+      ],
+      "country": [
+        "Russian"
+      ]
     },
     "sitelinks": 41
   },
@@ -76306,56 +77077,6 @@
     "sitelinks": 41
   },
   {
-    "id": "Henri Wieniawski",
-    "key": "henri_wieniawski",
-    "is_master": false,
-    "type": "Composer",
-    "era": 1875,
-    "tags": [
-      "Romantic",
-      "Violin",
-      "Russian"
-    ],
-    "collections": [
-      "classic-archives",
-      "unlocked-recordings",
-      "community_audio"
-    ],
-    "meta": {
-      "schools": [],
-      "regions": [
-        "Russian"
-      ],
-      "forms": [],
-      "styles": []
-    },
-    "related": [],
-    "aliases": [],
-    "qid": "Q272184",
-    "source": "wikidata",
-    "born": 1835,
-    "died": 1880,
-    "mbid": "a65d57ec-36a7-49ad-b99d-79f01cd45478",
-    "attrs": {
-      "movement": [],
-      "genre": [
-        "classical music"
-      ],
-      "instrument": [
-        "violin"
-      ],
-      "voice": [],
-      "member": [
-        "Royal Conservatory of Brussels",
-        "Saint Petersburg Conservatory"
-      ],
-      "country": [
-        "Russian"
-      ]
-    },
-    "sitelinks": 41
-  },
-  {
     "id": "Umberto Giordano",
     "key": "umberto_giordano",
     "is_master": false,
@@ -76405,14 +77126,14 @@
     "sitelinks": 41
   },
   {
-    "id": "Elmer Bernstein",
-    "key": "elmer_bernstein",
+    "id": "Ludwig Göransson",
+    "key": "ludwig_goransson",
     "is_master": false,
     "type": "Composer",
-    "era": 1962,
+    "era": 2024,
     "tags": [
-      "Modernist",
-      "American"
+      "Contemporary",
+      "Swedish"
     ],
     "collections": [
       "classic-archives",
@@ -76422,31 +77143,74 @@
     "meta": {
       "schools": [],
       "regions": [
-        "American"
+        "Swedish"
       ],
       "forms": [],
       "styles": []
     },
     "related": [],
-    "aliases": [],
-    "qid": "Q111436",
+    "aliases": [
+      "Ludwig Tomas Emil Göransson"
+    ],
+    "qid": "Q1358202",
     "source": "wikidata",
-    "born": 1922,
-    "died": 2004,
-    "mbid": "e2c7d7a5-b520-4232-b7cf-aaceead17b6c",
+    "born": 1984,
+    "died": null,
+    "mbid": "78471616-3cb4-4139-a148-aeac3c7d0f79",
     "attrs": {
       "movement": [],
       "genre": [],
+      "instrument": [],
+      "voice": [],
+      "member": [],
+      "country": [
+        "Swedish"
+      ]
+    },
+    "sitelinks": 41
+  },
+  {
+    "id": "Nayden Todorov",
+    "key": "nayden_todorov",
+    "is_master": false,
+    "type": "Composer",
+    "era": 2014,
+    "tags": [
+      "Contemporary",
+      "Opera",
+      "Symphony",
+      "Piano"
+    ],
+    "collections": [
+      "classic-archives",
+      "unlocked-recordings",
+      "community_audio"
+    ],
+    "meta": {
+      "schools": [],
+      "regions": [],
+      "forms": [],
+      "styles": []
+    },
+    "related": [],
+    "aliases": [],
+    "qid": "Q1963895",
+    "source": "wikidata",
+    "born": 1974,
+    "died": null,
+    "mbid": "2ebaede7-6ed0-4ffe-b575-9ec38827e042",
+    "attrs": {
+      "movement": [],
+      "genre": [
+        "opera",
+        "symphonic music"
+      ],
       "instrument": [
-        "keyboard instrument"
+        "piano"
       ],
       "voice": [],
-      "member": [
-        "University of Southern California"
-      ],
-      "country": [
-        "American"
-      ]
+      "member": [],
+      "country": []
     },
     "sitelinks": 41
   },
@@ -76495,94 +77259,6 @@
       "member": [
         "American Academy of Arts and Sciences"
       ],
-      "country": [
-        "American"
-      ]
-    },
-    "sitelinks": 41
-  },
-  {
-    "id": "Ludwig Göransson",
-    "key": "ludwig_goransson",
-    "is_master": false,
-    "type": "Composer",
-    "era": 2024,
-    "tags": [
-      "Contemporary",
-      "Swedish"
-    ],
-    "collections": [
-      "classic-archives",
-      "unlocked-recordings",
-      "community_audio"
-    ],
-    "meta": {
-      "schools": [],
-      "regions": [
-        "Swedish"
-      ],
-      "forms": [],
-      "styles": []
-    },
-    "related": [],
-    "aliases": [
-      "Ludwig Tomas Emil Göransson"
-    ],
-    "qid": "Q1358202",
-    "source": "wikidata",
-    "born": 1984,
-    "died": null,
-    "mbid": "78471616-3cb4-4139-a148-aeac3c7d0f79",
-    "attrs": {
-      "movement": [],
-      "genre": [],
-      "instrument": [],
-      "voice": [],
-      "member": [],
-      "country": [
-        "Swedish"
-      ]
-    },
-    "sitelinks": 41
-  },
-  {
-    "id": "Thomas Newman",
-    "key": "thomas_newman",
-    "is_master": false,
-    "type": "Composer",
-    "era": 1995,
-    "tags": [
-      "Contemporary",
-      "American"
-    ],
-    "collections": [
-      "classic-archives",
-      "unlocked-recordings",
-      "community_audio"
-    ],
-    "meta": {
-      "schools": [],
-      "regions": [
-        "American"
-      ],
-      "forms": [],
-      "styles": []
-    },
-    "related": [],
-    "aliases": [
-      "Tom Newman"
-    ],
-    "qid": "Q319996",
-    "source": "wikidata",
-    "born": 1955,
-    "died": null,
-    "mbid": "348f3a5f-5112-4d72-b33b-11c60b4f9af2",
-    "attrs": {
-      "movement": [],
-      "genre": [],
-      "instrument": [],
-      "voice": [],
-      "member": [],
       "country": [
         "American"
       ]
@@ -76744,16 +77420,15 @@
     "sitelinks": 40
   },
   {
-    "id": "Wanda Landowska",
-    "key": "wanda_landowska",
+    "id": "Gregorio Allegri",
+    "key": "gregorio_allegri",
     "is_master": false,
     "type": "Composer",
-    "era": 1919,
+    "era": 1622,
     "tags": [
-      "Modernist",
-      "Piano",
-      "Harpsichord",
-      "French"
+      "Baroque",
+      "Tenor",
+      "Italian"
     ],
     "collections": [
       "classic-archives",
@@ -76763,34 +77438,34 @@
     "meta": {
       "schools": [],
       "regions": [
-        "French"
+        "Italian"
       ],
       "forms": [],
       "styles": []
     },
     "related": [],
-    "aliases": [],
-    "qid": "Q160257",
+    "aliases": [
+      "Allegri"
+    ],
+    "qid": "Q216695",
     "source": "wikidata",
-    "born": 1879,
-    "died": 1959,
-    "mbid": "39bba85f-e589-4a35-8388-259195fe9c5b",
+    "born": 1582,
+    "died": 1652,
+    "mbid": "720f3f3f-49a2-47ae-a9ba-0d150ba4ee7a",
     "attrs": {
-      "movement": [],
+      "movement": [
+        "Baroque music"
+      ],
       "genre": [
         "classical music"
       ],
-      "instrument": [
-        "harpsichord",
-        "piano"
+      "instrument": [],
+      "voice": [
+        "tenor"
       ],
-      "voice": [],
-      "member": [
-        "Schola Cantorum Basiliensis",
-        "École Normale de Musique de Paris Alfred Cortot"
-      ],
+      "member": [],
       "country": [
-        "French"
+        "Italian"
       ]
     },
     "sitelinks": 40
@@ -76846,15 +77521,16 @@
     "sitelinks": 40
   },
   {
-    "id": "Gregorio Allegri",
-    "key": "gregorio_allegri",
+    "id": "Wanda Landowska",
+    "key": "wanda_landowska",
     "is_master": false,
     "type": "Composer",
-    "era": 1622,
+    "era": 1919,
     "tags": [
-      "Baroque",
-      "Tenor",
-      "Italian"
+      "Modernist",
+      "Piano",
+      "Harpsichord",
+      "French"
     ],
     "collections": [
       "classic-archives",
@@ -76864,76 +77540,35 @@
     "meta": {
       "schools": [],
       "regions": [
-        "Italian"
+        "French"
       ],
-      "forms": [],
-      "styles": []
-    },
-    "related": [],
-    "aliases": [
-      "Allegri"
-    ],
-    "qid": "Q216695",
-    "source": "wikidata",
-    "born": 1582,
-    "died": 1652,
-    "mbid": "720f3f3f-49a2-47ae-a9ba-0d150ba4ee7a",
-    "attrs": {
-      "movement": [
-        "Baroque music"
-      ],
-      "genre": [
-        "classical music"
-      ],
-      "instrument": [],
-      "voice": [
-        "tenor"
-      ],
-      "member": [],
-      "country": [
-        "Italian"
-      ]
-    },
-    "sitelinks": 40
-  },
-  {
-    "id": "Bernard Haitink",
-    "key": "bernard_haitink",
-    "is_master": false,
-    "type": "Conductor",
-    "era": 1969,
-    "tags": [
-      "Violin"
-    ],
-    "collections": [
-      "classic-archives",
-      "unlocked-recordings",
-      "community_audio"
-    ],
-    "meta": {
-      "schools": [],
-      "regions": [],
       "forms": [],
       "styles": []
     },
     "related": [],
     "aliases": [],
-    "qid": "Q158370",
+    "qid": "Q160257",
     "source": "wikidata",
-    "born": 1929,
-    "died": 2021,
-    "mbid": "8bc0b4b4-cc3f-40cf-8223-4ee980cb768d",
+    "born": 1879,
+    "died": 1959,
+    "mbid": "39bba85f-e589-4a35-8388-259195fe9c5b",
     "attrs": {
       "movement": [],
       "genre": [
         "classical music"
       ],
       "instrument": [
-        "violin"
+        "harpsichord",
+        "piano"
       ],
       "voice": [],
-      "member": [],
-      "country": []
+      "member": [
+        "Schola Cantorum Basiliensis",
+        "École Normale de Musique de Paris Alfred Cortot"
+      ],
+      "country": [
+        "French"
+      ]
     },
     "sitelinks": 40
   },
@@ -76986,6 +77621,47 @@
       "country": [
         "French"
       ]
+    },
+    "sitelinks": 40
+  },
+  {
+    "id": "Bernard Haitink",
+    "key": "bernard_haitink",
+    "is_master": false,
+    "type": "Conductor",
+    "era": 1969,
+    "tags": [
+      "Violin"
+    ],
+    "collections": [
+      "classic-archives",
+      "unlocked-recordings",
+      "community_audio"
+    ],
+    "meta": {
+      "schools": [],
+      "regions": [],
+      "forms": [],
+      "styles": []
+    },
+    "related": [],
+    "aliases": [],
+    "qid": "Q158370",
+    "source": "wikidata",
+    "born": 1929,
+    "died": 2021,
+    "mbid": "8bc0b4b4-cc3f-40cf-8223-4ee980cb768d",
+    "attrs": {
+      "movement": [],
+      "genre": [
+        "classical music"
+      ],
+      "instrument": [
+        "violin"
+      ],
+      "voice": [],
+      "member": [],
+      "country": []
     },
     "sitelinks": 40
   },
@@ -77346,6 +78022,55 @@
       ],
       "country": [
         "Russian"
+      ]
+    },
+    "sitelinks": 38
+  },
+  {
+    "id": "Hanns Eisler",
+    "key": "hanns_eisler",
+    "is_master": false,
+    "type": "Composer",
+    "era": 1938,
+    "tags": [
+      "Modernist",
+      "American",
+      "German"
+    ],
+    "collections": [
+      "classic-archives",
+      "unlocked-recordings",
+      "community_audio"
+    ],
+    "meta": {
+      "schools": [],
+      "regions": [
+        "American",
+        "German"
+      ],
+      "forms": [],
+      "styles": []
+    },
+    "related": [],
+    "aliases": [],
+    "qid": "Q78704",
+    "source": "wikidata",
+    "born": 1898,
+    "died": 1962,
+    "mbid": "eca53e25-c9b2-428a-aef4-2c167203045d",
+    "attrs": {
+      "movement": [],
+      "genre": [],
+      "instrument": [],
+      "voice": [],
+      "member": [
+        "Academy of Arts of the GDR",
+        "Hanns Eisler Music School Berlin",
+        "Second Viennese School"
+      ],
+      "country": [
+        "American",
+        "German"
       ]
     },
     "sitelinks": 38
@@ -77863,6 +78588,59 @@
       ],
       "country": [
         "French"
+      ]
+    },
+    "sitelinks": 34
+  },
+  {
+    "id": "Dimitri Tiomkin",
+    "key": "dimitri_tiomkin",
+    "is_master": false,
+    "type": "Composer",
+    "era": 1934,
+    "tags": [
+      "Modernist",
+      "Film",
+      "Piano",
+      "American",
+      "Russian"
+    ],
+    "collections": [
+      "classic-archives",
+      "unlocked-recordings",
+      "community_audio"
+    ],
+    "meta": {
+      "schools": [],
+      "regions": [
+        "American",
+        "Russian"
+      ],
+      "forms": [],
+      "styles": []
+    },
+    "related": [],
+    "aliases": [
+      "Dimitri Zinovievich Tiomkin"
+    ],
+    "qid": "Q317033",
+    "source": "wikidata",
+    "born": 1894,
+    "died": 1979,
+    "mbid": "0ed6e209-dd4d-4c47-b6d0-c3a1ae06fef5",
+    "attrs": {
+      "movement": [],
+      "genre": [
+        "film score"
+      ],
+      "instrument": [
+        "piano"
+      ],
+      "voice": [],
+      "member": [],
+      "country": [
+        "American",
+        "Russian"
       ]
     },
     "sitelinks": 34
@@ -79731,6 +80509,53 @@
       "voice": [],
       "member": [],
       "country": []
+    },
+    "sitelinks": 30
+  },
+  {
+    "id": "Hans Richter",
+    "key": "hans_richter",
+    "is_master": false,
+    "type": "Composer",
+    "era": 1883,
+    "tags": [
+      "Romantic",
+      "Opera",
+      "Hungarian"
+    ],
+    "collections": [
+      "classic-archives",
+      "unlocked-recordings",
+      "community_audio"
+    ],
+    "meta": {
+      "schools": [],
+      "regions": [
+        "Hungarian"
+      ],
+      "forms": [],
+      "styles": []
+    },
+    "related": [],
+    "aliases": [
+      "Johann Baptist Isidor Richter"
+    ],
+    "qid": "Q366147",
+    "source": "wikidata",
+    "born": 1843,
+    "died": 1916,
+    "mbid": "7e630ae3-5589-44c6-99b1-02b8907033ea",
+    "attrs": {
+      "movement": [],
+      "genre": [
+        "opera"
+      ],
+      "instrument": [],
+      "voice": [],
+      "member": [],
+      "country": [
+        "Hungarian"
+      ]
     },
     "sitelinks": 30
   },
@@ -86931,6 +87756,57 @@
       ],
       "country": [
         "French"
+      ]
+    },
+    "sitelinks": 20
+  },
+  {
+    "id": "Sergei Vasilenko",
+    "key": "sergei_vasilenko",
+    "is_master": false,
+    "type": "Composer",
+    "era": 1912,
+    "tags": [
+      "Modernist",
+      "Opera",
+      "Russian"
+    ],
+    "collections": [
+      "classic-archives",
+      "unlocked-recordings",
+      "community_audio"
+    ],
+    "meta": {
+      "schools": [],
+      "regions": [
+        "Russian"
+      ],
+      "forms": [],
+      "styles": []
+    },
+    "related": [],
+    "aliases": [
+      "Sergei Nikiforovich Vasilenko"
+    ],
+    "qid": "Q1553197",
+    "source": "wikidata",
+    "born": 1872,
+    "died": 1956,
+    "mbid": "a44353fb-85bf-47de-bafe-0238d6729ccd",
+    "attrs": {
+      "movement": [],
+      "genre": [
+        "opera"
+      ],
+      "instrument": [],
+      "voice": [],
+      "member": [
+        "Lomonosov Moscow State University",
+        "Moscow Conservatory",
+        "Union of Soviet Composers"
+      ],
+      "country": [
+        "Russian"
       ]
     },
     "sitelinks": 20

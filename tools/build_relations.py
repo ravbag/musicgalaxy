@@ -73,7 +73,17 @@ EXPANSION_OCCUPATIONS = {
     'Pianist': 'Q486748', 'Violinist': 'Q1259917', 'Organist': 'Q765778', 'Cellist': 'Q13219637',
 }
 NEEDS_CLASSICAL_EVIDENCE = {'Composer', 'Pianist', 'Violinist', 'Cellist'}  # also common outside classical
-CLASSICAL_GENRES = ['Q9730', 'Q1344']  # classical music, opera
+# Occupations that count as classical evidence by themselves: many film composers (Maurice Jarre,
+# Thomas Newman) have no genre on Wikidata and are described only as "composer and conductor"
+CLASSICAL_EVIDENCE_OCCUPATIONS = {'Q1415090', 'Q2865819'}  # film score composer, opera singer
+# Classical evidence for composers/instrumentalists born after PRE_POP_YEAR: a genre or movement whose
+# name sounds classical. Wikidata's genre tree doesn't help here: postminimalism has no parent genre
+# and ambient music is filed under popular music, so Max Richter would never count as classical.
+CLASSICAL_LABEL = re.compile(
+    r'classical|opera|operetta|baroque|romantic|renaissance|medieval|minimalis|minimal music|serial|'
+    r'twelve-tone|atonal|avant-garde|new music|neoclassic|impressionis|expressionis|spectral|symphon|'
+    r'chamber music|concerto|art song|lied|choral|sacred|liturgical|oratorio|cantata|ballet|film score|'
+    r'contemporary music|early music|polyphony|string quartet', re.I)
 PRE_POP_YEAR = 1850  # anyone born before this with these occupations counts as classical
 
 PROPS = {
@@ -97,7 +107,7 @@ MUSIC_DESCRIPTION = re.compile(
     r'flutist|oboist|clarinettist|clarinetist|bassoonist|trumpeter|horn player|harpist|kapellmeister|music theorist|'
     r'choirmaster|cantor|troubadour|trouv[eè]re|minnesinger|madrigalist|opera|music)', re.I)
 NON_CLASSICAL = re.compile(
-    r'\b(jazz|rock|pop|rapper|hip[- ]hop|singer-songwriter|songwriter|disc jockey|dj|heavy metal|punk|reggae|'
+    r'\b(jazz|rock|pop|rapper|hip[- ]hop|singer-songwriter|songwriter|disc jockey|dj|[\w-]*\s?metal|punk|playback singer|filmi|bollywood|reggae|'
     r'blues|soul|r&b|rhythm and blues|country music|funk|disco|electronic dance|bandleader|big band|swing|'
     r'schlager|flamenco|bossa nova|k-pop|j-pop|eurovision)\b', re.I)
 
@@ -529,19 +539,41 @@ def match_existing(kb, wd, overrides, report, rematch=False):
 
 
 # --- Step 2: find more artists ------------------------------------------------------------------------
+def resolve_includes(wd, names, kb, report):
+    """Wikidata ids for the 'include' list (names or Q-ids). A name resolves to the best-known person
+    of that exact name with a music occupation."""
+    known = {a['qid'] for a in kb if a.get('qid')}
+    ids = [n for n in names if re.fullmatch(r'Q\d+', str(n))]
+    by_name = [n for n in names if not re.fullmatch(r'Q\d+', str(n))]
+    try:
+        matches = wd.match_names(by_name) if by_name else {}
+    except Exception as e:  # noqa: BLE001 - keep building without the named includes
+        report['warnings'].append(f'include list: name lookup failed ({e}); {", ".join(by_name)} skipped')
+        by_name, matches = [], {}
+    for name in by_name:
+        people = [e for e in wd.load(matches.get(name, [])).values()
+                  if Q_HUMAN in e['instance'] and set(e['occupation']) & MUSIC_OCCUPATIONS]
+        if not people:
+            report['warnings'].append(f'include list: no musician named "{name}" found on Wikidata '
+                                      f'(check the spelling, or use the Q-id)')
+            continue
+        ids.append(max(people, key=lambda e: e['sitelinks'])['qid'])
+    resolved = [q for q in dict.fromkeys(ids) if q not in known]
+    if resolved:
+        log(f'  include list: {len(resolved)} artists')
+    return resolved
+
+
 def expansion_candidates(wd, kb, args, report):
     known = {a['qid'] for a in kb if a.get('qid')}
     found = {}
-    genre_values = ' '.join('wd:' + g for g in CLASSICAL_GENRES)
+    connected = set()  # teachers, students, influences of known artists (exempt from the evidence check)
     for label, occ in EXPANSION_OCCUPATIONS.items():
-        classical = (f'FILTER(EXISTS {{ ?item wdt:P136 ?g . VALUES ?g {{ {genre_values} }} }} '
-                     f'|| (BOUND(?born) && YEAR(?born) < {PRE_POP_YEAR}))') if label in NEEDS_CLASSICAL_EVIDENCE else ''
+        # Classical evidence (genre/movement names) is checked later, in classical_musician()
         query = f'''SELECT ?item ?links WHERE {{
   ?item wdt:P106 wd:{occ} ; wikibase:sitelinks ?links .
   FILTER(?links >= {args.min_sitelinks})
   ?item wdt:P31 wd:Q5 .
-  OPTIONAL {{ ?item wdt:P569 ?born }}
-  {classical}
 }}'''
         try:
             rows = wd.sparql(query)
@@ -558,6 +590,7 @@ def expansion_candidates(wd, kb, args, report):
     # People directly connected to known artists (teachers, students, influences, family)
     if args.expand_neighbours:
         neighbour = Counter()
+        lineage = set()  # family alone is no sign of a classical musician
         for a in kb:
             ent = wd.entities.get(a.get('qid') or '')
             if not ent:
@@ -566,14 +599,18 @@ def expansion_candidates(wd, kb, args, report):
                 for q in ent[key]:
                     if q not in known:
                         neighbour[q] += 1
+                        if key in ('student_of', 'student', 'influenced_by'):
+                            lineage.add(q)
         ents = wd.load(list(neighbour))
         n = 0
         for q, e in ents.items():
             if Q_HUMAN in e['instance'] and artist_type(e) and e['sitelinks'] >= args.min_sitelinks_neighbour:
                 found[q] = max(found.get(q, 0), e['sitelinks'])
+                if q in lineage:
+                    connected.add(q)
                 n += 1
         log(f'  connected to known artists (teachers, students, influences, family): {n}')
-    return sorted(found, key=lambda q: -found[q])
+    return sorted(found, key=lambda q: -found[q]), connected
 
 
 def derive_tags(ent, typ, era, labels):
@@ -605,30 +642,63 @@ def country_adjectives(ent, labels):
     return out
 
 
-def classical_musician(e, labels):
+ADJECTIVE_END = re.compile(r'(al|ic|ical|ian|an|ese|ish|ive|ary|ern)$', re.I)
+ROLE_NOUNS = {  # nouns with an adjective ending
+    'politician', 'historian', 'musician', 'physician', 'librarian', 'comedian', 'magician',
+    'mathematician', 'theologian', 'grammarian', 'academician', 'statistician', 'guardian', 'antiquarian',
+    'humanitarian', 'parliamentarian', 'critic', 'cleric', 'secretary', 'missionary', 'revolutionary',
+    'notary', 'executive', 'general', 'admiral', 'cardinal', 'official', 'statesman', 'nobleman',
+    'clergyman', 'businessman', 'chairman', 'artisan', 'veteran',
+}
+
+
+def first_role(desc):
+    """The first role in a Wikidata description: 'German composer and pianist' -> 'German composer';
+    'Genevan philosopher, writer and composer' -> 'Genevan philosopher'. When the part before 'and'
+    ends in an adjective, the noun comes after it: 'Austrian-Hungarian orchestral and operatic
+    conductor' -> the whole phrase."""
+    segment = re.split(r',|;|\(|\bwho\b', desc, maxsplit=1)[0]
+    parts = re.split(r'\band\b', segment)
+    role = parts[0].strip()
+    i = 0
+    # Only "<adjective> and <adjective> <noun>": in "American politician and composer" the part after
+    # 'and' is a single word, so 'politician' is the noun and the role ends there
+    while (i + 1 < len(parts) and role and ADJECTIVE_END.search(role.split()[-1])
+           and role.split()[-1].lower() not in ROLE_NOUNS and len(parts[i + 1].split()) >= 2):
+        i += 1
+        role = f'{role} and {parts[i].strip()}'
+    return role
+
+
+def classical_musician(e, labels, needs_evidence=False):
     """(True, '') or (False, reason) for a candidate artist."""
     desc = e.get('description') or ''
     # The first role named must be musical: "German composer and pianist" yes, "Genevan philosopher,
     # writer and composer" (Rousseau) or "British astronomer and composer" (Herschel) no
-    first_role = re.split(r',|;|\(|\band\b|\bwho\b', desc, maxsplit=1)[0]
-    if not MUSIC_DESCRIPTION.search(first_role):
+    if not MUSIC_DESCRIPTION.search(first_role(desc)):
         return False, f'described as "{desc}"' if desc else 'no description'
     genres = ' / '.join(labels.get(g, '') for g in e['genre'])
     for text in (desc, genres):
         m = NON_CLASSICAL.search(text)
         if m:
             return False, f'{m.group(0)} ({text})'
+    if needs_evidence:
+        movements = ' / '.join(labels.get(m, '') for m in e['movement'])
+        if (not set(e['occupation']) & CLASSICAL_EVIDENCE_OCCUPATIONS
+                and not any(CLASSICAL_LABEL.search(t) for t in (genres, movements, desc))):
+            return False, f'no classical genre or movement (genres: {genres or "none"})'
     return True, ''
 
 
-def add_new_artists(kb, wd, qids, args, report):
+def add_new_artists(kb, wd, qids, args, report, connected=(), included=()):
+    qids = list(dict.fromkeys(list(included) + list(qids)))
     ents = wd.load(qids)
     attr_labels = wd.labels([q for e in ents.values() for k in ('movement', 'genre', 'voice', 'instrument', 'country') for q in e[k]])
     taken_ids = {norm(a['id']) for a in kb} | {norm(x) for a in kb for x in a.get('aliases', [])}
     unmatched = {norm(a['id']): a for a in kb if not a.get('qid')}
     added = []
     for q in qids:
-        if len(added) >= args.max_new:
+        if len(added) >= args.max_new and q not in included:
             break
         e = ents.get(q)
         if not e or Q_HUMAN not in e['instance']:
@@ -638,10 +708,13 @@ def add_new_artists(kb, wd, qids, args, report):
         if not typ or era is None:
             report['skipped'].append(f"{e['label']} ({q}): no {'music occupation' if not typ else 'dates'}")
             continue
-        ok, why_not = classical_musician(e, attr_labels)
-        if not ok:
-            report['skipped'].append(f"{e['label']} ({q}): not a classical musician: {why_not}")
-            continue
+        if q not in included:  # artists you asked for skip the filters
+            needs_evidence = (typ in ('Composer', 'Instrumentalist') and q not in connected
+                              and (e['born'] is None or e['born'] >= PRE_POP_YEAR))
+            ok, why_not = classical_musician(e, attr_labels, needs_evidence)
+            if not ok:
+                report['skipped'].append(f"{e['label']} ({q}): not a classical musician: {why_not}")
+                continue
         name = e['label']
         if norm(name) in unmatched:  # an existing artist the matching step missed: link it instead of duplicating
             existing = unmatched.pop(norm(name))
@@ -918,6 +991,7 @@ def build(args, http):
     if os.path.exists(args.overrides):
         with open(args.overrides, encoding='utf-8') as f:
             overrides = json.load(f)
+    includes = overrides.pop('include', [])  # artists to add whatever the rules say
     report = defaultdict(list)
     wd = Wikidata(http)
 
@@ -931,7 +1005,9 @@ def build(args, http):
     n_before = len(kb)
     if args.expand:
         step('2/4 Finding more artists...')
-        add_new_artists(kb, wd, expansion_candidates(wd, kb, args, report), args, report)
+        included = resolve_includes(wd, includes, kb, report)
+        candidates, connected = expansion_candidates(wd, kb, args, report)
+        add_new_artists(kb, wd, candidates, args, report, connected=connected, included=included)
     else:
         step('2/4 Finding more artists: skipped (--no-expand)')
 

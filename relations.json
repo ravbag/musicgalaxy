@@ -1,6 +1,6 @@
 {
  "version": 1,
- "built": "2026-10-13 17:30 UTC",
+ "built": "2026-10-13 18:38 UTC",
  "sources": [
   "Wikidata (CC0)",
   "MusicBrainz (CC0)",
@@ -281,6 +281,16 @@
    },
    "why": [
     "listeners of Gustav Mahler also play Aaron Copland"
+   ]
+  },
+  {
+   "a": "Aaron Copland",
+   "b": "Hans Zimmer",
+   "s": {
+    "listen": 0.636
+   },
+   "why": [
+    "listeners of Aaron Copland also play Hans Zimmer"
    ]
   },
   {
@@ -2495,6 +2505,16 @@
   },
   {
    "a": "Alexander Glazunov",
+   "b": "Dimitri Tiomkin",
+   "s": {
+    "teacher": 1.0
+   },
+   "why": [
+    "Dimitri Tiomkin studied with Alexander Glazunov"
+   ]
+  },
+  {
+   "a": "Alexander Glazunov",
    "b": "Ernest Ansermet",
    "s": {
     "cooccur": 0.4
@@ -2926,6 +2946,16 @@
    ]
   },
   {
+   "a": "Alexander Scriabin",
+   "b": "Vladimir Horowitz",
+   "s": {
+    "listen": 1.0
+   },
+   "why": [
+    "listeners of Alexander Scriabin also play Vladimir Horowitz"
+   ]
+  },
+  {
    "a": "Alexander Siloti",
    "b": "Camille Saint-Saëns",
    "s": {
@@ -3134,6 +3164,248 @@
    },
    "why": [
     "Alexander von Zemlinsky studied with Robert Fuchs"
+   ]
+  },
+  {
+   "a": "Alexandre Desplat",
+   "b": "André Rieu",
+   "s": {
+    "listen": 0.29
+   },
+   "why": [
+    "listeners of André Rieu also play Alexandre Desplat"
+   ]
+  },
+  {
+   "a": "Alexandre Desplat",
+   "b": "Bernard Herrmann",
+   "s": {
+    "listen": 0.202
+   },
+   "why": [
+    "listeners of Bernard Herrmann also play Alexandre Desplat"
+   ]
+  },
+  {
+   "a": "Alexandre Desplat",
+   "b": "Danny Elfman",
+   "s": {
+    "listen": 0.715
+   },
+   "why": [
+    "listeners of Danny Elfman also play Alexandre Desplat"
+   ]
+  },
+  {
+   "a": "Alexandre Desplat",
+   "b": "Dimitri Tiomkin",
+   "s": {
+    "listen": 0.258
+   },
+   "why": [
+    "listeners of Dimitri Tiomkin also play Alexandre Desplat"
+   ]
+  },
+  {
+   "a": "Alexandre Desplat",
+   "b": "Ennio Morricone",
+   "s": {
+    "listen": 0.536
+   },
+   "why": [
+    "listeners of Ennio Morricone also play Alexandre Desplat"
+   ]
+  },
+  {
+   "a": "Alexandre Desplat",
+   "b": "Hans Zimmer",
+   "s": {
+    "listen": 1.0
+   },
+   "why": [
+    "listeners of Hans Zimmer also play Alexandre Desplat"
+   ]
+  },
+  {
+   "a": "Alexandre Desplat",
+   "b": "Howard Shore",
+   "s": {
+    "listen": 0.766
+   },
+   "why": [
+    "listeners of Howard Shore also play Alexandre Desplat"
+   ]
+  },
+  {
+   "a": "Alexandre Desplat",
+   "b": "James Horner",
+   "s": {
+    "listen": 0.727
+   },
+   "why": [
+    "listeners of James Horner also play Alexandre Desplat"
+   ]
+  },
+  {
+   "a": "Alexandre Desplat",
+   "b": "Jerry Goldsmith",
+   "s": {
+    "listen": 0.569
+   },
+   "why": [
+    "listeners of Jerry Goldsmith also play Alexandre Desplat"
+   ]
+  },
+  {
+   "a": "Alexandre Desplat",
+   "b": "John Barry",
+   "s": {
+    "listen": 0.571
+   },
+   "why": [
+    "listeners of John Barry also play Alexandre Desplat"
+   ]
+  },
+  {
+   "a": "Alexandre Desplat",
+   "b": "John Williams",
+   "s": {
+    "listen": 0.807,
+    "cooccur": 0.3
+   },
+   "why": [
+    "listeners of John Williams also play Alexandre Desplat",
+    "Alexandre Desplat and John Williams appear together on 3 archive.org recordings"
+   ]
+  },
+  {
+   "a": "Alexandre Desplat",
+   "b": "Lisa Gerrard",
+   "s": {
+    "listen": 0.234
+   },
+   "why": [
+    "listeners of Lisa Gerrard also play Alexandre Desplat"
+   ]
+  },
+  {
+   "a": "Alexandre Desplat",
+   "b": "Ludwig Göransson",
+   "s": {
+    "listen": 0.566
+   },
+   "why": [
+    "listeners of Alexandre Desplat also play Ludwig Göransson"
+   ]
+  },
+  {
+   "a": "Alexandre Desplat",
+   "b": "Maurice Jarre",
+   "s": {
+    "listen": 0.555
+   },
+   "why": [
+    "listeners of Maurice Jarre also play Alexandre Desplat"
+   ]
+  },
+  {
+   "a": "Alexandre Desplat",
+   "b": "Max Richter",
+   "s": {
+    "listen": 0.432
+   },
+   "why": [
+    "listeners of Max Richter also play Alexandre Desplat"
+   ]
+  },
+  {
+   "a": "Alexandre Desplat",
+   "b": "Michael Giacchino",
+   "s": {
+    "listen": 0.757
+   },
+   "why": [
+    "listeners of Alexandre Desplat also play Michael Giacchino"
+   ]
+  },
+  {
+   "a": "Alexandre Desplat",
+   "b": "Michael Kamen",
+   "s": {
+    "listen": 0.587
+   },
+   "why": [
+    "listeners of Alexandre Desplat also play Michael Kamen"
+   ]
+  },
+  {
+   "a": "Alexandre Desplat",
+   "b": "Miklós Rózsa",
+   "s": {
+    "listen": 0.432
+   },
+   "why": [
+    "listeners of Miklós Rózsa also play Alexandre Desplat"
+   ]
+  },
+  {
+   "a": "Alexandre Desplat",
+   "b": "Philip Glass",
+   "s": {
+    "listen": 0.438
+   },
+   "why": [
+    "listeners of Philip Glass also play Alexandre Desplat"
+   ]
+  },
+  {
+   "a": "Alexandre Desplat",
+   "b": "Ramin Djawadi",
+   "s": {
+    "listen": 0.811
+   },
+   "why": [
+    "listeners of Ramin Djawadi also play Alexandre Desplat"
+   ]
+  },
+  {
+   "a": "Alexandre Desplat",
+   "b": "Renée Fleming",
+   "s": {
+    "listen": 0.207
+   },
+   "why": [
+    "listeners of Renée Fleming also play Alexandre Desplat"
+   ]
+  },
+  {
+   "a": "Alexandre Desplat",
+   "b": "Ryuichi Sakamoto",
+   "s": {
+    "listen": 0.603
+   },
+   "why": [
+    "listeners of Ryuichi Sakamoto also play Alexandre Desplat"
+   ]
+  },
+  {
+   "a": "Alexandre Desplat",
+   "b": "Tan Dun",
+   "s": {
+    "listen": 0.703
+   },
+   "why": [
+    "listeners of Tan Dun also play Alexandre Desplat"
+   ]
+  },
+  {
+   "a": "Alexandre Desplat",
+   "b": "Thomas Newman",
+   "s": {
+    "listen": 0.927
+   },
+   "why": [
+    "listeners of Alexandre Desplat also play Thomas Newman"
    ]
   },
   {
@@ -3622,6 +3894,16 @@
   },
   {
    "a": "Alfred Newman",
+   "b": "Dimitri Tiomkin",
+   "s": {
+    "listen": 0.519
+   },
+   "why": [
+    "listeners of Alfred Newman also play Dimitri Tiomkin"
+   ]
+  },
+  {
+   "a": "Alfred Newman",
    "b": "Elmer Bernstein",
    "s": {
     "listen": 0.759
@@ -3658,6 +3940,16 @@
    },
    "why": [
     "Alfred Newman and Frédéric Chopin appear together on 2 archive.org recordings"
+   ]
+  },
+  {
+   "a": "Alfred Newman",
+   "b": "Hans Zimmer",
+   "s": {
+    "listen": 0.315
+   },
+   "why": [
+    "listeners of Alfred Newman also play Hans Zimmer"
    ]
   },
   {
@@ -3981,6 +4273,16 @@
    },
    "why": [
     "Alicia de Larrocha and Sviatoslav Richter appear together on 2 archive.org recordings"
+   ]
+  },
+  {
+   "a": "Alicia de Larrocha",
+   "b": "Vladimir Horowitz",
+   "s": {
+    "cooccur": 0.2
+   },
+   "why": [
+    "Alicia de Larrocha and Vladimir Horowitz appear together on 2 archive.org recordings"
    ]
   },
   {
@@ -4722,6 +5024,16 @@
   },
   {
    "a": "André Rieu",
+   "b": "Hans Zimmer",
+   "s": {
+    "listen": 0.403
+   },
+   "why": [
+    "listeners of André Rieu also play Hans Zimmer"
+   ]
+  },
+  {
+   "a": "André Rieu",
    "b": "Howard Shore",
    "s": {
     "listen": 0.355
@@ -4820,6 +5132,16 @@
    },
    "why": [
     "Andrés Segovia and Fernando Sor appear together on 2 archive.org recordings"
+   ]
+  },
+  {
+   "a": "Andrés Segovia",
+   "b": "Francisco Tárrega",
+   "s": {
+    "listen": 0.385
+   },
+   "why": [
+    "listeners of Francisco Tárrega also play Andrés Segovia"
    ]
   },
   {
@@ -5617,6 +5939,16 @@
   },
   {
    "a": "Antal Doráti",
+   "b": "Vladimir Horowitz",
+   "s": {
+    "cooccur": 0.2
+   },
+   "why": [
+    "Antal Doráti and Vladimir Horowitz appear together on 2 archive.org recordings"
+   ]
+  },
+  {
+   "a": "Antal Doráti",
    "b": "Wolfgang Amadeus Mozart",
    "s": {
     "cooccur": 0.3
@@ -6188,6 +6520,16 @@
    },
    "why": [
     "Pyotr Ilyich Tchaikovsky studied with Anton Rubinstein"
+   ]
+  },
+  {
+   "a": "Anton Seidl",
+   "b": "Hans Richter",
+   "s": {
+    "teacher": 1.0
+   },
+   "why": [
+    "Anton Seidl studied with Hans Richter"
    ]
   },
   {
@@ -6956,6 +7298,16 @@
   },
   {
    "a": "Antonio Vivaldi",
+   "b": "Francisco Tárrega",
+   "s": {
+    "listen": 0.39
+   },
+   "why": [
+    "listeners of Francisco Tárrega also play Antonio Vivaldi"
+   ]
+  },
+  {
+   "a": "Antonio Vivaldi",
    "b": "Franz Liszt",
    "s": {
     "listen": 0.307
@@ -7128,6 +7480,16 @@
    },
    "why": [
     "listeners of Gustav Mahler also play Antonio Vivaldi"
+   ]
+  },
+  {
+   "a": "Antonio Vivaldi",
+   "b": "Hans Zimmer",
+   "s": {
+    "listen": 0.251
+   },
+   "why": [
+    "listeners of Antonio Vivaldi also play Hans Zimmer"
    ]
   },
   {
@@ -7878,6 +8240,16 @@
   },
   {
    "a": "Antonín Dvořák",
+   "b": "Hans Zimmer",
+   "s": {
+    "listen": 0.231
+   },
+   "why": [
+    "listeners of Antonín Dvořák also play Hans Zimmer"
+   ]
+  },
+  {
+   "a": "Antonín Dvořák",
    "b": "Hector Berlioz",
    "s": {
     "listen": 0.514
@@ -8238,6 +8610,16 @@
    },
    "why": [
     "listeners of Antonín Dvořák also play Tomaso Albinoni"
+   ]
+  },
+  {
+   "a": "Antonín Dvořák",
+   "b": "Vladimir Horowitz",
+   "s": {
+    "listen": 0.083
+   },
+   "why": [
+    "listeners of Vladimir Horowitz also play Antonín Dvořák"
    ]
   },
   {
@@ -8621,6 +9003,16 @@
    },
    "why": [
     "Aram Khachaturian and Stanisław Skrowaczewski appear together on 2 archive.org recordings"
+   ]
+  },
+  {
+   "a": "Aram Khachaturian",
+   "b": "Vladimir Horowitz",
+   "s": {
+    "listen": 0.189
+   },
+   "why": [
+    "listeners of Aram Khachaturian also play Vladimir Horowitz"
    ]
   },
   {
@@ -9097,6 +9489,16 @@
    },
    "why": [
     "Arnold Schoenberg and György Ligeti appear together on 2 archive.org recordings"
+   ]
+  },
+  {
+   "a": "Arnold Schoenberg",
+   "b": "Hanns Eisler",
+   "s": {
+    "teacher": 1.0
+   },
+   "why": [
+    "Hanns Eisler studied with Arnold Schoenberg"
    ]
   },
   {
@@ -9639,6 +10041,16 @@
    },
    "why": [
     "Arthur Grumiaux and Sviatoslav Richter appear together on 2 archive.org recordings"
+   ]
+  },
+  {
+   "a": "Arthur Grumiaux",
+   "b": "Vladimir Horowitz",
+   "s": {
+    "cooccur": 0.2
+   },
+   "why": [
+    "Arthur Grumiaux and Vladimir Horowitz appear together on 2 archive.org recordings"
    ]
   },
   {
@@ -10347,6 +10759,16 @@
   },
   {
    "a": "Arthur Rubinstein",
+   "b": "Vladimir Horowitz",
+   "s": {
+    "listen": 1.0
+   },
+   "why": [
+    "listeners of Arthur Rubinstein also play Vladimir Horowitz"
+   ]
+  },
+  {
+   "a": "Arthur Rubinstein",
    "b": "Walter Susskind",
    "s": {
     "cooccur": 0.4
@@ -10375,6 +10797,16 @@
    },
    "why": [
     "Arthur Sullivan and Bryn Terfel appear together on 2 archive.org recordings"
+   ]
+  },
+  {
+   "a": "Arthur Sullivan",
+   "b": "Danny Elfman",
+   "s": {
+    "listen": 0.519
+   },
+   "why": [
+    "listeners of Arthur Sullivan also play Danny Elfman"
    ]
   },
   {
@@ -10549,6 +10981,16 @@
   },
   {
    "a": "Arturo Toscanini",
+   "b": "Vladimir Horowitz",
+   "s": {
+    "cooccur": 1.0
+   },
+   "why": [
+    "Arturo Toscanini and Vladimir Horowitz appear together on 46 archive.org recordings"
+   ]
+  },
+  {
+   "a": "Arturo Toscanini",
    "b": "Wolfgang Amadeus Mozart",
    "s": {
     "cooccur": 0.5
@@ -10635,6 +11077,16 @@
    },
    "why": [
     "listeners of Arvo Pärt also play Gustav Holst"
+   ]
+  },
+  {
+   "a": "Arvo Pärt",
+   "b": "Hans Zimmer",
+   "s": {
+    "listen": 0.194
+   },
+   "why": [
+    "listeners of Arvo Pärt also play Hans Zimmer"
    ]
   },
   {
@@ -10759,6 +11211,16 @@
   },
   {
    "a": "Arvo Pärt",
+   "b": "Vladimir Horowitz",
+   "s": {
+    "listen": 0.097
+   },
+   "why": [
+    "listeners of Arvo Pärt also play Vladimir Horowitz"
+   ]
+  },
+  {
+   "a": "Arvo Pärt",
    "b": "Wolfgang Amadeus Mozart",
    "s": {
     "listen": 0.368
@@ -10826,6 +11288,16 @@
    },
    "why": [
     "listeners of Fritz Kreisler also play Astor Piazzolla"
+   ]
+  },
+  {
+   "a": "Astor Piazzolla",
+   "b": "Hans Zimmer",
+   "s": {
+    "listen": 0.134
+   },
+   "why": [
+    "listeners of Astor Piazzolla also play Hans Zimmer"
    ]
   },
   {
@@ -11068,6 +11540,16 @@
    },
    "why": [
     "Bedřich Smetana and George Szell appear together on 8 archive.org recordings"
+   ]
+  },
+  {
+   "a": "Bedřich Smetana",
+   "b": "Hans Zimmer",
+   "s": {
+    "listen": 0.206
+   },
+   "why": [
+    "listeners of Bedřich Smetana also play Hans Zimmer"
    ]
   },
   {
@@ -11596,6 +12078,16 @@
   },
   {
    "a": "Benjamin Britten",
+   "b": "Max Richter",
+   "s": {
+    "listen": 0.346
+   },
+   "why": [
+    "listeners of Benjamin Britten also play Max Richter"
+   ]
+  },
+  {
+   "a": "Benjamin Britten",
    "b": "Michael Praetorius",
    "s": {
     "listen": 0.327
@@ -12086,6 +12578,16 @@
   },
   {
    "a": "Bernard Haitink",
+   "b": "Vladimir Horowitz",
+   "s": {
+    "cooccur": 0.2
+   },
+   "why": [
+    "Bernard Haitink and Vladimir Horowitz appear together on 2 archive.org recordings"
+   ]
+  },
+  {
+   "a": "Bernard Haitink",
    "b": "Wolfgang Amadeus Mozart",
    "s": {
     "listen": 0.5
@@ -12122,6 +12624,28 @@
    },
    "why": [
     "Bernard Herrmann and Claude Debussy appear together on 2 archive.org recordings"
+   ]
+  },
+  {
+   "a": "Bernard Herrmann",
+   "b": "Danny Elfman",
+   "s": {
+    "listen": 0.309,
+    "cooccur": 0.2
+   },
+   "why": [
+    "listeners of Bernard Herrmann also play Danny Elfman",
+    "Bernard Herrmann and Danny Elfman appear together on 2 archive.org recordings"
+   ]
+  },
+  {
+   "a": "Bernard Herrmann",
+   "b": "Dimitri Tiomkin",
+   "s": {
+    "listen": 0.864
+   },
+   "why": [
+    "listeners of Dimitri Tiomkin also play Bernard Herrmann"
    ]
   },
   {
@@ -12184,6 +12708,16 @@
    },
    "why": [
     "Bernard Herrmann and Gustav Holst appear together on 2 archive.org recordings"
+   ]
+  },
+  {
+   "a": "Bernard Herrmann",
+   "b": "Hans Zimmer",
+   "s": {
+    "listen": 0.319
+   },
+   "why": [
+    "listeners of Bernard Herrmann also play Hans Zimmer"
    ]
   },
   {
@@ -13718,6 +14252,16 @@
   },
   {
    "a": "Camille Saint-Saëns",
+   "b": "Danny Elfman",
+   "s": {
+    "listen": 0.163
+   },
+   "why": [
+    "listeners of Camille Saint-Saëns also play Danny Elfman"
+   ]
+  },
+  {
+   "a": "Camille Saint-Saëns",
    "b": "Edvard Grieg",
    "s": {
     "listen": 0.576,
@@ -13928,6 +14472,16 @@
   },
   {
    "a": "Camille Saint-Saëns",
+   "b": "Hans Zimmer",
+   "s": {
+    "listen": 0.247
+   },
+   "why": [
+    "listeners of Camille Saint-Saëns also play Hans Zimmer"
+   ]
+  },
+  {
+   "a": "Camille Saint-Saëns",
    "b": "Hector Berlioz",
    "s": {
     "listen": 0.629
@@ -14108,6 +14662,16 @@
    },
    "why": [
     "Camille Saint-Saëns and Max Bruch appear together on 3 archive.org recordings"
+   ]
+  },
+  {
+   "a": "Camille Saint-Saëns",
+   "b": "Max Richter",
+   "s": {
+    "listen": 0.303
+   },
+   "why": [
+    "listeners of Camille Saint-Saëns also play Max Richter"
    ]
   },
   {
@@ -14324,6 +14888,16 @@
    },
    "why": [
     "Camille Saint-Saëns and Vincent d'Indy appear together on 3 archive.org recordings"
+   ]
+  },
+  {
+   "a": "Camille Saint-Saëns",
+   "b": "Vladimir Horowitz",
+   "s": {
+    "listen": 0.258
+   },
+   "why": [
+    "listeners of Camille Saint-Saëns also play Vladimir Horowitz"
    ]
   },
   {
@@ -14919,6 +15493,16 @@
   },
   {
    "a": "Carl Orff",
+   "b": "Danny Elfman",
+   "s": {
+    "listen": 0.394
+   },
+   "why": [
+    "listeners of Carl Orff also play Danny Elfman"
+   ]
+  },
+  {
+   "a": "Carl Orff",
    "b": "Edvard Grieg",
    "s": {
     "listen": 0.759
@@ -15009,6 +15593,16 @@
   },
   {
    "a": "Carl Orff",
+   "b": "Hans Zimmer",
+   "s": {
+    "listen": 0.581
+   },
+   "why": [
+    "listeners of Carl Orff also play Hans Zimmer"
+   ]
+  },
+  {
+   "a": "Carl Orff",
    "b": "Hermann Prey",
    "s": {
     "cooccur": 0.2
@@ -15075,6 +15669,16 @@
    },
    "why": [
     "listeners of Carl Orff also play Ludwig van Beethoven"
+   ]
+  },
+  {
+   "a": "Carl Orff",
+   "b": "Max Richter",
+   "s": {
+    "listen": 0.331
+   },
+   "why": [
+    "listeners of Carl Orff also play Max Richter"
    ]
   },
   {
@@ -18066,6 +18670,16 @@
   },
   {
    "a": "Christoph Willibald Gluck",
+   "b": "Hans Zimmer",
+   "s": {
+    "listen": 0.141
+   },
+   "why": [
+    "listeners of Christoph Willibald Gluck also play Hans Zimmer"
+   ]
+  },
+  {
+   "a": "Christoph Willibald Gluck",
    "b": "Jean-Philippe Rameau",
    "s": {
     "cooccur": 0.2
@@ -18496,6 +19110,16 @@
   },
   {
    "a": "Claude Debussy",
+   "b": "Francisco Tárrega",
+   "s": {
+    "listen": 0.186
+   },
+   "why": [
+    "listeners of Francisco Tárrega also play Claude Debussy"
+   ]
+  },
+  {
+   "a": "Claude Debussy",
    "b": "Franz Liszt",
    "s": {
     "listen": 0.558,
@@ -18620,6 +19244,16 @@
    },
    "why": [
     "listeners of Gustav Mahler also play Claude Debussy"
+   ]
+  },
+  {
+   "a": "Claude Debussy",
+   "b": "Hans Zimmer",
+   "s": {
+    "listen": 0.173
+   },
+   "why": [
+    "listeners of Claude Debussy also play Hans Zimmer"
    ]
   },
   {
@@ -19100,6 +19734,18 @@
   },
   {
    "a": "Claude Debussy",
+   "b": "Vladimir Horowitz",
+   "s": {
+    "listen": 0.235,
+    "cooccur": 0.5
+   },
+   "why": [
+    "listeners of Claude Debussy also play Vladimir Horowitz",
+    "Claude Debussy and Vladimir Horowitz appear together on 5 archive.org recordings"
+   ]
+  },
+  {
+   "a": "Claude Debussy",
    "b": "Wolfgang Amadeus Mozart",
    "s": {
     "listen": 0.535,
@@ -19188,6 +19834,16 @@
    },
    "why": [
     "Claudio Abbado studied with Hans Swarowsky"
+   ]
+  },
+  {
+   "a": "Claudio Abbado",
+   "b": "Hans Zimmer",
+   "s": {
+    "listen": 0.094
+   },
+   "why": [
+    "listeners of Claudio Abbado also play Hans Zimmer"
    ]
   },
   {
@@ -21422,6 +22078,16 @@
   },
   {
    "a": "Daniel Barenboim",
+   "b": "Vladimir Horowitz",
+   "s": {
+    "listen": 0.159
+   },
+   "why": [
+    "listeners of Daniel Barenboim also play Vladimir Horowitz"
+   ]
+  },
+  {
+   "a": "Daniel Barenboim",
    "b": "Wolfgang Amadeus Mozart",
    "s": {
     "listen": 0.346,
@@ -21481,6 +22147,236 @@
    "why": [
     "Henry Purcell and Daniel Purcell were siblings",
     "Daniel Purcell and Henry Purcell were siblings"
+   ]
+  },
+  {
+   "a": "Danny Elfman",
+   "b": "Dimitri Tiomkin",
+   "s": {
+    "listen": 0.5
+   },
+   "why": [
+    "listeners of Dimitri Tiomkin also play Danny Elfman"
+   ]
+  },
+  {
+   "a": "Danny Elfman",
+   "b": "Edward Elgar",
+   "s": {
+    "listen": 0.17
+   },
+   "why": [
+    "listeners of Edward Elgar also play Danny Elfman"
+   ]
+  },
+  {
+   "a": "Danny Elfman",
+   "b": "Ennio Morricone",
+   "s": {
+    "listen": 0.561
+   },
+   "why": [
+    "listeners of Ennio Morricone also play Danny Elfman"
+   ]
+  },
+  {
+   "a": "Danny Elfman",
+   "b": "Fritz Kreisler",
+   "s": {
+    "listen": 0.192
+   },
+   "why": [
+    "listeners of Fritz Kreisler also play Danny Elfman"
+   ]
+  },
+  {
+   "a": "Danny Elfman",
+   "b": "Gustav Holst",
+   "s": {
+    "listen": 0.156
+   },
+   "why": [
+    "listeners of Gustav Holst also play Danny Elfman"
+   ]
+  },
+  {
+   "a": "Danny Elfman",
+   "b": "Hans Zimmer",
+   "s": {
+    "listen": 1.0
+   },
+   "why": [
+    "listeners of Hans Zimmer also play Danny Elfman"
+   ]
+  },
+  {
+   "a": "Danny Elfman",
+   "b": "Howard Shore",
+   "s": {
+    "listen": 0.739
+   },
+   "why": [
+    "listeners of Danny Elfman also play Howard Shore"
+   ]
+  },
+  {
+   "a": "Danny Elfman",
+   "b": "James Horner",
+   "s": {
+    "listen": 0.683
+   },
+   "why": [
+    "listeners of James Horner also play Danny Elfman"
+   ]
+  },
+  {
+   "a": "Danny Elfman",
+   "b": "Jerry Goldsmith",
+   "s": {
+    "listen": 0.705
+   },
+   "why": [
+    "listeners of Danny Elfman also play Jerry Goldsmith"
+   ]
+  },
+  {
+   "a": "Danny Elfman",
+   "b": "Joe Hisaishi",
+   "s": {
+    "listen": 0.803
+   },
+   "why": [
+    "listeners of Joe Hisaishi also play Danny Elfman"
+   ]
+  },
+  {
+   "a": "Danny Elfman",
+   "b": "John Barry",
+   "s": {
+    "listen": 0.622
+   },
+   "why": [
+    "listeners of John Barry also play Danny Elfman"
+   ]
+  },
+  {
+   "a": "Danny Elfman",
+   "b": "John Williams",
+   "s": {
+    "listen": 0.909
+   },
+   "why": [
+    "listeners of John Williams also play Danny Elfman"
+   ]
+  },
+  {
+   "a": "Danny Elfman",
+   "b": "Maurice Jarre",
+   "s": {
+    "listen": 0.651
+   },
+   "why": [
+    "listeners of Maurice Jarre also play Danny Elfman"
+   ]
+  },
+  {
+   "a": "Danny Elfman",
+   "b": "Michael Giacchino",
+   "s": {
+    "listen": 0.675
+   },
+   "why": [
+    "listeners of Danny Elfman also play Michael Giacchino"
+   ]
+  },
+  {
+   "a": "Danny Elfman",
+   "b": "Michael Kamen",
+   "s": {
+    "listen": 0.735
+   },
+   "why": [
+    "listeners of Danny Elfman also play Michael Kamen"
+   ]
+  },
+  {
+   "a": "Danny Elfman",
+   "b": "Miklós Rózsa",
+   "s": {
+    "listen": 0.526
+   },
+   "why": [
+    "listeners of Miklós Rózsa also play Danny Elfman"
+   ]
+  },
+  {
+   "a": "Danny Elfman",
+   "b": "Philip Glass",
+   "s": {
+    "listen": 0.252
+   },
+   "why": [
+    "listeners of Philip Glass also play Danny Elfman"
+   ]
+  },
+  {
+   "a": "Danny Elfman",
+   "b": "Ralph Vaughan Williams",
+   "s": {
+    "listen": 0.152
+   },
+   "why": [
+    "listeners of Ralph Vaughan Williams also play Danny Elfman"
+   ]
+  },
+  {
+   "a": "Danny Elfman",
+   "b": "Ramin Djawadi",
+   "s": {
+    "listen": 0.623
+   },
+   "why": [
+    "listeners of Danny Elfman also play Ramin Djawadi"
+   ]
+  },
+  {
+   "a": "Danny Elfman",
+   "b": "Richard Strauss",
+   "s": {
+    "listen": 0.174
+   },
+   "why": [
+    "listeners of Richard Strauss also play Danny Elfman"
+   ]
+  },
+  {
+   "a": "Danny Elfman",
+   "b": "Tan Dun",
+   "s": {
+    "listen": 0.572
+   },
+   "why": [
+    "listeners of Tan Dun also play Danny Elfman"
+   ]
+  },
+  {
+   "a": "Danny Elfman",
+   "b": "Thomas Newman",
+   "s": {
+    "listen": 0.761
+   },
+   "why": [
+    "listeners of Danny Elfman also play Thomas Newman"
+   ]
+  },
+  {
+   "a": "Danny Elfman",
+   "b": "Toru Takemitsu",
+   "s": {
+    "listen": 0.654
+   },
+   "why": [
+    "listeners of Toru Takemitsu also play Danny Elfman"
    ]
   },
   {
@@ -21891,6 +22787,16 @@
    },
    "why": [
     "David Oistrakh and Sviatoslav Richter appear together on 2 archive.org recordings"
+   ]
+  },
+  {
+   "a": "Deanna Durbin",
+   "b": "Jerome Kern",
+   "s": {
+    "cooccur": 0.2
+   },
+   "why": [
+    "Deanna Durbin and Jerome Kern appear together on 2 archive.org recordings"
    ]
   },
   {
@@ -22649,6 +23555,206 @@
    ]
   },
   {
+   "a": "Dimitri Tiomkin",
+   "b": "Egon Petri",
+   "s": {
+    "teacher": 1.0
+   },
+   "why": [
+    "Dimitri Tiomkin studied with Egon Petri"
+   ]
+  },
+  {
+   "a": "Dimitri Tiomkin",
+   "b": "Elmer Bernstein",
+   "s": {
+    "listen": 0.758
+   },
+   "why": [
+    "listeners of Elmer Bernstein also play Dimitri Tiomkin"
+   ]
+  },
+  {
+   "a": "Dimitri Tiomkin",
+   "b": "Ennio Morricone",
+   "s": {
+    "listen": 1.0
+   },
+   "why": [
+    "listeners of Dimitri Tiomkin also play Ennio Morricone"
+   ]
+  },
+  {
+   "a": "Dimitri Tiomkin",
+   "b": "Erich Wolfgang Korngold",
+   "s": {
+    "listen": 0.516
+   },
+   "why": [
+    "listeners of Erich Wolfgang Korngold also play Dimitri Tiomkin"
+   ]
+  },
+  {
+   "a": "Dimitri Tiomkin",
+   "b": "Felix Mikhailovich Blumenfeld",
+   "s": {
+    "teacher": 1.0
+   },
+   "why": [
+    "Dimitri Tiomkin studied with Felix Mikhailovich Blumenfeld"
+   ]
+  },
+  {
+   "a": "Dimitri Tiomkin",
+   "b": "Ferruccio Busoni",
+   "s": {
+    "teacher": 1.0
+   },
+   "why": [
+    "Dimitri Tiomkin studied with Ferruccio Busoni"
+   ]
+  },
+  {
+   "a": "Dimitri Tiomkin",
+   "b": "Hans Zimmer",
+   "s": {
+    "listen": 0.409
+   },
+   "why": [
+    "listeners of Dimitri Tiomkin also play Hans Zimmer"
+   ]
+  },
+  {
+   "a": "Dimitri Tiomkin",
+   "b": "Howard Shore",
+   "s": {
+    "listen": 0.288
+   },
+   "why": [
+    "listeners of Dimitri Tiomkin also play Howard Shore"
+   ]
+  },
+  {
+   "a": "Dimitri Tiomkin",
+   "b": "James Horner",
+   "s": {
+    "listen": 0.545
+   },
+   "why": [
+    "listeners of Dimitri Tiomkin also play James Horner"
+   ]
+  },
+  {
+   "a": "Dimitri Tiomkin",
+   "b": "Jerry Goldsmith",
+   "s": {
+    "listen": 0.682
+   },
+   "why": [
+    "listeners of Dimitri Tiomkin also play Jerry Goldsmith"
+   ]
+  },
+  {
+   "a": "Dimitri Tiomkin",
+   "b": "Johann Strauss II",
+   "s": {
+    "cooccur": 0.4
+   },
+   "why": [
+    "Dimitri Tiomkin and Johann Strauss II appear together on 4 archive.org recordings"
+   ]
+  },
+  {
+   "a": "Dimitri Tiomkin",
+   "b": "John Barry",
+   "s": {
+    "listen": 0.682
+   },
+   "why": [
+    "listeners of Dimitri Tiomkin also play John Barry"
+   ]
+  },
+  {
+   "a": "Dimitri Tiomkin",
+   "b": "John Williams",
+   "s": {
+    "listen": 0.561
+   },
+   "why": [
+    "listeners of Dimitri Tiomkin also play John Williams"
+   ]
+  },
+  {
+   "a": "Dimitri Tiomkin",
+   "b": "Max Steiner",
+   "s": {
+    "listen": 0.75
+   },
+   "why": [
+    "listeners of Max Steiner also play Dimitri Tiomkin"
+   ]
+  },
+  {
+   "a": "Dimitri Tiomkin",
+   "b": "Michael Giacchino",
+   "s": {
+    "listen": 0.242
+   },
+   "why": [
+    "listeners of Dimitri Tiomkin also play Michael Giacchino"
+   ]
+  },
+  {
+   "a": "Dimitri Tiomkin",
+   "b": "Michael Kamen",
+   "s": {
+    "listen": 0.318
+   },
+   "why": [
+    "listeners of Dimitri Tiomkin also play Michael Kamen"
+   ]
+  },
+  {
+   "a": "Dimitri Tiomkin",
+   "b": "Miklós Rózsa",
+   "s": {
+    "listen": 0.5
+   },
+   "why": [
+    "listeners of Miklós Rózsa also play Dimitri Tiomkin"
+   ]
+  },
+  {
+   "a": "Dimitri Tiomkin",
+   "b": "Nino Rota",
+   "s": {
+    "listen": 0.212
+   },
+   "why": [
+    "listeners of Dimitri Tiomkin also play Nino Rota"
+   ]
+  },
+  {
+   "a": "Dimitri Tiomkin",
+   "b": "Ramin Djawadi",
+   "s": {
+    "listen": 0.167
+   },
+   "why": [
+    "listeners of Dimitri Tiomkin also play Ramin Djawadi"
+   ]
+  },
+  {
+   "a": "Dimitri Tiomkin",
+   "b": "Thomas Newman",
+   "s": {
+    "listen": 0.424
+   },
+   "why": [
+    "listeners of Dimitri Tiomkin also play Thomas Newman"
+   ]
+  },
+  {
    "a": "Dinu Lipatti",
    "b": "Edvard Grieg",
    "s": {
@@ -22706,6 +23812,16 @@
    },
    "why": [
     "Dinu Lipatti and Robert Schumann appear together on 6 archive.org recordings"
+   ]
+  },
+  {
+   "a": "Dinu Lipatti",
+   "b": "Vladimir Horowitz",
+   "s": {
+    "listen": 0.747
+   },
+   "why": [
+    "listeners of Vladimir Horowitz also play Dinu Lipatti"
    ]
   },
   {
@@ -23351,6 +24467,18 @@
   },
   {
    "a": "Domenico Scarlatti",
+   "b": "Vladimir Horowitz",
+   "s": {
+    "listen": 0.211,
+    "cooccur": 0.9
+   },
+   "why": [
+    "listeners of Domenico Scarlatti also play Vladimir Horowitz",
+    "Domenico Scarlatti and Vladimir Horowitz appear together on 9 archive.org recordings"
+   ]
+  },
+  {
+   "a": "Domenico Scarlatti",
    "b": "Wanda Landowska",
    "s": {
     "cooccur": 0.4
@@ -23894,6 +25022,16 @@
   },
   {
    "a": "Edvard Grieg",
+   "b": "Hans Zimmer",
+   "s": {
+    "listen": 0.326
+   },
+   "why": [
+    "listeners of Edvard Grieg also play Hans Zimmer"
+   ]
+  },
+  {
+   "a": "Edvard Grieg",
    "b": "Herbert von Karajan",
    "s": {
     "listen": 0.233,
@@ -24042,6 +25180,16 @@
    },
    "why": [
     "Edvard Grieg and Maurice Ravel appear together on 3 archive.org recordings"
+   ]
+  },
+  {
+   "a": "Edvard Grieg",
+   "b": "Max Richter",
+   "s": {
+    "listen": 0.261
+   },
+   "why": [
+    "listeners of Edvard Grieg also play Max Richter"
    ]
   },
   {
@@ -24339,6 +25487,16 @@
   },
   {
    "a": "Edward Elgar",
+   "b": "Hans Zimmer",
+   "s": {
+    "listen": 0.206
+   },
+   "why": [
+    "listeners of Edward Elgar also play Hans Zimmer"
+   ]
+  },
+  {
+   "a": "Edward Elgar",
    "b": "Hector Berlioz",
    "s": {
     "listen": 0.343
@@ -24493,12 +25651,32 @@
   },
   {
    "a": "Edward Elgar",
+   "b": "Kitarō",
+   "s": {
+    "cooccur": 0.2
+   },
+   "why": [
+    "Edward Elgar and Kitarō appear together on 2 archive.org recordings"
+   ]
+  },
+  {
+   "a": "Edward Elgar",
    "b": "Maurice Ravel",
    "s": {
     "listen": 0.145
    },
    "why": [
     "listeners of Edward Elgar also play Maurice Ravel"
+   ]
+  },
+  {
+   "a": "Edward Elgar",
+   "b": "Max Richter",
+   "s": {
+    "listen": 0.339
+   },
+   "why": [
+    "listeners of Edward Elgar also play Max Richter"
    ]
   },
   {
@@ -25478,6 +26656,16 @@
   },
   {
    "a": "Elmer Bernstein",
+   "b": "Hans Zimmer",
+   "s": {
+    "listen": 0.972
+   },
+   "why": [
+    "listeners of Elmer Bernstein also play Hans Zimmer"
+   ]
+  },
+  {
+   "a": "Elmer Bernstein",
    "b": "Howard Shore",
    "s": {
     "influence": 1.0
@@ -26048,6 +27236,16 @@
   },
   {
    "a": "Ennio Morricone",
+   "b": "Hans Zimmer",
+   "s": {
+    "listen": 0.897
+   },
+   "why": [
+    "listeners of Ennio Morricone also play Hans Zimmer"
+   ]
+  },
+  {
+   "a": "Ennio Morricone",
    "b": "Hildur Guðnadóttir",
    "s": {
     "listen": 0.134
@@ -26094,6 +27292,16 @@
    },
    "why": [
     "listeners of James Levine also play Ennio Morricone"
+   ]
+  },
+  {
+   "a": "Ennio Morricone",
+   "b": "Jerome Kern",
+   "s": {
+    "listen": 1.0
+   },
+   "why": [
+    "listeners of Jerome Kern also play Ennio Morricone"
    ]
   },
   {
@@ -26208,6 +27416,16 @@
   },
   {
    "a": "Ennio Morricone",
+   "b": "Lisa Gerrard",
+   "s": {
+    "listen": 0.224
+   },
+   "why": [
+    "listeners of Lisa Gerrard also play Ennio Morricone"
+   ]
+  },
+  {
+   "a": "Ennio Morricone",
    "b": "Lotte Lenya",
    "s": {
     "listen": 0.448
@@ -26284,6 +27502,26 @@
    },
    "why": [
     "listeners of Maurice Ravel also play Ennio Morricone"
+   ]
+  },
+  {
+   "a": "Ennio Morricone",
+   "b": "Max Richter",
+   "s": {
+    "listen": 0.275
+   },
+   "why": [
+    "listeners of Max Richter also play Ennio Morricone"
+   ]
+  },
+  {
+   "a": "Ennio Morricone",
+   "b": "Michael Giacchino",
+   "s": {
+    "listen": 0.349
+   },
+   "why": [
+    "listeners of Ennio Morricone also play Michael Giacchino"
    ]
   },
   {
@@ -26456,6 +27694,16 @@
    },
    "why": [
     "listeners of Toru Takemitsu also play Ennio Morricone"
+   ]
+  },
+  {
+   "a": "Ennio Morricone",
+   "b": "Vladimir Horowitz",
+   "s": {
+    "listen": 0.061
+   },
+   "why": [
+    "listeners of Vladimir Horowitz also play Ennio Morricone"
    ]
   },
   {
@@ -26836,6 +28084,16 @@
   },
   {
    "a": "Erich Wolfgang Korngold",
+   "b": "Hans Zimmer",
+   "s": {
+    "listen": 0.613
+   },
+   "why": [
+    "listeners of Erich Wolfgang Korngold also play Hans Zimmer"
+   ]
+  },
+  {
+   "a": "Erich Wolfgang Korngold",
    "b": "Ignacy Jan Paderewski",
    "s": {
     "cooccur": 0.2
@@ -26912,6 +28170,16 @@
    },
    "why": [
     "listeners of Francis Poulenc also play Erik Satie"
+   ]
+  },
+  {
+   "a": "Erik Satie",
+   "b": "Francisco Tárrega",
+   "s": {
+    "listen": 0.644
+   },
+   "why": [
+    "listeners of Francisco Tárrega also play Erik Satie"
    ]
   },
   {
@@ -27064,6 +28332,16 @@
    },
    "why": [
     "listeners of Gustav Mahler also play Erik Satie"
+   ]
+  },
+  {
+   "a": "Erik Satie",
+   "b": "Hans Zimmer",
+   "s": {
+    "listen": 0.292
+   },
+   "why": [
+    "listeners of Erik Satie also play Hans Zimmer"
    ]
   },
   {
@@ -27362,6 +28640,16 @@
   },
   {
    "a": "Erik Satie",
+   "b": "Max Richter",
+   "s": {
+    "listen": 0.794
+   },
+   "why": [
+    "listeners of Erik Satie also play Max Richter"
+   ]
+  },
+  {
+   "a": "Erik Satie",
    "b": "Michael Tilson Thomas",
    "s": {
     "listen": 0.174
@@ -27588,6 +28876,16 @@
    },
    "why": [
     "Erik Satie studied with Vincent d'Indy"
+   ]
+  },
+  {
+   "a": "Erik Satie",
+   "b": "Vladimir Horowitz",
+   "s": {
+    "listen": 0.223
+   },
+   "why": [
+    "listeners of Vladimir Horowitz also play Erik Satie"
    ]
   },
   {
@@ -28757,6 +30055,16 @@
    ]
   },
   {
+   "a": "Evgeny Kissin",
+   "b": "Vladimir Horowitz",
+   "s": {
+    "listen": 1.0
+   },
+   "why": [
+    "listeners of Vladimir Horowitz also play Evgeny Kissin"
+   ]
+  },
+  {
    "a": "Ezio Pinza",
    "b": "Feodor Chaliapin",
    "s": {
@@ -29084,6 +30392,16 @@
   },
   {
    "a": "Felix Mendelssohn",
+   "b": "Hans Zimmer",
+   "s": {
+    "listen": 0.129
+   },
+   "why": [
+    "listeners of Felix Mendelssohn also play Hans Zimmer"
+   ]
+  },
+  {
+   "a": "Felix Mendelssohn",
    "b": "Hector Berlioz",
    "s": {
     "listen": 0.971,
@@ -29314,6 +30632,16 @@
   },
   {
    "a": "Felix Mendelssohn",
+   "b": "Max Richter",
+   "s": {
+    "listen": 0.167
+   },
+   "why": [
+    "listeners of Felix Mendelssohn also play Max Richter"
+   ]
+  },
+  {
+   "a": "Felix Mendelssohn",
    "b": "Nicolai Gedda",
    "s": {
     "cooccur": 0.3
@@ -29486,6 +30814,16 @@
    },
    "why": [
     "Felix Mikhailovich Blumenfeld studied with Nikolai Rimsky-Korsakov"
+   ]
+  },
+  {
+   "a": "Felix Mikhailovich Blumenfeld",
+   "b": "Vladimir Horowitz",
+   "s": {
+    "teacher": 1.0
+   },
+   "why": [
+    "Vladimir Horowitz studied with Felix Mikhailovich Blumenfeld"
    ]
   },
   {
@@ -30252,12 +31590,114 @@
   },
   {
    "a": "Francis Poulenc",
+   "b": "Vladimir Horowitz",
+   "s": {
+    "listen": 0.424,
+    "cooccur": 0.2
+   },
+   "why": [
+    "listeners of Francis Poulenc also play Vladimir Horowitz",
+    "Francis Poulenc and Vladimir Horowitz appear together on 2 archive.org recordings"
+   ]
+  },
+  {
+   "a": "Francis Poulenc",
    "b": "İdil Biret",
    "s": {
     "listen": 0.291
    },
    "why": [
     "listeners of Francis Poulenc also play İdil Biret"
+   ]
+  },
+  {
+   "a": "Francisco Tárrega",
+   "b": "Hans Zimmer",
+   "s": {
+    "listen": 0.237
+   },
+   "why": [
+    "listeners of Francisco Tárrega also play Hans Zimmer"
+   ]
+  },
+  {
+   "a": "Francisco Tárrega",
+   "b": "Heitor Villa-Lobos",
+   "s": {
+    "listen": 0.739
+   },
+   "why": [
+    "listeners of Heitor Villa-Lobos also play Francisco Tárrega"
+   ]
+  },
+  {
+   "a": "Francisco Tárrega",
+   "b": "Isaac Albéniz",
+   "s": {
+    "listen": 1.0
+   },
+   "why": [
+    "listeners of Isaac Albéniz also play Francisco Tárrega"
+   ]
+  },
+  {
+   "a": "Francisco Tárrega",
+   "b": "Joaquín Rodrigo",
+   "s": {
+    "listen": 0.441
+   },
+   "why": [
+    "listeners of Joaquín Rodrigo also play Francisco Tárrega"
+   ]
+  },
+  {
+   "a": "Francisco Tárrega",
+   "b": "Manuel de Falla",
+   "s": {
+    "listen": 0.677
+   },
+   "why": [
+    "listeners of Manuel de Falla also play Francisco Tárrega"
+   ]
+  },
+  {
+   "a": "Francisco Tárrega",
+   "b": "Narciso Yepes",
+   "s": {
+    "listen": 1.0
+   },
+   "why": [
+    "listeners of Francisco Tárrega also play Narciso Yepes"
+   ]
+  },
+  {
+   "a": "Francisco Tárrega",
+   "b": "Philip Glass",
+   "s": {
+    "listen": 0.237
+   },
+   "why": [
+    "listeners of Francisco Tárrega also play Philip Glass"
+   ]
+  },
+  {
+   "a": "Francisco Tárrega",
+   "b": "Pyotr Ilyich Tchaikovsky",
+   "s": {
+    "listen": 0.254
+   },
+   "why": [
+    "listeners of Francisco Tárrega also play Pyotr Ilyich Tchaikovsky"
+   ]
+  },
+  {
+   "a": "Francisco Tárrega",
+   "b": "Wolfgang Amadeus Mozart",
+   "s": {
+    "listen": 0.39
+   },
+   "why": [
+    "listeners of Francisco Tárrega also play Wolfgang Amadeus Mozart"
    ]
   },
   {
@@ -30889,6 +32329,16 @@
   },
   {
    "a": "Franz Liszt",
+   "b": "Hans Zimmer",
+   "s": {
+    "listen": 0.105
+   },
+   "why": [
+    "listeners of Franz Liszt also play Hans Zimmer"
+   ]
+  },
+  {
+   "a": "Franz Liszt",
    "b": "Hans von Bülow",
    "s": {
     "teacher": 1.0
@@ -31059,6 +32509,16 @@
    },
    "why": [
     "Franz Liszt and Max Reger appear together on 2 archive.org recordings"
+   ]
+  },
+  {
+   "a": "Franz Liszt",
+   "b": "Max Richter",
+   "s": {
+    "listen": 0.143
+   },
+   "why": [
+    "listeners of Franz Liszt also play Max Richter"
    ]
   },
   {
@@ -31279,6 +32739,18 @@
    },
    "why": [
     "Franz Liszt and Vladimir Ashkenazy appear together on 5 archive.org recordings"
+   ]
+  },
+  {
+   "a": "Franz Liszt",
+   "b": "Vladimir Horowitz",
+   "s": {
+    "listen": 0.129,
+    "cooccur": 0.5
+   },
+   "why": [
+    "listeners of Franz Liszt also play Vladimir Horowitz",
+    "Franz Liszt and Vladimir Horowitz appear together on 5 archive.org recordings"
    ]
   },
   {
@@ -31857,6 +33329,18 @@
   },
   {
    "a": "Franz Schubert",
+   "b": "Vladimir Horowitz",
+   "s": {
+    "listen": 0.109,
+    "cooccur": 0.2
+   },
+   "why": [
+    "listeners of Franz Schubert also play Vladimir Horowitz",
+    "Franz Schubert and Vladimir Horowitz appear together on 2 archive.org recordings"
+   ]
+  },
+  {
+   "a": "Franz Schubert",
    "b": "Walter Susskind",
    "s": {
     "cooccur": 0.3
@@ -32340,6 +33824,16 @@
   },
   {
    "a": "Fritz Kreisler",
+   "b": "Hans Zimmer",
+   "s": {
+    "listen": 0.154
+   },
+   "why": [
+    "listeners of Fritz Kreisler also play Hans Zimmer"
+   ]
+  },
+  {
+   "a": "Fritz Kreisler",
    "b": "Hector Berlioz",
    "s": {
     "listen": 0.4
@@ -32773,6 +34267,16 @@
    ]
   },
   {
+   "a": "Fritz Reiner",
+   "b": "Vladimir Horowitz",
+   "s": {
+    "cooccur": 1.0
+   },
+   "why": [
+    "Fritz Reiner and Vladimir Horowitz appear together on 10 archive.org recordings"
+   ]
+  },
+  {
    "a": "Fritz Wunderlich",
    "b": "Gundula Janowitz",
    "s": {
@@ -33034,6 +34538,16 @@
   },
   {
    "a": "Frédéric Chopin",
+   "b": "Hans Zimmer",
+   "s": {
+    "listen": 0.259
+   },
+   "why": [
+    "listeners of Frédéric Chopin also play Hans Zimmer"
+   ]
+  },
+  {
+   "a": "Frédéric Chopin",
    "b": "Howard Shore",
    "s": {
     "listen": 0.203
@@ -33162,6 +34676,16 @@
   },
   {
    "a": "Frédéric Chopin",
+   "b": "Max Richter",
+   "s": {
+    "listen": 0.311
+   },
+   "why": [
+    "listeners of Frédéric Chopin also play Max Richter"
+   ]
+  },
+  {
+   "a": "Frédéric Chopin",
    "b": "Moriz Rosenthal",
    "s": {
     "cooccur": 0.3
@@ -33274,6 +34798,18 @@
    },
    "why": [
     "Frédéric Chopin and Vladimir Ashkenazy appear together on 5 archive.org recordings"
+   ]
+  },
+  {
+   "a": "Frédéric Chopin",
+   "b": "Vladimir Horowitz",
+   "s": {
+    "listen": 0.432,
+    "cooccur": 0.9
+   },
+   "why": [
+    "listeners of Frédéric Chopin also play Vladimir Horowitz",
+    "Frédéric Chopin and Vladimir Horowitz appear together on 9 archive.org recordings"
    ]
   },
   {
@@ -33771,6 +35307,16 @@
    },
    "why": [
     "Gabriel Fauré and Vincent d'Indy appear together on 2 archive.org recordings"
+   ]
+  },
+  {
+   "a": "Gabriel Fauré",
+   "b": "Vladimir Horowitz",
+   "s": {
+    "listen": 0.065
+   },
+   "why": [
+    "listeners of Gabriel Fauré also play Vladimir Horowitz"
    ]
   },
   {
@@ -34997,6 +36543,16 @@
   },
   {
    "a": "George Frideric Handel",
+   "b": "Hans Zimmer",
+   "s": {
+    "listen": 0.173
+   },
+   "why": [
+    "listeners of George Frideric Handel also play Hans Zimmer"
+   ]
+  },
+  {
+   "a": "George Frideric Handel",
    "b": "Hector Berlioz",
    "s": {
     "listen": 0.571
@@ -35109,6 +36665,16 @@
   },
   {
    "a": "George Frideric Handel",
+   "b": "Kitarō",
+   "s": {
+    "cooccur": 0.2
+   },
+   "why": [
+    "George Frideric Handel and Kitarō appear together on 2 archive.org recordings"
+   ]
+  },
+  {
+   "a": "George Frideric Handel",
    "b": "Kurt Thomas",
    "s": {
     "cooccur": 0.2
@@ -35167,6 +36733,16 @@
    },
    "why": [
     "listeners of Maurice Ravel also play George Frideric Handel"
+   ]
+  },
+  {
+   "a": "George Frideric Handel",
+   "b": "Max Richter",
+   "s": {
+    "listen": 0.128
+   },
+   "why": [
+    "listeners of George Frideric Handel also play Max Richter"
    ]
   },
   {
@@ -35283,6 +36859,16 @@
   },
   {
    "a": "George Gershwin",
+   "b": "Hans Zimmer",
+   "s": {
+    "listen": 0.132
+   },
+   "why": [
+    "listeners of George Gershwin also play Hans Zimmer"
+   ]
+  },
+  {
+   "a": "George Gershwin",
    "b": "Henry Cowell",
    "s": {
     "teacher": 1.0
@@ -35299,6 +36885,26 @@
    },
    "why": [
     "listeners of George Gershwin also play Howard Shore"
+   ]
+  },
+  {
+   "a": "George Gershwin",
+   "b": "Irving Berlin",
+   "s": {
+    "cooccur": 0.3
+   },
+   "why": [
+    "George Gershwin and Irving Berlin appear together on 3 archive.org recordings"
+   ]
+  },
+  {
+   "a": "George Gershwin",
+   "b": "Jerome Kern",
+   "s": {
+    "cooccur": 0.3
+   },
+   "why": [
+    "George Gershwin and Jerome Kern appear together on 3 archive.org recordings"
    ]
   },
   {
@@ -36003,6 +37609,16 @@
    },
    "why": [
     "listeners of Gustav Mahler also play Giacomo Puccini"
+   ]
+  },
+  {
+   "a": "Giacomo Puccini",
+   "b": "Hans Zimmer",
+   "s": {
+    "listen": 0.211
+   },
+   "why": [
+    "listeners of Giacomo Puccini also play Hans Zimmer"
    ]
   },
   {
@@ -38369,6 +39985,16 @@
   },
   {
    "a": "Glenn Gould",
+   "b": "Hans Zimmer",
+   "s": {
+    "listen": 0.341
+   },
+   "why": [
+    "listeners of Glenn Gould also play Hans Zimmer"
+   ]
+  },
+  {
+   "a": "Glenn Gould",
    "b": "Herbert von Karajan",
    "s": {
     "listen": 0.24
@@ -38427,6 +40053,16 @@
    },
    "why": [
     "listeners of Glenn Gould also play Ryuichi Sakamoto"
+   ]
+  },
+  {
+   "a": "Glenn Gould",
+   "b": "Vladimir Horowitz",
+   "s": {
+    "listen": 0.341
+   },
+   "why": [
+    "listeners of Vladimir Horowitz also play Glenn Gould"
    ]
   },
   {
@@ -38947,6 +40583,16 @@
   },
   {
    "a": "Gustav Holst",
+   "b": "Hans Zimmer",
+   "s": {
+    "listen": 0.524
+   },
+   "why": [
+    "listeners of Gustav Holst also play Hans Zimmer"
+   ]
+  },
+  {
+   "a": "Gustav Holst",
    "b": "Hector Berlioz",
    "s": {
     "listen": 0.6
@@ -39057,6 +40703,16 @@
   },
   {
    "a": "Gustav Holst",
+   "b": "Max Richter",
+   "s": {
+    "listen": 0.264
+   },
+   "why": [
+    "listeners of Gustav Holst also play Max Richter"
+   ]
+  },
+  {
+   "a": "Gustav Holst",
    "b": "Philip Glass",
    "s": {
     "listen": 0.427
@@ -39157,6 +40813,16 @@
    },
    "why": [
     "Gustav Holst and Zubin Mehta appear together on 2 archive.org recordings"
+   ]
+  },
+  {
+   "a": "Gustav Mahler",
+   "b": "Hans Zimmer",
+   "s": {
+    "listen": 0.303
+   },
+   "why": [
+    "listeners of Gustav Mahler also play Hans Zimmer"
    ]
   },
   {
@@ -39868,6 +41534,16 @@
    ]
   },
   {
+   "a": "Hanns Eisler",
+   "b": "Joseph Kosma",
+   "s": {
+    "teacher": 1.0
+   },
+   "why": [
+    "Joseph Kosma studied with Hanns Eisler"
+   ]
+  },
+  {
    "a": "Hans Abrahamsen",
    "b": "Per Nørgård",
    "s": {
@@ -39995,6 +41671,16 @@
    },
    "why": [
     "Hans Hotter and Wolfgang Sawallisch appear together on 6 archive.org recordings"
+   ]
+  },
+  {
+   "a": "Hans Knappertsbusch",
+   "b": "Hans Richter",
+   "s": {
+    "teacher": 1.0
+   },
+   "why": [
+    "Hans Knappertsbusch studied with Hans Richter"
    ]
   },
   {
@@ -40178,6 +41864,16 @@
    ]
   },
   {
+   "a": "Hans Richter",
+   "b": "István Kertész",
+   "s": {
+    "cooccur": 0.4
+   },
+   "why": [
+    "Hans Richter and István Kertész appear together on 4 archive.org recordings"
+   ]
+  },
+  {
    "a": "Hans Swarowsky",
    "b": "Ivry Gitlis",
    "s": {
@@ -40315,6 +42011,590 @@
    },
    "why": [
     "Hans Werner Henze and Heitor Villa-Lobos appear together on 2 archive.org recordings"
+   ]
+  },
+  {
+   "a": "Hans Zimmer",
+   "b": "Hector Berlioz",
+   "s": {
+    "listen": 0.371
+   },
+   "why": [
+    "listeners of Hector Berlioz also play Hans Zimmer"
+   ]
+  },
+  {
+   "a": "Hans Zimmer",
+   "b": "Henry Purcell",
+   "s": {
+    "listen": 0.186
+   },
+   "why": [
+    "listeners of Henry Purcell also play Hans Zimmer"
+   ]
+  },
+  {
+   "a": "Hans Zimmer",
+   "b": "Herbert von Karajan",
+   "s": {
+    "listen": 0.09
+   },
+   "why": [
+    "listeners of Herbert von Karajan also play Hans Zimmer"
+   ]
+  },
+  {
+   "a": "Hans Zimmer",
+   "b": "Hildur Guðnadóttir",
+   "s": {
+    "listen": 0.475
+   },
+   "why": [
+    "listeners of Hildur Guðnadóttir also play Hans Zimmer"
+   ]
+  },
+  {
+   "a": "Hans Zimmer",
+   "b": "Howard Shore",
+   "s": {
+    "listen": 0.93
+   },
+   "why": [
+    "listeners of Hans Zimmer also play Howard Shore"
+   ]
+  },
+  {
+   "a": "Hans Zimmer",
+   "b": "Igor Stravinsky",
+   "s": {
+    "listen": 0.234
+   },
+   "why": [
+    "listeners of Igor Stravinsky also play Hans Zimmer"
+   ]
+  },
+  {
+   "a": "Hans Zimmer",
+   "b": "Isaac Albéniz",
+   "s": {
+    "listen": 0.238
+   },
+   "why": [
+    "listeners of Isaac Albéniz also play Hans Zimmer"
+   ]
+  },
+  {
+   "a": "Hans Zimmer",
+   "b": "Itzhak Perlman",
+   "s": {
+    "listen": 0.527
+   },
+   "why": [
+    "listeners of Itzhak Perlman also play Hans Zimmer"
+   ]
+  },
+  {
+   "a": "Hans Zimmer",
+   "b": "James Horner",
+   "s": {
+    "listen": 1.0
+   },
+   "why": [
+    "listeners of Hans Zimmer also play James Horner"
+   ]
+  },
+  {
+   "a": "Hans Zimmer",
+   "b": "James Levine",
+   "s": {
+    "listen": 0.306
+   },
+   "why": [
+    "listeners of James Levine also play Hans Zimmer"
+   ]
+  },
+  {
+   "a": "Hans Zimmer",
+   "b": "Jerry Goldsmith",
+   "s": {
+    "listen": 1.0
+   },
+   "why": [
+    "listeners of Hans Zimmer also play Jerry Goldsmith"
+   ]
+  },
+  {
+   "a": "Hans Zimmer",
+   "b": "Joe Hisaishi",
+   "s": {
+    "listen": 0.988
+   },
+   "why": [
+    "listeners of Joe Hisaishi also play Hans Zimmer"
+   ]
+  },
+  {
+   "a": "Hans Zimmer",
+   "b": "Johann Pachelbel",
+   "s": {
+    "listen": 0.333
+   },
+   "why": [
+    "listeners of Johann Pachelbel also play Hans Zimmer"
+   ]
+  },
+  {
+   "a": "Hans Zimmer",
+   "b": "Johann Sebastian Bach",
+   "s": {
+    "listen": 0.312
+   },
+   "why": [
+    "listeners of Johann Sebastian Bach also play Hans Zimmer"
+   ]
+  },
+  {
+   "a": "Hans Zimmer",
+   "b": "Johann Strauss II",
+   "s": {
+    "listen": 0.387
+   },
+   "why": [
+    "listeners of Johann Strauss II also play Hans Zimmer"
+   ]
+  },
+  {
+   "a": "Hans Zimmer",
+   "b": "Johannes Brahms",
+   "s": {
+    "listen": 0.099
+   },
+   "why": [
+    "listeners of Johannes Brahms also play Hans Zimmer"
+   ]
+  },
+  {
+   "a": "Hans Zimmer",
+   "b": "John Barry",
+   "s": {
+    "listen": 0.924
+   },
+   "why": [
+    "listeners of Hans Zimmer also play John Barry"
+   ]
+  },
+  {
+   "a": "Hans Zimmer",
+   "b": "John Philip Sousa",
+   "s": {
+    "listen": 0.586
+   },
+   "why": [
+    "listeners of John Philip Sousa also play Hans Zimmer"
+   ]
+  },
+  {
+   "a": "Hans Zimmer",
+   "b": "John Tavener",
+   "s": {
+    "listen": 0.4
+   },
+   "why": [
+    "listeners of John Tavener also play Hans Zimmer"
+   ]
+  },
+  {
+   "a": "Hans Zimmer",
+   "b": "John Williams",
+   "s": {
+    "listen": 1.0,
+    "cooccur": 0.2
+   },
+   "why": [
+    "listeners of Hans Zimmer also play John Williams",
+    "Hans Zimmer and John Williams appear together on 2 archive.org recordings"
+   ]
+  },
+  {
+   "a": "Hans Zimmer",
+   "b": "Jordi Savall",
+   "s": {
+    "listen": 0.235
+   },
+   "why": [
+    "listeners of Jordi Savall also play Hans Zimmer"
+   ]
+  },
+  {
+   "a": "Hans Zimmer",
+   "b": "Leroy Anderson",
+   "s": {
+    "listen": 0.357
+   },
+   "why": [
+    "listeners of Leroy Anderson also play Hans Zimmer"
+   ]
+  },
+  {
+   "a": "Hans Zimmer",
+   "b": "Lisa Gerrard",
+   "s": {
+    "listen": 1.0,
+    "cooccur": 0.4
+   },
+   "why": [
+    "listeners of Hans Zimmer also play Lisa Gerrard",
+    "Hans Zimmer and Lisa Gerrard appear together on 4 archive.org recordings"
+   ]
+  },
+  {
+   "a": "Hans Zimmer",
+   "b": "Luciano Pavarotti",
+   "s": {
+    "listen": 0.248
+   },
+   "why": [
+    "listeners of Luciano Pavarotti also play Hans Zimmer"
+   ]
+  },
+  {
+   "a": "Hans Zimmer",
+   "b": "Ludwig Göransson",
+   "s": {
+    "listen": 0.969
+   },
+   "why": [
+    "listeners of Ludwig Göransson also play Hans Zimmer"
+   ]
+  },
+  {
+   "a": "Hans Zimmer",
+   "b": "Ludwig van Beethoven",
+   "s": {
+    "listen": 0.23
+   },
+   "why": [
+    "listeners of Ludwig van Beethoven also play Hans Zimmer"
+   ]
+  },
+  {
+   "a": "Hans Zimmer",
+   "b": "Maurice Jarre",
+   "s": {
+    "listen": 0.809
+   },
+   "why": [
+    "listeners of Maurice Jarre also play Hans Zimmer"
+   ]
+  },
+  {
+   "a": "Hans Zimmer",
+   "b": "Max Richter",
+   "s": {
+    "listen": 0.404
+   },
+   "why": [
+    "listeners of Max Richter also play Hans Zimmer"
+   ]
+  },
+  {
+   "a": "Hans Zimmer",
+   "b": "Max Steiner",
+   "s": {
+    "listen": 0.661
+   },
+   "why": [
+    "listeners of Max Steiner also play Hans Zimmer"
+   ]
+  },
+  {
+   "a": "Hans Zimmer",
+   "b": "Michael Giacchino",
+   "s": {
+    "listen": 1.0
+   },
+   "why": [
+    "listeners of Hans Zimmer also play Michael Giacchino"
+   ]
+  },
+  {
+   "a": "Hans Zimmer",
+   "b": "Michael Kamen",
+   "s": {
+    "listen": 1.0
+   },
+   "why": [
+    "listeners of Hans Zimmer also play Michael Kamen"
+   ]
+  },
+  {
+   "a": "Hans Zimmer",
+   "b": "Mikhail Glinka",
+   "s": {
+    "listen": 0.647
+   },
+   "why": [
+    "listeners of Mikhail Glinka also play Hans Zimmer"
+   ]
+  },
+  {
+   "a": "Hans Zimmer",
+   "b": "Mikis Theodorakis",
+   "s": {
+    "listen": 0.293
+   },
+   "why": [
+    "listeners of Mikis Theodorakis also play Hans Zimmer"
+   ]
+  },
+  {
+   "a": "Hans Zimmer",
+   "b": "Miklós Rózsa",
+   "s": {
+    "listen": 0.695
+   },
+   "why": [
+    "listeners of Miklós Rózsa also play Hans Zimmer"
+   ]
+  },
+  {
+   "a": "Hans Zimmer",
+   "b": "Modest Mussorgsky",
+   "s": {
+    "listen": 0.357
+   },
+   "why": [
+    "listeners of Modest Mussorgsky also play Hans Zimmer"
+   ]
+  },
+  {
+   "a": "Hans Zimmer",
+   "b": "Montserrat Caballé",
+   "s": {
+    "listen": 0.08
+   },
+   "why": [
+    "listeners of Montserrat Caballé also play Hans Zimmer"
+   ]
+  },
+  {
+   "a": "Hans Zimmer",
+   "b": "Nino Rota",
+   "s": {
+    "listen": 0.66
+   },
+   "why": [
+    "listeners of Nino Rota also play Hans Zimmer"
+   ]
+  },
+  {
+   "a": "Hans Zimmer",
+   "b": "Philip Glass",
+   "s": {
+    "listen": 0.649
+   },
+   "why": [
+    "listeners of Philip Glass also play Hans Zimmer"
+   ]
+  },
+  {
+   "a": "Hans Zimmer",
+   "b": "Plácido Domingo",
+   "s": {
+    "listen": 0.12
+   },
+   "why": [
+    "listeners of Plácido Domingo also play Hans Zimmer"
+   ]
+  },
+  {
+   "a": "Hans Zimmer",
+   "b": "Pyotr Ilyich Tchaikovsky",
+   "s": {
+    "listen": 0.305
+   },
+   "why": [
+    "listeners of Pyotr Ilyich Tchaikovsky also play Hans Zimmer"
+   ]
+  },
+  {
+   "a": "Hans Zimmer",
+   "b": "Ralph Vaughan Williams",
+   "s": {
+    "listen": 0.224
+   },
+   "why": [
+    "listeners of Ralph Vaughan Williams also play Hans Zimmer"
+   ]
+  },
+  {
+   "a": "Hans Zimmer",
+   "b": "Ramin Djawadi",
+   "s": {
+    "listen": 1.0
+   },
+   "why": [
+    "listeners of Hans Zimmer also play Ramin Djawadi"
+   ]
+  },
+  {
+   "a": "Hans Zimmer",
+   "b": "Renée Fleming",
+   "s": {
+    "listen": 0.202
+   },
+   "why": [
+    "listeners of Renée Fleming also play Hans Zimmer"
+   ]
+  },
+  {
+   "a": "Hans Zimmer",
+   "b": "Richard Strauss",
+   "s": {
+    "listen": 0.331
+   },
+   "why": [
+    "listeners of Richard Strauss also play Hans Zimmer"
+   ]
+  },
+  {
+   "a": "Hans Zimmer",
+   "b": "Robert Schumann",
+   "s": {
+    "listen": 0.169
+   },
+   "why": [
+    "listeners of Robert Schumann also play Hans Zimmer"
+   ]
+  },
+  {
+   "a": "Hans Zimmer",
+   "b": "Ryuichi Sakamoto",
+   "s": {
+    "listen": 0.733
+   },
+   "why": [
+    "listeners of Ryuichi Sakamoto also play Hans Zimmer"
+   ]
+  },
+  {
+   "a": "Hans Zimmer",
+   "b": "Samuel Barber",
+   "s": {
+    "listen": 0.5
+   },
+   "why": [
+    "listeners of Samuel Barber also play Hans Zimmer"
+   ]
+  },
+  {
+   "a": "Hans Zimmer",
+   "b": "Seiji Ozawa",
+   "s": {
+    "listen": 0.067
+   },
+   "why": [
+    "listeners of Seiji Ozawa also play Hans Zimmer"
+   ]
+  },
+  {
+   "a": "Hans Zimmer",
+   "b": "Sergei Prokofiev",
+   "s": {
+    "listen": 0.286
+   },
+   "why": [
+    "listeners of Sergei Prokofiev also play Hans Zimmer"
+   ]
+  },
+  {
+   "a": "Hans Zimmer",
+   "b": "Sergei Rachmaninoff",
+   "s": {
+    "listen": 0.263
+   },
+   "why": [
+    "listeners of Sergei Rachmaninoff also play Hans Zimmer"
+   ]
+  },
+  {
+   "a": "Hans Zimmer",
+   "b": "Tan Dun",
+   "s": {
+    "listen": 1.0
+   },
+   "why": [
+    "listeners of Tan Dun also play Hans Zimmer"
+   ]
+  },
+  {
+   "a": "Hans Zimmer",
+   "b": "Thomas Newman",
+   "s": {
+    "listen": 1.0
+   },
+   "why": [
+    "listeners of Hans Zimmer also play Thomas Newman"
+   ]
+  },
+  {
+   "a": "Hans Zimmer",
+   "b": "Tomaso Albinoni",
+   "s": {
+    "listen": 0.446
+   },
+   "why": [
+    "listeners of Tomaso Albinoni also play Hans Zimmer"
+   ]
+  },
+  {
+   "a": "Hans Zimmer",
+   "b": "Vladimir Ashkenazy",
+   "s": {
+    "listen": 0.44
+   },
+   "why": [
+    "listeners of Vladimir Ashkenazy also play Hans Zimmer"
+   ]
+  },
+  {
+   "a": "Hans Zimmer",
+   "b": "Vladimir Horowitz",
+   "s": {
+    "listen": 0.08
+   },
+   "why": [
+    "listeners of Vladimir Horowitz also play Hans Zimmer"
+   ]
+  },
+  {
+   "a": "Hans Zimmer",
+   "b": "Wojciech Kilar",
+   "s": {
+    "listen": 1.0
+   },
+   "why": [
+    "listeners of Wojciech Kilar also play Hans Zimmer"
+   ]
+  },
+  {
+   "a": "Hans Zimmer",
+   "b": "Wolfgang Amadeus Mozart",
+   "s": {
+    "listen": 0.311
+   },
+   "why": [
+    "listeners of Wolfgang Amadeus Mozart also play Hans Zimmer"
+   ]
+  },
+  {
+   "a": "Hans Zimmer",
+   "b": "Yo-Yo Ma",
+   "s": {
+    "listen": 0.312
+   },
+   "why": [
+    "listeners of Yo-Yo Ma also play Hans Zimmer"
    ]
   },
   {
@@ -41530,6 +43810,16 @@
    ]
   },
   {
+   "a": "Henryk Szeryng",
+   "b": "Vladimir Horowitz",
+   "s": {
+    "cooccur": 0.2
+   },
+   "why": [
+    "Henryk Szeryng and Vladimir Horowitz appear together on 2 archive.org recordings"
+   ]
+  },
+  {
    "a": "Herbert Blomstedt",
    "b": "Igor Markevitch",
    "s": {
@@ -42289,6 +44579,16 @@
   },
   {
    "a": "Hildegard von Bingen",
+   "b": "Max Richter",
+   "s": {
+    "listen": 0.274
+   },
+   "why": [
+    "listeners of Hildegard von Bingen also play Max Richter"
+   ]
+  },
+  {
+   "a": "Hildegard von Bingen",
    "b": "Walther von der Vogelweide",
    "s": {
     "listen": 1.0
@@ -42315,6 +44615,16 @@
    },
    "why": [
     "listeners of Hildur Guðnadóttir also play Ludwig Göransson"
+   ]
+  },
+  {
+   "a": "Hildur Guðnadóttir",
+   "b": "Max Richter",
+   "s": {
+    "listen": 0.894
+   },
+   "why": [
+    "listeners of Hildur Guðnadóttir also play Max Richter"
    ]
   },
   {
@@ -42601,6 +44911,16 @@
   },
   {
    "a": "Howard Shore",
+   "b": "Lisa Gerrard",
+   "s": {
+    "listen": 0.299
+   },
+   "why": [
+    "listeners of Lisa Gerrard also play Howard Shore"
+   ]
+  },
+  {
+   "a": "Howard Shore",
    "b": "Luciano Pavarotti",
    "s": {
     "listen": 0.182
@@ -42649,6 +44969,26 @@
    },
    "why": [
     "listeners of Maurice Ravel also play Howard Shore"
+   ]
+  },
+  {
+   "a": "Howard Shore",
+   "b": "Max Richter",
+   "s": {
+    "listen": 0.213
+   },
+   "why": [
+    "listeners of Max Richter also play Howard Shore"
+   ]
+  },
+  {
+   "a": "Howard Shore",
+   "b": "Michael Giacchino",
+   "s": {
+    "listen": 0.672
+   },
+   "why": [
+    "listeners of Howard Shore also play Michael Giacchino"
    ]
   },
   {
@@ -42718,7 +45058,7 @@
     "listen": 0.709
    },
    "why": [
-    "listeners of Howard Shore also play Ramin Djawadi"
+    "listeners of Ramin Djawadi also play Howard Shore"
    ]
   },
   {
@@ -42829,6 +45169,16 @@
    },
    "why": [
     "listeners of Toru Takemitsu also play Howard Shore"
+   ]
+  },
+  {
+   "a": "Howard Shore",
+   "b": "Vladimir Horowitz",
+   "s": {
+    "listen": 0.072
+   },
+   "why": [
+    "listeners of Vladimir Horowitz also play Howard Shore"
    ]
   },
   {
@@ -44019,6 +46369,16 @@
   },
   {
    "a": "Isaac Stern",
+   "b": "Vladimir Horowitz",
+   "s": {
+    "cooccur": 0.2
+   },
+   "why": [
+    "Isaac Stern and Vladimir Horowitz appear together on 2 archive.org recordings"
+   ]
+  },
+  {
+   "a": "Isaac Stern",
    "b": "Wolfgang Amadeus Mozart",
    "s": {
     "cooccur": 0.9
@@ -44117,6 +46477,16 @@
    "why": [
     "Itzhak Perlman performed John Williams's Air and Simple Gifts",
     "listeners of John Williams also play Itzhak Perlman"
+   ]
+  },
+  {
+   "a": "Itzhak Perlman",
+   "b": "Lisa Gerrard",
+   "s": {
+    "listen": 0.062
+   },
+   "why": [
+    "listeners of Itzhak Perlman also play Lisa Gerrard"
    ]
   },
   {
@@ -44542,12 +46912,42 @@
   },
   {
    "a": "James Horner",
+   "b": "Lisa Gerrard",
+   "s": {
+    "listen": 0.257
+   },
+   "why": [
+    "listeners of Lisa Gerrard also play James Horner"
+   ]
+  },
+  {
+   "a": "James Horner",
    "b": "Maurice Jarre",
    "s": {
     "listen": 0.947
    },
    "why": [
     "listeners of Maurice Jarre also play James Horner"
+   ]
+  },
+  {
+   "a": "James Horner",
+   "b": "Max Richter",
+   "s": {
+    "listen": 0.225
+   },
+   "why": [
+    "listeners of Max Richter also play James Horner"
+   ]
+  },
+  {
+   "a": "James Horner",
+   "b": "Michael Giacchino",
+   "s": {
+    "listen": 0.588
+   },
+   "why": [
+    "listeners of James Horner also play Michael Giacchino"
    ]
   },
   {
@@ -44668,6 +47068,16 @@
    },
    "why": [
     "Maria Ewing studied with James Levine"
+   ]
+  },
+  {
+   "a": "James Levine",
+   "b": "Max Richter",
+   "s": {
+    "listen": 0.327
+   },
+   "why": [
+    "listeners of James Levine also play Max Richter"
    ]
   },
   {
@@ -45704,6 +48114,16 @@
   },
   {
    "a": "Jerry Goldsmith",
+   "b": "Lisa Gerrard",
+   "s": {
+    "listen": 0.139
+   },
+   "why": [
+    "listeners of Lisa Gerrard also play Jerry Goldsmith"
+   ]
+  },
+  {
+   "a": "Jerry Goldsmith",
    "b": "Ludwig Göransson",
    "s": {
     "listen": 0.118
@@ -45740,6 +48160,16 @@
    },
    "why": [
     "listeners of Max Steiner also play Jerry Goldsmith"
+   ]
+  },
+  {
+   "a": "Jerry Goldsmith",
+   "b": "Michael Giacchino",
+   "s": {
+    "listen": 0.706
+   },
+   "why": [
+    "listeners of Jerry Goldsmith also play Michael Giacchino"
    ]
   },
   {
@@ -46193,6 +48623,16 @@
    },
    "why": [
     "listeners of Joe Hisaishi also play John Williams"
+   ]
+  },
+  {
+   "a": "Joe Hisaishi",
+   "b": "Max Richter",
+   "s": {
+    "listen": 0.309
+   },
+   "why": [
+    "listeners of Joe Hisaishi also play Max Richter"
    ]
   },
   {
@@ -47012,6 +49452,16 @@
   },
   {
    "a": "Johann Pachelbel",
+   "b": "Max Richter",
+   "s": {
+    "listen": 0.661
+   },
+   "why": [
+    "listeners of Johann Pachelbel also play Max Richter"
+   ]
+  },
+  {
+   "a": "Johann Pachelbel",
    "b": "Philip Glass",
    "s": {
     "listen": 0.885
@@ -47273,6 +49723,16 @@
    },
    "why": [
     "listeners of Maurice Ravel also play Johann Sebastian Bach"
+   ]
+  },
+  {
+   "a": "Johann Sebastian Bach",
+   "b": "Max Richter",
+   "s": {
+    "listen": 0.323
+   },
+   "why": [
+    "listeners of Johann Sebastian Bach also play Max Richter"
    ]
   },
   {
@@ -47717,6 +50177,16 @@
   },
   {
    "a": "Johann Strauss II",
+   "b": "Vladimir Horowitz",
+   "s": {
+    "listen": 0.068
+   },
+   "why": [
+    "listeners of Vladimir Horowitz also play Johann Strauss II"
+   ]
+  },
+  {
+   "a": "Johann Strauss II",
    "b": "Wolfgang Amadeus Mozart",
    "s": {
     "listen": 1.0
@@ -48105,6 +50575,16 @@
   },
   {
    "a": "John Adams",
+   "b": "Lisa Gerrard",
+   "s": {
+    "listen": 0.148
+   },
+   "why": [
+    "listeners of John Adams also play Lisa Gerrard"
+   ]
+  },
+  {
+   "a": "John Adams",
    "b": "Ryuichi Sakamoto",
    "s": {
     "listen": 0.565
@@ -48157,12 +50637,32 @@
   },
   {
    "a": "John Barry",
+   "b": "Lisa Gerrard",
+   "s": {
+    "listen": 0.201
+   },
+   "why": [
+    "listeners of Lisa Gerrard also play John Barry"
+   ]
+  },
+  {
+   "a": "John Barry",
    "b": "Maurice Jarre",
    "s": {
     "listen": 0.885
    },
    "why": [
     "listeners of Maurice Jarre also play John Barry"
+   ]
+  },
+  {
+   "a": "John Barry",
+   "b": "Michael Giacchino",
+   "s": {
+    "listen": 0.516
+   },
+   "why": [
+    "listeners of John Barry also play Michael Giacchino"
    ]
   },
   {
@@ -48643,6 +51143,26 @@
   },
   {
    "a": "John Williams",
+   "b": "Max Richter",
+   "s": {
+    "listen": 0.181
+   },
+   "why": [
+    "listeners of Max Richter also play John Williams"
+   ]
+  },
+  {
+   "a": "John Williams",
+   "b": "Michael Giacchino",
+   "s": {
+    "listen": 0.91
+   },
+   "why": [
+    "listeners of John Williams also play Michael Giacchino"
+   ]
+  },
+  {
+   "a": "John Williams",
    "b": "Michael Kamen",
    "s": {
     "listen": 0.857
@@ -48799,6 +51319,16 @@
    },
    "why": [
     "John Williams and Toshiro Mayuzumi appear together on 2 archive.org recordings"
+   ]
+  },
+  {
+   "a": "John Williams",
+   "b": "Vladimir Horowitz",
+   "s": {
+    "cooccur": 0.2
+   },
+   "why": [
+    "John Williams and Vladimir Horowitz appear together on 2 archive.org recordings"
    ]
   },
   {
@@ -49636,6 +52166,16 @@
   },
   {
    "a": "Khatia Buniatishvili",
+   "b": "Michel Sogny",
+   "s": {
+    "teacher": 1.0
+   },
+   "why": [
+    "Khatia Buniatishvili studied with Michel Sogny"
+   ]
+  },
+  {
+   "a": "Khatia Buniatishvili",
    "b": "Paavo Järvi",
    "s": {
     "cooccur": 0.2
@@ -49774,6 +52314,26 @@
    },
    "why": [
     "Kirsten Flagstad and Wilhelm Furtwängler appear together on 7 archive.org recordings"
+   ]
+  },
+  {
+   "a": "Kitarō",
+   "b": "Lisa Gerrard",
+   "s": {
+    "listen": 0.285
+   },
+   "why": [
+    "listeners of Lisa Gerrard also play Kitarō"
+   ]
+  },
+  {
+   "a": "Kitarō",
+   "b": "Steve Reich",
+   "s": {
+    "listen": 0.132
+   },
+   "why": [
+    "listeners of Kitarō also play Steve Reich"
    ]
   },
   {
@@ -50190,6 +52750,16 @@
    },
    "why": [
     "listeners of Leonard Bernstein also play Sir Simon Rattle"
+   ]
+  },
+  {
+   "a": "Leonard Bernstein",
+   "b": "Vladimir Horowitz",
+   "s": {
+    "listen": 0.214
+   },
+   "why": [
+    "listeners of Leonard Bernstein also play Vladimir Horowitz"
    ]
   },
   {
@@ -50666,6 +53236,86 @@
    ]
   },
   {
+   "a": "Lisa Gerrard",
+   "b": "Maurice Jarre",
+   "s": {
+    "listen": 0.191
+   },
+   "why": [
+    "listeners of Maurice Jarre also play Lisa Gerrard"
+   ]
+  },
+  {
+   "a": "Lisa Gerrard",
+   "b": "Michael Kamen",
+   "s": {
+    "listen": 0.133
+   },
+   "why": [
+    "listeners of Michael Kamen also play Lisa Gerrard"
+   ]
+  },
+  {
+   "a": "Lisa Gerrard",
+   "b": "Nino Rota",
+   "s": {
+    "listen": 0.106
+   },
+   "why": [
+    "listeners of Nino Rota also play Lisa Gerrard"
+   ]
+  },
+  {
+   "a": "Lisa Gerrard",
+   "b": "Ramin Djawadi",
+   "s": {
+    "listen": 0.2
+   },
+   "why": [
+    "listeners of Lisa Gerrard also play Ramin Djawadi"
+   ]
+  },
+  {
+   "a": "Lisa Gerrard",
+   "b": "Renée Fleming",
+   "s": {
+    "listen": 0.011
+   },
+   "why": [
+    "listeners of Renée Fleming also play Lisa Gerrard"
+   ]
+  },
+  {
+   "a": "Lisa Gerrard",
+   "b": "Ryuichi Sakamoto",
+   "s": {
+    "listen": 0.198
+   },
+   "why": [
+    "listeners of Ryuichi Sakamoto also play Lisa Gerrard"
+   ]
+  },
+  {
+   "a": "Lisa Gerrard",
+   "b": "Thomas Newman",
+   "s": {
+    "listen": 0.244
+   },
+   "why": [
+    "listeners of Lisa Gerrard also play Thomas Newman"
+   ]
+  },
+  {
+   "a": "Lisa Gerrard",
+   "b": "Wojciech Kilar",
+   "s": {
+    "listen": 0.186
+   },
+   "why": [
+    "listeners of Wojciech Kilar also play Lisa Gerrard"
+   ]
+  },
+  {
    "a": "Lorenzo Da Ponte",
    "b": "Wolfgang Amadeus Mozart",
    "s": {
@@ -51019,6 +53669,16 @@
   },
   {
    "a": "Luciano Berio",
+   "b": "Max Richter",
+   "s": {
+    "teacher": 1.0
+   },
+   "why": [
+    "Max Richter studied with Luciano Berio"
+   ]
+  },
+  {
+   "a": "Luciano Berio",
    "b": "Pierre Boulez",
    "s": {
     "cooccur": 0.4
@@ -51213,6 +53873,16 @@
   },
   {
    "a": "Ludwig Göransson",
+   "b": "Michael Giacchino",
+   "s": {
+    "listen": 0.688
+   },
+   "why": [
+    "listeners of Michael Giacchino also play Ludwig Göransson"
+   ]
+  },
+  {
+   "a": "Ludwig Göransson",
    "b": "Ramin Djawadi",
    "s": {
     "listen": 1.0
@@ -51259,6 +53929,16 @@
    },
    "why": [
     "Ludwig van Beethoven and Marilyn Horne appear together on 5 archive.org recordings"
+   ]
+  },
+  {
+   "a": "Ludwig van Beethoven",
+   "b": "Max Richter",
+   "s": {
+    "listen": 0.179
+   },
+   "why": [
+    "listeners of Ludwig van Beethoven also play Max Richter"
    ]
   },
   {
@@ -51465,6 +54145,16 @@
    },
    "why": [
     "Ludwig van Beethoven and Vladimir Ashkenazy appear together on 3 archive.org recordings"
+   ]
+  },
+  {
+   "a": "Ludwig van Beethoven",
+   "b": "Vladimir Horowitz",
+   "s": {
+    "cooccur": 0.9
+   },
+   "why": [
+    "Ludwig van Beethoven and Vladimir Horowitz appear together on 9 archive.org recordings"
    ]
   },
   {
@@ -52287,6 +54977,16 @@
   },
   {
    "a": "Marin Alsop",
+   "b": "Max Richter",
+   "s": {
+    "listen": 0.25
+   },
+   "why": [
+    "listeners of Marin Alsop also play Max Richter"
+   ]
+  },
+  {
+   "a": "Marin Alsop",
    "b": "Philip Glass",
    "s": {
     "listen": 1.0
@@ -52426,6 +55126,16 @@
    ]
   },
   {
+   "a": "Martha Argerich",
+   "b": "Vladimir Horowitz",
+   "s": {
+    "listen": 1.0
+   },
+   "why": [
+    "listeners of Vladimir Horowitz also play Martha Argerich"
+   ]
+  },
+  {
    "a": "Martin Wegelius",
    "b": "Toivo Kuula",
    "s": {
@@ -52463,6 +55173,16 @@
    },
    "why": [
     "Maurice Emmanuel studied with Théodore Dubois"
+   ]
+  },
+  {
+   "a": "Maurice Jarre",
+   "b": "Michael Giacchino",
+   "s": {
+    "listen": 0.541
+   },
+   "why": [
+    "listeners of Maurice Jarre also play Michael Giacchino"
    ]
   },
   {
@@ -52763,6 +55483,16 @@
   },
   {
    "a": "Maurice Ravel",
+   "b": "Vladimir Horowitz",
+   "s": {
+    "listen": 0.178
+   },
+   "why": [
+    "listeners of Maurice Ravel also play Vladimir Horowitz"
+   ]
+  },
+  {
+   "a": "Maurice Ravel",
    "b": "Wolfgang Amadeus Mozart",
    "s": {
     "listen": 0.346,
@@ -52906,6 +55636,96 @@
    ]
   },
   {
+   "a": "Max Richter",
+   "b": "Michael Giacchino",
+   "s": {
+    "listen": 0.185
+   },
+   "why": [
+    "listeners of Michael Giacchino also play Max Richter"
+   ]
+  },
+  {
+   "a": "Max Richter",
+   "b": "Philip Glass",
+   "s": {
+    "listen": 1.0
+   },
+   "why": [
+    "listeners of Philip Glass also play Max Richter"
+   ]
+  },
+  {
+   "a": "Max Richter",
+   "b": "Ralph Vaughan Williams",
+   "s": {
+    "listen": 0.333
+   },
+   "why": [
+    "listeners of Ralph Vaughan Williams also play Max Richter"
+   ]
+  },
+  {
+   "a": "Max Richter",
+   "b": "Ramin Djawadi",
+   "s": {
+    "listen": 0.326
+   },
+   "why": [
+    "listeners of Max Richter also play Ramin Djawadi"
+   ]
+  },
+  {
+   "a": "Max Richter",
+   "b": "Robert Schumann",
+   "s": {
+    "listen": 0.295
+   },
+   "why": [
+    "listeners of Robert Schumann also play Max Richter"
+   ]
+  },
+  {
+   "a": "Max Richter",
+   "b": "Ryuichi Sakamoto",
+   "s": {
+    "listen": 0.963
+   },
+   "why": [
+    "listeners of Ryuichi Sakamoto also play Max Richter"
+   ]
+  },
+  {
+   "a": "Max Richter",
+   "b": "Sergei Prokofiev",
+   "s": {
+    "listen": 0.156
+   },
+   "why": [
+    "listeners of Sergei Prokofiev also play Max Richter"
+   ]
+  },
+  {
+   "a": "Max Richter",
+   "b": "Sergei Rachmaninoff",
+   "s": {
+    "listen": 0.258
+   },
+   "why": [
+    "listeners of Sergei Rachmaninoff also play Max Richter"
+   ]
+  },
+  {
+   "a": "Max Richter",
+   "b": "Thomas Newman",
+   "s": {
+    "listen": 0.439
+   },
+   "why": [
+    "listeners of Max Richter also play Thomas Newman"
+   ]
+  },
+  {
    "a": "Max Steiner",
    "b": "Miklós Rózsa",
    "s": {
@@ -52963,6 +55783,66 @@
    },
    "why": [
     "Meliton Balanchivadze studied with Nikolai Rimsky-Korsakov"
+   ]
+  },
+  {
+   "a": "Michael Giacchino",
+   "b": "Michael Kamen",
+   "s": {
+    "listen": 0.709
+   },
+   "why": [
+    "listeners of Michael Giacchino also play Michael Kamen"
+   ]
+  },
+  {
+   "a": "Michael Giacchino",
+   "b": "Miklós Rózsa",
+   "s": {
+    "listen": 0.537
+   },
+   "why": [
+    "listeners of Miklós Rózsa also play Michael Giacchino"
+   ]
+  },
+  {
+   "a": "Michael Giacchino",
+   "b": "Philip Glass",
+   "s": {
+    "listen": 0.23
+   },
+   "why": [
+    "listeners of Philip Glass also play Michael Giacchino"
+   ]
+  },
+  {
+   "a": "Michael Giacchino",
+   "b": "Ramin Djawadi",
+   "s": {
+    "listen": 0.806
+   },
+   "why": [
+    "listeners of Ramin Djawadi also play Michael Giacchino"
+   ]
+  },
+  {
+   "a": "Michael Giacchino",
+   "b": "Tan Dun",
+   "s": {
+    "listen": 0.529
+   },
+   "why": [
+    "listeners of Tan Dun also play Michael Giacchino"
+   ]
+  },
+  {
+   "a": "Michael Giacchino",
+   "b": "Thomas Newman",
+   "s": {
+    "listen": 0.872
+   },
+   "why": [
+    "listeners of Michael Giacchino also play Thomas Newman"
    ]
   },
   {
@@ -53097,6 +55977,16 @@
   },
   {
    "a": "Michael Tilson Thomas",
+   "b": "Vladimir Horowitz",
+   "s": {
+    "listen": 0.087
+   },
+   "why": [
+    "listeners of Michael Tilson Thomas also play Vladimir Horowitz"
+   ]
+  },
+  {
+   "a": "Michael Tilson Thomas",
    "b": "Walter Piston",
    "s": {
     "cooccur": 0.2
@@ -53187,6 +56077,16 @@
    "why": [
     "Reinhold Glière studied with Mikhail Ippolitov-Ivanov",
     "Mikhail Ippolitov-Ivanov and Reinhold Glière appear together on 8 archive.org recordings"
+   ]
+  },
+  {
+   "a": "Mikhail Ippolitov-Ivanov",
+   "b": "Sergei Vasilenko",
+   "s": {
+    "teacher": 1.0
+   },
+   "why": [
+    "Sergei Vasilenko studied with Mikhail Ippolitov-Ivanov"
    ]
   },
   {
@@ -53538,6 +56438,16 @@
    },
    "why": [
     "Modest Mussorgsky and Vladimir Ashkenazy appear together on 2 archive.org recordings"
+   ]
+  },
+  {
+   "a": "Modest Mussorgsky",
+   "b": "Vladimir Horowitz",
+   "s": {
+    "cooccur": 0.4
+   },
+   "why": [
+    "Modest Mussorgsky and Vladimir Horowitz appear together on 4 archive.org recordings"
    ]
   },
   {
@@ -54275,6 +57185,16 @@
    },
    "why": [
     "listeners of Nikolai Rimsky-Korsakov also play Wolfgang Amadeus Mozart"
+   ]
+  },
+  {
+   "a": "Nikolai Roslavets",
+   "b": "Sergei Vasilenko",
+   "s": {
+    "teacher": 1.0
+   },
+   "why": [
+    "Nikolai Roslavets studied with Sergei Vasilenko"
    ]
   },
   {
@@ -55473,6 +58393,18 @@
   },
   {
    "a": "Pyotr Ilyich Tchaikovsky",
+   "b": "Vladimir Horowitz",
+   "s": {
+    "listen": 0.117,
+    "cooccur": 0.2
+   },
+   "why": [
+    "listeners of Vladimir Horowitz also play Pyotr Ilyich Tchaikovsky",
+    "Pyotr Ilyich Tchaikovsky and Vladimir Horowitz appear together on 2 archive.org recordings"
+   ]
+  },
+  {
+   "a": "Pyotr Ilyich Tchaikovsky",
    "b": "Walter Susskind",
    "s": {
     "cooccur": 0.2
@@ -56266,6 +59198,18 @@
   },
   {
    "a": "Robert Schumann",
+   "b": "Vladimir Horowitz",
+   "s": {
+    "listen": 0.134,
+    "cooccur": 0.7
+   },
+   "why": [
+    "listeners of Robert Schumann also play Vladimir Horowitz",
+    "Robert Schumann and Vladimir Horowitz appear together on 7 archive.org recordings"
+   ]
+  },
+  {
+   "a": "Robert Schumann",
    "b": "Wolfgang Amadeus Mozart",
    "s": {
     "listen": 0.72,
@@ -56619,6 +59563,16 @@
   },
   {
    "a": "Sergei Prokofiev",
+   "b": "Vladimir Horowitz",
+   "s": {
+    "listen": 0.182
+   },
+   "why": [
+    "listeners of Sergei Prokofiev also play Vladimir Horowitz"
+   ]
+  },
+  {
+   "a": "Sergei Prokofiev",
    "b": "Walter Susskind",
    "s": {
     "cooccur": 0.5
@@ -56657,6 +59611,16 @@
    },
    "why": [
     "Sergei Rachmaninoff studied with Sergei Taneyev"
+   ]
+  },
+  {
+   "a": "Sergei Rachmaninoff",
+   "b": "Vladimir Horowitz",
+   "s": {
+    "listen": 0.188
+   },
+   "why": [
+    "listeners of Sergei Rachmaninoff also play Vladimir Horowitz"
    ]
   },
   {
@@ -56751,6 +59715,18 @@
    "why": [
     "listeners of Steve Reich also play Terry Riley",
     "Steve Reich and Terry Riley appear together on 4 archive.org recordings"
+   ]
+  },
+  {
+   "a": "Sviatoslav Richter",
+   "b": "Vladimir Horowitz",
+   "s": {
+    "listen": 1.0,
+    "cooccur": 0.2
+   },
+   "why": [
+    "listeners of Vladimir Horowitz also play Sviatoslav Richter",
+    "Sviatoslav Richter and Vladimir Horowitz appear together on 2 archive.org recordings"
    ]
   },
   {
@@ -56991,6 +59967,16 @@
   },
   {
    "a": "Vladimir Ashkenazy",
+   "b": "Vladimir Horowitz",
+   "s": {
+    "listen": 0.72
+   },
+   "why": [
+    "listeners of Vladimir Horowitz also play Vladimir Ashkenazy"
+   ]
+  },
+  {
+   "a": "Vladimir Ashkenazy",
    "b": "Wolfgang Amadeus Mozart",
    "s": {
     "listen": 0.92,
@@ -57009,6 +59995,26 @@
    },
    "why": [
     "Vladimir Ashkenazy and Zubin Mehta appear together on 2 archive.org recordings"
+   ]
+  },
+  {
+   "a": "Vladimir Horowitz",
+   "b": "Wolfgang Amadeus Mozart",
+   "s": {
+    "listen": 0.205
+   },
+   "why": [
+    "listeners of Vladimir Horowitz also play Wolfgang Amadeus Mozart"
+   ]
+  },
+  {
+   "a": "Vladimir Horowitz",
+   "b": "İdil Biret",
+   "s": {
+    "listen": 0.527
+   },
+   "why": [
+    "listeners of Vladimir Horowitz also play İdil Biret"
    ]
   },
   {
