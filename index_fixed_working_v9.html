@@ -622,6 +622,9 @@ async function init() {
     function skipTrack() {
         if (playMode !== 'radio' && !currentNode) { setStatus('Pick an artist first'); return; }
         setStatus('');
+        // Stop the current track (or station) now: otherwise it plays on while the next one is looked
+        // up, and if it ends meanwhile, autoplay would skip a second time
+        player.pause();
         autoNext();
     }
 
