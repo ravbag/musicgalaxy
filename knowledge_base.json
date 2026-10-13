@@ -72127,6 +72127,62 @@
     "sitelinks": 89
   },
   {
+    "id": "Lisa Gerrard",
+    "key": "lisa_gerrard",
+    "is_master": false,
+    "type": "Composer",
+    "era": 2001,
+    "tags": [
+      "Contemporary",
+      "Contralto",
+      "Guitar",
+      "Australian"
+    ],
+    "collections": [
+      "classic-archives",
+      "unlocked-recordings",
+      "community_audio"
+    ],
+    "meta": {
+      "schools": [],
+      "regions": [
+        "Australian"
+      ],
+      "forms": [],
+      "styles": []
+    },
+    "related": [],
+    "aliases": [],
+    "qid": "Q40580",
+    "source": "wikidata",
+    "born": 1961,
+    "died": null,
+    "mbid": "cd645207-1664-46af-9953-264e9ae54089",
+    "attrs": {
+      "movement": [],
+      "genre": [
+        "dark wave",
+        "ethereal wave",
+        "world music"
+      ],
+      "instrument": [
+        "accordion",
+        "guitar",
+        "voice"
+      ],
+      "voice": [
+        "contralto"
+      ],
+      "member": [
+        "Dead Can Dance"
+      ],
+      "country": [
+        "Australian"
+      ]
+    },
+    "sitelinks": 84
+  },
+  {
     "id": "John Williams",
     "key": "john_williams",
     "is_master": false,
@@ -72180,6 +72236,66 @@
       ]
     },
     "sitelinks": 78
+  },
+  {
+    "id": "Irving Berlin",
+    "key": "irving_berlin",
+    "is_master": false,
+    "type": "Composer",
+    "era": 1928,
+    "tags": [
+      "Modernist",
+      "Piano",
+      "American",
+      "Russian"
+    ],
+    "collections": [
+      "classic-archives",
+      "unlocked-recordings",
+      "community_audio"
+    ],
+    "meta": {
+      "schools": [],
+      "regions": [
+        "American",
+        "Russian"
+      ],
+      "forms": [],
+      "styles": []
+    },
+    "related": [],
+    "aliases": [
+      "I. Berlin",
+      "Israel Balin",
+      "Israel Baline",
+      "Israel Isidore Baline"
+    ],
+    "qid": "Q128746",
+    "source": "wikidata",
+    "born": 1888,
+    "died": 1989,
+    "mbid": "5e645519-a175-4fe0-9a9b-eb9dc9f506b5",
+    "attrs": {
+      "movement": [],
+      "genre": [
+        "musical play",
+        "vaudeville"
+      ],
+      "instrument": [
+        "piano"
+      ],
+      "voice": [],
+      "member": [
+        "American Society of Composers, Authors and Publishers",
+        "SACEM",
+        "Ted Snyder Company"
+      ],
+      "country": [
+        "American",
+        "Russian"
+      ]
+    },
+    "sitelinks": 73
   },
   {
     "id": "Arthur Rubinstein",
@@ -72441,6 +72557,50 @@
     "sitelinks": 62
   },
   {
+    "id": "Maurice Jarre",
+    "key": "maurice_jarre",
+    "is_master": false,
+    "type": "Composer",
+    "era": 1964,
+    "tags": [
+      "Modernist",
+      "French"
+    ],
+    "collections": [
+      "classic-archives",
+      "unlocked-recordings",
+      "community_audio"
+    ],
+    "meta": {
+      "schools": [],
+      "regions": [
+        "French"
+      ],
+      "forms": [],
+      "styles": []
+    },
+    "related": [],
+    "aliases": [
+      "Maurice-Alexis Jarre"
+    ],
+    "qid": "Q105487",
+    "source": "wikidata",
+    "born": 1924,
+    "died": 2009,
+    "mbid": "05d4d95c-8803-450f-80c2-7ea606e6f78b",
+    "attrs": {
+      "movement": [],
+      "genre": [],
+      "instrument": [],
+      "voice": [],
+      "member": [],
+      "country": [
+        "French"
+      ]
+    },
+    "sitelinks": 62
+  },
+  {
     "id": "Jenny Lind",
     "key": "jenny_lind",
     "is_master": false,
@@ -72663,6 +72823,55 @@
         "American",
         "British",
         "Polish"
+      ]
+    },
+    "sitelinks": 60
+  },
+  {
+    "id": "Danny Elfman",
+    "key": "danny_elfman",
+    "is_master": false,
+    "type": "Composer",
+    "era": 1993,
+    "tags": [
+      "Contemporary",
+      "American"
+    ],
+    "collections": [
+      "classic-archives",
+      "unlocked-recordings",
+      "community_audio"
+    ],
+    "meta": {
+      "schools": [],
+      "regions": [
+        "American"
+      ],
+      "forms": [],
+      "styles": []
+    },
+    "related": [],
+    "aliases": [],
+    "qid": "Q193338",
+    "source": "wikidata",
+    "born": 1953,
+    "died": null,
+    "mbid": "5b24fbab-c58f-4c37-a59d-ab232e2d98c4",
+    "attrs": {
+      "movement": [],
+      "genre": [
+        "new wave",
+        "ska"
+      ],
+      "instrument": [
+        "voice"
+      ],
+      "voice": [],
+      "member": [
+        "Oingo Boingo"
+      ],
+      "country": [
+        "American"
       ]
     },
     "sitelinks": 60
@@ -73283,62 +73492,6 @@
     "sitelinks": 54
   },
   {
-    "id": "Mohammed Rafi",
-    "key": "mohammed_rafi",
-    "is_master": false,
-    "type": "Composer",
-    "era": 1964,
-    "tags": [
-      "Modernist",
-      "Film",
-      "Organ"
-    ],
-    "collections": [
-      "classic-archives",
-      "unlocked-recordings",
-      "community_audio"
-    ],
-    "meta": {
-      "schools": [],
-      "regions": [],
-      "forms": [],
-      "styles": []
-    },
-    "related": [],
-    "aliases": [
-      "Mohammad Rafi",
-      "Rafi",
-      "Muhammad Rafi",
-      "Mohd Rafi",
-      "Mohd. Rafi"
-    ],
-    "qid": "Q156815",
-    "source": "wikidata",
-    "born": 1924,
-    "died": 1980,
-    "mbid": "28365249-f3fd-44db-8131-32cb170970c4",
-    "attrs": {
-      "movement": [],
-      "genre": [
-        "Carnatic music",
-        "Indian classical music",
-        "Indian film music",
-        "Thumri",
-        "bhajan",
-        "ghazal",
-        "qawwali"
-      ],
-      "instrument": [
-        "reed organ",
-        "voice"
-      ],
-      "voice": [],
-      "member": [],
-      "country": []
-    },
-    "sitelinks": 54
-  },
-  {
     "id": "Ramin Djawadi",
     "key": "ramin_djawadi",
     "is_master": false,
@@ -73815,6 +73968,55 @@
     "sitelinks": 51
   },
   {
+    "id": "Alexandre Desplat",
+    "key": "alexandre_desplat",
+    "is_master": false,
+    "type": "Composer",
+    "era": 2001,
+    "tags": [
+      "Contemporary",
+      "Piano",
+      "Flute",
+      "French"
+    ],
+    "collections": [
+      "classic-archives",
+      "unlocked-recordings",
+      "community_audio"
+    ],
+    "meta": {
+      "schools": [],
+      "regions": [
+        "French"
+      ],
+      "forms": [],
+      "styles": []
+    },
+    "related": [],
+    "aliases": [],
+    "qid": "Q313362",
+    "source": "wikidata",
+    "born": 1961,
+    "died": null,
+    "mbid": "391846f7-f09f-470c-b188-c16b3a2022e4",
+    "attrs": {
+      "movement": [],
+      "genre": [],
+      "instrument": [
+        "flute",
+        "piano"
+      ],
+      "voice": [],
+      "member": [
+        "Royal College of Music"
+      ],
+      "country": [
+        "French"
+      ]
+    },
+    "sitelinks": 51
+  },
+  {
     "id": "Itzhak Perlman",
     "key": "itzhak_perlman",
     "is_master": false,
@@ -73961,61 +74163,6 @@
       "member": [],
       "country": [
         "Czech"
-      ]
-    },
-    "sitelinks": 50
-  },
-  {
-    "id": "Anette Olzon",
-    "key": "anette_olzon",
-    "is_master": false,
-    "type": "Composer",
-    "era": 2011,
-    "tags": [
-      "Contemporary",
-      "Symphony",
-      "Swedish"
-    ],
-    "collections": [
-      "classic-archives",
-      "unlocked-recordings",
-      "community_audio"
-    ],
-    "meta": {
-      "schools": [],
-      "regions": [
-        "Swedish"
-      ],
-      "forms": [],
-      "styles": []
-    },
-    "related": [],
-    "aliases": [
-      "Anette Ingegerd Olsson Husgafvel"
-    ],
-    "qid": "Q486059",
-    "source": "wikidata",
-    "born": 1971,
-    "died": null,
-    "mbid": "39b8f29b-2881-471b-9f33-5a23df6388fc",
-    "attrs": {
-      "movement": [],
-      "genre": [
-        "power metal",
-        "symphonic metal"
-      ],
-      "instrument": [
-        "voice"
-      ],
-      "voice": [],
-      "member": [
-        "Allen / Olzon",
-        "Alyson Avenue",
-        "Nightwish",
-        "The Dark Element"
-      ],
-      "country": [
-        "Swedish"
       ]
     },
     "sitelinks": 50
@@ -74559,57 +74706,6 @@
         "tenor"
       ],
       "member": [],
-      "country": []
-    },
-    "sitelinks": 48
-  },
-  {
-    "id": "Sharon den Adel",
-    "key": "sharon_den_adel",
-    "is_master": false,
-    "type": "Composer",
-    "era": 2014,
-    "tags": [
-      "Contemporary",
-      "Symphony",
-      "Mezzo"
-    ],
-    "collections": [
-      "classic-archives",
-      "unlocked-recordings",
-      "community_audio"
-    ],
-    "meta": {
-      "schools": [],
-      "regions": [],
-      "forms": [],
-      "styles": []
-    },
-    "related": [],
-    "aliases": [
-      "Sharon Janny den Adel"
-    ],
-    "qid": "Q207710",
-    "source": "wikidata",
-    "born": 1974,
-    "died": null,
-    "mbid": "7f4195a2-c1ce-4dae-bbbc-3f5967f077ec",
-    "attrs": {
-      "movement": [],
-      "genre": [
-        "alternative metal",
-        "gothic metal",
-        "symphonic metal"
-      ],
-      "instrument": [
-        "voice"
-      ],
-      "voice": [
-        "light mezzo-soprano"
-      ],
-      "member": [
-        "Within Temptation"
-      ],
       "country": []
     },
     "sitelinks": 48
@@ -75191,60 +75287,6 @@
     "sitelinks": 45
   },
   {
-    "id": "Floor Jansen",
-    "key": "floor_jansen",
-    "is_master": false,
-    "type": "Composer",
-    "era": 2021,
-    "tags": [
-      "Contemporary",
-      "Symphony",
-      "Soprano"
-    ],
-    "collections": [
-      "classic-archives",
-      "unlocked-recordings",
-      "community_audio"
-    ],
-    "meta": {
-      "schools": [],
-      "regions": [],
-      "forms": [],
-      "styles": []
-    },
-    "related": [],
-    "aliases": [
-      "Floor E. M. Jansen"
-    ],
-    "qid": "Q253259",
-    "source": "wikidata",
-    "born": 1981,
-    "died": null,
-    "mbid": "1dc9f1ab-3748-46c5-ac64-4a1311680da5",
-    "attrs": {
-      "movement": [],
-      "genre": [
-        "symphonic metal"
-      ],
-      "instrument": [
-        "voice"
-      ],
-      "voice": [
-        "soprano"
-      ],
-      "member": [
-        "After Forever",
-        "Nightwish",
-        "Northward",
-        "Raskasta Joulua",
-        "ReVamp",
-        "Star One"
-      ],
-      "country": []
-    },
-    "sitelinks": 45
-  },
-  {
     "id": "Jordi Savall",
     "key": "jordi_savall",
     "is_master": false,
@@ -75454,6 +75496,60 @@
       "country": [
         "Austrian",
         "Czech"
+      ]
+    },
+    "sitelinks": 44
+  },
+  {
+    "id": "Kitarō",
+    "key": "kitaro",
+    "is_master": false,
+    "type": "Composer",
+    "era": 1993,
+    "tags": [
+      "Contemporary",
+      "Electronic",
+      "Japanese"
+    ],
+    "collections": [
+      "classic-archives",
+      "unlocked-recordings",
+      "community_audio"
+    ],
+    "meta": {
+      "schools": [],
+      "regions": [
+        "Japanese"
+      ],
+      "forms": [],
+      "styles": []
+    },
+    "related": [],
+    "aliases": [
+      "Kitarou",
+      "Masanori Takahashi",
+      "Takahashi Masanori"
+    ],
+    "qid": "Q273652",
+    "source": "wikidata",
+    "born": 1953,
+    "died": null,
+    "mbid": "f3d8c154-208d-4efa-b52d-7e9f16adcdae",
+    "attrs": {
+      "movement": [],
+      "genre": [
+        "ambient music",
+        "electronica",
+        "new age music"
+      ],
+      "instrument": [
+        "electronic keyboard",
+        "synthesizer"
+      ],
+      "voice": [],
+      "member": [],
+      "country": [
+        "Japanese"
       ]
     },
     "sitelinks": 44
@@ -75913,6 +76009,57 @@
       "member": [],
       "country": [
         "Italian"
+      ]
+    },
+    "sitelinks": 43
+  },
+  {
+    "id": "Jerome Kern",
+    "key": "jerome_kern",
+    "is_master": false,
+    "type": "Composer",
+    "era": 1925,
+    "tags": [
+      "Modernist",
+      "American"
+    ],
+    "collections": [
+      "classic-archives",
+      "unlocked-recordings",
+      "community_audio"
+    ],
+    "meta": {
+      "schools": [],
+      "regions": [
+        "American"
+      ],
+      "forms": [],
+      "styles": []
+    },
+    "related": [],
+    "aliases": [
+      "Jerome David Kern"
+    ],
+    "qid": "Q313270",
+    "source": "wikidata",
+    "born": 1885,
+    "died": 1945,
+    "mbid": "8fb64b2e-db8b-4579-ad08-f324ef1bf494",
+    "attrs": {
+      "movement": [],
+      "genre": [
+        "musical play",
+        "song"
+      ],
+      "instrument": [],
+      "voice": [],
+      "member": [
+        "American Academy of Arts and Letters",
+        "Jerome David Kern and Dorothy Fields",
+        "T.B. Harms & Co."
+      ],
+      "country": [
+        "American"
       ]
     },
     "sitelinks": 43
@@ -76689,6 +76836,52 @@
     "sitelinks": 42
   },
   {
+    "id": "Elmer Bernstein",
+    "key": "elmer_bernstein",
+    "is_master": false,
+    "type": "Composer",
+    "era": 1962,
+    "tags": [
+      "Modernist",
+      "American"
+    ],
+    "collections": [
+      "classic-archives",
+      "unlocked-recordings",
+      "community_audio"
+    ],
+    "meta": {
+      "schools": [],
+      "regions": [
+        "American"
+      ],
+      "forms": [],
+      "styles": []
+    },
+    "related": [],
+    "aliases": [],
+    "qid": "Q111436",
+    "source": "wikidata",
+    "born": 1922,
+    "died": 2004,
+    "mbid": "e2c7d7a5-b520-4232-b7cf-aaceead17b6c",
+    "attrs": {
+      "movement": [],
+      "genre": [],
+      "instrument": [
+        "keyboard instrument"
+      ],
+      "voice": [],
+      "member": [
+        "University of Southern California"
+      ],
+      "country": [
+        "American"
+      ]
+    },
+    "sitelinks": 41
+  },
+  {
     "id": "Victor Borge",
     "key": "victor_borge",
     "is_master": false,
@@ -76727,6 +76920,50 @@
       "instrument": [
         "piano"
       ],
+      "voice": [],
+      "member": [],
+      "country": [
+        "American"
+      ]
+    },
+    "sitelinks": 41
+  },
+  {
+    "id": "Thomas Newman",
+    "key": "thomas_newman",
+    "is_master": false,
+    "type": "Composer",
+    "era": 1995,
+    "tags": [
+      "Contemporary",
+      "American"
+    ],
+    "collections": [
+      "classic-archives",
+      "unlocked-recordings",
+      "community_audio"
+    ],
+    "meta": {
+      "schools": [],
+      "regions": [
+        "American"
+      ],
+      "forms": [],
+      "styles": []
+    },
+    "related": [],
+    "aliases": [
+      "Tom Newman"
+    ],
+    "qid": "Q319996",
+    "source": "wikidata",
+    "born": 1955,
+    "died": null,
+    "mbid": "348f3a5f-5112-4d72-b33b-11c60b4f9af2",
+    "attrs": {
+      "movement": [],
+      "genre": [],
+      "instrument": [],
       "voice": [],
       "member": [],
       "country": [
@@ -76884,6 +77121,50 @@
       ],
       "country": [
         "Italian"
+      ]
+    },
+    "sitelinks": 41
+  },
+  {
+    "id": "Ludwig Göransson",
+    "key": "ludwig_goransson",
+    "is_master": false,
+    "type": "Composer",
+    "era": 2024,
+    "tags": [
+      "Contemporary",
+      "Swedish"
+    ],
+    "collections": [
+      "classic-archives",
+      "unlocked-recordings",
+      "community_audio"
+    ],
+    "meta": {
+      "schools": [],
+      "regions": [
+        "Swedish"
+      ],
+      "forms": [],
+      "styles": []
+    },
+    "related": [],
+    "aliases": [
+      "Ludwig Tomas Emil Göransson"
+    ],
+    "qid": "Q1358202",
+    "source": "wikidata",
+    "born": 1984,
+    "died": null,
+    "mbid": "78471616-3cb4-4139-a148-aeac3c7d0f79",
+    "attrs": {
+      "movement": [],
+      "genre": [],
+      "instrument": [],
+      "voice": [],
+      "member": [],
+      "country": [
+        "Swedish"
       ]
     },
     "sitelinks": 41

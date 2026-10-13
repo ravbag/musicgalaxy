@@ -1,6 +1,6 @@
 {
  "version": 1,
- "built": "2026-10-13 18:35 UTC",
+ "built": "2026-10-13 18:38 UTC",
  "sources": [
   "Wikidata (CC0)",
   "MusicBrainz (CC0)",
@@ -3167,6 +3167,248 @@
    ]
   },
   {
+   "a": "Alexandre Desplat",
+   "b": "André Rieu",
+   "s": {
+    "listen": 0.29
+   },
+   "why": [
+    "listeners of André Rieu also play Alexandre Desplat"
+   ]
+  },
+  {
+   "a": "Alexandre Desplat",
+   "b": "Bernard Herrmann",
+   "s": {
+    "listen": 0.202
+   },
+   "why": [
+    "listeners of Bernard Herrmann also play Alexandre Desplat"
+   ]
+  },
+  {
+   "a": "Alexandre Desplat",
+   "b": "Danny Elfman",
+   "s": {
+    "listen": 0.715
+   },
+   "why": [
+    "listeners of Danny Elfman also play Alexandre Desplat"
+   ]
+  },
+  {
+   "a": "Alexandre Desplat",
+   "b": "Dimitri Tiomkin",
+   "s": {
+    "listen": 0.258
+   },
+   "why": [
+    "listeners of Dimitri Tiomkin also play Alexandre Desplat"
+   ]
+  },
+  {
+   "a": "Alexandre Desplat",
+   "b": "Ennio Morricone",
+   "s": {
+    "listen": 0.536
+   },
+   "why": [
+    "listeners of Ennio Morricone also play Alexandre Desplat"
+   ]
+  },
+  {
+   "a": "Alexandre Desplat",
+   "b": "Hans Zimmer",
+   "s": {
+    "listen": 1.0
+   },
+   "why": [
+    "listeners of Hans Zimmer also play Alexandre Desplat"
+   ]
+  },
+  {
+   "a": "Alexandre Desplat",
+   "b": "Howard Shore",
+   "s": {
+    "listen": 0.766
+   },
+   "why": [
+    "listeners of Howard Shore also play Alexandre Desplat"
+   ]
+  },
+  {
+   "a": "Alexandre Desplat",
+   "b": "James Horner",
+   "s": {
+    "listen": 0.727
+   },
+   "why": [
+    "listeners of James Horner also play Alexandre Desplat"
+   ]
+  },
+  {
+   "a": "Alexandre Desplat",
+   "b": "Jerry Goldsmith",
+   "s": {
+    "listen": 0.569
+   },
+   "why": [
+    "listeners of Jerry Goldsmith also play Alexandre Desplat"
+   ]
+  },
+  {
+   "a": "Alexandre Desplat",
+   "b": "John Barry",
+   "s": {
+    "listen": 0.571
+   },
+   "why": [
+    "listeners of John Barry also play Alexandre Desplat"
+   ]
+  },
+  {
+   "a": "Alexandre Desplat",
+   "b": "John Williams",
+   "s": {
+    "listen": 0.807,
+    "cooccur": 0.3
+   },
+   "why": [
+    "listeners of John Williams also play Alexandre Desplat",
+    "Alexandre Desplat and John Williams appear together on 3 archive.org recordings"
+   ]
+  },
+  {
+   "a": "Alexandre Desplat",
+   "b": "Lisa Gerrard",
+   "s": {
+    "listen": 0.234
+   },
+   "why": [
+    "listeners of Lisa Gerrard also play Alexandre Desplat"
+   ]
+  },
+  {
+   "a": "Alexandre Desplat",
+   "b": "Ludwig Göransson",
+   "s": {
+    "listen": 0.566
+   },
+   "why": [
+    "listeners of Alexandre Desplat also play Ludwig Göransson"
+   ]
+  },
+  {
+   "a": "Alexandre Desplat",
+   "b": "Maurice Jarre",
+   "s": {
+    "listen": 0.555
+   },
+   "why": [
+    "listeners of Maurice Jarre also play Alexandre Desplat"
+   ]
+  },
+  {
+   "a": "Alexandre Desplat",
+   "b": "Max Richter",
+   "s": {
+    "listen": 0.432
+   },
+   "why": [
+    "listeners of Max Richter also play Alexandre Desplat"
+   ]
+  },
+  {
+   "a": "Alexandre Desplat",
+   "b": "Michael Giacchino",
+   "s": {
+    "listen": 0.757
+   },
+   "why": [
+    "listeners of Alexandre Desplat also play Michael Giacchino"
+   ]
+  },
+  {
+   "a": "Alexandre Desplat",
+   "b": "Michael Kamen",
+   "s": {
+    "listen": 0.587
+   },
+   "why": [
+    "listeners of Alexandre Desplat also play Michael Kamen"
+   ]
+  },
+  {
+   "a": "Alexandre Desplat",
+   "b": "Miklós Rózsa",
+   "s": {
+    "listen": 0.432
+   },
+   "why": [
+    "listeners of Miklós Rózsa also play Alexandre Desplat"
+   ]
+  },
+  {
+   "a": "Alexandre Desplat",
+   "b": "Philip Glass",
+   "s": {
+    "listen": 0.438
+   },
+   "why": [
+    "listeners of Philip Glass also play Alexandre Desplat"
+   ]
+  },
+  {
+   "a": "Alexandre Desplat",
+   "b": "Ramin Djawadi",
+   "s": {
+    "listen": 0.811
+   },
+   "why": [
+    "listeners of Ramin Djawadi also play Alexandre Desplat"
+   ]
+  },
+  {
+   "a": "Alexandre Desplat",
+   "b": "Renée Fleming",
+   "s": {
+    "listen": 0.207
+   },
+   "why": [
+    "listeners of Renée Fleming also play Alexandre Desplat"
+   ]
+  },
+  {
+   "a": "Alexandre Desplat",
+   "b": "Ryuichi Sakamoto",
+   "s": {
+    "listen": 0.603
+   },
+   "why": [
+    "listeners of Ryuichi Sakamoto also play Alexandre Desplat"
+   ]
+  },
+  {
+   "a": "Alexandre Desplat",
+   "b": "Tan Dun",
+   "s": {
+    "listen": 0.703
+   },
+   "why": [
+    "listeners of Tan Dun also play Alexandre Desplat"
+   ]
+  },
+  {
+   "a": "Alexandre Desplat",
+   "b": "Thomas Newman",
+   "s": {
+    "listen": 0.927
+   },
+   "why": [
+    "listeners of Alexandre Desplat also play Thomas Newman"
+   ]
+  },
+  {
    "a": "Alfred Brendel",
    "b": "Antonín Dvořák",
    "s": {
@@ -3662,6 +3904,16 @@
   },
   {
    "a": "Alfred Newman",
+   "b": "Elmer Bernstein",
+   "s": {
+    "listen": 0.759
+   },
+   "why": [
+    "listeners of Alfred Newman also play Elmer Bernstein"
+   ]
+  },
+  {
+   "a": "Alfred Newman",
    "b": "Ezio Pinza",
    "s": {
     "cooccur": 0.2
@@ -3728,6 +3980,17 @@
    },
    "why": [
     "listeners of Miklós Rózsa also play Alfred Newman"
+   ]
+  },
+  {
+   "a": "Alfred Newman",
+   "b": "Thomas Newman",
+   "s": {
+    "family": 1.0
+   },
+   "why": [
+    "Alfred Newman was the father of Thomas Newman",
+    "Alfred Newman was the parent of Thomas Newman"
    ]
   },
   {
@@ -10538,6 +10801,16 @@
   },
   {
    "a": "Arthur Sullivan",
+   "b": "Danny Elfman",
+   "s": {
+    "listen": 0.519
+   },
+   "why": [
+    "listeners of Arthur Sullivan also play Danny Elfman"
+   ]
+  },
+  {
+   "a": "Arthur Sullivan",
    "b": "Howard Shore",
    "s": {
     "listen": 0.407
@@ -12355,12 +12628,34 @@
   },
   {
    "a": "Bernard Herrmann",
+   "b": "Danny Elfman",
+   "s": {
+    "listen": 0.309,
+    "cooccur": 0.2
+   },
+   "why": [
+    "listeners of Bernard Herrmann also play Danny Elfman",
+    "Bernard Herrmann and Danny Elfman appear together on 2 archive.org recordings"
+   ]
+  },
+  {
+   "a": "Bernard Herrmann",
    "b": "Dimitri Tiomkin",
    "s": {
     "listen": 0.864
    },
    "why": [
     "listeners of Dimitri Tiomkin also play Bernard Herrmann"
+   ]
+  },
+  {
+   "a": "Bernard Herrmann",
+   "b": "Elmer Bernstein",
+   "s": {
+    "listen": 0.587
+   },
+   "why": [
+    "listeners of Bernard Herrmann also play Elmer Bernstein"
    ]
   },
   {
@@ -12483,6 +12778,16 @@
    },
    "why": [
     "listeners of Bernard Herrmann also play John Williams"
+   ]
+  },
+  {
+   "a": "Bernard Herrmann",
+   "b": "Maurice Jarre",
+   "s": {
+    "listen": 0.517
+   },
+   "why": [
+    "listeners of Maurice Jarre also play Bernard Herrmann"
    ]
   },
   {
@@ -13947,6 +14252,16 @@
   },
   {
    "a": "Camille Saint-Saëns",
+   "b": "Danny Elfman",
+   "s": {
+    "listen": 0.163
+   },
+   "why": [
+    "listeners of Camille Saint-Saëns also play Danny Elfman"
+   ]
+  },
+  {
+   "a": "Camille Saint-Saëns",
    "b": "Edvard Grieg",
    "s": {
     "listen": 0.576,
@@ -15174,6 +15489,16 @@
    },
    "why": [
     "listeners of Claude Debussy also play Carl Orff"
+   ]
+  },
+  {
+   "a": "Carl Orff",
+   "b": "Danny Elfman",
+   "s": {
+    "listen": 0.394
+   },
+   "why": [
+    "listeners of Carl Orff also play Danny Elfman"
    ]
   },
   {
@@ -21825,6 +22150,236 @@
    ]
   },
   {
+   "a": "Danny Elfman",
+   "b": "Dimitri Tiomkin",
+   "s": {
+    "listen": 0.5
+   },
+   "why": [
+    "listeners of Dimitri Tiomkin also play Danny Elfman"
+   ]
+  },
+  {
+   "a": "Danny Elfman",
+   "b": "Edward Elgar",
+   "s": {
+    "listen": 0.17
+   },
+   "why": [
+    "listeners of Edward Elgar also play Danny Elfman"
+   ]
+  },
+  {
+   "a": "Danny Elfman",
+   "b": "Ennio Morricone",
+   "s": {
+    "listen": 0.561
+   },
+   "why": [
+    "listeners of Ennio Morricone also play Danny Elfman"
+   ]
+  },
+  {
+   "a": "Danny Elfman",
+   "b": "Fritz Kreisler",
+   "s": {
+    "listen": 0.192
+   },
+   "why": [
+    "listeners of Fritz Kreisler also play Danny Elfman"
+   ]
+  },
+  {
+   "a": "Danny Elfman",
+   "b": "Gustav Holst",
+   "s": {
+    "listen": 0.156
+   },
+   "why": [
+    "listeners of Gustav Holst also play Danny Elfman"
+   ]
+  },
+  {
+   "a": "Danny Elfman",
+   "b": "Hans Zimmer",
+   "s": {
+    "listen": 1.0
+   },
+   "why": [
+    "listeners of Hans Zimmer also play Danny Elfman"
+   ]
+  },
+  {
+   "a": "Danny Elfman",
+   "b": "Howard Shore",
+   "s": {
+    "listen": 0.739
+   },
+   "why": [
+    "listeners of Danny Elfman also play Howard Shore"
+   ]
+  },
+  {
+   "a": "Danny Elfman",
+   "b": "James Horner",
+   "s": {
+    "listen": 0.683
+   },
+   "why": [
+    "listeners of James Horner also play Danny Elfman"
+   ]
+  },
+  {
+   "a": "Danny Elfman",
+   "b": "Jerry Goldsmith",
+   "s": {
+    "listen": 0.705
+   },
+   "why": [
+    "listeners of Danny Elfman also play Jerry Goldsmith"
+   ]
+  },
+  {
+   "a": "Danny Elfman",
+   "b": "Joe Hisaishi",
+   "s": {
+    "listen": 0.803
+   },
+   "why": [
+    "listeners of Joe Hisaishi also play Danny Elfman"
+   ]
+  },
+  {
+   "a": "Danny Elfman",
+   "b": "John Barry",
+   "s": {
+    "listen": 0.622
+   },
+   "why": [
+    "listeners of John Barry also play Danny Elfman"
+   ]
+  },
+  {
+   "a": "Danny Elfman",
+   "b": "John Williams",
+   "s": {
+    "listen": 0.909
+   },
+   "why": [
+    "listeners of John Williams also play Danny Elfman"
+   ]
+  },
+  {
+   "a": "Danny Elfman",
+   "b": "Maurice Jarre",
+   "s": {
+    "listen": 0.651
+   },
+   "why": [
+    "listeners of Maurice Jarre also play Danny Elfman"
+   ]
+  },
+  {
+   "a": "Danny Elfman",
+   "b": "Michael Giacchino",
+   "s": {
+    "listen": 0.675
+   },
+   "why": [
+    "listeners of Danny Elfman also play Michael Giacchino"
+   ]
+  },
+  {
+   "a": "Danny Elfman",
+   "b": "Michael Kamen",
+   "s": {
+    "listen": 0.735
+   },
+   "why": [
+    "listeners of Danny Elfman also play Michael Kamen"
+   ]
+  },
+  {
+   "a": "Danny Elfman",
+   "b": "Miklós Rózsa",
+   "s": {
+    "listen": 0.526
+   },
+   "why": [
+    "listeners of Miklós Rózsa also play Danny Elfman"
+   ]
+  },
+  {
+   "a": "Danny Elfman",
+   "b": "Philip Glass",
+   "s": {
+    "listen": 0.252
+   },
+   "why": [
+    "listeners of Philip Glass also play Danny Elfman"
+   ]
+  },
+  {
+   "a": "Danny Elfman",
+   "b": "Ralph Vaughan Williams",
+   "s": {
+    "listen": 0.152
+   },
+   "why": [
+    "listeners of Ralph Vaughan Williams also play Danny Elfman"
+   ]
+  },
+  {
+   "a": "Danny Elfman",
+   "b": "Ramin Djawadi",
+   "s": {
+    "listen": 0.623
+   },
+   "why": [
+    "listeners of Danny Elfman also play Ramin Djawadi"
+   ]
+  },
+  {
+   "a": "Danny Elfman",
+   "b": "Richard Strauss",
+   "s": {
+    "listen": 0.174
+   },
+   "why": [
+    "listeners of Richard Strauss also play Danny Elfman"
+   ]
+  },
+  {
+   "a": "Danny Elfman",
+   "b": "Tan Dun",
+   "s": {
+    "listen": 0.572
+   },
+   "why": [
+    "listeners of Tan Dun also play Danny Elfman"
+   ]
+  },
+  {
+   "a": "Danny Elfman",
+   "b": "Thomas Newman",
+   "s": {
+    "listen": 0.761
+   },
+   "why": [
+    "listeners of Danny Elfman also play Thomas Newman"
+   ]
+  },
+  {
+   "a": "Danny Elfman",
+   "b": "Toru Takemitsu",
+   "s": {
+    "listen": 0.654
+   },
+   "why": [
+    "listeners of Toru Takemitsu also play Danny Elfman"
+   ]
+  },
+  {
    "a": "Darius Milhaud",
    "b": "Ernest Bloch",
    "s": {
@@ -22232,6 +22787,16 @@
    },
    "why": [
     "David Oistrakh and Sviatoslav Richter appear together on 2 archive.org recordings"
+   ]
+  },
+  {
+   "a": "Deanna Durbin",
+   "b": "Jerome Kern",
+   "s": {
+    "cooccur": 0.2
+   },
+   "why": [
+    "Deanna Durbin and Jerome Kern appear together on 2 archive.org recordings"
    ]
   },
   {
@@ -23001,6 +23566,16 @@
   },
   {
    "a": "Dimitri Tiomkin",
+   "b": "Elmer Bernstein",
+   "s": {
+    "listen": 0.758
+   },
+   "why": [
+    "listeners of Elmer Bernstein also play Dimitri Tiomkin"
+   ]
+  },
+  {
+   "a": "Dimitri Tiomkin",
    "b": "Ennio Morricone",
    "s": {
     "listen": 1.0
@@ -23167,6 +23742,16 @@
    },
    "why": [
     "listeners of Dimitri Tiomkin also play Ramin Djawadi"
+   ]
+  },
+  {
+   "a": "Dimitri Tiomkin",
+   "b": "Thomas Newman",
+   "s": {
+    "listen": 0.424
+   },
+   "why": [
+    "listeners of Dimitri Tiomkin also play Thomas Newman"
    ]
   },
   {
@@ -25066,6 +25651,16 @@
   },
   {
    "a": "Edward Elgar",
+   "b": "Kitarō",
+   "s": {
+    "cooccur": 0.2
+   },
+   "why": [
+    "Edward Elgar and Kitarō appear together on 2 archive.org recordings"
+   ]
+  },
+  {
+   "a": "Edward Elgar",
    "b": "Maurice Ravel",
    "s": {
     "listen": 0.145
@@ -26050,6 +26645,136 @@
    ]
   },
   {
+   "a": "Elmer Bernstein",
+   "b": "Erich Wolfgang Korngold",
+   "s": {
+    "listen": 0.71
+   },
+   "why": [
+    "listeners of Erich Wolfgang Korngold also play Elmer Bernstein"
+   ]
+  },
+  {
+   "a": "Elmer Bernstein",
+   "b": "Hans Zimmer",
+   "s": {
+    "listen": 0.972
+   },
+   "why": [
+    "listeners of Elmer Bernstein also play Hans Zimmer"
+   ]
+  },
+  {
+   "a": "Elmer Bernstein",
+   "b": "Howard Shore",
+   "s": {
+    "influence": 1.0
+   },
+   "why": [
+    "Howard Shore was influenced by Elmer Bernstein"
+   ]
+  },
+  {
+   "a": "Elmer Bernstein",
+   "b": "James Horner",
+   "s": {
+    "listen": 0.894
+   },
+   "why": [
+    "listeners of Elmer Bernstein also play James Horner"
+   ]
+  },
+  {
+   "a": "Elmer Bernstein",
+   "b": "Jerry Goldsmith",
+   "s": {
+    "listen": 1.0
+   },
+   "why": [
+    "listeners of Jerry Goldsmith also play Elmer Bernstein"
+   ]
+  },
+  {
+   "a": "Elmer Bernstein",
+   "b": "John Barry",
+   "s": {
+    "listen": 0.783
+   },
+   "why": [
+    "listeners of John Barry also play Elmer Bernstein"
+   ]
+  },
+  {
+   "a": "Elmer Bernstein",
+   "b": "Maurice Jarre",
+   "s": {
+    "listen": 0.517
+   },
+   "why": [
+    "listeners of Maurice Jarre also play Elmer Bernstein"
+   ]
+  },
+  {
+   "a": "Elmer Bernstein",
+   "b": "Max Steiner",
+   "s": {
+    "listen": 0.875
+   },
+   "why": [
+    "listeners of Max Steiner also play Elmer Bernstein"
+   ]
+  },
+  {
+   "a": "Elmer Bernstein",
+   "b": "Michael Kamen",
+   "s": {
+    "listen": 0.457
+   },
+   "why": [
+    "listeners of Michael Kamen also play Elmer Bernstein"
+   ]
+  },
+  {
+   "a": "Elmer Bernstein",
+   "b": "Miklós Rózsa",
+   "s": {
+    "listen": 0.432
+   },
+   "why": [
+    "listeners of Miklós Rózsa also play Elmer Bernstein"
+   ]
+  },
+  {
+   "a": "Elmer Bernstein",
+   "b": "Nino Rota",
+   "s": {
+    "listen": 0.217
+   },
+   "why": [
+    "listeners of Nino Rota also play Elmer Bernstein"
+   ]
+  },
+  {
+   "a": "Elmer Bernstein",
+   "b": "Ramin Djawadi",
+   "s": {
+    "listen": 0.228
+   },
+   "why": [
+    "listeners of Elmer Bernstein also play Ramin Djawadi"
+   ]
+  },
+  {
+   "a": "Elmer Bernstein",
+   "b": "Wojciech Kilar",
+   "s": {
+    "listen": 0.231
+   },
+   "why": [
+    "listeners of Elmer Bernstein also play Wojciech Kilar"
+   ]
+  },
+  {
    "a": "Elvira de Hidalgo",
    "b": "Maria Callas",
    "s": {
@@ -26571,6 +27296,16 @@
   },
   {
    "a": "Ennio Morricone",
+   "b": "Jerome Kern",
+   "s": {
+    "listen": 1.0
+   },
+   "why": [
+    "listeners of Jerome Kern also play Ennio Morricone"
+   ]
+  },
+  {
+   "a": "Ennio Morricone",
    "b": "Jerry Goldsmith",
    "s": {
     "listen": 0.881
@@ -26681,6 +27416,16 @@
   },
   {
    "a": "Ennio Morricone",
+   "b": "Lisa Gerrard",
+   "s": {
+    "listen": 0.224
+   },
+   "why": [
+    "listeners of Lisa Gerrard also play Ennio Morricone"
+   ]
+  },
+  {
+   "a": "Ennio Morricone",
    "b": "Lotte Lenya",
    "s": {
     "listen": 0.448
@@ -26711,6 +27456,16 @@
   },
   {
    "a": "Ennio Morricone",
+   "b": "Ludwig Göransson",
+   "s": {
+    "listen": 0.273
+   },
+   "why": [
+    "listeners of Ludwig Göransson also play Ennio Morricone"
+   ]
+  },
+  {
+   "a": "Ennio Morricone",
    "b": "Ludwig van Beethoven",
    "s": {
     "listen": 0.235
@@ -26727,6 +27482,16 @@
    },
    "why": [
     "listeners of Manuel de Falla also play Ennio Morricone"
+   ]
+  },
+  {
+   "a": "Ennio Morricone",
+   "b": "Maurice Jarre",
+   "s": {
+    "listen": 1.0
+   },
+   "why": [
+    "listeners of Maurice Jarre also play Ennio Morricone"
    ]
   },
   {
@@ -26767,16 +27532,6 @@
    },
    "why": [
     "listeners of Miklós Rózsa also play Ennio Morricone"
-   ]
-  },
-  {
-   "a": "Ennio Morricone",
-   "b": "Mohammed Rafi",
-   "s": {
-    "listen": 0.058
-   },
-   "why": [
-    "listeners of Mohammed Rafi also play Ennio Morricone"
    ]
   },
   {
@@ -26909,6 +27664,16 @@
    },
    "why": [
     "listeners of Tan Dun also play Ennio Morricone"
+   ]
+  },
+  {
+   "a": "Ennio Morricone",
+   "b": "Thomas Newman",
+   "s": {
+    "listen": 0.638
+   },
+   "why": [
+    "listeners of Ennio Morricone also play Thomas Newman"
    ]
   },
   {
@@ -35900,6 +36665,16 @@
   },
   {
    "a": "George Frideric Handel",
+   "b": "Kitarō",
+   "s": {
+    "cooccur": 0.2
+   },
+   "why": [
+    "George Frideric Handel and Kitarō appear together on 2 archive.org recordings"
+   ]
+  },
+  {
+   "a": "George Frideric Handel",
    "b": "Kurt Thomas",
    "s": {
     "cooccur": 0.2
@@ -36110,6 +36885,26 @@
    },
    "why": [
     "listeners of George Gershwin also play Howard Shore"
+   ]
+  },
+  {
+   "a": "George Gershwin",
+   "b": "Irving Berlin",
+   "s": {
+    "cooccur": 0.3
+   },
+   "why": [
+    "George Gershwin and Irving Berlin appear together on 3 archive.org recordings"
+   ]
+  },
+  {
+   "a": "George Gershwin",
+   "b": "Jerome Kern",
+   "s": {
+    "cooccur": 0.3
+   },
+   "why": [
+    "George Gershwin and Jerome Kern appear together on 3 archive.org recordings"
    ]
   },
   {
@@ -41442,6 +42237,18 @@
   },
   {
    "a": "Hans Zimmer",
+   "b": "Lisa Gerrard",
+   "s": {
+    "listen": 1.0,
+    "cooccur": 0.4
+   },
+   "why": [
+    "listeners of Hans Zimmer also play Lisa Gerrard",
+    "Hans Zimmer and Lisa Gerrard appear together on 4 archive.org recordings"
+   ]
+  },
+  {
+   "a": "Hans Zimmer",
    "b": "Luciano Pavarotti",
    "s": {
     "listen": 0.248
@@ -41452,12 +42259,32 @@
   },
   {
    "a": "Hans Zimmer",
+   "b": "Ludwig Göransson",
+   "s": {
+    "listen": 0.969
+   },
+   "why": [
+    "listeners of Ludwig Göransson also play Hans Zimmer"
+   ]
+  },
+  {
+   "a": "Hans Zimmer",
    "b": "Ludwig van Beethoven",
    "s": {
     "listen": 0.23
    },
    "why": [
     "listeners of Ludwig van Beethoven also play Hans Zimmer"
+   ]
+  },
+  {
+   "a": "Hans Zimmer",
+   "b": "Maurice Jarre",
+   "s": {
+    "listen": 0.809
+   },
+   "why": [
+    "listeners of Maurice Jarre also play Hans Zimmer"
    ]
   },
   {
@@ -41692,22 +42519,22 @@
   },
   {
    "a": "Hans Zimmer",
-   "b": "Sharon den Adel",
-   "s": {
-    "listen": 0.081
-   },
-   "why": [
-    "listeners of Sharon den Adel also play Hans Zimmer"
-   ]
-  },
-  {
-   "a": "Hans Zimmer",
    "b": "Tan Dun",
    "s": {
     "listen": 1.0
    },
    "why": [
     "listeners of Tan Dun also play Hans Zimmer"
+   ]
+  },
+  {
+   "a": "Hans Zimmer",
+   "b": "Thomas Newman",
+   "s": {
+    "listen": 1.0
+   },
+   "why": [
+    "listeners of Hans Zimmer also play Thomas Newman"
    ]
   },
   {
@@ -43782,6 +44609,16 @@
   },
   {
    "a": "Hildur Guðnadóttir",
+   "b": "Ludwig Göransson",
+   "s": {
+    "listen": 0.195
+   },
+   "why": [
+    "listeners of Hildur Guðnadóttir also play Ludwig Göransson"
+   ]
+  },
+  {
+   "a": "Hildur Guðnadóttir",
    "b": "Max Richter",
    "s": {
     "listen": 0.894
@@ -44074,6 +44911,16 @@
   },
   {
    "a": "Howard Shore",
+   "b": "Lisa Gerrard",
+   "s": {
+    "listen": 0.299
+   },
+   "why": [
+    "listeners of Lisa Gerrard also play Howard Shore"
+   ]
+  },
+  {
+   "a": "Howard Shore",
    "b": "Luciano Pavarotti",
    "s": {
     "listen": 0.182
@@ -44084,12 +44931,34 @@
   },
   {
    "a": "Howard Shore",
+   "b": "Ludwig Göransson",
+   "s": {
+    "listen": 0.512
+   },
+   "why": [
+    "listeners of Ludwig Göransson also play Howard Shore"
+   ]
+  },
+  {
+   "a": "Howard Shore",
    "b": "Ludwig van Beethoven",
    "s": {
     "listen": 0.235
    },
    "why": [
     "listeners of Ludwig van Beethoven also play Howard Shore"
+   ]
+  },
+  {
+   "a": "Howard Shore",
+   "b": "Maurice Jarre",
+   "s": {
+    "influence": 1.0,
+    "listen": 0.646
+   },
+   "why": [
+    "Howard Shore was influenced by Maurice Jarre",
+    "listeners of Maurice Jarre also play Howard Shore"
    ]
   },
   {
@@ -44270,6 +45139,16 @@
    },
    "why": [
     "listeners of Tan Dun also play Howard Shore"
+   ]
+  },
+  {
+   "a": "Howard Shore",
+   "b": "Thomas Newman",
+   "s": {
+    "listen": 0.738
+   },
+   "why": [
+    "listeners of Howard Shore also play Thomas Newman"
    ]
   },
   {
@@ -45602,6 +46481,16 @@
   },
   {
    "a": "Itzhak Perlman",
+   "b": "Lisa Gerrard",
+   "s": {
+    "listen": 0.062
+   },
+   "why": [
+    "listeners of Itzhak Perlman also play Lisa Gerrard"
+   ]
+  },
+  {
+   "a": "Itzhak Perlman",
    "b": "Michael Kamen",
    "s": {
     "listen": 0.044
@@ -46023,6 +46912,26 @@
   },
   {
    "a": "James Horner",
+   "b": "Lisa Gerrard",
+   "s": {
+    "listen": 0.257
+   },
+   "why": [
+    "listeners of Lisa Gerrard also play James Horner"
+   ]
+  },
+  {
+   "a": "James Horner",
+   "b": "Maurice Jarre",
+   "s": {
+    "listen": 0.947
+   },
+   "why": [
+    "listeners of Maurice Jarre also play James Horner"
+   ]
+  },
+  {
+   "a": "James Horner",
    "b": "Max Richter",
    "s": {
     "listen": 0.225
@@ -46119,6 +47028,16 @@
    },
    "why": [
     "listeners of Tan Dun also play James Horner"
+   ]
+  },
+  {
+   "a": "James Horner",
+   "b": "Thomas Newman",
+   "s": {
+    "listen": 0.796
+   },
+   "why": [
+    "listeners of James Horner also play Thomas Newman"
    ]
   },
   {
@@ -47195,12 +48114,42 @@
   },
   {
    "a": "Jerry Goldsmith",
+   "b": "Lisa Gerrard",
+   "s": {
+    "listen": 0.139
+   },
+   "why": [
+    "listeners of Lisa Gerrard also play Jerry Goldsmith"
+   ]
+  },
+  {
+   "a": "Jerry Goldsmith",
+   "b": "Ludwig Göransson",
+   "s": {
+    "listen": 0.118
+   },
+   "why": [
+    "listeners of Ludwig Göransson also play Jerry Goldsmith"
+   ]
+  },
+  {
+   "a": "Jerry Goldsmith",
    "b": "Mario Castelnuovo-Tedesco",
    "s": {
     "teacher": 1.0
    },
    "why": [
     "Jerry Goldsmith studied with Mario Castelnuovo-Tedesco"
+   ]
+  },
+  {
+   "a": "Jerry Goldsmith",
+   "b": "Maurice Jarre",
+   "s": {
+    "listen": 0.761
+   },
+   "why": [
+    "listeners of Maurice Jarre also play Jerry Goldsmith"
    ]
   },
   {
@@ -47291,6 +48240,16 @@
    },
    "why": [
     "listeners of Tan Dun also play Jerry Goldsmith"
+   ]
+  },
+  {
+   "a": "Jerry Goldsmith",
+   "b": "Thomas Newman",
+   "s": {
+    "listen": 0.686
+   },
+   "why": [
+    "listeners of Jerry Goldsmith also play Thomas Newman"
    ]
   },
   {
@@ -49616,6 +50575,16 @@
   },
   {
    "a": "John Adams",
+   "b": "Lisa Gerrard",
+   "s": {
+    "listen": 0.148
+   },
+   "why": [
+    "listeners of John Adams also play Lisa Gerrard"
+   ]
+  },
+  {
+   "a": "John Adams",
    "b": "Ryuichi Sakamoto",
    "s": {
     "listen": 0.565
@@ -49664,6 +50633,26 @@
    },
    "why": [
     "listeners of John Williams also play John Barry"
+   ]
+  },
+  {
+   "a": "John Barry",
+   "b": "Lisa Gerrard",
+   "s": {
+    "listen": 0.201
+   },
+   "why": [
+    "listeners of Lisa Gerrard also play John Barry"
+   ]
+  },
+  {
+   "a": "John Barry",
+   "b": "Maurice Jarre",
+   "s": {
+    "listen": 0.885
+   },
+   "why": [
+    "listeners of Maurice Jarre also play John Barry"
    ]
   },
   {
@@ -49744,6 +50733,16 @@
    },
    "why": [
     "listeners of Tan Dun also play John Barry"
+   ]
+  },
+  {
+   "a": "John Barry",
+   "b": "Thomas Newman",
+   "s": {
+    "listen": 0.848
+   },
+   "why": [
+    "listeners of John Barry also play Thomas Newman"
    ]
   },
   {
@@ -50104,6 +51103,16 @@
   },
   {
    "a": "John Williams",
+   "b": "Ludwig Göransson",
+   "s": {
+    "listen": 0.833
+   },
+   "why": [
+    "listeners of Ludwig Göransson also play John Williams"
+   ]
+  },
+  {
+   "a": "John Williams",
    "b": "Ludwig van Beethoven",
    "s": {
     "listen": 0.217
@@ -50120,6 +51129,16 @@
    },
    "why": [
     "John Williams studied with Mario Castelnuovo-Tedesco"
+   ]
+  },
+  {
+   "a": "John Williams",
+   "b": "Maurice Jarre",
+   "s": {
+    "listen": 0.904
+   },
+   "why": [
+    "listeners of Maurice Jarre also play John Williams"
    ]
   },
   {
@@ -50270,6 +51289,16 @@
    },
    "why": [
     "listeners of Tan Dun also play John Williams"
+   ]
+  },
+  {
+   "a": "John Williams",
+   "b": "Thomas Newman",
+   "s": {
+    "listen": 0.733
+   },
+   "why": [
+    "listeners of John Williams also play Thomas Newman"
    ]
   },
   {
@@ -51288,6 +52317,26 @@
    ]
   },
   {
+   "a": "Kitarō",
+   "b": "Lisa Gerrard",
+   "s": {
+    "listen": 0.285
+   },
+   "why": [
+    "listeners of Lisa Gerrard also play Kitarō"
+   ]
+  },
+  {
+   "a": "Kitarō",
+   "b": "Steve Reich",
+   "s": {
+    "listen": 0.132
+   },
+   "why": [
+    "listeners of Kitarō also play Steve Reich"
+   ]
+  },
+  {
    "a": "Krzysztof Meyer",
    "b": "Nadia Boulanger",
    "s": {
@@ -52187,6 +53236,86 @@
    ]
   },
   {
+   "a": "Lisa Gerrard",
+   "b": "Maurice Jarre",
+   "s": {
+    "listen": 0.191
+   },
+   "why": [
+    "listeners of Maurice Jarre also play Lisa Gerrard"
+   ]
+  },
+  {
+   "a": "Lisa Gerrard",
+   "b": "Michael Kamen",
+   "s": {
+    "listen": 0.133
+   },
+   "why": [
+    "listeners of Michael Kamen also play Lisa Gerrard"
+   ]
+  },
+  {
+   "a": "Lisa Gerrard",
+   "b": "Nino Rota",
+   "s": {
+    "listen": 0.106
+   },
+   "why": [
+    "listeners of Nino Rota also play Lisa Gerrard"
+   ]
+  },
+  {
+   "a": "Lisa Gerrard",
+   "b": "Ramin Djawadi",
+   "s": {
+    "listen": 0.2
+   },
+   "why": [
+    "listeners of Lisa Gerrard also play Ramin Djawadi"
+   ]
+  },
+  {
+   "a": "Lisa Gerrard",
+   "b": "Renée Fleming",
+   "s": {
+    "listen": 0.011
+   },
+   "why": [
+    "listeners of Renée Fleming also play Lisa Gerrard"
+   ]
+  },
+  {
+   "a": "Lisa Gerrard",
+   "b": "Ryuichi Sakamoto",
+   "s": {
+    "listen": 0.198
+   },
+   "why": [
+    "listeners of Ryuichi Sakamoto also play Lisa Gerrard"
+   ]
+  },
+  {
+   "a": "Lisa Gerrard",
+   "b": "Thomas Newman",
+   "s": {
+    "listen": 0.244
+   },
+   "why": [
+    "listeners of Lisa Gerrard also play Thomas Newman"
+   ]
+  },
+  {
+   "a": "Lisa Gerrard",
+   "b": "Wojciech Kilar",
+   "s": {
+    "listen": 0.186
+   },
+   "why": [
+    "listeners of Wojciech Kilar also play Lisa Gerrard"
+   ]
+  },
+  {
    "a": "Lorenzo Da Ponte",
    "b": "Wolfgang Amadeus Mozart",
    "s": {
@@ -52740,6 +53869,36 @@
    },
    "why": [
     "Ludwig Berger studied with Muzio Clementi"
+   ]
+  },
+  {
+   "a": "Ludwig Göransson",
+   "b": "Michael Giacchino",
+   "s": {
+    "listen": 0.688
+   },
+   "why": [
+    "listeners of Michael Giacchino also play Ludwig Göransson"
+   ]
+  },
+  {
+   "a": "Ludwig Göransson",
+   "b": "Ramin Djawadi",
+   "s": {
+    "listen": 1.0
+   },
+   "why": [
+    "listeners of Ramin Djawadi also play Ludwig Göransson"
+   ]
+  },
+  {
+   "a": "Ludwig Göransson",
+   "b": "Ryuichi Sakamoto",
+   "s": {
+    "listen": 0.186
+   },
+   "why": [
+    "listeners of Ludwig Göransson also play Ryuichi Sakamoto"
    ]
   },
   {
@@ -54017,6 +55176,96 @@
    ]
   },
   {
+   "a": "Maurice Jarre",
+   "b": "Michael Giacchino",
+   "s": {
+    "listen": 0.541
+   },
+   "why": [
+    "listeners of Maurice Jarre also play Michael Giacchino"
+   ]
+  },
+  {
+   "a": "Maurice Jarre",
+   "b": "Michael Kamen",
+   "s": {
+    "listen": 0.316
+   },
+   "why": [
+    "listeners of Maurice Jarre also play Michael Kamen"
+   ]
+  },
+  {
+   "a": "Maurice Jarre",
+   "b": "Miklós Rózsa",
+   "s": {
+    "listen": 0.389
+   },
+   "why": [
+    "listeners of Miklós Rózsa also play Maurice Jarre"
+   ]
+  },
+  {
+   "a": "Maurice Jarre",
+   "b": "Nino Rota",
+   "s": {
+    "listen": 0.263
+   },
+   "why": [
+    "listeners of Nino Rota also play Maurice Jarre"
+   ]
+  },
+  {
+   "a": "Maurice Jarre",
+   "b": "Ramin Djawadi",
+   "s": {
+    "listen": 0.297
+   },
+   "why": [
+    "listeners of Maurice Jarre also play Ramin Djawadi"
+   ]
+  },
+  {
+   "a": "Maurice Jarre",
+   "b": "Ryuichi Sakamoto",
+   "s": {
+    "listen": 0.211
+   },
+   "why": [
+    "listeners of Maurice Jarre also play Ryuichi Sakamoto"
+   ]
+  },
+  {
+   "a": "Maurice Jarre",
+   "b": "Tan Dun",
+   "s": {
+    "listen": 0.215
+   },
+   "why": [
+    "listeners of Maurice Jarre also play Tan Dun"
+   ]
+  },
+  {
+   "a": "Maurice Jarre",
+   "b": "Thomas Newman",
+   "s": {
+    "listen": 0.646
+   },
+   "why": [
+    "listeners of Maurice Jarre also play Thomas Newman"
+   ]
+  },
+  {
+   "a": "Maurice Jarre",
+   "b": "Wojciech Kilar",
+   "s": {
+    "listen": 0.236
+   },
+   "why": [
+    "listeners of Maurice Jarre also play Wojciech Kilar"
+   ]
+  },
+  {
    "a": "Maurice Ravel",
    "b": "Modest Mussorgsky",
    "s": {
@@ -54467,6 +55716,16 @@
    ]
   },
   {
+   "a": "Max Richter",
+   "b": "Thomas Newman",
+   "s": {
+    "listen": 0.439
+   },
+   "why": [
+    "listeners of Max Richter also play Thomas Newman"
+   ]
+  },
+  {
    "a": "Max Steiner",
    "b": "Miklós Rózsa",
    "s": {
@@ -54577,6 +55836,16 @@
    ]
   },
   {
+   "a": "Michael Giacchino",
+   "b": "Thomas Newman",
+   "s": {
+    "listen": 0.872
+   },
+   "why": [
+    "listeners of Michael Giacchino also play Thomas Newman"
+   ]
+  },
+  {
    "a": "Michael Gielen",
    "b": "Montserrat Caballé",
    "s": {
@@ -54634,6 +55903,16 @@
    },
    "why": [
     "listeners of Tan Dun also play Michael Kamen"
+   ]
+  },
+  {
+   "a": "Michael Kamen",
+   "b": "Thomas Newman",
+   "s": {
+    "listen": 0.756
+   },
+   "why": [
+    "listeners of Michael Kamen also play Thomas Newman"
    ]
   },
   {
@@ -54838,6 +56117,16 @@
    },
    "why": [
     "listeners of Miklós Rózsa also play Philip Glass"
+   ]
+  },
+  {
+   "a": "Miklós Rózsa",
+   "b": "Thomas Newman",
+   "s": {
+    "listen": 0.632
+   },
+   "why": [
+    "listeners of Miklós Rózsa also play Thomas Newman"
    ]
   },
   {
@@ -56748,6 +58037,16 @@
   },
   {
    "a": "Philip Glass",
+   "b": "Thomas Newman",
+   "s": {
+    "listen": 0.485
+   },
+   "why": [
+    "listeners of Philip Glass also play Thomas Newman"
+   ]
+  },
+  {
+   "a": "Philip Glass",
    "b": "Toru Takemitsu",
    "s": {
     "listen": 0.5
@@ -57352,6 +58651,16 @@
    },
    "why": [
     "listeners of Tan Dun also play Ramin Djawadi"
+   ]
+  },
+  {
+   "a": "Ramin Djawadi",
+   "b": "Thomas Newman",
+   "s": {
+    "listen": 0.72
+   },
+   "why": [
+    "listeners of Ramin Djawadi also play Thomas Newman"
    ]
   },
   {
@@ -58032,6 +59341,16 @@
    ]
   },
   {
+   "a": "Ryuichi Sakamoto",
+   "b": "Thomas Newman",
+   "s": {
+    "listen": 0.662
+   },
+   "why": [
+    "listeners of Ryuichi Sakamoto also play Thomas Newman"
+   ]
+  },
+  {
    "a": "Samuel Adler",
    "b": "Walter Piston",
    "s": {
@@ -58438,6 +59757,16 @@
    },
    "why": [
     "Tamás Vásáry studied with Zoltán Kodály"
+   ]
+  },
+  {
+   "a": "Tan Dun",
+   "b": "Thomas Newman",
+   "s": {
+    "listen": 0.879
+   },
+   "why": [
+    "listeners of Tan Dun also play Thomas Newman"
    ]
   },
   {

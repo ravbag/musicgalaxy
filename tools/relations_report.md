@@ -1,16 +1,16 @@
 # Relations build report
 
-Built 2026-10-13 18:35 UTC
+Built 2026-10-13 18:38 UTC
 
-- artists: 907
-- artists added: 477
-- matched to Wikidata: 907
-- with MusicBrainz id: 901
-- related pairs: 5780
-- pairs with cooccur: 3292
-- pairs with family: 100
-- pairs with influence: 57
-- pairs with listen: 1802
+- artists: 913
+- artists added: 483
+- matched to Wikidata: 913
+- with MusicBrainz id: 907
+- related pairs: 5912
+- pairs with cooccur: 3300
+- pairs with family: 101
+- pairs with influence: 59
+- pairs with listen: 1927
 - pairs with performed: 20
 - pairs with teacher: 935
 
@@ -34,7 +34,7 @@ Built 2026-10-13 18:35 UTC
 
 (none)
 
-## Artists added (477)
+## Artists added (483)
 
 - Max Richter (Composer, 1966–, 31 Wikipedia editions)
 - Anatoliy Solovyanenko (Singer, 1932–1999, 120 Wikipedia editions)
@@ -42,16 +42,20 @@ Built 2026-10-13 18:35 UTC
 - Ennio Morricone (Composer, 1928–2020, 94 Wikipedia editions)
 - Hans Zimmer (Composer, 1957–, 89 Wikipedia editions)
 - Louis Braille (Instrumentalist, 1809–1852, 89 Wikipedia editions)
+- Lisa Gerrard (Composer, 1961–, 84 Wikipedia editions)
 - John Williams (Composer, 1932–, 78 Wikipedia editions)
+- Irving Berlin (Composer, 1888–1989, 73 Wikipedia editions)
 - Arthur Rubinstein (Composer, 1887–1982, 71 Wikipedia editions)
 - James Horner (Composer, 1953–2015, 66 Wikipedia editions)
 - Pau Casals (Composer, 1876–1973, 64 Wikipedia editions)
 - Mikis Theodorakis (Composer, 1925–2021, 63 Wikipedia editions)
 - Walther von der Vogelweide (Composer, 1170–1230, 62 Wikipedia editions)
+- Maurice Jarre (Composer, 1924–2009, 62 Wikipedia editions)
 - Jenny Lind (Singer, 1820–1887, 62 Wikipedia editions)
 - Yo-Yo Ma (Composer, 1955–, 60 Wikipedia editions)
 - John Barry (Composer, 1933–2011, 60 Wikipedia editions)
 - Ignacy Jan Paderewski (Composer, 1860–1941, 60 Wikipedia editions)
+- Danny Elfman (Composer, 1953–, 60 Wikipedia editions)
 - Michel Sogny (Composer, 1947–, 60 Wikipedia editions)
 - Vladimir Horowitz (Instrumentalist, 1903–1989, 60 Wikipedia editions)
 - Zubin Mehta (Conductor, 1936–, 59 Wikipedia editions)
@@ -64,7 +68,6 @@ Built 2026-10-13 18:35 UTC
 - François-André Danican Philidor (Composer, 1726–1795, 55 Wikipedia editions)
 - Airat Ichmouratov (Composer, 1973–, 55 Wikipedia editions)
 - Sviatoslav Richter (Composer, 1915–1997, 54 Wikipedia editions)
-- Mohammed Rafi (Composer, 1924–1980, 54 Wikipedia editions)
 - Ramin Djawadi (Composer, 1974–, 53 Wikipedia editions)
 - Paul Dukas (Composer, 1865–1935, 53 Wikipedia editions)
 - Daniel François Esprit Auber (Composer, 1782–1871, 53 Wikipedia editions)
@@ -74,10 +77,10 @@ Built 2026-10-13 18:35 UTC
 - Lorenzo Da Ponte (Composer, 1749–1838, 52 Wikipedia editions)
 - David Oistrakh (Conductor, 1908–1974, 52 Wikipedia editions)
 - Max Reger (Composer, 1873–1916, 51 Wikipedia editions)
+- Alexandre Desplat (Composer, 1961–, 51 Wikipedia editions)
 - Itzhak Perlman (Conductor, 1945–, 51 Wikipedia editions)
 - Arnaut Daniel (Composer, 1150–1210, 50 Wikipedia editions)
 - Alma Mahler (Composer, 1879–1964, 50 Wikipedia editions)
-- Anette Olzon (Composer, 1971–, 50 Wikipedia editions)
 - Jascha Heifetz (Instrumentalist, 1901–1987, 50 Wikipedia editions)
 - Wilhelm Friedemann Bach (Composer, 1710–1784, 49 Wikipedia editions)
 - Renata Scotto (Singer, 1934–2023, 49 Wikipedia editions)
@@ -89,7 +92,6 @@ Built 2026-10-13 18:35 UTC
 - Giovanni Paisiello (Composer, 1740–1816, 48 Wikipedia editions)
 - Pablo de Sarasate (Composer, 1844–1908, 48 Wikipedia editions)
 - Jacopo Peri (Composer, 1561–1633, 48 Wikipedia editions)
-- Sharon den Adel (Composer, 1974–, 48 Wikipedia editions)
 - Galina Vishnevskaya (Singer, 1926–2012, 48 Wikipedia editions)
 - Max Bruch (Composer, 1838–1920, 47 Wikipedia editions)
 - André Rieu (Conductor, 1949–, 47 Wikipedia editions)
@@ -101,11 +103,11 @@ Built 2026-10-13 18:35 UTC
 - Beverly Sills (Singer, 1929–2007, 46 Wikipedia editions)
 - Malena Ernman (Singer, 1970–, 46 Wikipedia editions)
 - Arthur Sullivan (Composer, 1842–1900, 45 Wikipedia editions)
-- Floor Jansen (Composer, 1981–, 45 Wikipedia editions)
 - Jordi Savall (Composer, 1941–, 45 Wikipedia editions)
 - Maria Anna Mozart (Composer, 1751–1829, 45 Wikipedia editions)
 - Mykola Lysenko (Composer, 1842–1912, 44 Wikipedia editions)
 - Alfred Brendel (Composer, 1931–2025, 44 Wikipedia editions)
+- Kitarō (Composer, 1953–, 44 Wikipedia editions)
 - Alfred Newman (Composer, 1900–1970, 44 Wikipedia editions)
 - Amilcare Ponchielli (Composer, 1834–1886, 44 Wikipedia editions)
 - Borys Liatoshynsky (Composer, 1894–1968, 44 Wikipedia editions)
@@ -115,6 +117,7 @@ Built 2026-10-13 18:35 UTC
 - Lorin Maazel (Composer, 1930–2014, 43 Wikipedia editions)
 - Charles-Valentin Alkan (Composer, 1813–1888, 43 Wikipedia editions)
 - Farinelli (Composer, 1705–1782, 43 Wikipedia editions)
+- Jerome Kern (Composer, 1885–1945, 43 Wikipedia editions)
 - Ottorino Respighi (Composer, 1879–1936, 43 Wikipedia editions)
 - Fritz Kreisler (Composer, 1875–1962, 43 Wikipedia editions)
 - Evgeny Kissin (Composer, 1971–, 43 Wikipedia editions)
@@ -130,10 +133,13 @@ Built 2026-10-13 18:35 UTC
 - Lotte Lenya (Singer, 1898–1981, 42 Wikipedia editions)
 - Florence Foster Jenkins (Singer, 1868–1944, 42 Wikipedia editions)
 - Khatia Buniatishvili (Instrumentalist, 1987–, 42 Wikipedia editions)
+- Elmer Bernstein (Composer, 1922–2004, 41 Wikipedia editions)
 - Victor Borge (Composer, 1909–2000, 41 Wikipedia editions)
+- Thomas Newman (Composer, 1955–, 41 Wikipedia editions)
 - Henri Wieniawski (Composer, 1835–1880, 41 Wikipedia editions)
 - André Grétry (Composer, 1741–1813, 41 Wikipedia editions)
 - Umberto Giordano (Composer, 1867–1948, 41 Wikipedia editions)
+- Ludwig Göransson (Composer, 1984–, 41 Wikipedia editions)
 - Nayden Todorov (Composer, 1974–, 41 Wikipedia editions)
 - Isaac Stern (Conductor, 1920–2001, 41 Wikipedia editions)
 - Nellie Melba (Singer, 1861–1931, 41 Wikipedia editions)
@@ -514,7 +520,7 @@ Built 2026-10-13 18:35 UTC
 - Ervin Nyiregyházi (Composer, 1903–1987, 15 Wikipedia editions)
 - Ilmari Hannikainen (Composer, 1892–1955, 15 Wikipedia editions)
 
-## Candidates skipped (1059)
+## Candidates skipped (1053)
 
 - Michael Jackson (Q2831): not a classical musician: songwriter (American singer, songwriter, record producer, and dancer (1958–2009))
 - Leonardo da Vinci (Q762): not a classical musician: described as "Italian Renaissance polymath (1452−1519)"
@@ -679,7 +685,6 @@ Built 2026-10-13 18:35 UTC
 - Tristan Tzara (Q16409): not a classical musician: described as "Romanian-French poet (1896–1963)"
 - Kesha (Q33605): not a classical musician: songwriter (American singer and songwriter (born 1987))
 - John Cale (Q45909): not a classical musician: singer-songwriter (Welsh composer, singer-songwriter and record producer (born 1942))
-- Lisa Gerrard (Q40580): not a classical musician: no classical genre or movement (genres: world music / ethereal wave / dark wave)
 - Viggo Mortensen (Q171363): not a classical musician: described as "American actor"
 - Hugh Laurie (Q49017): not a classical musician: described as "English actor, comedian, director, musician and writer (born 1959)"
 - Pedro I of Brazil (Q939): not a classical musician: described as "Emperor of Brazil from 1822 to 1831 and King of Portugal in 1826 (1798-1834)"
@@ -754,7 +759,6 @@ Built 2026-10-13 18:35 UTC
 - Alejandro González Iñárritu (Q55215): not a classical musician: described as "Mexican film director"
 - Adam Levine (Q219631): not a classical musician: soul (soul / pop rock)
 - Lars Ulrich (Q106193): not a classical musician: heavy metal (heavy metal music / thrash metal)
-- Irving Berlin (Q128746): not a classical musician: no classical genre or movement (genres: musical play / vaudeville)
 - Shania Twain (Q131433): not a classical musician: rock (rock music / pop music / folk music / country music / soft rock / dance music / country rock / country pop)
 - Leopold I, Holy Roman Emperor (Q150494): not a classical musician: described as "Holy Roman Emperor (1658-1705), King of Hungary and Croatia and King of Bohemia (lived 1640-1705)"
 - Peter Gabriel (Q175195): not a classical musician: rock (rock music / progressive rock / new wave / art rock / pop rock / experimental rock / worldbeat / art pop)
@@ -850,7 +854,7 @@ Built 2026-10-13 18:35 UTC
 - Paula Abdul (Q185465): not a classical musician: pop (pop music / soul / contemporary R&B)
 - Scott Joplin (Q191499): not a classical musician: no classical genre or movement (genres: ragtime)
 - Tori Amos (Q193744): not a classical musician: singer-songwriter (American singer-songwriter (born 1963))
-- Kirk Hammett (Q484030): not a classical musician: no classical genre or movement (genres: thrash metal)
+- Kirk Hammett (Q484030): not a classical musician: thrash metal (thrash metal)
 - Demis Roussos (Q487882): not a classical musician: pop (pop music / progressive rock / variety)
 - Philipp Kirkorov (Q494596): not a classical musician: pop (pop music / Russian pop)
 - Brian Eno (Q569003): not a classical musician: rock (electronic music / ambient music / art rock / drone music / art pop)
@@ -867,11 +871,10 @@ Built 2026-10-13 18:35 UTC
 - Antônio Carlos Jobim (Q200131): not a classical musician: described as "Brazilian songwriter, composer, arranger, singer, and pianist/guitarist (1927–1994)"
 - Dennis Quaid (Q200768): not a classical musician: described as "American actor"
 - Debby Ryan (Q204005): not a classical musician: jazz (jazz / pop music / indie pop)
-- Varg Vikernes (Q207824): not a classical musician: no classical genre or movement (genres: black metal / dark ambient)
+- Varg Vikernes (Q207824): not a classical musician: black metal (Norwegian black metal musician)
 - Serj Tankian (Q486063): not a classical musician: rock (Armenian-American rock musician, singer, songwriter and record producer)
 - Natalie Imbruglia (Q488353): not a classical musician: pop (pop music / adult contemporary music / pop rock)
 - Oscar I of Sweden (Q52926): not a classical musician: described as "King of Sweden and Norway between 1844–1859 (1799–1859)"
-- Maurice Jarre (Q105487): not a classical musician: no classical genre or movement (genres: none)
 - Benny Andersson (Q214582): not a classical musician: rock (rock music / pop music / popular music)
 - Michael Bublé (Q153694): not a classical musician: songwriter (Canadian singer, songwriter and actor)
 - Eddie Van Halen (Q272012): not a classical musician: rock (Dutch-American rock guitarist (1955–2020))
@@ -887,7 +890,7 @@ Built 2026-10-13 18:35 UTC
 - Thelonious Monk (Q109612): not a classical musician: jazz (American jazz pianist and composer (1917–1982))
 - John Mayer (Q215215): not a classical musician: blues (blues / alternative rock / rock music / pop music / folk music / country music / soul / indie rock / folk rock / blues rock / soft rock / acoustic music / pop rock / country rock / blue-eyed soul)
 - Paul Anka (Q216563): not a classical musician: jazz (jazz / pop music / soft rock / doo-wop)
-- Till Lindemann (Q154852): not a classical musician: no classical genre or movement (genres: industrial metal / Neue Deutsche Härte)
+- Till Lindemann (Q154852): not a classical musician: industrial metal (industrial metal / Neue Deutsche Härte)
 - Joseph of Anchieta (Q317126): not a classical musician: described as "Spanish Jesuit missionary (1534-1597)"
 - Chris Rea (Q262314): not a classical musician: singer-songwriter (English male singer-songwriter and guitarist (1951–2025))
 - Chris Cornell (Q270935): not a classical musician: rock (grunge / alternative rock / rock music / alternative metal / hard rock)
@@ -905,7 +908,7 @@ Built 2026-10-13 18:35 UTC
 - John IV of Portugal (Q1060796): not a classical musician: described as "King of Portugal from 1640 to 1656 (lived 1604-1656)"
 - Carrie Underwood (Q215546): not a classical musician: pop (pop music / country music / country rock / country pop)
 - Wolfram von Eschenbach (Q18821): not a classical musician: described as "German knight and poet (1170–1220)"
-- Asha Bhosle (Q38393): not a classical musician: pop (pop music / world music / ghazal / qawwali / Indian film music / bhajan / Indian classical music / Hindustani classical music / Indian folk music / Indian rock)
+- Asha Bhosle (Q38393): not a classical musician: playback singer (Indian playback singer (1933–2026))
 - John Lee Hooker (Q44570): not a classical musician: blues (American blues musician (1912 or 1917–2001))
 - George Gurdjieff (Q217771): not a classical musician: described as "philosopher, mystic, and writer (c. 1866–1877 – 1949)"
 - Muddy Waters (Q220707): not a classical musician: blues (American blues musician (1913–1983))
@@ -917,7 +920,6 @@ Built 2026-10-13 18:35 UTC
 - Pierre-Jean de Béranger (Q324998): not a classical musician: described as "French poet and chansonnier (1780-1857)"
 - Mark Knopfler (Q185343): not a classical musician: blues (blues / rock music / country music / blues rock / country rock / Celtic rock)
 - Mika (Q186329): not a classical musician: songwriter (British-Lebanese musician, singer and songwriter)
-- Danny Elfman (Q193338): not a classical musician: no classical genre or movement (genres: ska / new wave)
 - Domenico Modugno (Q201392): not a classical musician: pop (pop music / folk music)
 - Fats Domino (Q209586): not a classical musician: rock (rock and roll / jazz / rhythm and blues / boogie-woogie)
 - Nusrat Fateh Ali Khan (Q299073): not a classical musician: no classical genre or movement (genres: ghazal / qawwali)
@@ -936,7 +938,7 @@ Built 2026-10-13 18:35 UTC
 - Sertab Erener (Q193534): not a classical musician: pop (pop music / dance-pop)
 - Isaac Hayes (Q206439): not a classical musician: rhythm and blues (rhythm and blues / soul / funk)
 - Eric Idle (Q210741): not a classical musician: described as "British comedian, actor and writer (born 1943)"
-- Shreya Ghoshal (Q2050788): not a classical musician: pop (pop music / ghazal / pop rock / qawwali / Indian film music / Carnatic music / Hindustani classical music / folk-pop)
+- Shreya Ghoshal (Q2050788): not a classical musician: playback singer (Indian playback singer)
 - Bebe Rexha (Q16185856): not a classical musician: pop (pop music / contemporary R&B)
 - Glynis Johns (Q272579): not a classical musician: described as "British actress (1923–2024)"
 - Max Brod (Q28480): not a classical musician: described as "Bohemian-Israeli author, composer, and journalist (1884–1968)"
@@ -960,7 +962,7 @@ Built 2026-10-13 18:35 UTC
 - Lionel Barrymore (Q295593): not a classical musician: described as "American actor, director and screenwriter (1878–1954)"
 - Sam Cooke (Q295919): not a classical musician: songwriter (American singer and songwriter (1931–1964))
 - Joss Whedon (Q298025): not a classical musician: described as "American director, screenwriter, and producer (born 1964)"
-- Tarja Turunen (Q484540): not a classical musician: heavy metal (classical music / power metal / glam metal / symphonic metal / traditional heavy metal / operatic pop)
+- Tarja Turunen (Q484540): not a classical musician: power metal (classical music / power metal / glam metal / symphonic metal / traditional heavy metal / operatic pop)
 - Krist Novoselic (Q428798): not a classical musician: rock (American rock musician)
 - Donald Glover (Q1239933): not a classical musician: described as "American actor, comedian, musician, and filmmaker (born 1983)"
 - Travis Scott (Q13605596): not a classical musician: described as "American rapper, singer and record producer"
@@ -1044,6 +1046,7 @@ Built 2026-10-13 18:35 UTC
 - Roberta Flack (Q231484): not a classical musician: jazz (jazz / rhythm and blues / soul / traditional folk music / adult contemporary music)
 - Bulat Okudzhava (Q239652): not a classical musician: described as "Soviet and Russian writer and singer (1924–1997)"
 - Tom Petty (Q311655): not a classical musician: rock (rock music)
+- Mohammed Rafi (Q156815): not a classical musician: playback singer (Indian playback singer (1924–1980))
 - Dieter Bohlen (Q76906): not a classical musician: described as "German songwriter, producer, singer, and television personality"
 - Fela Kuti (Q313868): not a classical musician: jazz (jazz / Afrobeat / highlife)
 - John Paul Jones (Q190243): not a classical musician: rock (rock music / soul)
@@ -1106,7 +1109,6 @@ Built 2026-10-13 18:35 UTC
 - Chaka Khan (Q229498): not a classical musician: jazz (jazz / pop music / rhythm and blues / soul)
 - Laurie Anderson (Q235066): not a classical musician: described as "American artist and musician (born 1947)"
 - Khaled (Q312609): not a classical musician: jazz (jazz / pop music / raï)
-- Alexandre Desplat (Q313362): not a classical musician: no classical genre or movement (genres: none)
 - Thomas Mitchell (Q317026): not a classical musician: described as "American actor, playwright and screenwriter (1892-1962)"
 - Jack White (Q272031): not a classical musician: blues (blues / alternative rock / rock music)
 - Robin Gibb (Q188482): not a classical musician: pop (pop music / new wave)
@@ -1147,6 +1149,7 @@ Built 2026-10-13 18:35 UTC
 - David Arquette (Q294185): not a classical musician: described as "American actor, director and professional wrestler"
 - Darren Criss (Q295502): not a classical musician: described as "American actor and singer"
 - Rob Zombie (Q298255): not a classical musician: rock (American rock singer and filmmaker)
+- Anette Olzon (Q486059): not a classical musician: power metal (power metal / symphonic metal)
 - Muslim Magomayev (Q558799): not a classical musician: pop (opera / pop music / operatic pop / classical crossover)
 - Iryna Bilyk (Q2662849): not a classical musician: pop (pop music)
 - SZA (Q16210722): not a classical musician: singer-songwriter (American singer-songwriter (born 1989))
@@ -1191,9 +1194,10 @@ Built 2026-10-13 18:35 UTC
 - John Gay (Q321660): not a classical musician: described as "English poet and playwright (1685–1732)"
 - Rob Halford (Q271576): not a classical musician: heavy metal (British heavy metal singer)
 - Yngwie Malmsteen (Q192260): not a classical musician: heavy metal (heavy metal music / neo-classical metal)
+- Sharon den Adel (Q207710): not a classical musician: alternative metal (alternative metal / gothic metal / symphonic metal)
 - Manu Chao (Q207898): not a classical musician: reggae (reggae / ska / world music / music of Latin America)
 - C. Rajagopalachari (Q378404): not a classical musician: described as "Indian politician and activist (1878–1972)"
-- Corey Taylor (Q295120): not a classical musician: no classical genre or movement (genres: alternative metal / groove metal / nu metal)
+- Corey Taylor (Q295120): not a classical musician: alternative metal (alternative metal / groove metal / nu metal)
 - George Sanders (Q296491): not a classical musician: described as "British actor (1906–1972)"
 - Sonny Rollins (Q299208): not a classical musician: described as "American jazz saxophonist and composer (1930–2026)"
 - Karel Gott (Q333187): not a classical musician: pop (pop music / romance / chanson / estrada)
@@ -1275,14 +1279,14 @@ Built 2026-10-13 18:35 UTC
 - Vinícius de Moraes (Q333856): not a classical musician: bossa nova (bossa nova)
 - Mark Ronson (Q425821): not a classical musician: hip-hop (hip-hop / contemporary R&B)
 - Ethel Lilian Voynich (Q466068): not a classical musician: described as "British writer and musician (1864–1960)"
-- Alka Yagnik (Q466826): not a classical musician: pop (Indian film music / bhajan / Indian classical music / Indian pop / Indian folk music)
+- Alka Yagnik (Q466826): not a classical musician: playback singer (Indian playback singer)
 - Hardwell (Q923731): not a classical musician: described as "Dutch DJ and record producer (born 1988)"
 - Maher Zain (Q2750368): not a classical musician: R&B (Swedish R&B singer, songwriter and music producer)
 - Tove Lo (Q15948790): not a classical musician: pop (pop music / electropop / indie pop / synth-pop)
 - Hozier (Q16233232): not a classical musician: blues (blues / rhythm and blues / soul / indie rock / blues rock / traditional folk music)
 - Cab Calloway (Q273079): not a classical musician: jazz (American jazz singer (1907–1994))
 - Ève Curie (Q230068): not a classical musician: described as "writer, journalist and pianist, younger daughter of Marie and Pierre Curie (1904–2007)"
-- Joe Hahn (Q19200): not a classical musician: no classical genre or movement (genres: nu metal)
+- Joe Hahn (Q19200): not a classical musician: nu metal (nu metal)
 - Rob Bourdon (Q19205): not a classical musician: described as "American drummer"
 - Jack Kevorkian (Q46636): not a classical musician: described as "American pathologist, euthanasia activist (1928-2011)"
 - Deadmau5 (Q49009): not a classical musician: electronic dance (Canadian electronic dance music producer (born 1981))
@@ -1304,6 +1308,7 @@ Built 2026-10-13 18:35 UTC
 - Baz Luhrmann (Q250545): not a classical musician: described as "Australian writer, director, and producer (born 1962)"
 - Paul van Dyk (Q77034): not a classical musician: described as "German DJ and trance music producer"
 - Jason Schwartzman (Q313705): not a classical musician: described as "American actor and musician"
+- Floor Jansen (Q253259): not a classical musician: symphonic metal (symphonic metal)
 - Anoushka Shankar (Q259379): not a classical musician: blues (blues / Indian classical music)
 - Wayne Shorter (Q317161): not a classical musician: described as "American jazz saxophonist and composer (1933–2023)"
 - Henry Rollins (Q318509): not a classical musician: punk (hardcore punk / heavy metal music)
@@ -1343,11 +1348,10 @@ Built 2026-10-13 18:35 UTC
 - Keith Emerson (Q319751): not a classical musician: described as "British recording artist; keyboard player and composer (1944–2016)"
 - Al Jarreau (Q174547): not a classical musician: described as "American jazz and pop singer (1940–2017)"
 - Gordon Lightfoot (Q359552): not a classical musician: singer-songwriter (Canadian singer-songwriter (1938–2023))
-- Kitarō (Q273652): not a classical musician: no classical genre or movement (genres: ambient music / new age music / electronica)
 - María Elena Walsh (Q188848): not a classical musician: described as "Argentine author and composer"
 - Stéphane Grappelli (Q206244): not a classical musician: jazz (French jazz violinist (1908–1997))
 - Jaco Pastorius (Q211136): not a classical musician: jazz (American jazz bassist (1951–1987))
-- John Petrucci (Q211976): not a classical musician: no classical genre or movement (genres: progressive metal)
+- John Petrucci (Q211976): not a classical musician: progressive metal (progressive metal)
 - Omar Epps (Q297334): not a classical musician: described as "American actor and musician"
 - Tom Morello (Q297552): not a classical musician: punk (hardcore punk / alternative metal / folk music / hard rock / nu metal / crossover / funk metal / electronic dance music / rap metal / traditional heavy metal)
 - Gotye (Q489643): not a classical musician: rock (alternative rock / rock music / indie rock)
@@ -1375,7 +1379,6 @@ Built 2026-10-13 18:35 UTC
 - Peter of Castile (Q310963): not a classical musician: described as "king of Castile and León from 1350 to 1369"
 - Aly Michalka (Q236075): not a classical musician: pop (pop music / pop rock)
 - Gary Busey (Q312081): not a classical musician: described as "American actor (born 1944)"
-- Jerome Kern (Q313270): not a classical musician: no classical genre or movement (genres: musical play / song)
 - Joe Perry (Q313378): not a classical musician: blues (blues / hard rock / blues rock / traditional heavy metal)
 - Lynda Carter (Q242903): not a classical musician: described as "American actress, singer, and beauty pageant titleholder"
 - Waylon Jennings (Q251287): not a classical musician: country music (country music / rockabilly / country rock / outlaw country / honky-tonk / progressive country)
@@ -1390,7 +1393,7 @@ Built 2026-10-13 18:35 UTC
 - Kalākaua (Q163080): not a classical musician: described as "last reigning king of the Kingdom of Hawaii (1836–1891)"
 - Angelo Badalamenti (Q357014): not a classical musician: jazz (jazz / ambient music / film score)
 - Darude (Q360591): not a classical musician: described as "Finnish DJ, music producer and composer"
-- Jonathan Davis (Q270692): not a classical musician: no classical genre or movement (genres: nu metal)
+- Jonathan Davis (Q270692): not a classical musician: nu metal (nu metal)
 - RedOne (Q323470): not a classical musician: described as "Moroccan-Swedish songwriter, singer, record producer and record executive (born 1972)"
 - Alejandro Sanz (Q276170): not a classical musician: pop (Spanish pop musician (born 1968))
 - Harel Skaat (Q276295): not a classical musician: songwriter (Israeli singer, performer, songwriter)
@@ -1427,7 +1430,7 @@ Built 2026-10-13 18:35 UTC
 - Conradin (Q158246): not a classical musician: described as "Duke of Swabia, King of Jerusalem and King of Sicily (1252–1268)"
 - Lyonel Feininger (Q158255): not a classical musician: described as "German-American painter (1871–1956)"
 - Sun Ra (Q354508): not a classical musician: jazz (American jazz composer and bandleader (1914–1993))
-- Chuck Schuldiner (Q266544): not a classical musician: no classical genre or movement (genres: death metal / progressive metal)
+- Chuck Schuldiner (Q266544): not a classical musician: death metal (death metal / progressive metal)
 - Julian Lennon (Q357974): not a classical musician: rock (rock music)
 - Patrick Moore (Q268024): not a classical musician: described as "English astronomer, broadcaster and writer (1923–2012)"
 - Janick Gers (Q271656): not a classical musician: heavy metal (heavy metal music)
@@ -1457,7 +1460,6 @@ Built 2026-10-13 18:35 UTC
 - Solomon Burke (Q49888): not a classical musician: country music (country music / soul / gospel music)
 - Bernard de Ventadour (Q4501): not a classical musician: described as "12th-century troubador"
 - Venantius Fortunatus (Q44934): not a classical musician: described as "Italian saint-bishop, poet and hymnwriter (c. 530-c. 600/609)"
-- Elmer Bernstein (Q111436): not a classical musician: no classical genre or movement (genres: none)
 - Jackson Rathbone (Q223854): not a classical musician: described as "American actor and musician"
 - Steve Morse (Q213952): not a classical musician: rock (rock music / progressive rock)
 - Georg V of Hanover (Q57428): not a classical musician: described as "King of Hanover (1819–1878)"
@@ -1480,19 +1482,17 @@ Built 2026-10-13 18:35 UTC
 - Carl Jonas Love Almqvist (Q316381): not a classical musician: described as "Swedish romantic poet, early feminist, realist, composer, social critic and traveller (1793-1866)"
 - John McLaughlin (Q164757): not a classical musician: jazz (jazz / jazz fusion / ethno jazz)
 - Sufjan Stevens (Q319502): not a classical musician: rock (classical music / electronic music / alternative rock / baroque pop / indie rock / indie pop / indie folk / lo-fi music / folk-pop / chamber pop)
-- Thomas Newman (Q319996): not a classical musician: no classical genre or movement (genres: none)
 - Léo Ferré (Q320146): not a classical musician: described as "French-born Monégasque poet and singer"
 - Chris de Burgh (Q178237): not a classical musician: singer-songwriter (Argentine - British-Irish singer-songwriter and instrumentalist)
 - Merle Haggard (Q183092): not a classical musician: country music (American country music songwriter, singer, and musician (1937–2016))
 - John Fogerty (Q326538): not a classical musician: rock (American rock musician (born 1945))
 - Richie Sambora (Q295153): not a classical musician: rock (American rock musician)
-- Kerry King (Q297210): not a classical musician: no classical genre or movement (genres: thrash metal)
-- Jeff Hanneman (Q299122): not a classical musician: no classical genre or movement (genres: thrash metal)
+- Kerry King (Q297210): not a classical musician: thrash metal (thrash metal)
+- Jeff Hanneman (Q299122): not a classical musician: thrash metal (thrash metal)
 - Achinoam "Noa" Nini (Q340527): not a classical musician: jazz (jazz / pop music / contemporary R&B)
 - Olly Murs (Q552770): not a classical musician: pop (pop music)
 - Tobe Hooper (Q450728): not a classical musician: described as "American film director, screenwriter and producer (1943-2017)"
 - Milton Berle (Q558933): not a classical musician: described as "American comedian and actor (1908–2002)"
-- Ludwig Göransson (Q1358202): not a classical musician: no classical genre or movement (genres: none)
 - Kacey Musgraves (Q2783855): not a classical musician: country music (folk music / country music)
 - Zarah Leander (Q46479): not a classical musician: described as "Swedish actress and singer (1907–1981)"
 - Mário de Andrade (Q203623): not a classical musician: described as "Brazilian writer, musicologist and photographer (1893–1945)"
@@ -1530,7 +1530,7 @@ Built 2026-10-13 18:35 UTC
 - Tyga (Q358087): not a classical musician: described as "American rapper"
 - Shel Silverstein (Q361257): not a classical musician: described as "American poet, cartoonist, songwriter, and children's writer (1930–1999)"
 - Joe Jackson (talent manager) (Q361297): not a classical musician: pop (pop music)
-- Alexi Laiho (Q270970): not a classical musician: no classical genre or movement (genres: melodic death metal)
+- Alexi Laiho (Q270970): not a classical musician: death metal (melodic death metal)
 - Vitas (Q362258): not a classical musician: rock (opera / rock music / world music / pop rock / synth-pop)
 - Jaron Lanier (Q92862): not a classical musician: described as "American computer scientist, musician, and author"
 - Lenka (Q276745): not a classical musician: singer-songwriter (Australian singer-songwriter)
