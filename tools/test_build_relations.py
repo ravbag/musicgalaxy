@@ -58,6 +58,9 @@ ENTITIES = {
     'Q12': person('Q12', 'Young Prodigy', [COMPOSER], 1995, links=41, desc='British composer'),
     'Q13': person('Q13', 'Johann Pachelbel', [COMPOSER], 1653, 1706, links=70, desc='German Baroque composer', movement=['Q502']),
     'Q14': person('Q14', 'Album Performer', [COMPOSER], 1950, links=10),
+    'Q16': person('Q16', 'Jean-Jacques Rousseau', [COMPOSER], 1712, 1778, links=180,
+                  desc='Genevan philosopher, writer and composer (1712–1778)'),
+    'Q17': person('Q17', 'Dual Role Musician', [COMPOSER], 1700, 1760, links=45, desc='Italian composer and philosopher'),
     'Q15': person('Q15', 'Rocky Pianist', ['Q486748'], 1950, links=50, desc='American pianist', genre=['Q503']),
 }
 del ENTITIES['Q9']['claims']['P569']
@@ -119,7 +122,8 @@ def fake_sparql(query):
                 rows.append({'item': {'value': ENTITY_URI + q}, 'label': {'value': lab, 'xml:lang': 'en'}})
     elif 'wd:Q36834 ; wikibase:sitelinks' in query:
         rows = [{'item': {'value': ENTITY_URI + i}, 'links': {'value': str(n)}}
-                for i, n in [('Q10', 200), ('Q11', 150), ('Q13', 70), ('Q6', 55), ('Q9', 60), ('Q3', 90), ('Q12', 41)]]
+                for i, n in [('Q10', 200), ('Q16', 180), ('Q11', 150), ('Q13', 70), ('Q6', 55), ('Q9', 60), ('Q3', 90),
+                             ('Q17', 45), ('Q12', 41)]]
     elif 'wd:Q2865819 ; wikibase:sitelinks' in query:
         rows = [{'item': {'value': ENTITY_URI + 'Q7'}, 'links': {'value': '45'}}]
     elif 'wd:Q486748 ; wikibase:sitelinks' in query:
@@ -216,6 +220,8 @@ class BuildRelationsTest(unittest.TestCase):
         self.assertNotIn('Johann Wolfgang von Goethe', by_id)
         self.assertNotIn('Louis Armstrong', by_id)
         self.assertNotIn('Rocky Pianist', by_id)
+        self.assertNotIn('Jean-Jacques Rousseau', by_id)  # composer only as a later role
+        self.assertIn('Dual Role Musician', by_id)  # composer first: kept
         self.assertEqual(by_id['Young Prodigy']['era'], br.CURRENT_YEAR)  # born 1995: era capped, not 2035
         # placeholder entry: matched despite its made-up era, then corrected; not duplicated
         p = by_id['Johann Pachelbel']
@@ -265,7 +271,7 @@ class BuildRelationsTest(unittest.TestCase):
         kb2, rel2, _, http = self.run_build(offline=True)  # would raise on any uncached request
         self.assertEqual(rel1['edges'], rel2['edges'])
         self.assertEqual([a['id'] for a in kb2], [a['id'] for a in kb1])  # same artists, no duplicates on a re-run
-        self.assertEqual(len(kb2), 10)  # 6 curated + 4 added
+        self.assertEqual(len(kb2), 11)  # 6 curated + 5 added
         self.assertEqual(http.requests, [])
 
     def test_overrides_and_no_expand(self):

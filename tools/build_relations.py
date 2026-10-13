@@ -604,7 +604,10 @@ def country_adjectives(ent, labels):
 def classical_musician(e, labels):
     """(True, '') or (False, reason) for a candidate artist."""
     desc = e.get('description') or ''
-    if not MUSIC_DESCRIPTION.search(desc):
+    # The first role named must be musical: "German composer and pianist" yes, "Genevan philosopher,
+    # writer and composer" (Rousseau) or "British astronomer and composer" (Herschel) no
+    first_role = re.split(r',|;|\(|\band\b|\bwho\b', desc, maxsplit=1)[0]
+    if not MUSIC_DESCRIPTION.search(first_role):
         return False, f'described as "{desc}"' if desc else 'no description'
     genres = ' / '.join(labels.get(g, '') for g in e['genre'])
     for text in (desc, genres):
