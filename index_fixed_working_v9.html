@@ -830,7 +830,9 @@ async function init() {
     // Wikimedia Commons: full-text search over audio files that mention the artist
     // Spoken content: talks, concert introductions, interviews, lectures, podcasts. Only words that
     // clearly mean speech (not "introduction", which is common in music titles: Introduction and Allegro)
-    const SPEECH_WORDS = /\b(spoken|pronunciation|interviews?|lectures?|podcasts?|speech(es)?|talk show|discussion|conversation|audio ?guide|radio (programme|program|show)|inleiding|toelichting|lezing|gesprek|voordracht|einf(ü|ue)hrung|vortrag|gespr(ä|ae)ch|diskussion|conf(é|e)rence|entretien|causerie)\b/i;
+    // "Concert introduction" and German/Dutch compounds (Konzerteinführung, concertinleiding) are matched
+    // as such, so the plain word "introduction" can stay allowed.
+    const SPEECH_WORDS = /\b(spoken|pronunciation|interviews?|lectures?|podcasts?|speech(es)?|talk show|discussion|conversation|audio ?guide|radio (programme|program|show)|concert introductions?|pre-?concert talks?|\w*inleiding(en)?|toelichting|lezing|gesprek|voordracht|\w*einf(ü|ue)hrung(en)?|vortrag|gespr(ä|ae)ch|diskussion|conf(é|e)rence|entretien|causerie)\b/i;
     // Categories that mark a file as music ("Audio files of music by ...", "Symphonies by ...", ...)
     const MUSIC_CATEGORY = /music|musique|musik|muziek|m(ú|u)sica|symphon|concert|sonata|quartet|opera|aria|lieder|song|piano|organ|orchestra|choir|choral|cantata|mass(es)? by|requiem|composition|works by/i;
 

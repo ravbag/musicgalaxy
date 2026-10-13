@@ -112,7 +112,9 @@ mostly exist only on 78s; for them the 78s are tried first.
 - *Wikimedia Commons*: picks a random matching audio file, preferring files categorised as music.
   It skips MIDI files, pronunciation clips, anything under 45 seconds and spoken content: talks,
   concert introductions, interviews, lectures and podcasts, recognised by words such as *interview*,
-  *lecture*, *inleiding*, *Einführung* or *conférence* in the title, description or categories.
+  *lecture*, *concert introduction*, *pre-concert talk*, *inleiding*, *(Konzert)einführung* or
+  *conférence* in the title, description or categories. Plain "introduction" is allowed, since it's
+  common in music titles (*Introduction and Allegro*).
 - The track line shows the source in blue, then the artist and the track title. For Commons it also
   shows the performer or uploader and the licence, since many files require attribution.
 
