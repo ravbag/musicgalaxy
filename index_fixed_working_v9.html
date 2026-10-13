@@ -47,6 +47,7 @@
         <button onclick="setMode('spiral_time')">Spiral Time</button>
         <button onclick="setMode('teleport')">Teleport</button>
         <button onclick="setMode('radio')" title="Live internet radio for the active tag; press again for another station">Radio</button>
+        <button onclick="skipTrack()" title="Next track now (in Radio mode: next station). Media key: Next">Skip ⏭</button>
         <button onclick="toggleAutoplay()" id="autoplay-btn">Autoplay: ON</button>
         <button onclick="resumeLast()">Resume Last</button>
         <button onclick="clearActiveTag()">Clear Tag</button>
@@ -613,9 +614,21 @@ async function init() {
         if (mode === 'teleport' || mode === 'radio' || previous === 'radio' || (currentNode && !playing)) {
             autoNext();
         } else if (playing && mode !== previous) {
-            setStatus('New mode starts after this track');
+            setStatus('New mode starts after this track (Skip to start it now)');
         }
     }
+
+    // Move on now: the next pick in the current mode, or the next station in Radio mode
+    function skipTrack() {
+        if (playMode !== 'radio' && !currentNode) { setStatus('Pick an artist first'); return; }
+        setStatus('');
+        autoNext();
+    }
+
+    // The keyboard's "next track" media key does the same
+    try {
+        navigator.mediaSession?.setActionHandler('nexttrack', skipTrack);
+    } catch (e) { /* not supported */ }
 
     function toggleAutoplay() {
         autoplayEnabled = !autoplayEnabled;

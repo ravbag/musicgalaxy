@@ -122,7 +122,8 @@ the next pick. After 5 failures in a row it stops and asks you to check your con
 ### Autoplay modes
 
 The mode decides what plays next when a track ends (with Autoplay ON). Choosing a new mode while a
-track is playing lets that track finish; the status line says "New mode starts after this track". If
+track is playing lets that track finish; the status line says "New mode starts after this track";
+press **Skip** to start it straight away. If
 nothing is playing, the new mode starts straight away. Teleport and Radio always act immediately, and so
 does leaving Radio (a live stream never ends).
 
@@ -203,6 +204,7 @@ When you click a name yourself, it shows the link from the previous artist (*Lin
 
 | Button | Action |
 |---|---|
+| **Skip ⏭** | Moves on now: the next pick in the current mode (or the next station in Radio mode). The keyboard's "next track" media key does the same. |
 | **Autoplay: ON/OFF** | Whether a new track starts automatically when one ends. |
 | **Resume Last** | Picks up the last track you were listening to, at the position you left it. |
 | **Clear Tag** | Removes the active tag (Within Tag then falls back to the current artist's first tag). |
