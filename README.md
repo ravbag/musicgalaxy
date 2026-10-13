@@ -248,8 +248,13 @@ What it does:
    crater or a band with the same name.
 2. **Adds more artists**: classical composers, conductors, opera singers, pianists, violinists,
    organists and cellists with articles in at least 40 Wikipedia languages (up to 500), plus the
-   teachers, students, influences and family of artists already in the database. They get tags
-   (period, style, voice, instrument, nationality) derived from Wikidata.
+   teachers, students, influences and family of artists already in the database. Only people whose
+   Wikidata description calls them a musician ("German composer", "Italian soprano") are added, and
+   not jazz, pop or rock musicians, so writers or rulers who also composed (Goethe, Henry VIII)
+   stay out. New artists get tags (period, style, voice, instrument, nationality) from Wikidata.
+   Each run rebuilds the added artists from scratch; your curated entries are never removed.
+   Curated stub entries with a made-up era (1850, tagged *Romantic, Secondary*) are matched by name
+   and corrected with their real era and style.
 3. **Collects relations**: Wikidata (teacher/student, influence, family, works one artist performed
    by another, and shared movement, genre, ensembles, voice, instrument, country), MusicBrainz
    (teacher, family, collaborations), ListenBrainz (listened to by the same people) and archive.org

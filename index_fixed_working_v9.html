@@ -358,7 +358,9 @@ function focusOnNode(node, scale=1.35, duration=650) {
     }
 
     // Vertical position from relatedness: order artists so that related ones sit at similar heights
-    // (spectral ordering - the Fiedler vector of the style-neighbour graph), spread evenly 0-1.
+    // (spectral ordering - the Fiedler vector of the style-neighbour graph), spread 0-1.
+    // Related artists tend to be contemporaries, so the ordering is kept independent of era (the x
+    // axis already shows time): the vertical axis shows what relates artists beyond when they lived.
     function computeRelatednessAxis() {
         const n = nodes.length;
         if (n < 3) { nodes.forEach((d, i) => d._ry = n > 1 ? i / (n - 1) : 0.5); return; }
@@ -376,6 +378,12 @@ function focusOnNode(node, scale=1.35, duration=650) {
         let seed = 12345; // fixed seed: the same data always gives the same map
         const rand = () => (seed = (seed * 1103515245 + 12345) % 2147483648) / 2147483648;
         let v = nodes.map(() => rand() - 0.5);
+        // centred, normalised era vector to project out (time is the x axis)
+        const eras = nodes.map(d => Number.isFinite(+d.era) ? +d.era : 1800);
+        const eraMean = eras.reduce((a, b) => a + b, 0) / n;
+        let eraVec = eras.map(e => e - eraMean);
+        const eraNorm = Math.sqrt(eraVec.reduce((a, b) => a + b * b, 0)) || 1;
+        eraVec = eraVec.map(x => x / eraNorm);
         for (let it = 0; it < 3000; it++) {
             // power iteration on (c*I - Laplacian), keeping v orthogonal to the constant vector
             const next = new Array(n);
@@ -385,16 +393,29 @@ function focusOnNode(node, scale=1.35, duration=650) {
                 next[i] = c * v[i] - lv;
             }
             const mean = next.reduce((a, b) => a + b, 0) / n;
+            for (let i = 0; i < n; i++) next[i] -= mean;
+            let dot = 0;
+            for (let i = 0; i < n; i++) dot += next[i] * eraVec[i];
             let norm = 0;
-            for (let i = 0; i < n; i++) { next[i] -= mean; norm += next[i] * next[i]; }
+            for (let i = 0; i < n; i++) { next[i] -= dot * eraVec[i]; norm += next[i] * next[i]; }
             norm = Math.sqrt(norm) || 1;
             v = next.map(x => x / norm);
         }
         // Stable orientation: opera towards the top
         const opera = nodes.reduce((acc, d, i) => acc + ((d.tags || []).includes('Opera') ? v[i] : 0), 0);
         if (opera < 0) v = v.map(x => -x);
-        const order = v.map((x, i) => [x, i]).sort((a, b) => a[0] - b[0]);
-        order.forEach(([, i], rank) => { nodes[i]._ry = rank / (n - 1); });
+        // Height = position among contemporaries (artists within ~40 years, at least 25 of them), so
+        // within any period related artists sit together but no period as a whole sits higher
+        const byEra = nodes.map((d, i) => i).sort((a, b) => eras[a] - eras[b]);
+        for (let i = 0; i < n; i++) {
+            let window = byEra.filter(j => Math.abs(eras[j] - eras[i]) <= 40);
+            if (window.length < 25) {
+                window = byEra.slice().sort((a, b) => Math.abs(eras[a] - eras[i]) - Math.abs(eras[b] - eras[i])).slice(0, 25);
+            }
+            let below = 0, same = 0;
+            for (const j of window) { if (v[j] < v[i]) below++; else if (v[j] === v[i]) same++; }
+            nodes[i]._ry = window.length > 1 ? (below + (same - 1) / 2) / (window.length - 1) : 0.5;
+        }
     }
 
     // Keep the map filling the window when it's resized
@@ -834,6 +855,8 @@ async function init() {
         // Update play counters
         plays.set(node.id, (plays.get(node.id) || 0) + 1);
         lastPlayedAt.set(node.id, Date.now());
+        recentPicks.push(node.id);
+        if (recentPicks.length > RECENT_EXCLUDED) recentPicks.shift();
 
         // Update UI
         renderTagChips(node);
@@ -1137,7 +1160,11 @@ async function init() {
         return [...new Set(reasons.map(r => r.text))].slice(0, max);
     }
 
+    const RECENT_EXCLUDED = 8;   // the last 8 artists played are never picked again straight away
+    const recentPicks = [];
+
     function baseWeight(candidate) {
+        if (recentPicks.includes(candidate.id)) return 0;
         const role = candidate.is_master ? ROLE_MASTER_W : 1.0;
         const p = plays.get(candidate.id) || 0;
         const novelty = 1 / Math.sqrt(1 + p);
@@ -1180,8 +1207,10 @@ async function init() {
     }
 
     function pickNextPureRandom() {
-        const next = nodes[Math.floor(Math.random() * nodes.length)];
-        return next;
+        // Any artist except the ones just played (unless there's nothing else)
+        const pool = nodes.filter(n => !recentPicks.includes(n.id));
+        const from = pool.length ? pool : nodes;
+        return from[Math.floor(Math.random() * from.length)];
     }
 
     function pickNextRandomWalk() {
