@@ -1,289 +1,166 @@
 # Relations build report
 
-Built 2026-10-12 21:21 UTC
+Built 2026-10-13 16:33 UTC
 
-- artists: 930
-- artists added: 500
-- matched to Wikidata: 894
-- with MusicBrainz id: 862
-- related pairs: 6184
-- pairs with cooccur: 3217
-- pairs with family: 83
-- pairs with influence: 95
-- pairs with listen: 2562
-- pairs with performed: 79
-- pairs with teacher: 598
+- artists: 922
+- artists added: 492
+- matched to Wikidata: 920
+- with MusicBrainz id: 913
+- related pairs: 5751
+- pairs with cooccur: 3331
+- pairs with family: 103
+- pairs with influence: 59
+- pairs with listen: 1722
+- pairs with performed: 20
+- pairs with teacher: 945
 
 ## Warnings (0)
 
 (none)
 
-## Not matched to Wikidata (36)
+## Not matched to Wikidata (2)
 
-- Elgar
-- Adam de la Halle
-- Leonel Power
-- John Dunstable
-- Johannes Ockeghem
-- Jacob Obrecht
-- Heinrich Isaac
-- Adrian Willaert
-- Cipriano de Rore
-- Luca Marenzio
-- Heinrich Schütz
-- Johann Pachelbel
-- Jan Dismas Zelenka
-- Johann Fux
-- Alessandro Scarlatti
-- Domenico Cimarosa
-- Antonio Salieri
-- Carl Philipp Emanuel Bach
-- Johann Christian Bach
-- Emmanuel Chabrier
-- Ernest Chausson
-- Henri Duparc
-- Zdeněk Fibich
-- Josef Suk
-- Alexander Glazunov
-- Nikolai Medtner
-- Enrique Granados
-- Isaac Albéniz
-- Joaquín Turina
-- Karol Szymanowski
-- Heitor Villa-Lobos
-- Alberto Ginastera
-- Silvestre Revueltas
-- Toru Takemitsu
 - Dmitri Tcherepnin
 - Zoltán Kodály
 
 ## Uncertain matches (check, fix in tools/wikidata_overrides.json) (2)
 
-- John Adams: chose Q84114 (John Adams, born 1947) over Q788469 (John Luther Adams, born 1953)
-- William Cornysh: chose Q1366992 (William Cornysh the Younger, born 1465) over Q4019968 (William Cornysh the elder, born 1430)
+- Josef Suk: chose Q312700 (Josef Suk, born 1874) over Q707845 (Josef Suk, born 1929)
+- Karol Szymanowski: chose Q295400 (Karol Szymanowski, born 1882) over Q85102524 (Karol Szymanowski, born 1960)
 
-## Artists added (500)
+## Placeholder entries corrected from Wikidata (45)
 
-- Leonardo da Vinci (Composer, 1452–1519, 307 Wikipedia editions)
-- Johann Wolfgang von Goethe (Composer, 1749–1832, 278 Wikipedia editions)
-- Martin Luther (Composer, 1483–1546, 259 Wikipedia editions)
-- Friedrich Nietzsche (Composer, 1844–1900, 255 Wikipedia editions)
+- Adam de la Halle: era 1850 -> 1277, tags Romantic -> Medieval, French
+- Leonel Power: era 1850 -> 1410, tags Romantic -> Renaissance, English
+- John Dunstable: era 1850 -> 1430, tags Romantic -> Renaissance, Sacred, English
+- Johannes Ockeghem: era 1850 -> 1450, tags Romantic -> Renaissance, French
+- Jacob Obrecht: era 1850 -> 1497, tags Romantic -> Renaissance, Sacred
+- Heinrich Isaac: era 1850 -> 1490, tags Romantic -> Renaissance, Sacred, Organ
+- Adrian Willaert: era 1850 -> 1520, tags Romantic -> Renaissance
+- Cipriano de Rore: era 1850 -> 1555, tags Romantic -> Renaissance, Italian
+- Luca Marenzio: era 1850 -> 1593, tags Romantic -> Renaissance, Italian
+- Heinrich Schütz: era 1850 -> 1625, tags Romantic -> Baroque, Opera, Organ, German
+- Johann Pachelbel: era 1850 -> 1693, tags Romantic -> Baroque, Organ, German
+- Jan Dismas Zelenka: era 1850 -> 1719, tags Romantic -> Baroque, Opera, Czech
+- Johann Fux: era 1850 -> 1700, tags Romantic -> Baroque, Opera, Organ, German
+- Alessandro Scarlatti: era 1850 -> 1700, tags Romantic -> Baroque, Opera, Sacred, Harpsichord
+- Domenico Cimarosa: era 1850 -> 1789, tags Romantic -> Classical, Opera, Italian
+- Antonio Salieri: era 1850 -> 1790, tags Romantic -> Classical, Organ, Italian, Austrian
+- Carl Philipp Emanuel Bach: era 1850 -> 1754, tags Romantic -> Symphony, Baroque, Organ, Piano, German
+- Johann Christian Bach: era 1850 -> 1775, tags Romantic -> Classical, Opera, Symphony, Organ, British
+- Johann Nepomuk Hummel: era 1850 -> 1818, tags Romantic -> Classical, Opera, Piano, Guitar
+- John Field: era 1850 -> 1822, tags Romantic -> Romantic, Piano, Irish, Russian
+- Carl Czerny: era 1850 -> 1831, tags Romantic -> Romantic, Piano, Austrian
+- Louis Spohr: era 1850 -> 1824, tags Romantic -> Romantic, Opera, Symphony, Violin
+- Giacomo Meyerbeer: era 1850 -> 1831, tags Romantic -> Romantic, Opera, German
+- Fromental Halévy: era 1850 -> 1839, tags Romantic -> Romantic, Opera, Sacred, French
+- Adolphe Adam: era 1850 -> 1843, tags Romantic -> Romantic, Opera, Piano, French
+- Léo Delibes: era 1850 -> 1876, tags Romantic -> Romantic, Opera, Organ, French
+- Emmanuel Chabrier: era 1850 -> 1881, tags Romantic -> Romantic, Piano, French
+- Ernest Chausson: era 1850 -> 1894, tags Romantic -> Romantic, Opera, Symphony, Piano, French
+- Henri Duparc: era 1850 -> 1888, tags Romantic -> Romantic, French
+- César Franck: era 1850 -> 1862, tags Romantic -> Romantic, Opera, Symphony, Organ, Belgian, French
+- Bedřich Smetana: era 1850 -> 1864, tags Romantic -> Romantic, Opera, Symphony, Piano, Violin, Austrian
+- Zdeněk Fibich: era 1850 -> 1890, tags Romantic -> Romantic, Opera, Symphony, Organ
+- Josef Suk: era 1850 -> 1914, tags Romantic -> Modernist, Opera, Symphony, Violin, Czech
+- Mily Balakirev: era 1850 -> 1877, tags Romantic -> Romantic, Symphony, Piano, Russian
+- César Cui: era 1850 -> 1875, tags Romantic -> Romantic, Opera, Piano, Russian
+- Alexander Glazunov: era 1850 -> 1905, tags Romantic -> Romantic, Symphony, Russian
+- Nikolai Medtner: era 1850 -> 1920, tags Romantic -> Modernist, Piano, British, Russian
+- Enrique Granados: era 1850 -> 1907, tags Romantic -> Romantic, Piano, Spanish
+- Isaac Albéniz: era 1850 -> 1900, tags Romantic -> Romantic, Opera, Piano, Spanish
+- Joaquín Turina: era 1850 -> 1922, tags Romantic -> Modernist, Opera, Piano, Spanish
+- Karol Szymanowski: era 1850 -> 1922, tags Romantic -> Modernist, Opera, Symphony, Piano, Russian
+- Heitor Villa-Lobos: era 1850 -> 1927, tags Romantic -> Modernist, Opera, Symphony, Guitar, Brazilian
+- Alberto Ginastera: era 1850 -> 1956, tags Romantic -> Modernist, Opera, Piano, Argentinian
+- Silvestre Revueltas: era 1850 -> 1935, tags Romantic -> Modernist, Violin, Mexican
+- Toru Takemitsu: era 1850 -> 1970, tags Romantic -> Modernist, Impressionism, Piano, Japanese
+
+## Existing artists linked during expansion (0)
+
+(none)
+
+## Artists added (492)
+
 - Jean-Jacques Rousseau (Composer, 1712–1778, 233 Wikipedia editions)
-- Louis Armstrong (Conductor, 1901–1971, 179 Wikipedia editions)
-- Heinrich Heine (Composer, 1797–1856, 168 Wikipedia editions)
-- Paul McCartney (Composer, 1942–, 149 Wikipedia editions)
-- Sappho (Composer, -650–-569, 148 Wikipedia editions)
-- George Sand (Composer, 1804–1876, 137 Wikipedia editions)
-- Jean-Auguste-Dominique Ingres (Instrumentalist, 1780–1867, 133 Wikipedia editions)
-- Zhu Xi (Composer, 1130–1200, 128 Wikipedia editions)
-- Frederick II of Prussia (Composer, 1712–1786, 124 Wikipedia editions)
 - Albert Schweitzer (Composer, 1875–1965, 122 Wikipedia editions)
-- Henry VIII of England (Composer, 1491–1547, 120 Wikipedia editions)
 - Anatoliy Solovyanenko (Singer, 1932–1999, 120 Wikipedia editions)
-- Lila Downs (Singer, 1968–, 115 Wikipedia editions)
 - William Herschel (Composer, 1738–1822, 114 Wikipedia editions)
-- Frank Zappa (Composer, 1940–1993, 110 Wikipedia editions)
-- Giacomo Casanova (Instrumentalist, 1725–1798, 106 Wikipedia editions)
 - Jacques Offenbach (Composer, 1819–1880, 105 Wikipedia editions)
-- Anne Boleyn (Composer, 1501–1536, 105 Wikipedia editions)
-- Theodor W. Adorno (Composer, 1903–1969, 104 Wikipedia editions)
-- Peter Abelard (Composer, 1079–1142, 103 Wikipedia editions)
-- Huldrych Zwingli (Composer, 1484–1531, 100 Wikipedia editions)
-- Ella Fitzgerald (Composer, 1917–1996, 100 Wikipedia editions)
-- Miles Davis (Composer, 1926–1991, 99 Wikipedia editions)
-- Andrea Bocelli (Composer, 1958–, 97 Wikipedia editions)
 - Isabelle de Charrière (Composer, 1740–1805, 97 Wikipedia editions)
-- Ravi Shankar (Composer, 1920–2012, 96 Wikipedia editions)
 - Ennio Morricone (Composer, 1928–2020, 94 Wikipedia editions)
-- E. T. A. Hoffmann (Composer, 1776–1822, 92 Wikipedia editions)
 - Louis Braille (Instrumentalist, 1809–1852, 89 Wikipedia editions)
-- Leon Battista Alberti (Instrumentalist, 1404–1472, 89 Wikipedia editions)
-- John Cale (Composer, 1942–, 84 Wikipedia editions)
-- Pedro I of Brazil (Composer, 1798–1834, 83 Wikipedia editions)
-- Edward Heath (Conductor, 1916–2005, 81 Wikipedia editions)
-- Jamala (Singer, 1983–, 81 Wikipedia editions)
-- John of Damascus (Composer, 675–749, 80 Wikipedia editions)
-- Roger Waters (Composer, 1943–, 79 Wikipedia editions)
-- Alfonso X of Castile and Leon (Composer, 1221–1284, 78 Wikipedia editions)
 - John Williams (Composer, 1932–, 78 Wikipedia editions)
-- Sofia Rotaru (Conductor, 1947–, 78 Wikipedia editions)
-- Sor Juana Inés de la Cruz (Composer, 1651–1695, 75 Wikipedia editions)
-- Edward Elgar (Composer, 1857–1934, 75 Wikipedia editions)
-- Abdülaziz (Composer, 1830–1876, 75 Wikipedia editions)
-- Ruslana Lyzhychko (Composer, 1973–, 75 Wikipedia editions)
-- Antonio Salieri (1750) (Composer, 1750–1825, 74 Wikipedia editions)
-- Carl Philipp Emanuel Bach (1714) (Composer, 1714–1788, 73 Wikipedia editions)
-- Leopold I, Holy Roman Emperor (Composer, 1640–1705, 73 Wikipedia editions)
-- Quincy Jones (Composer, 1933–2024, 73 Wikipedia editions)
-- Alexander Rybak (Composer, 1986–, 72 Wikipedia editions)
-- Samuel Butler (Composer, 1835–1902, 72 Wikipedia editions)
-- Rouget de Lisle (Composer, 1760–1836, 72 Wikipedia editions)
 - Arthur Rubinstein (Composer, 1887–1982, 71 Wikipedia editions)
-- Liliʻuokalani (Composer, 1838–1917, 70 Wikipedia editions)
-- Karl May (Composer, 1842–1912, 70 Wikipedia editions)
-- Caroline Herschel (Singer, 1750–1848, 70 Wikipedia editions)
-- Prince Albert of Saxe-Coburg and Gotha (Conductor, 1819–1861, 68 Wikipedia editions)
-- Paco de Lucía (Composer, 1947–2014, 67 Wikipedia editions)
-- Johann Christian Bach (1735) (Composer, 1735–1782, 66 Wikipedia editions)
-- A. R. Rahman (Composer, 1966–, 66 Wikipedia editions)
 - Mstislav Rostropovich (Composer, 1927–2007, 66 Wikipedia editions)
 - James Horner (Composer, 1953–2015, 66 Wikipedia editions)
-- Dizzy Gillespie (Composer, 1917–1993, 66 Wikipedia editions)
-- Ferdinand III, Holy Roman Emperor (Composer, 1608–1657, 65 Wikipedia editions)
-- Joseph I, Holy Roman Emperor (Composer, 1678–1711, 65 Wikipedia editions)
-- Frederik IX of Denmark (Conductor, 1899–1972, 65 Wikipedia editions)
-- Benny Goodman (Composer, 1909–1986, 65 Wikipedia editions)
-- Tori Amos (Composer, 1963–, 64 Wikipedia editions)
-- Zeami Motokiyo (Composer, 1363–1443, 64 Wikipedia editions)
 - Abay Kunanbaiuly (Composer, 1845–1904, 64 Wikipedia editions)
 - Pau Casals (Composer, 1876–1973, 64 Wikipedia editions)
-- David Ogden Stiers (Conductor, 1942–2018, 64 Wikipedia editions)
-- Glenn Miller (Composer, 1904–1944, 64 Wikipedia editions)
 - Mikis Theodorakis (Composer, 1925–2021, 63 Wikipedia editions)
-- Serj Tankian (Composer, 1967–, 63 Wikipedia editions)
 - Walther von der Vogelweide (Composer, 1170–1230, 62 Wikipedia editions)
-- Oscar I of Sweden (Composer, 1799–1859, 62 Wikipedia editions)
 - Maurice Jarre (Composer, 1924–2009, 62 Wikipedia editions)
 - Jenny Lind (Singer, 1820–1887, 62 Wikipedia editions)
-- Benny Andersson (Composer, 1946–, 62 Wikipedia editions)
-- Joseph of Anchieta (Composer, 1534–1597, 61 Wikipedia editions)
-- John IV of Portugal (Composer, 1604–1656, 61 Wikipedia editions)
-- Frederick William III of Prussia (Composer, 1770–1840, 61 Wikipedia editions)
-- Leo VI the Wise (Composer, 866–912, 61 Wikipedia editions)
 - Alexander Griboyedov (Composer, 1795–1829, 61 Wikipedia editions)
-- Athanasius Kircher (Composer, 1602–1680, 60 Wikipedia editions)
-- Johann Pachelbel (1653) (Composer, 1653–1706, 60 Wikipedia editions)
-- Herbie Hancock (Composer, 1940–, 60 Wikipedia editions)
 - Ignacy Jan Paderewski (Composer, 1860–1941, 60 Wikipedia editions)
-- Pierre-Jean de Béranger (Composer, 1780–1857, 60 Wikipedia editions)
 - Yo-Yo Ma (Composer, 1955–, 60 Wikipedia editions)
-- Wolfram von Eschenbach (Composer, 1170–1220, 60 Wikipedia editions)
-- Bettina von Arnim (Composer, 1785–1859, 60 Wikipedia editions)
 - John Barry (Composer, 1933–2011, 60 Wikipedia editions)
 - Vladimir Horowitz (Instrumentalist, 1903–1989, 60 Wikipedia editions)
-- Isaac Albéniz (1860) (Composer, 1860–1909, 59 Wikipedia editions)
 - Zubin Mehta (Conductor, 1936–, 59 Wikipedia editions)
-- Jon Lord (Composer, 1941–2012, 59 Wikipedia editions)
 - Anton Rubinstein (Composer, 1829–1894, 58 Wikipedia editions)
-- Alessandro Scarlatti (1660) (Composer, 1660–1725, 58 Wikipedia editions)
 - Jerry Goldsmith (Composer, 1929–2004, 58 Wikipedia editions)
-- Tarja Turunen (Composer, 1977–, 58 Wikipedia editions)
 - John Carpenter (Composer, 1948–, 58 Wikipedia editions)
-- Yehudi Menuhin (Conductor, 1916–1999, 58 Wikipedia editions)
-- Henry Mancini (Composer, 1924–1994, 58 Wikipedia editions)
-- Chick Corea (Composer, 1941–2021, 58 Wikipedia editions)
 - Marian Anderson (Singer, 1897–1993, 58 Wikipedia editions)
-- Mike Oldfield (Composer, 1953–, 57 Wikipedia editions)
-- Alexander Glazounov (Composer, 1865–1936, 57 Wikipedia editions)
 - Martha Argerich (Instrumentalist, 1941–, 57 Wikipedia editions)
-- Hryhorii Skovoroda (Composer, 1722–1794, 56 Wikipedia editions)
-- Vanessa-Mae (Composer, 1978–, 56 Wikipedia editions)
 - Noël Coward (Conductor, 1899–1973, 56 Wikipedia editions)
-- Michel Legrand (Composer, 1932–2019, 56 Wikipedia editions)
 - Komitas (Composer, 1869–1935, 56 Wikipedia editions)
 - Giuseppe Tartini (Composer, 1692–1770, 55 Wikipedia editions)
-- Matt Bellamy (Composer, 1978–, 55 Wikipedia editions)
 - Airat Ichmouratov (Composer, 1973–, 55 Wikipedia editions)
 - François-André Danican Philidor (Composer, 1726–1795, 55 Wikipedia editions)
 - Glenn Gould (Composer, 1932–1982, 55 Wikipedia editions)
-- Count Basie (Composer, 1904–1984, 55 Wikipedia editions)
 - Sviatoslav Richter (Composer, 1915–1997, 54 Wikipedia editions)
-- Burt Bacharach (Composer, 1928–2023, 54 Wikipedia editions)
-- Barry White (Composer, 1944–2003, 54 Wikipedia editions)
-- Fela Kuti (Composer, 1938–1997, 54 Wikipedia editions)
-- Sarah Brightman (Singer, 1960–, 54 Wikipedia editions)
-- Madame du Barry (Singer, 1743–1793, 54 Wikipedia editions)
 - Władysław Szpilman (Composer, 1911–2000, 53 Wikipedia editions)
 - Daniel François Esprit Auber (Composer, 1782–1871, 53 Wikipedia editions)
-- George Martin (Composer, 1926–2016, 53 Wikipedia editions)
-- Alphonsus Maria de Liguori (Composer, 1696–1787, 53 Wikipedia editions)
-- Heitor Villa-Lobos (1887) (Composer, 1887–1959, 53 Wikipedia editions)
 - Paul Dukas (Composer, 1865–1935, 53 Wikipedia editions)
 - Howard Shore (Composer, 1946–, 53 Wikipedia editions)
 - Ramin Djawadi (Composer, 1974–, 53 Wikipedia editions)
-- Ezra Miller (Singer, 1992–, 53 Wikipedia editions)
 - Lorenzo Da Ponte (Composer, 1749–1838, 52 Wikipedia editions)
-- Denis I of Portugal (Composer, 1261–1325, 52 Wikipedia editions)
-- Peter III of Aragon (Composer, 1240–1285, 52 Wikipedia editions)
 - Stanisław Moniuszko (Composer, 1819–1872, 52 Wikipedia editions)
 - Uzeyir Hajibeyov (Composer, 1885–1948, 52 Wikipedia editions)
-- Bill Haley (Composer, 1925–1981, 52 Wikipedia editions)
 - David Oistrakh (Conductor, 1908–1974, 52 Wikipedia editions)
-- Alan Silvestri (Composer, 1950–, 52 Wikipedia editions)
 - Max Reger (Composer, 1873–1916, 51 Wikipedia editions)
-- Heinrich Schütz (1585) (Composer, 1585–1672, 51 Wikipedia editions)
-- Bill Evans (Composer, 1929–1980, 51 Wikipedia editions)
-- Ike Turner (Composer, 1931–2007, 51 Wikipedia editions)
 - Itzhak Perlman (Conductor, 1945–, 51 Wikipedia editions)
-- Josh Groban (Singer, 1981–, 51 Wikipedia editions)
 - Alma Mahler (Composer, 1879–1964, 50 Wikipedia editions)
-- Alain-René Lesage (Composer, 1668–1747, 50 Wikipedia editions)
-- Muslim Magomayev (Composer, 1942–2008, 50 Wikipedia editions)
-- Bobby McFerrin (Composer, 1950–, 50 Wikipedia editions)
-- Blanche of Castile (Composer, 1188–1252, 50 Wikipedia editions)
 - Arnaut Daniel (Composer, 1150–1210, 50 Wikipedia editions)
-- Alexandra David-Néel (Singer, 1868–1969, 50 Wikipedia editions)
 - Jascha Heifetz (Instrumentalist, 1901–1987, 50 Wikipedia editions)
-- August Heinrich Hoffmann von Fallersleben (Composer, 1798–1874, 49 Wikipedia editions)
 - Wilhelm Friedemann Bach (Composer, 1710–1784, 49 Wikipedia editions)
-- Domenico Cimarosa (1749) (Composer, 1749–1801, 49 Wikipedia editions)
-- Dimitrie Cantemir (Composer, 1673–1723, 49 Wikipedia editions)
 - Mikalojus Konstantinas Čiurlionis (Composer, 1875–1911, 49 Wikipedia editions)
-- James Newton Howard (Composer, 1951–, 49 Wikipedia editions)
-- Charles Mingus (Composer, 1922–1979, 49 Wikipedia editions)
-- Randy Newman (Composer, 1943–, 49 Wikipedia editions)
 - Renata Scotto (Singer, 1934–2023, 49 Wikipedia editions)
 - Peng Liyuan (Singer, 1962–, 49 Wikipedia editions)
 - Pablo de Sarasate (Composer, 1844–1908, 48 Wikipedia editions)
 - Andrés Segovia (Composer, 1893–1987, 48 Wikipedia editions)
-- Wenceslaus II of Bohemia (Composer, 1271–1305, 48 Wikipedia editions)
-- John Gay (Composer, 1685–1732, 48 Wikipedia editions)
 - Sayat-Nova (Composer, 1712–1795, 48 Wikipedia editions)
 - Giovanni Paisiello (Composer, 1740–1816, 48 Wikipedia editions)
 - Jacopo Peri (Composer, 1561–1633, 48 Wikipedia editions)
 - Hugo Wolf (Composer, 1860–1903, 48 Wikipedia editions)
 - Johann Nestroy (Composer, 1801–1862, 48 Wikipedia editions)
-- Sonny Rollins (Composer, 1930–2026, 48 Wikipedia editions)
-- Violetta Villas (Composer, 1938–2011, 48 Wikipedia editions)
 - Galina Vishnevskaya (Singer, 1926–2012, 48 Wikipedia editions)
-- RZA (Composer, 1969–, 47 Wikipedia editions)
 - Max Bruch (Composer, 1838–1920, 47 Wikipedia editions)
 - Arrigo Boito (Composer, 1842–1918, 47 Wikipedia editions)
-- Kristin Chenoweth (Composer, 1968–, 47 Wikipedia editions)
-- Wynton Marsalis (Composer, 1961–, 47 Wikipedia editions)
-- Hans Sachs (Composer, 1494–1576, 47 Wikipedia editions)
 - André Rieu (Conductor, 1949–, 47 Wikipedia editions)
-- Dorothy Dandridge (Singer, 1922–1965, 47 Wikipedia editions)
 - Mario Lanza (Singer, 1921–1959, 47 Wikipedia editions)
 - Anne-Sophie Mutter (Instrumentalist, 1963–, 47 Wikipedia editions)
-- Ludovico Einaudi (Composer, 1955–, 47 Wikipedia editions)
-- Alfonso II of Aragon (Composer, 1157–1196, 46 Wikipedia editions)
-- James II of Aragon (Composer, 1267–1327, 46 Wikipedia editions)
-- Yma Sumac (Composer, 1922–2008, 46 Wikipedia editions)
 - John Philip Sousa (Composer, 1854–1932, 46 Wikipedia editions)
-- Adam de la Halle (1237) (Composer, 1237–1288, 46 Wikipedia editions)
 - Annette von Droste-Hülshoff (Composer, 1797–1848, 46 Wikipedia editions)
-- Ernst Moritz Arndt (Composer, 1769–1860, 46 Wikipedia editions)
-- Cab Calloway (Conductor, 1907–1994, 46 Wikipedia editions)
 - Alexander Alexandrov (Composer, 1883–1946, 46 Wikipedia editions)
 - Malena Ernman (Singer, 1970–, 46 Wikipedia editions)
 - Beverly Sills (Singer, 1929–2007, 46 Wikipedia editions)
 - Maria Anna Mozart (Composer, 1751–1829, 45 Wikipedia editions)
-- John Newton (Composer, 1725–1807, 45 Wikipedia editions)
 - Arthur Sullivan (Composer, 1842–1900, 45 Wikipedia editions)
-- Karol Szymanowski (1882) (Composer, 1882–1937, 45 Wikipedia editions)
 - Jordi Savall (Composer, 1941–, 45 Wikipedia editions)
-- Frauke Petry (Instrumentalist, 1975–, 45 Wikipedia editions)
 - Alfred Brendel (Composer, 1931–2025, 44 Wikipedia editions)
 - Mykola Lysenko (Composer, 1842–1912, 44 Wikipedia editions)
-- Johannes Ockeghem (1410) (Composer, 1410–1497, 44 Wikipedia editions)
-- Margaret of Austria, Duchess of Savoy (Composer, 1480–1530, 44 Wikipedia editions)
-- Rabanus Maurus (Composer, 776–856, 44 Wikipedia editions)
-- Eugène Scribe (Composer, 1791–1861, 44 Wikipedia editions)
 - Amilcare Ponchielli (Composer, 1834–1886, 44 Wikipedia editions)
 - Borys Liatoshynsky (Composer, 1894–1968, 44 Wikipedia editions)
-- Guillaume IX (Composer, 1071–1126, 44 Wikipedia editions)
-- Fats Waller (Composer, 1904–1943, 44 Wikipedia editions)
 - Alfred Newman (Composer, 1900–1970, 44 Wikipedia editions)
 - Maryja Kaleśnikava (Conductor, 1982–, 44 Wikipedia editions)
 - Deanna Durbin (Singer, 1921–2013, 44 Wikipedia editions)
@@ -291,51 +168,26 @@ Built 2026-10-12 21:21 UTC
 - Władysław Tarnowski (Composer, 1836–1878, 43 Wikipedia editions)
 - Fritz Kreisler (Composer, 1875–1962, 43 Wikipedia editions)
 - Lorin Maazel (Composer, 1930–2014, 43 Wikipedia editions)
-- André Previn (Composer, 1929–2019, 43 Wikipedia editions)
 - Evgeny Kissin (Composer, 1971–, 43 Wikipedia editions)
 - Gilbert Bécaud (Composer, 1927–2001, 43 Wikipedia editions)
-- Marie d'Agoult (Composer, 1805–1876, 43 Wikipedia editions)
-- Philippe II, Duke of Orléans (Composer, 1674–1723, 43 Wikipedia editions)
-- Kalākaua (Composer, 1836–1891, 43 Wikipedia editions)
 - Marco Misciagna (Composer, 1984–, 43 Wikipedia editions)
-- Peter of Castile (Composer, 1334–1369, 43 Wikipedia editions)
-- Theobald I of Navarre (Composer, 1201–1253, 43 Wikipedia editions)
 - Baldassare Galuppi (Composer, 1706–1785, 43 Wikipedia editions)
 - Charles-Valentin Alkan (Composer, 1813–1888, 43 Wikipedia editions)
 - Farinelli (Composer, 1705–1782, 43 Wikipedia editions)
-- Enrique Granados (1867) (Composer, 1867–1916, 43 Wikipedia editions)
 - Ottorino Respighi (Composer, 1879–1936, 43 Wikipedia editions)
-- Angelo Badalamenti (Composer, 1937–2022, 43 Wikipedia editions)
-- Marceline Desbordes-Valmore (Singer, 1786–1859, 43 Wikipedia editions)
 - Liberace (Singer, 1919–1987, 43 Wikipedia editions)
-- Princess Helena of the United Kingdom (Instrumentalist, 1846–1923, 43 Wikipedia editions)
 - Vladimir Ashkenazy (Composer, 1937–, 42 Wikipedia editions)
-- Hortense de Beauharnais (Composer, 1783–1837, 42 Wikipedia editions)
 - Giuseppe Torelli (Composer, 1658–1709, 42 Wikipedia editions)
-- Conradin (Composer, 1252–1268, 42 Wikipedia editions)
-- Bernard Germain de Lacépède (Composer, 1756–1825, 42 Wikipedia editions)
-- Wilhelm Müller (Composer, 1794–1827, 42 Wikipedia editions)
 - Michael Kamen (Composer, 1948–2003, 42 Wikipedia editions)
-- Richard Lewis (Conductor, 1947–2024, 42 Wikipedia editions)
-- Sun Ra (Composer, 1914–1993, 42 Wikipedia editions)
 - Lotte Lenya (Singer, 1898–1981, 42 Wikipedia editions)
 - Florence Foster Jenkins (Singer, 1868–1944, 42 Wikipedia editions)
 - Khatia Buniatishvili (Instrumentalist, 1987–, 42 Wikipedia editions)
-- Hermann of Reichenau (Composer, 1013–1054, 41 Wikipedia editions)
-- Chet Atkins (Composer, 1924–2001, 41 Wikipedia editions)
-- David Foster (Composer, 1949–, 41 Wikipedia editions)
 - Nayden Todorov (Composer, 1974–, 41 Wikipedia editions)
 - Carl Jonas Love Almqvist (Composer, 1793–1866, 41 Wikipedia editions)
-- Franco Battiato (Composer, 1945–2021, 41 Wikipedia editions)
 - André Grétry (Composer, 1741–1813, 41 Wikipedia editions)
 - Victor Borge (Composer, 1909–2000, 41 Wikipedia editions)
 - Henri Wieniawski (Composer, 1835–1880, 41 Wikipedia editions)
 - Umberto Giordano (Composer, 1867–1948, 41 Wikipedia editions)
-- Sufjan Stevens (Composer, 1975–, 41 Wikipedia editions)
-- Léo Ferré (Composer, 1916–1993, 41 Wikipedia editions)
-- Venantius Fortunatus (Composer, 530–609, 41 Wikipedia editions)
-- Bernard de Ventadour (Composer, 1140–1190, 41 Wikipedia editions)
-- Georg V of Hanover (Composer, 1819–1878, 41 Wikipedia editions)
 - Elmer Bernstein (Composer, 1922–2004, 41 Wikipedia editions)
 - Isaac Stern (Conductor, 1920–2001, 41 Wikipedia editions)
 - Ludwig Göransson (Composer, 1984–, 41 Wikipedia editions)
@@ -343,64 +195,49 @@ Built 2026-10-12 21:21 UTC
 - Nellie Melba (Singer, 1861–1931, 41 Wikipedia editions)
 - Jacqueline du Pré (Instrumentalist, 1945–1987, 41 Wikipedia editions)
 - Engelbert Humperdinck (Composer, 1854–1921, 40 Wikipedia editions)
-- Hartmann von Aue (Composer, 1160–1210, 40 Wikipedia editions)
 - Wanda Landowska (Composer, 1879–1959, 40 Wikipedia editions)
-- Carl Michael Bellman (Composer, 1740–1795, 40 Wikipedia editions)
 - Marin Marais (Composer, 1656–1728, 40 Wikipedia editions)
 - Gregorio Allegri (Composer, 1582–1652, 40 Wikipedia editions)
-- Lalo Schifrin (Composer, 1932–2025, 40 Wikipedia editions)
-- Vitas (Composer, 1979–, 40 Wikipedia editions)
 - Bernard Haitink (Conductor, 1929–2021, 40 Wikipedia editions)
 - Alfred Cortot (Conductor, 1877–1962, 40 Wikipedia editions)
-- Buddy Rich (Conductor, 1917–1987, 40 Wikipedia editions)
-- George Clinton (Composer, 1941–, 40 Wikipedia editions)
-- George Gaynes (Singer, 1917–2016, 40 Wikipedia editions)
-- John Sigismund Zápolya (Instrumentalist, 1540–1571, 40 Wikipedia editions)
-- Joe Zawinul (Composer, 1932–2007, 40 Wikipedia editions)
 - Johann Christoph Friedrich Bach (Composer, 1732–1795, 39 Wikipedia editions)
 - Claudio Arrau (Instrumentalist, 1903–1991, 39 Wikipedia editions)
 - Nikolai Rubinstein (Composer, 1835–1881, 39 Wikipedia editions)
 - Wojciech Kilar (Composer, 1932–2013, 39 Wikipedia editions)
+- Gilles Binchois (Composer, 1400–1460, 38 Wikipedia editions)
 - Vincent d'Indy (Composer, 1851–1931, 38 Wikipedia editions)
-- Josef Suk (1874) (Composer, 1874–1935, 38 Wikipedia editions)
 - Anton Arensky (Composer, 1861–1906, 38 Wikipedia editions)
 - Hanns Eisler (Composer, 1898–1962, 38 Wikipedia editions)
 - Pietro Locatelli (Composer, 1695–1764, 37 Wikipedia editions)
 - Eugen d'Albert (Composer, 1864–1932, 37 Wikipedia editions)
 - Cosima Wagner (Composer, 1837–1930, 37 Wikipedia editions)
-- Ira Gershwin (Composer, 1896–1983, 37 Wikipedia editions)
 - Jeanette MacDonald (Singer, 1903–1965, 36 Wikipedia editions)
-- Alberto Ginastera (1916) (Composer, 1916–1983, 36 Wikipedia editions)
+- Giovanni Battista Sammartini (Composer, 1700–1775, 36 Wikipedia editions)
 - Constanze Mozart (Singer, 1762–1842, 36 Wikipedia editions)
-- Emmanuel Chabrier (1841) (Composer, 1841–1894, 36 Wikipedia editions)
 - François Joseph Gossec (Composer, 1734–1829, 35 Wikipedia editions)
-- Giovanni Battista Sammartini (Composer, 1700–1775, 35 Wikipedia editions)
 - Marcel Dupré (Composer, 1886–1971, 35 Wikipedia editions)
 - Joseph Strauss (Composer, 1827–1870, 35 Wikipedia editions)
 - François Adrien Boieldieu (Composer, 1775–1834, 34 Wikipedia editions)
-- Johann Ambrosius Bach (Composer, 1645–1695, 34 Wikipedia editions)
-- Carl Reinecke (Composer, 1824–1910, 34 Wikipedia editions)
-- Einojuhani Rautavaara (Composer, 1928–2016, 34 Wikipedia editions)
 - Dimitri Tiomkin (Composer, 1894–1979, 34 Wikipedia editions)
+- Carl Reinecke (Composer, 1824–1910, 34 Wikipedia editions)
+- Johann Ambrosius Bach (Composer, 1645–1695, 34 Wikipedia editions)
+- Einojuhani Rautavaara (Composer, 1928–2016, 34 Wikipedia editions)
 - Maria Malibran (Composer, 1808–1836, 34 Wikipedia editions)
 - Jacques Ibert (Composer, 1890–1962, 34 Wikipedia editions)
-- Barbara Hendricks (Singer, 1948–, 33 Wikipedia editions)
-- Franz Xaver Wolfgang Mozart (Composer, 1791–1844, 33 Wikipedia editions)
 - Andrea Gabrieli (Composer, 1533–1585, 33 Wikipedia editions)
+- Franz Xaver Wolfgang Mozart (Composer, 1791–1844, 33 Wikipedia editions)
 - Anna Magdalena Bach (Composer, 1701–1760, 33 Wikipedia editions)
 - Luigi Dallapiccola (Composer, 1904–1975, 33 Wikipedia editions)
 - Arthur Nikisch (Composer, 1855–1922, 33 Wikipedia editions)
 - Charles Villiers Stanford (Composer, 1852–1924, 33 Wikipedia editions)
 - Percy Grainger (Composer, 1882–1961, 33 Wikipedia editions)
-- Archduke Rudolf of Austria (Composer, 1788–1831, 33 Wikipedia editions)
 - George Antheil (Composer, 1900–1959, 33 Wikipedia editions)
 - Henryk Szeryng (Instrumentalist, 1918–1988, 33 Wikipedia editions)
 - Giacomo Carissimi (Composer, 1605–1674, 32 Wikipedia editions)
 - Giovanni Battista Martini (Composer, 1706–1784, 32 Wikipedia editions)
-- Jan Dismas Zelenka (1679) (Composer, 1679–1745, 32 Wikipedia editions)
+- Alicia de Larrocha (Composer, 1923–2009, 32 Wikipedia editions)
 - Giovanni Bononcini (Composer, 1670–1747, 32 Wikipedia editions)
 - Franz Xaver Süssmayr (Composer, 1766–1803, 32 Wikipedia editions)
-- Donald Byrd (Composer, 1932–2013, 32 Wikipedia editions)
 - Eduard Strauss (Composer, 1835–1916, 32 Wikipedia editions)
 - Ignaz Moscheles (Composer, 1794–1870, 31 Wikipedia editions)
 - Sigismond Thalberg (Composer, 1812–1871, 31 Wikipedia editions)
@@ -414,28 +251,30 @@ Built 2026-10-12 21:21 UTC
 - Roberto Alagna (Singer, 1963–, 31 Wikipedia editions)
 - Nicolai Ghiaurov (Singer, 1929–2004, 30 Wikipedia editions)
 - Marin Alsop (Conductor, 1956–, 30 Wikipedia editions)
+- Francesco Durante (Composer, 1684–1755, 30 Wikipedia editions)
+- Maria Barbara Bach (Singer, 1684–1720, 30 Wikipedia editions)
 - Maria Szymanowska (Composer, 1789–1831, 30 Wikipedia editions)
 - Theodor Leschetizky (Composer, 1830–1915, 30 Wikipedia editions)
 - Siegfried Wagner (Composer, 1869–1930, 30 Wikipedia editions)
 - Hans Richter (Composer, 1843–1916, 30 Wikipedia editions)
 - Johann Jakob Froberger (Composer, 1616–1667, 30 Wikipedia editions)
-- Maria Barbara Bach (Singer, 1684–1720, 30 Wikipedia editions)
-- Johann Joseph Fux (Composer, 1660–1741, 30 Wikipedia editions)
 - Friedrich Kalkbrenner (Composer, 1785–1849, 30 Wikipedia editions)
 - Józef Elsner (Composer, 1769–1854, 30 Wikipedia editions)
-- Francesco Durante (Composer, 1684–1755, 30 Wikipedia editions)
 - Nicolaus Bruhns (Composer, 1665–1697, 29 Wikipedia editions)
+- Maria Theresia Paradis (Composer, 1759–1824, 29 Wikipedia editions)
 - Carl Friedrich Zelter (Composer, 1758–1832, 29 Wikipedia editions)
 - Charles Koechlin (Composer, 1867–1950, 29 Wikipedia editions)
 - Franz Schmidt (Composer, 1874–1939, 29 Wikipedia editions)
 - Karl Goldmark (Composer, 1830–1915, 29 Wikipedia editions)
 - Giuseppe Sinopoli (Composer, 1946–2001, 29 Wikipedia editions)
 - Henry Cowell (Composer, 1897–1965, 29 Wikipedia editions)
-- Nikolai Medtner (1880) (Composer, 1880–1951, 29 Wikipedia editions)
 - Zakaria Paliashvili (Composer, 1871–1933, 29 Wikipedia editions)
 - Ignaz Pleyel (Composer, 1757–1831, 29 Wikipedia editions)
 - Narciso Yepes (Composer, 1927–1997, 29 Wikipedia editions)
 - Ida Haendel (Instrumentalist, 1928–2020, 29 Wikipedia editions)
+- Johann Christoph Bach I (Composer, 1642–1703, 28 Wikipedia editions)
+- Antonio Lotti (Composer, 1667–1740, 28 Wikipedia editions)
+- Jan Ladislav Dussek (Composer, 1760–1812, 28 Wikipedia editions)
 - Fredrik Pacius (Composer, 1809–1891, 28 Wikipedia editions)
 - Mélanie Bonis (Composer, 1858–1937, 28 Wikipedia editions)
 - Jan Kubelík (Composer, 1880–1940, 28 Wikipedia editions)
@@ -445,7 +284,6 @@ Built 2026-10-12 21:21 UTC
 - John Blow (Composer, 1649–1708, 28 Wikipedia editions)
 - Christian Gottlob Neefe (Composer, 1748–1798, 28 Wikipedia editions)
 - Andrea Luchesi (Composer, 1741–1801, 28 Wikipedia editions)
-- Pierre Henry (Composer, 1927–2017, 28 Wikipedia editions)
 - François-Joseph Fétis (Composer, 1784–1871, 28 Wikipedia editions)
 - Neeme Järvi (Conductor, 1937–, 28 Wikipedia editions)
 - Yuri Temirkanov (Conductor, 1938–2023, 28 Wikipedia editions)
@@ -453,15 +291,14 @@ Built 2026-10-12 21:21 UTC
 - Rodolphe Kreutzer (Composer, 1766–1831, 27 Wikipedia editions)
 - Jean-François Le Sueur (Composer, 1760–1837, 27 Wikipedia editions)
 - Joseph Kosma (Composer, 1905–1969, 27 Wikipedia editions)
+- Felip Pedrell (Composer, 1841–1922, 26 Wikipedia editions)
 - Chevalier de Saint-Georges (Composer, 1745–1799, 26 Wikipedia editions)
 - Johann Christoph Bach III (Composer, 1671–1721, 26 Wikipedia editions)
 - Johann Georg Pisendel (Composer, 1687–1755, 26 Wikipedia editions)
 - Ferdinando Paër (Composer, 1771–1839, 26 Wikipedia editions)
 - Ferdinand Ries (Composer, 1784–1838, 26 Wikipedia editions)
 - Edwin Fischer (Composer, 1886–1960, 26 Wikipedia editions)
-- Anna Mahler (Composer, 1904–1988, 26 Wikipedia editions)
 - Ivry Gitlis (Instrumentalist, 1922–2020, 26 Wikipedia editions)
-- Felip Pedrell (Composer, 1841–1922, 26 Wikipedia editions)
 - Étienne Méhul (Composer, 1763–1817, 25 Wikipedia editions)
 - Spiro Samara (Composer, 1861–1917, 25 Wikipedia editions)
 - André Messager (Composer, 1853–1929, 25 Wikipedia editions)
@@ -472,9 +309,8 @@ Built 2026-10-12 21:21 UTC
 - Josef Rheinberger (Composer, 1839–1901, 25 Wikipedia editions)
 - Riccardo Zandonai (Composer, 1883–1944, 25 Wikipedia editions)
 - Ildebrando Pizzetti (Composer, 1880–1968, 25 Wikipedia editions)
-- Vladimir Cosma (Composer, 1940–, 25 Wikipedia editions)
 - Leroy Anderson (Composer, 1908–1975, 25 Wikipedia editions)
-- Friedrich Gulda (Composer, 1930–2000, 24 Wikipedia editions)
+- Georg Christoph Wagenseil (Composer, 1715–1777, 24 Wikipedia editions)
 - Giuseppe Sarti (Composer, 1729–1802, 24 Wikipedia editions)
 - Isabella Colbran (Composer, 1784–1845, 24 Wikipedia editions)
 - Antonio Bazzini (Composer, 1818–1897, 24 Wikipedia editions)
@@ -485,12 +321,12 @@ Built 2026-10-12 21:21 UTC
 - Helmut Lachenmann (Composer, 1935–, 24 Wikipedia editions)
 - Cathy Berberian (Composer, 1925–1983, 24 Wikipedia editions)
 - Magdalena Kožená (Singer, 1973–, 24 Wikipedia editions)
-- Johann van Beethoven (Composer, 1739–1792, 24 Wikipedia editions)
 - Arthur Grumiaux (Instrumentalist, 1921–1986, 24 Wikipedia editions)
 - Kristīne Opolais (Singer, 1979–, 24 Wikipedia editions)
 - Faustina Bordoni (Singer, 1697–1781, 24 Wikipedia editions)
 - Herbert Blomstedt (Conductor, 1927–, 23 Wikipedia editions)
 - Paul Ben-Haim (Composer, 1897–1984, 23 Wikipedia editions)
+- Ludwig Senfl (Composer, 1486–1543, 23 Wikipedia editions)
 - Adolf von Henselt (Composer, 1814–1889, 23 Wikipedia editions)
 - Antoine-François Marmontel (Composer, 1816–1898, 23 Wikipedia editions)
 - Augusta Holmès (Composer, 1847–1903, 23 Wikipedia editions)
@@ -512,6 +348,7 @@ Built 2026-10-12 21:21 UTC
 - Théodore Dubois (Composer, 1837–1924, 23 Wikipedia editions)
 - Leó Weiner (Composer, 1885–1960, 22 Wikipedia editions)
 - Hans Swarowsky (Conductor, 1899–1975, 22 Wikipedia editions)
+- Franz Xaver Richter (Composer, 1709–1789, 22 Wikipedia editions)
 - Stephen Heller (Composer, 1813–1888, 22 Wikipedia editions)
 - Moritz Hauptmann (Composer, 1792–1868, 22 Wikipedia editions)
 - Maurice Emmanuel (Composer, 1862–1938, 22 Wikipedia editions)
@@ -525,6 +362,8 @@ Built 2026-10-12 21:21 UTC
 - Charles Munch (Conductor, 1891–1968, 22 Wikipedia editions)
 - Manuel Ponce (Composer, 1882–1948, 22 Wikipedia editions)
 - Elvira de Hidalgo (Singer, 1891–1980, 21 Wikipedia editions)
+- Simon Sechter (Composer, 1788–1867, 21 Wikipedia editions)
+- Wilhelm Friedrich Ernst Bach (Composer, 1759–1845, 21 Wikipedia editions)
 - Johann Baptist Cramer (Composer, 1771–1858, 21 Wikipedia editions)
 - Georg Joseph Vogler (Composer, 1749–1814, 21 Wikipedia editions)
 - Eliahu Inbal (Conductor, 1936–, 21 Wikipedia editions)
@@ -533,7 +372,6 @@ Built 2026-10-12 21:21 UTC
 - Johann Friedrich Agricola (Composer, 1720–1774, 21 Wikipedia editions)
 - Marietta Alboni (Singer, 1826–1894, 21 Wikipedia editions)
 - Carl Tausig (Composer, 1841–1871, 21 Wikipedia editions)
-- Simon Sechter (Composer, 1788–1867, 21 Wikipedia editions)
 - Nina Grieg (Composer, 1845–1935, 21 Wikipedia editions)
 - Toivo Kuula (Composer, 1883–1918, 21 Wikipedia editions)
 - Gina Bachauer (Composer, 1913–1976, 21 Wikipedia editions)
@@ -547,6 +385,8 @@ Built 2026-10-12 21:21 UTC
 - Ginette Neveu (Instrumentalist, 1919–1949, 21 Wikipedia editions)
 - Yuri Shaporin (Composer, 1887–1966, 21 Wikipedia editions)
 - Ferdinand David (Composer, 1810–1873, 20 Wikipedia editions)
+- Walter Susskind (Composer, 1913–1980, 20 Wikipedia editions)
+- Vasily Safonov (Conductor, 1852–1918, 20 Wikipedia editions)
 - Mary Beth Peil (Singer, 1940–, 20 Wikipedia editions)
 - Luzzasco Luzzaschi (Composer, 1545–1607, 20 Wikipedia editions)
 - Johann Ludwig Krebs (Composer, 1713–1780, 20 Wikipedia editions)
@@ -555,16 +395,361 @@ Built 2026-10-12 21:21 UTC
 - Robert Kajanus (Composer, 1856–1933, 20 Wikipedia editions)
 - Meliton Balanchivadze (Composer, 1863–1937, 20 Wikipedia editions)
 - Felix Mikhailovich Blumenfeld (Composer, 1863–1931, 20 Wikipedia editions)
-- Vasily Safonov (Conductor, 1852–1918, 20 Wikipedia editions)
 - Lars-Erik Larsson (Composer, 1908–1986, 20 Wikipedia editions)
 - Yvonne Loriod (Composer, 1924–2010, 20 Wikipedia editions)
 - Aleksander Goldenweiser (Composer, 1875–1961, 20 Wikipedia editions)
-- Vítězslava Kaprálová (Composer, 1915–1940, 20 Wikipedia editions)
 - David Diamond (Composer, 1915–2005, 20 Wikipedia editions)
 - Robert Russell Bennett (Composer, 1894–1981, 20 Wikipedia editions)
+- Vítězslava Kaprálová (Composer, 1915–1940, 20 Wikipedia editions)
 - Benjamin Godard (Composer, 1849–1895, 20 Wikipedia editions)
 - Sergei Vasilenko (Composer, 1872–1956, 20 Wikipedia editions)
+- Richard Bonynge (Conductor, 1930–, 19 Wikipedia editions)
+- Marcello Abbado (Composer, 1926–2020, 19 Wikipedia editions)
+- Marc'Antonio Ingegneri (Composer, 1535–1592, 19 Wikipedia editions)
+- Matthias Weckmann (Composer, 1619–1674, 19 Wikipedia editions)
+- Julius Benedict (Composer, 1804–1885, 19 Wikipedia editions)
+- Theodor Kullak (Composer, 1818–1882, 19 Wikipedia editions)
+- Alfrēds Kalniņš (Composer, 1879–1951, 19 Wikipedia editions)
+- Victor Massé (Composer, 1822–1884, 19 Wikipedia editions)
+- Aleksandr Gauk (Composer, 1893–1963, 19 Wikipedia editions)
+- Siegmund von Hausegger (Composer, 1872–1948, 19 Wikipedia editions)
+- Jean-Féry Rebel (Composer, 1666–1747, 19 Wikipedia editions)
+- Charles Avison (Composer, 1709–1770, 19 Wikipedia editions)
+- Christian Cannabich (Composer, 1731–1798, 19 Wikipedia editions)
+- Moriz Rosenthal (Composer, 1862–1946, 19 Wikipedia editions)
+- Mart Saar (Composer, 1882–1963, 19 Wikipedia editions)
+- André Gedalge (Composer, 1856–1926, 19 Wikipedia editions)
+- Nikolai Zverev (Composer, 1833–1893, 19 Wikipedia editions)
+- Lou Harrison (Composer, 1917–2003, 19 Wikipedia editions)
+- Anna Yesipova (Instrumentalist, 1851–1914, 19 Wikipedia editions)
+- Oskar Sala (Composer, 1910–2002, 19 Wikipedia editions)
+- Norman Dello Joio (Composer, 1913–2008, 19 Wikipedia editions)
+- Holger Czukay (Composer, 1938–2017, 19 Wikipedia editions)
+- Giovanni Animuccia (Composer, 1520–1571, 19 Wikipedia editions)
+- Matthew Locke (Composer, 1621–1677, 19 Wikipedia editions)
+- Modest Tchaikovsky (Composer, 1850–1916, 19 Wikipedia editions)
+- Max von Schillings (Composer, 1868–1933, 19 Wikipedia editions)
+- Michael Gielen (Composer, 1927–2019, 19 Wikipedia editions)
+- Arvīds Jansons (Conductor, 1914–1984, 19 Wikipedia editions)
+- Sophie Menter (Composer, 1846–1918, 19 Wikipedia editions)
+- Toshio Hosokawa (Composer, 1955–, 19 Wikipedia editions)
+- Jacques-Nicolas Lemmens (Composer, 1823–1881, 19 Wikipedia editions)
+- Ferenc Farkas (Composer, 1905–2000, 19 Wikipedia editions)
+- Vagn Holmboe (Composer, 1909–1996, 19 Wikipedia editions)
+- Louis Diémer (Composer, 1843–1919, 19 Wikipedia editions)
+- Johann Gottlieb Graun (Composer, 1703–1771, 19 Wikipedia editions)
+- Walter Berry (Singer, 1929–2000, 18 Wikipedia editions)
+- Johann Theile (Composer, 1646–1724, 18 Wikipedia editions)
+- Florian Leopold Gassmann (Composer, 1729–1774, 18 Wikipedia editions)
+- Johann Gottfried Bernhard Bach (Composer, 1715–1739, 18 Wikipedia editions)
+- François-Auguste Gevaert (Composer, 1828–1908, 18 Wikipedia editions)
+- Anna von Mildenburg (Singer, 1872–1947, 18 Wikipedia editions)
+- Cheryl Studer (Singer, 1955–, 18 Wikipedia editions)
+- Claudio Scimone (Composer, 1934–2018, 18 Wikipedia editions)
+- Johann Kaspar Kerll (Composer, 1627–1693, 18 Wikipedia editions)
+- Giovanni Battista Bassani (Composer, 1650–1716, 18 Wikipedia editions)
+- Anton Stamitz (Composer, 1750–1800, 18 Wikipedia editions)
+- Alessandro Rolla (Composer, 1757–1841, 18 Wikipedia editions)
+- Salomon Jadassohn (Composer, 1831–1902, 18 Wikipedia editions)
+- Arthur De Greef (Composer, 1862–1940, 18 Wikipedia editions)
+- Martin Wegelius (Composer, 1846–1906, 18 Wikipedia editions)
+- Leevi Madetoja (Composer, 1887–1947, 18 Wikipedia editions)
+- Rudolf Friml (Composer, 1879–1972, 18 Wikipedia editions)
+- Rudolf Firkušný (Composer, 1912–1994, 18 Wikipedia editions)
+- Fyodor Stravinsky (Singer, 1843–1902, 18 Wikipedia editions)
+- Roberto Gerhard (Composer, 1896–1970, 18 Wikipedia editions)
+- Humphrey Searle (Composer, 1915–1982, 18 Wikipedia editions)
+- Hans von Koessler (Composer, 1853–1926, 18 Wikipedia editions)
+- Ricard Viñes (Composer, 1875–1943, 18 Wikipedia editions)
+- Horatio Parker (Composer, 1863–1919, 18 Wikipedia editions)
+- Napoléon Henri Reber (Composer, 1807–1880, 18 Wikipedia editions)
+- Franco Donatoni (Composer, 1927–2000, 18 Wikipedia editions)
+- Lev Knipper (Composer, 1898–1974, 18 Wikipedia editions)
+- Boris Alexandrovich Alexandrov (Composer, 1905–1994, 18 Wikipedia editions)
+- Pavel Vranický (Composer, 1756–1808, 18 Wikipedia editions)
+- Marianna Martines (Composer, 1744–1812, 18 Wikipedia editions)
+- Sigismund von Neukomm (Composer, 1778–1858, 18 Wikipedia editions)
+- George Perle (Composer, 1915–2009, 18 Wikipedia editions)
+- Paul Vidal (Composer, 1863–1931, 18 Wikipedia editions)
+- Lennox Berkeley (Composer, 1903–1989, 18 Wikipedia editions)
+- Ralph Kirkpatrick (Instrumentalist, 1911–1984, 18 Wikipedia editions)
+- Stanisław Skrowaczewski (Composer, 1923–2017, 18 Wikipedia editions)
+- Cláudio Santoro (Composer, 1919–1989, 18 Wikipedia editions)
+- Joseph Hellmesberger (Composer, 1828–1893, 18 Wikipedia editions)
+- Christian Ferras (Instrumentalist, 1933–1982, 18 Wikipedia editions)
+- Dimitri Arakishvili (Composer, 1873–1953, 18 Wikipedia editions)
+- Walter Legge (Composer, 1906–1979, 17 Wikipedia editions)
+- Heinrich Albert (Composer, 1604–1651, 17 Wikipedia editions)
+- Nicola Fago (Composer, 1677–1745, 17 Wikipedia editions)
+- Henri-Montan Berton (Composer, 1767–1844, 17 Wikipedia editions)
+- Camille Erlanger (Composer, 1863–1919, 17 Wikipedia editions)
+- Déodat de Séverac (Composer, 1872–1921, 17 Wikipedia editions)
+- Zygmunt Noskowski (Composer, 1846–1909, 17 Wikipedia editions)
+- Johann Caspar Ferdinand Fischer (Composer, 1656–1746, 17 Wikipedia editions)
+- Johann Jacob Bach (Composer, 1682–1722, 17 Wikipedia editions)
+- Adolphe Nourrit (Composer, 1802–1839, 17 Wikipedia editions)
+- Giuseppe Donizetti (Composer, 1788–1856, 17 Wikipedia editions)
+- José Vianna da Motta (Composer, 1868–1948, 17 Wikipedia editions)
+- Albert Lavignac (Composer, 1846–1916, 17 Wikipedia editions)
+- Sándor Veress (Composer, 1907–1992, 17 Wikipedia editions)
+- Maximilian Steinberg (Composer, 1883–1946, 17 Wikipedia editions)
+- Arnold Mendelssohn (Composer, 1855–1933, 17 Wikipedia editions)
+- Betsy Jolas (Composer, 1926–, 17 Wikipedia editions)
+- Giovanni Maria Nanino (Composer, 1544–1607, 17 Wikipedia editions)
+- Ignaz von Seyfried (Composer, 1776–1841, 17 Wikipedia editions)
+- Nikolai Zaremba (Composer, 1821–1879, 17 Wikipedia editions)
+- Armas Järnefelt (Composer, 1869–1958, 17 Wikipedia editions)
+- Júlia Várady (Singer, 1941–, 17 Wikipedia editions)
+- Jorma Panula (Composer, 1930–, 17 Wikipedia editions)
+- Alexander Mosolov (Composer, 1900–1973, 17 Wikipedia editions)
+- Antonín Vranický (Composer, 1761–1820, 17 Wikipedia editions)
+- Egon Petri (Instrumentalist, 1881–1962, 17 Wikipedia editions)
+- Ture Rangström (Composer, 1884–1947, 17 Wikipedia editions)
+- Charles Strouse (Composer, 1928–2025, 17 Wikipedia editions)
+- George Whitefield Chadwick (Composer, 1854–1931, 17 Wikipedia editions)
+- Pál Kadosa (Composer, 1903–1983, 17 Wikipedia editions)
+- Hans Abrahamsen (Composer, 1952–, 17 Wikipedia editions)
+- Paul Le Flem (Composer, 1881–1984, 17 Wikipedia editions)
+- Ferdinand Leitner (Composer, 1912–1996, 17 Wikipedia editions)
+- Vincent Persichetti (Composer, 1915–1987, 16 Wikipedia editions)
+- Evelyn Lear (Singer, 1926–2012, 16 Wikipedia editions)
+- Johann Paul von Westhoff (Composer, 1656–1705, 16 Wikipedia editions)
+- Louis Adam (Composer, 1758–1848, 16 Wikipedia editions)
+- Louis Aubert (Composer, 1877–1968, 16 Wikipedia editions)
+- Horst Stein (Conductor, 1928–2008, 16 Wikipedia editions)
+- Kurt Thomas (Composer, 1904–1973, 16 Wikipedia editions)
+- Franz Tunder (Composer, 1614–1667, 16 Wikipedia editions)
+- Giovanni Battista Somis (Composer, 1686–1763, 16 Wikipedia editions)
+- Michele Carafa (Composer, 1787–1872, 16 Wikipedia editions)
+- Julius Epstein (Composer, 1832–1926, 16 Wikipedia editions)
+- Eduard Steuermann (Composer, 1892–1964, 16 Wikipedia editions)
+- György Sándor (Composer, 1912–2005, 16 Wikipedia editions)
+- Samuel Adler (Composer, 1928–, 16 Wikipedia editions)
+- Chou Wen-chung (Composer, 1923–2019, 16 Wikipedia editions)
+- Witold Maliszewski (Composer, 1873–1939, 16 Wikipedia editions)
+- Giovanni Francesco Anerio (Composer, 1567–1630, 16 Wikipedia editions)
+- Arleen Auger (Singer, 1939–1993, 16 Wikipedia editions)
+- Elizabeth Maconchy (Composer, 1907–1994, 16 Wikipedia editions)
+- Randall Thompson (Composer, 1899–1984, 16 Wikipedia editions)
+- Georg Kulenkampff (Conductor, 1898–1948, 16 Wikipedia editions)
+- Manuel García (1805) (Singer, 1805–1906, 16 Wikipedia editions)
+- Geirr Tveitt (Composer, 1908–1981, 16 Wikipedia editions)
+- Clifford Curzon (Composer, 1907–1982, 16 Wikipedia editions)
+- Karel Husa (Composer, 1921–2016, 16 Wikipedia editions)
+- Heinrich von Herzogenberg (Composer, 1843–1900, 16 Wikipedia editions)
+- Philippe Gaubert (Composer, 1879–1941, 16 Wikipedia editions)
+- Ádám Fischer (Conductor, 1949–, 16 Wikipedia editions)
+- Jean Mouton (Composer, 1459–1522, 15 Wikipedia editions)
+- Maria Ivogün (Singer, 1891–1987, 15 Wikipedia editions)
+- Carlo Zecchi (Conductor, 1903–1984, 15 Wikipedia editions)
+- Costanzo Porta (Composer, 1529–1601, 15 Wikipedia editions)
+- Adam Krieger (Composer, 1634–1666, 15 Wikipedia editions)
+- Carlo Farina (Composer, 1600–1639, 15 Wikipedia editions)
+- Johann Heinrich Buttstett (Composer, 1666–1727, 15 Wikipedia editions)
+- Gottlieb Muffat (Composer, 1690–1770, 15 Wikipedia editions)
+- Anselm Hüttenbrenner (Composer, 1794–1868, 15 Wikipedia editions)
+- Ludwig Berger (Composer, 1777–1839, 15 Wikipedia editions)
+- François Benoist (Composer, 1794–1878, 15 Wikipedia editions)
+- Henri Büsser (Composer, 1872–1973, 15 Wikipedia editions)
+- Paul Gilson (Composer, 1865–1942, 15 Wikipedia editions)
+- Hans Bronsart von Schellendorff (Composer, 1830–1913, 15 Wikipedia editions)
+- Arthur Friedheim (Composer, 1859–1932, 15 Wikipedia editions)
+- István Thomán (Composer, 1862–1940, 15 Wikipedia editions)
+- Stefan Wolpe (Composer, 1902–1972, 15 Wikipedia editions)
+- Ellen Taaffe Zwilich (Composer, 1939–, 15 Wikipedia editions)
+- Daniel Purcell (Composer, 1664–1717, 15 Wikipedia editions)
+- Karl Heinrich Barth (Composer, 1847–1922, 15 Wikipedia editions)
+- Asger Hamerik (Composer, 1843–1923, 15 Wikipedia editions)
+- Gaetano Greco (Composer, 1657–1728, 15 Wikipedia editions)
+- Paul Juon (Composer, 1872–1940, 15 Wikipedia editions)
+- Jean-Baptiste Krumpholz (Composer, 1747–1790, 15 Wikipedia editions)
+- Thomas Attwood (Composer, 1765–1838, 15 Wikipedia editions)
+- Johann Baptist Schenk (Composer, 1753–1836, 15 Wikipedia editions)
+- Woldemar Bargiel (Composer, 1828–1897, 15 Wikipedia editions)
+- Thea Musgrave (Composer, 1928–, 15 Wikipedia editions)
+- Marc Blitzstein (Composer, 1905–1964, 15 Wikipedia editions)
+- Joanna Bruzdowicz (Composer, 1943–2021, 15 Wikipedia editions)
+- Vinko Globokar (Composer, 1934–, 15 Wikipedia editions)
+- Virginia Zeani (Singer, 1925–2023, 15 Wikipedia editions)
+- Andria Balanchivadze (Composer, 1906–1992, 15 Wikipedia editions)
+- Ervin Nyiregyházi (Composer, 1903–1987, 15 Wikipedia editions)
+- Ilmari Hannikainen (Composer, 1892–1955, 15 Wikipedia editions)
 
-## Candidates skipped (0)
+## Candidates skipped (176)
 
-(none)
+- Leonardo da Vinci (Q762): not a classical musician: described as "Italian Renaissance polymath (1452−1519)"
+- Johann Wolfgang von Goethe (Q5879): not a classical musician: described as "German writer, artist, natural scientist and politician (1749–1832)"
+- Martin Luther (Q9554): not a classical musician: described as "German priest and theologian (1483–1546)"
+- Friedrich Nietzsche (Q9358): not a classical musician: described as "German philosopher (1844-1900)"
+- Louis Armstrong (Q1779): not a classical musician: jazz (American jazz musician, trumpeter and singer (1901–1971))
+- Heinrich Heine (Q44403): not a classical musician: described as "German poet, writer and literary critic (1797–1856)"
+- Paul McCartney (Q2599): not a classical musician: rock (rock and roll / classical music / rock music / psychedelic rock / art rock / pop rock / beat music)
+- Sappho (Q17892): not a classical musician: described as "ancient Greek poet from Lesbos (c. 630-c. 570 BC)"
+- George Sand (Q3816): not a classical musician: described as "French novelist and memoirist (1804–1876)"
+- Jean-Auguste-Dominique Ingres (Q23380): not a classical musician: described as "French painter (1780–1867)"
+- Zhu Xi (Q9397): not a classical musician: described as "Chinese historian, neo-Confucian philosopher, poet, and politician during the Song dynasty (1130–1200)"
+- Frederick II of Prussia (Q33550): not a classical musician: described as "King of Prussia from 1740 to 1786 (1712-1786)"
+- Henry VIII of England (Q38370): not a classical musician: described as "King of England from 1509 to 1547 (1491–1547)"
+- Lila Downs (Q23880): not a classical musician: singer-songwriter (Mexican-American singer-songwriter)
+- Frank Zappa (Q127330): not a classical musician: jazz (jazz / classical music / alternative rock / rock music / proto-punk / progressive rock / jazz fusion / psychedelic rock / musique concrète / comedy rock / art music / experimental music / experimental rock / avant-garde music / avant-prog / avant-pop)
+- Giacomo Casanova (Q83321): not a classical musician: described as "Venetian adventurer and writer (1725–1798)"
+- Anne Boleyn (Q80823): not a classical musician: described as "second wife of Henry VIII of England (died 1536)"
+- Theodor W. Adorno (Q152388): not a classical musician: described as "German philosopher, sociologist and theorist (1903–1969)"
+- Peter Abelard (Q4295): not a classical musician: described as "French scholastic philosopher, theologian and preeminent logician (c.1079-1142)"
+- Huldrych Zwingli (Q123034): not a classical musician: described as "Protestant Reformation leader in Switzerland, Swiss Reformed Church founder (1484-1531)"
+- Ella Fitzgerald (Q1768): not a classical musician: jazz (American jazz singer (1917–1996))
+- Miles Davis (Q93341): not a classical musician: jazz (American jazz trumpeter, bandleader, and composer (1926–1991))
+- Andrea Bocelli (Q42402): not a classical musician: singer-songwriter (Italian tenor and singer-songwriter (born 1958))
+- Ravi Shankar (Q103774): not a classical musician: described as "Indian sitar player (1920–2012)"
+- E. T. A. Hoffmann (Q150471): not a classical musician: described as "German writer (1776-1822)"
+- Leon Battista Alberti (Q182046): not a classical musician: described as "Italian architect and writer (1404-1472)"
+- John Cale (Q45909): not a classical musician: singer-songwriter (Welsh composer, singer-songwriter and record producer (born 1942))
+- Pedro I of Brazil (Q939): not a classical musician: described as "Emperor of Brazil from 1822 to 1831 and King of Portugal in 1826 (1798-1834)"
+- Edward Heath (Q128967): not a classical musician: described as "Prime Minister of the United Kingdom from 1970 to 1974 (1916–2005)"
+- Jamala (Q2662517): not a classical musician: jazz (jazz / pop music / folk music / soul / electro)
+- John of Damascus (Q51884): not a classical musician: described as "Christian monk, priest, hymnographer and apologist (675/6-749)"
+- Roger Waters (Q180861): not a classical musician: rock (opera / progressive rock / blues rock / psychedelic rock / art rock)
+- Alfonso X of Castile and Leon (Q47595): not a classical musician: described as "King of Castile from 1252 to 1284"
+- Sofia Rotaru (Q43137): not a classical musician: songwriter (Ukrainian singer, songwriter and actress)
+- Sor Juana Inés de la Cruz (Q183074): not a classical musician: described as "Mexican writer, philosopher, playwright and poet"
+- Abdülaziz (Q151500): not a classical musician: described as "32th Sultan of the Ottoman Empire (1861–1876)"
+- Ruslana Lyzhychko (Q129119): not a classical musician: pop (pop music / world music / folk-pop)
+- Leopold I, Holy Roman Emperor (Q150494): not a classical musician: described as "Holy Roman Emperor (1658-1705), King of Hungary and Croatia and King of Bohemia (lived 1640-1705)"
+- Quincy Jones (Q193645): not a classical musician: jazz (jazz / rhythm and blues / soul / funk / swing / bossa nova)
+- Alexander Rybak (Q131259): not a classical musician: pop (classical music / pop music / baroque pop / country music / folk rock / adult contemporary music / pop rock / crossover / symphonic rock / indie pop)
+- Samuel Butler (Q312829): not a classical musician: described as "English novelist and critic (1835–1902)"
+- Rouget de Lisle (Q207660): not a classical musician: described as "French army officer (1760-1836)"
+- Liliʻuokalani (Q107288): not a classical musician: described as "monarch of the Hawaiian Kingdom (1838–1917)"
+- Karl May (Q22714): not a classical musician: described as "German writer (1842–1912)"
+- Caroline Herschel (Q76948): not a classical musician: described as "German-British astronomer (1750-1848)"
+- Prince Albert of Saxe-Coburg and Gotha (Q152245): not a classical musician: described as "Consort of Queen Victoria from 1840 to 1861 (1819–1861)"
+- Paco de Lucía (Q153300): not a classical musician: flamenco (Spanish flamenco, classical, jazz guitarist & musician (1947-2014))
+- A. R. Rahman (Q108560): not a classical musician: pop (classical music / electronic music / pop music / world music / soft rock / dance music / pop rock / electronic dance music / Carnatic music / Indian classical music / experimental music / folk-pop)
+- Dizzy Gillespie (Q49575): not a classical musician: jazz (American jazz trumpeter (1917–1993))
+- Ferdinand III, Holy Roman Emperor (Q150575): not a classical musician: described as "Emperor of the Holy Roman Empire (1608-1657)"
+- Joseph I, Holy Roman Emperor (Q152480): not a classical musician: described as "Emperor from 1705 till his death in 1711"
+- Frederik IX of Denmark (Q151312): not a classical musician: described as "King of Denmark from 1947 to 1972"
+- Benny Goodman (Q46755): not a classical musician: jazz (American jazz clarinetist and bandleader (1909–1986))
+- Tori Amos (Q193744): not a classical musician: singer-songwriter (American singer-songwriter (born 1963))
+- Zeami Motokiyo (Q169352): not a classical musician: described as "Japanese aesthetician and playwright"
+- David Ogden Stiers (Q202449): not a classical musician: described as "American actor (1942–2018)"
+- Glenn Miller (Q103651): not a classical musician: jazz (jazz / blues / swing / big band music)
+- Serj Tankian (Q486063): not a classical musician: rock (Armenian-American rock musician, singer, songwriter and record producer)
+- Oscar I of Sweden (Q52926): not a classical musician: described as "King of Sweden and Norway between 1844–1859 (1799–1859)"
+- Benny Andersson (Q214582): not a classical musician: rock (rock music / pop music / popular music)
+- Joseph of Anchieta (Q317126): not a classical musician: described as "Spanish Jesuit missionary (1534-1597)"
+- John IV of Portugal (Q1060796): not a classical musician: described as "King of Portugal from 1640 to 1656 (lived 1604-1656)"
+- Frederick William III of Prussia (Q37134): not a classical musician: described as "King of Prussia from 1797 to 1840"
+- Leo VI the Wise (Q41618): not a classical musician: described as "Byzantine Emperor"
+- Athanasius Kircher (Q76738): not a classical musician: described as "German Jesuit scholar (1601 or 1602-1680)"
+- Herbie Hancock (Q105875): not a classical musician: jazz (American jazz pianist and composer (born 1940))
+- Pierre-Jean de Béranger (Q324998): not a classical musician: described as "French poet and chansonnier (1780-1857)"
+- Wolfram von Eschenbach (Q18821): not a classical musician: described as "German knight and poet (1170–1220)"
+- Bettina von Arnim (Q57236): not a classical musician: described as "German writer and novelist (1785-1859)"
+- Jon Lord (Q192114): not a classical musician: rock (concerto / rock music / progressive rock / hard rock / symphonic music)
+- Tarja Turunen (Q484540): not a classical musician: heavy metal (classical music / power metal / glam metal / symphonic metal / traditional heavy metal / operatic pop)
+- Yehudi Menuhin (Q156814): not a classical musician: jazz (jazz / classical music / art music)
+- Henry Mancini (Q185928): not a classical musician: pop (comedy / melodrama / easy listening / lounge music / orchestral pop / stage and screen)
+- Chick Corea (Q192465): not a classical musician: jazz (American jazz and fusion pianist, keyboardist, and composer (1941-2021))
+- Mike Oldfield (Q3008): not a classical musician: pop (classical music / pop music / progressive rock / ambient music / world music / new age music / traditional folk music / pop rock / Celtic fusion)
+- Hryhorii Skovoroda (Q336803): not a classical musician: described as "Ukrainian philosopher (1722–1794)"
+- Vanessa-Mae (Q215076): not a classical musician: pop (classical music / pop music / techno)
+- Michel Legrand (Q313281): not a classical musician: jazz (jazz / film score / instrumental music / easy listening / variety)
+- Matt Bellamy (Q190576): not a classical musician: singer-songwriter (English singer-songwriter, member of Muse)
+- Count Basie (Q107008): not a classical musician: jazz (American jazz musician and composer (1904–1984))
+- Burt Bacharach (Q212762): not a classical musician: pop (pop music / vocal music / easy listening / lounge music / orchestral pop)
+- Barry White (Q213647): not a classical musician: soul (American soul singer (1944–2003))
+- Fela Kuti (Q313868): not a classical musician: jazz (jazz / Afrobeat / highlife)
+- Sarah Brightman (Q151814): not a classical musician: pop (musical play / baroque pop / world music / operatic pop)
+- Madame du Barry (Q230677): not a classical musician: described as "French noblewoman by marriage (1743–1793), last mistress of Louis XV (from 1768 to 1774)"
+- George Martin (Q191819): not a classical musician: described as "English record producer (1926–2016)"
+- Alphonsus Maria de Liguori (Q273334): not a classical musician: described as "Italian Catholic bishop and saint (1696-1787)"
+- Ezra Miller (Q508049): not a classical musician: described as "American actor (born 1992)"
+- Denis I of Portugal (Q212890): not a classical musician: described as "King of Portugal"
+- Peter III of Aragon (Q312311): not a classical musician: described as "King of Aragon and Valencia (1276–85); King of Sicily (1282–85)"
+- Bill Haley (Q202319): not a classical musician: rock (American rock and roll music pioneer (1925–1981))
+- Alan Silvestri (Q313537): not a classical musician: jazz (jazz / blues)
+- Bill Evans (Q208205): not a classical musician: jazz (American jazz pianist (1929–1980))
+- Ike Turner (Q208871): not a classical musician: blues (blues / rhythm and blues / funk)
+- Josh Groban (Q218083): not a classical musician: pop (pop music)
+- Alain-René Lesage (Q267962): not a classical musician: described as "French writer (1668–1747)"
+- Muslim Magomayev (Q558799): not a classical musician: pop (opera / pop music / operatic pop / classical crossover)
+- Bobby McFerrin (Q310894): not a classical musician: jazz (American jazz vocalist and composer (born 1950))
+- Blanche of Castile (Q353): not a classical musician: described as "Queen consort of France (1188–1252)"
+- Alexandra David-Néel (Q230456): not a classical musician: described as "French explorer, spiritualist, Buddhist, Taoist, anarchist and writer"
+- August Heinrich Hoffmann von Fallersleben (Q76938): not a classical musician: described as "German scholar and poet (1798–1874)"
+- Dimitrie Cantemir (Q159933): not a classical musician: described as "Prince of Moldavia"
+- James Newton Howard (Q213869): not a classical musician: jazz (free jazz / film score)
+- Charles Mingus (Q107432): not a classical musician: jazz (American jazz double bassist, composer and bandleader (1922–1979))
+- Randy Newman (Q318475): not a classical musician: singer-songwriter (American singer-songwriter and pianist)
+- Wenceslaus II of Bohemia (Q155581): not a classical musician: described as "King of Bohemia and Poland"
+- John Gay (Q321660): not a classical musician: described as "English poet and playwright (1685–1732)"
+- Sonny Rollins (Q299208): not a classical musician: jazz (American jazz saxophonist and composer (1930–2026))
+- Violetta Villas (Q217750): not a classical musician: songwriter (Polish cabaret star, singer, actress, composer, songwriter (1938-2011))
+- RZA (Q52447): not a classical musician: described as "American rapper, record producer and actor (born 1969)"
+- Kristin Chenoweth (Q231811): not a classical musician: jazz (opera / musical play / jazz / pop music / folk music / gospel music)
+- Wynton Marsalis (Q273076): not a classical musician: jazz (American jazz musician and educator)
+- Hans Sachs (Q19543): not a classical musician: described as "German shoemaker, meistersinger, poet and playwright (1494-1576)"
+- Dorothy Dandridge (Q229251): not a classical musician: jazz (jazz / traditional pop)
+- Ludovico Einaudi (Q83182): not a classical musician: pop (minimalist music / neoclassical new-age music / 20th-century classical music / operatic pop)
+- Alfonso II of Aragon (Q299156): not a classical musician: described as "Aragonese monarch (1157-1196)"
+- James II of Aragon (Q312735): not a classical musician: described as "King of Aragon and Valencia, Count of Barcelona and King of Sicily (1267-1327)"
+- Yma Sumac (Q239030): not a classical musician: jazz (opera / jazz / rock music / pop music / folk music / ballade / Latin jazz / electronic dance music / exotica / lounge music / mambo / music of Peru / big band music)
+- Ernst Moritz Arndt (Q57351): not a classical musician: described as "German historian, writer and politician (1769-1860)"
+- Cab Calloway (Q273079): not a classical musician: jazz (American jazz singer (1907–1994))
+- John Newton (Q357301): not a classical musician: described as "Anglican clergyman, slave trader and abolitionist (1725–1807)"
+- Frauke Petry (Q7477615): not a classical musician: described as "German politician"
+- Margaret of Austria, Duchess of Savoy (Q157100): not a classical musician: described as "Austrian archduchess and regent of the Netherlands (1480-1530)"
+- Rabanus Maurus (Q160441): not a classical musician: described as "archbishop of Mainz and writer (d. 856)"
+- Eugène Scribe (Q319261): not a classical musician: described as "French dramatist and librettist (1791-1861)"
+- Guillaume IX (Q5351): not a classical musician: described as "Duke of Aquitaine and Gascony and Count of Poitou"
+- Fats Waller (Q310476): not a classical musician: jazz (American jazz pianist and composer (1904–1943))
+- André Previn (Q155712): not a classical musician: jazz (opera / jazz / classical music)
+- Marie d'Agoult (Q253453): not a classical musician: described as "Franco-German romantic author and historian (1805-1876)"
+- Philippe II, Duke of Orléans (Q155596): not a classical musician: described as "member of the royal family of France, Regent of the Kingdom from 1715 to 1723 (1674–1723)"
+- Kalākaua (Q163080): not a classical musician: described as "last reigning king of the Kingdom of Hawaii (1836–1891)"
+- Peter of Castile (Q310963): not a classical musician: described as "king of Castile and León from 1350 to 1369"
+- Theobald I of Navarre (Q314562): not a classical musician: described as "King of Navarre from 1234 to 1253"
+- Angelo Badalamenti (Q357014): not a classical musician: jazz (jazz / ambient music / film score)
+- Marceline Desbordes-Valmore (Q466987): not a classical musician: described as "French poet and novelist"
+- Princess Helena of the United Kingdom (Q160539): not a classical musician: described as "Member of the House of Schleswig-Holstein-Sonderburg-Augustenburg (1846–1923)"
+- Hortense de Beauharnais (Q229875): not a classical musician: described as "queen consort of the Netherlands (1783-1837)"
+- Conradin (Q158246): not a classical musician: described as "Duke of Swabia, King of Jerusalem and King of Sicily (1252–1268)"
+- Bernard Germain de Lacépède (Q313363): not a classical musician: described as "French naturalist (1756-1825)"
+- Wilhelm Müller (Q57879): not a classical musician: described as "German poet (1794-1827)"
+- Richard Lewis (Q331587): not a classical musician: described as "American stand-up comedian (1947–2024)"
+- Sun Ra (Q354508): not a classical musician: jazz (American jazz composer and bandleader (1914–1993))
+- Hermann of Reichenau (Q68490): not a classical musician: described as "German 11th-century Benedictine monk"
+- Chet Atkins (Q72096): not a classical musician: jazz (jazz / classical music / country music / traditional folk music)
+- David Foster (Q77112): not a classical musician: songwriter (Canadian musician, record producer, songwriter)
+- Franco Battiato (Q25147): not a classical musician: singer-songwriter (Italian singer-songwriter and musician (1945–2021))
+- Sufjan Stevens (Q319502): not a classical musician: rock (classical music / electronic music / alternative rock / baroque pop / indie rock / indie pop / indie folk / lo-fi music / folk-pop / chamber pop)
+- Léo Ferré (Q320146): not a classical musician: pop (classical music / chanson / French pop / spoken word)
+- Venantius Fortunatus (Q44934): not a classical musician: described as "Italian saint-bishop, poet and hymnwriter (c. 530-c. 600/609)"
+- Bernard de Ventadour (Q4501): not a classical musician: described as "12th-century troubador"
+- Georg V of Hanover (Q57428): not a classical musician: described as "King of Hanover (1819–1878)"
+- Hartmann von Aue (Q75852): not a classical musician: described as "leading poet of the Middle High German period"
+- Carl Michael Bellman (Q312498): not a classical musician: songwriter (Swedish poet, songwriter and composer (1740–1795))
+- Lalo Schifrin (Q247293): not a classical musician: jazz (jazz / classical music / rock music / bebop / bossa nova)
+- Vitas (Q362258): not a classical musician: rock (opera / rock music / world music / pop rock / synth-pop)
+- Buddy Rich (Q318339): not a classical musician: described as "American jazz drummer and bandleader (1917–1987)"
+- George Clinton (Q336272): not a classical musician: funk (American funk musician, singer, songwriter and music producer)
+- George Gaynes (Q279225): not a classical musician: described as "American actor (1917–2016)"
+- John Sigismund Zápolya (Q313396): not a classical musician: described as "King of Hungary and Prince of Transylvania"
+- Joe Zawinul (Q44767): not a classical musician: jazz (Austrian jazz keyboardist and composer (1932–2007))
+- Ira Gershwin (Q61059): not a classical musician: described as "American lyricist (1896–1983)"
+- Barbara Hendricks (Q807482): not a classical musician: jazz (opera / jazz / swing)
+- Archduke Rudolf of Austria (Q93373): not a classical musician: described as "Austrian cardinal"
+- Donald Byrd (Q362764): not a classical musician: jazz (American recording artist; jazz and rhythm & blues trumpeter and vocalist (1932–2013))
+- Pierre Henry (Q544469): not a classical musician: rock (electronic rock / musique concrète)
+- Anna Mahler (Q215588): not a classical musician: described as "Austrian sculptor (1904-1988)"
+- Vladimir Cosma (Q507940): not a classical musician: jazz (opera / jazz / symphonic music)
+- Friedrich Gulda (Q345922): not a classical musician: jazz (jazz)
+- Johann van Beethoven (Q2153541): not a classical musician: described as "father of Ludwig van Beethoven"
+- María Grever (Q1645018): not a classical musician: songwriter (Mexican-American musician, songwriter, conductor)
+- Andrew Hill (Q505138): not a classical musician: jazz (American jazz pianist and composer (1931-2007))
+- Harriet Smithson (Q1034113): not a classical musician: described as "Anglo-Irish actress (1800-1854)"
+- Gottfried Heinrich Bach (Q710996): not a classical musician: described as "Son of Johann Sebastian Bach"
+- Jaroslav Ježek (Q1345146): not a classical musician: jazz (Czech conductor, Esperantist, composer and jazz musician (1906–1942))
+- Marie Bigot (Q460587): not a classical musician: described as "French piano teacher"
+- Egberto Gismonti (Q746182): not a classical musician: jazz (jazz / Latin jazz)
