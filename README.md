@@ -73,6 +73,12 @@ Then open <http://localhost:8000/index_fixed_working_v9.html>. Press Ctrl+C in t
 - **Colour is the type of artist**: gold = composer, pink = singer, blue = conductor, green = instrumentalist.
 - **Large bold names** are "masters", the 100 core figures; smaller names are secondary.
 - **Drag** to pan and **scroll** to zoom. The name that's playing pulses.
+- **Zoom in to see more names.** Zoomed out you see only the masters; at normal zoom the most
+  notable other artists too; from about 3× zoom all of them. The counter in the bottom-right corner
+  shows how many are visible ("173 of 896 names · zoom in for more"). Notability is how many
+  Wikipedia languages cover an artist, with a head start for the hand-curated artists over the ones
+  the build script added. The artist that's playing, its closest related artists and any search
+  matches are always shown, whatever the zoom.
 
 ### Playing music
 
