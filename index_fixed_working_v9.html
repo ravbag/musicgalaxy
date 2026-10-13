@@ -815,12 +815,28 @@ async function init() {
     }
 
     // Wikimedia Commons: full-text search over audio files that mention the artist
+    // Spoken content: talks, concert introductions, interviews, lectures, podcasts. Only words that
+    // clearly mean speech (not "introduction", which is common in music titles: Introduction and Allegro)
+    const SPEECH_WORDS = /\b(spoken|pronunciation|interviews?|lectures?|podcasts?|speech(es)?|talk show|discussion|conversation|audio ?guide|radio (programme|program|show)|inleiding|toelichting|lezing|gesprek|voordracht|einf(ü|ue)hrung|vortrag|gespr(ä|ae)ch|diskussion|conf(é|e)rence|entretien|causerie)\b/i;
+    // Categories that mark a file as music ("Audio files of music by ...", "Symphonies by ...", ...)
+    const MUSIC_CATEGORY = /music|musique|musik|muziek|m(ú|u)sica|symphon|concert|sonata|quartet|opera|aria|lieder|song|piano|organ|orchestra|choir|choral|cantata|mass(es)? by|requiem|composition|works by/i;
+
+    function commonsText(ii) {
+        const em = ii.extmetadata || {};
+        return {
+            description: htmlToText(em.ImageDescription?.value) + ' ' + htmlToText(em.ObjectName?.value),
+            categories: String(em.Categories?.value || ''),
+        };
+    }
+
     function isMusicFile(title, ii) {
         const mime = ii.mime || '';
         if (!(ii.mediatype === 'AUDIO' || mime.startsWith('audio/'))) return false;
         if (/midi/i.test(mime)) return false;
-        // Spoken Wikipedia articles and pronunciation clips ("File:De-Bach.ogg", "File:LL-Q150 ...")
-        if (/spoken|pronunciation/i.test(title) || /^File:(LL-|[A-Z][a-z]{1,2}(-[a-z]{2,3})?-)/.test(title)) return false;
+        // Pronunciation clips ("File:De-Bach.ogg", "File:LL-Q150 ...") and spoken content
+        if (/^File:(LL-|[A-Z][a-z]{1,2}(-[a-z]{2,3})?-)/.test(title)) return false;
+        const { description, categories } = commonsText(ii);
+        if (SPEECH_WORDS.test(title) || SPEECH_WORDS.test(description) || SPEECH_WORDS.test(categories)) return false;
         const meta = Array.isArray(ii.metadata) ? ii.metadata : [];
         const lenEntry = meta.find(m => m && (m.name === 'length' || m.name === 'playtime_seconds'));
         const len = lenEntry ? Number(lenEntry.value) : NaN;
@@ -834,14 +850,17 @@ async function init() {
             generator: 'search', gsrsearch: `"${String(node.id).replace(/"/g, '')}" filetype:audio`,
             gsrnamespace: '6', gsrlimit: '50',
             prop: 'imageinfo', iiprop: 'url|mime|size|mediatype|metadata|extmetadata',
-            iiextmetadatafilter: 'ObjectName|Artist|LicenseShortName',
+            iiextmetadatafilter: 'ObjectName|Artist|LicenseShortName|ImageDescription|Categories',
         });
         const data = await fetchJson(`${COMMONS_API}?${params}`, { headers: { 'Api-User-Agent': API_USER_AGENT } });
         if (!isCurrent()) return null;
         const pages = Array.isArray(data?.query?.pages) ? data.query.pages : Object.values(data?.query?.pages || {});
         const candidates = pages.filter(p => p?.imageinfo?.[0]?.url && isMusicFile(p.title || '', p.imageinfo[0]));
         if (!candidates.length) return null;
-        const page = candidates[Math.floor(Math.random() * candidates.length)];
+        // Prefer files categorised as music; others only if there are none
+        const music = candidates.filter(p => MUSIC_CATEGORY.test(commonsText(p.imageinfo[0]).categories));
+        const pool = music.length ? music : candidates;
+        const page = pool[Math.floor(Math.random() * pool.length)];
         const ii = page.imageinfo[0];
         const em = ii.extmetadata || {};
         const title = htmlToText(em.ObjectName?.value) || String(page.title).replace(/^File:/, '').replace(/\.[^.]+$/, '');

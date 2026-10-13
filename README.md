@@ -109,8 +109,10 @@ mostly exist only on 78s; for them the 78s are tried first.
 - *archive.org*: takes up to 50 of the most-downloaded matching items and looks at up to 3 of them at
   random. It plays a random full-length track, in the best encoding available (FLAC first, then
   high-bitrate MP3/Ogg, then low-bitrate MP3), and prefers an item with a good encoding.
-- *Wikimedia Commons*: picks a random matching audio file, skipping MIDI files, spoken-word articles,
-  pronunciation clips and anything under 45 seconds.
+- *Wikimedia Commons*: picks a random matching audio file, preferring files categorised as music.
+  It skips MIDI files, pronunciation clips, anything under 45 seconds and spoken content: talks,
+  concert introductions, interviews, lectures and podcasts, recognised by words such as *interview*,
+  *lecture*, *inleiding*, *Einführung* or *conférence* in the title, description or categories.
 - The track line shows the source in blue, then the artist and the track title. For Commons it also
   shows the performer or uploader and the licence, since many files require attribution.
 
