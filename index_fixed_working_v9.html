@@ -1207,8 +1207,10 @@ async function init() {
     }
 
     function pickNextPureRandom() {
-        const next = nodes[Math.floor(Math.random() * nodes.length)];
-        return next;
+        // Any artist except the ones just played (unless there's nothing else)
+        const pool = nodes.filter(n => !recentPicks.includes(n.id));
+        const from = pool.length ? pool : nodes;
+        return from[Math.floor(Math.random() * from.length)];
     }
 
     function pickNextRandomWalk() {

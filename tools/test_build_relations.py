@@ -303,6 +303,24 @@ class BuildRelationsTest(unittest.TestCase):
         self.assertTrue(any('Hildegard von Bingen' in w and 'run again' in w for w in report['warnings']))
         self.assertIsNotNone(self.edge(rel, 'Léonin', 'Pérotin'))
 
+    def test_batch_matching_outage_falls_back_to_search(self):
+        class NoBatch(FakeHttp):
+            def fetch_raw(self, url, headers):
+                if 'query.wikidata.org' in url and 'VALUES+%3Fname' in url:
+                    raise br.urllib.error.HTTPError(url, 503, 'Service Unavailable', {'Retry-After': '1'}, None)
+                return super().fetch_raw(url, headers)
+        args = br.parse_args(['--root', self.root, '--no-expand'])
+        real_sleep = br.time.sleep
+        br.time.sleep = lambda s: None
+        try:
+            kb, rel, report = br.build(args, NoBatch(args.cache))
+        finally:
+            br.time.sleep = real_sleep
+        by_id = {a['id']: a for a in kb}
+        self.assertTrue(any('batch name matching failed' in w for w in report['warnings']))
+        self.assertEqual(by_id['Pérotin']['qid'], 'Q2')  # found by the per-artist search instead
+        self.assertEqual(by_id['Hildegard von Bingen']['qid'], 'Q3')
+
     def test_listenbrainz_outage_is_skipped(self):
         class Broken(FakeHttp):
             def fetch_raw(self, url, headers):

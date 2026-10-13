@@ -472,8 +472,12 @@ def match_existing(kb, wd, overrides, report, rematch=False):
     todo = [a for a in kb if a['id'] not in overrides and (rematch or not a.get('qid'))]
     # 1) exact name matches, many artists per query
     names = list(dict.fromkeys(n for a in todo for n in [a['id']] + [x for x in a.get('aliases', []) if ' ' in x]))
-    exact = wd.match_names(names) if names else {}
-    wd.load([q for qs in exact.values() for q in qs])
+    try:
+        exact = wd.match_names(names) if names else {}
+        wd.load([q for qs in exact.values() for q in qs])
+    except Exception as ex:  # noqa: BLE001 - fall back to one search per artist rather than stopping
+        report['warnings'].append(f'Wikidata batch name matching failed ({ex}); searched artists one by one instead')
+        exact = {}
     matched = 0
     for artist in kb:
         name = artist['id']
